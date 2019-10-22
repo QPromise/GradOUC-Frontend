@@ -1,13 +1,31 @@
+<view class = "avatar">
+      <image class='profile-photo' src='{{userInfo.avatarUrl}}'></image>
+</view>
+
+<view class = "nickname"> 
+  <text>{{nickName}}</text>
+  <image class='gender-photo' src="{{gender}}"></image>
+</view>
+
 <view class="messcontainer">
   <view class="items" bindtap="goComments">
-    <image class="icon" src="../../images/comments.png"></image>
+    <image class="icon" src="../../images/message_comments.png"></image>
     <text class="text">评论</text>
     <text class="messcount" hidden="{{newCommentsCount===0}}">{{newCommentsCount}}</text>
   </view>
-
   <view class="items" bindtap="goThumbup">
-    <image class="icon" src="../../images/thumbup.png"></image>
+    <image class="icon" src="../../images/message_like.png"></image>
     <text class="text">点赞</text>
     <text class="messcount" hidden="{{newThumbupCount===0}}">{{newThumbupCount}}</text>
   </view>
+    <view class="items" bindtap="goTest" >
+    <image class="icon" src="../../images/department_type.png"></image>
+    <text class="text">目标院系</text>
+  </view>
+  <view class="items" bindtap="goProfile">
+    <image class="icon" src="../../images/modify.png"></image>
+    <text class="text">修改信息</text>
+  </view>
+ 
 </view>
+

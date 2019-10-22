@@ -1,7 +1,12 @@
+.topBackground
+{
+ width: 550rpx;
+  height: 344rpx;
+}
 .topimage{
-  width: 144rpx;
-  height: 144rpx;
-  margin-top: 80rpx;
+  width: 237rpx;
+  height: 216rpx;
+  margin-top: 30rpx;
 }
 
 .centertext{
@@ -16,13 +21,46 @@
 .loginbtn{
   width:260rpx;
   height:88rpx;
-  background-color: #313EC9;
-  box-shadow:0px 0px 30px 0px rgba(49, 201, 62, 0.35);
+  background-color: #ffbb12;
+  box-shadow:0px 0px 30px 0px #ffbb12;
   border-radius:44px;
 
   font-size:32rpx;
   font-family:SourceHanSansCN-Medium;
   font-weight:500;
   color:rgba(255,255,255,1);
-  margin-top: 150rpx;
+  margin-top: 80rpx;
+}
+.content {
+  margin: 80rpx 30rpx 0rpx 30rpx;
+  color: white;
+  background: linear-gradient(to bottom, #2eb3ff, #6cadd2);
+}
+
+.content-title {
+  text-align: center;
+  font-size: 32rpx;
+  height: 88rpx;
+  line-height: 88rpx;
+  border-top-left-radius: 10rpx;
+  border-top-right-radius: 10rpx;
+  background-color: rgba(255, 255, 255, 0.2);
+  position: relative;
+}
+
+.content-text {
+  padding: 20rpx;
+  font-size: 28rpx;
+  border-bottom-left-radius: 10rpx;
+  border-bottom-right-radius: 10rpx;
+  background-color: rgba(255, 255, 255, 0.1);
+  line-height: 2;
+}
+
+.title-icon {
+  position: absolute;
+  right: 20rpx;
+  top: 24rpx;
+  height: 40rpx;
+  width: 40rpx;
 }

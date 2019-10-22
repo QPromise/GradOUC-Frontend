@@ -1,6 +1,6 @@
 function throttle(fn, gapTime) {
   if (gapTime == null || gapTime == undefined) {
-    gapTime = 1000
+    gapTime = 10000
   }
 
   let _lastTime = null

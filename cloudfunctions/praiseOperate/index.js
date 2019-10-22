@@ -59,6 +59,19 @@ exports.main = async (event, context) => {
         console.error(e)
       }
       break;
+    case 'repeatPraise':
+      try {
+        return await db.collection('praiseDoc').where({
+          // data 字段表示需新增的 JSON 数据
+          data: {
+            _id: event._id,
+            clickUserId: event.clickUserId
+          }
+        }).count()
+      } catch (e) {
+        console.error(e)
+      }
+      break;
     default:
       break;
   }

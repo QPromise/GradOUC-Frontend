@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   margin-left: 20rpx;
-  margin-right: 35rpx;
+  margin-right: 10rpx;
   height: 300rpx;
   /* 蒙层效果 */
 }
@@ -11,24 +11,36 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin-top: 15rpx;
+  margin-top: 10rpx;
   margin-bottom: 10rpx;
 }
 
 .input-title image {
-  width: 40rpx;
-  height: 40rpx;
+  width: 37rpx;
+  height: 37rpx;
 }
 
-.input-content{
-  border: 2px solid rebeccapurple;
-  width: 100%;
+.input-panel {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
 }
 
-.input-confirm{
-  text-align: right;
-  line-height: 70rpx;
-  color: #3B49E0;
-  font-family: 'Times New Roman', Times, serif;
-  font-weight: bolder;
+.input-content {
+  border: 1px solid rgba(156, 162, 187, 1);
+  width: 75%;
+  height: 63rpx;
+  padding: 12rpx 0;
+}
+
+.input-confirm {
+  text-align: center;
+  margin: 0 1rpx 0 0;
+  width: 140rpx;
+  height: 65rpx;
+  font-size: 28rpx;
+  font-family: SourceHanSansCN-Medium;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 1);
+  background: linear-gradient(to bottom, #6cadd2, #2eb3ff);
 }

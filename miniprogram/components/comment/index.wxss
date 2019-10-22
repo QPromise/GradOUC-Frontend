@@ -41,7 +41,7 @@
 
 .delete{
   font-size: 30rpx;
-  color: #3B49E0;
+  color: #2eb3ff;
   text-align: right;
   margin-right: 20rpx;
   margin-bottom: 10rpx;

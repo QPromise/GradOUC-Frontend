@@ -1,3 +1,16 @@
+.swiper {
+  width: 100%;
+  z-index: 0;
+  top: 2;
+}
+.toptext{
+font-size:32rpx;
+  font-family:SourceHanSansCN-Regular;
+  font-weight:400;
+  color:rgba(51,51,51,1);
+  line-height:36rpx;
+  text-align: center;
+}
 .nav{
   display: flex;
   align-items:center;
@@ -14,8 +27,8 @@
 .nav_item.active{
   font-size:34rpx;
   font-family:PingFang-SC-Bold;
-  color:rgba(59,73,224,1);
-  border-bottom: 5rpx solid rgba(59,73,224,1);
+  color:#2eb3ff;
+  border-bottom: 5rpx solid#2eb3ff;
 }
 
 
@@ -49,7 +62,7 @@
   border-radius: 50%;
 }
 .userinformation{
-  width: 72%;
+  width: 73%;
   margin-left: 20rpx;
 }
 .information_top{
@@ -162,8 +175,26 @@
   margin-bottom: 10rpx;
 }
 
-.comments_thumbsup{
+.stateinformation{
   margin-top: 20rpx;
+  display: flex;
+  justify-content:space-between;
+}
+.department image{
+  width: 42rpx;
+  height: 42rpx;
+  margin-right: 8rpx;
+  margin-bottom: 0rpx;
+}
+.department text{
+  font-size:31rpx;
+  font-family:SourceHanSansCN-Regular;
+  font-weight:400;
+  color:rgba(156,162,187,1);
+  margin-right: 5rpx;
+}
+
+.comments_thumbsup{
   display: flex;
   justify-content:space-between;
 }
@@ -176,20 +207,21 @@
   align-items: center;
 }
 .comments{
-  margin-right: 50rpx;
+  margin-right: 20rpx;
 }
-
 .comments_thumbsup image{
-  width: 30rpx;
-  height: 30rpx;
-  margin-right: 10rpx;
+  width: 42rpx;
+  height: 42rpx;
+  margin-right: 8rpx;
+  margin-bottom: 0rpx;
 }
 .comments_thumbsup text{
-  font-size:30rpx;
+  font-size:31rpx;
   font-family:SourceHanSansCN-Regular;
   font-weight:400;
   color:rgba(156,162,187,1);
-  margin-right: 10rpx;
+  margin-right: 20rpx;
+
 }
 
 

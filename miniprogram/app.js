@@ -15,6 +15,7 @@ App({
     wx.cloud.callFunction({
       name: 'treeholeLogin',
       complete: res => {
+        console.log(res.result.openid);
         that.globalData.openId = res.result.openid;
         if (this.openIdReadyCallback) {
           this.openIdReadyCallback(res)
@@ -45,7 +46,7 @@ App({
     openId: null,
     userInfo: null,
     newCommentsCount: 0,
-    newThumbupCount: 0
+    newThumbupCount: 0,
   }
 
 })

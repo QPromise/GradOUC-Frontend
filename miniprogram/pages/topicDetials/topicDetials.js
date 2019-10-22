@@ -1,6 +1,5 @@
 var util = require('../../utils/util.js');
 var th = require('../../utils/throttle/throttle.js');
-
 const app = getApp()
 
 var avoidPreviewImageOnShow; //避免预览图片后，触发onShow函数
@@ -27,6 +26,7 @@ Page({
   },
 
   onLoad: function(options) {
+    console.log("来到了details");
     //获取用户的openid
     this.data.userInfo = app.globalData.userInfo;
     this.data.recordId = options.recordId;

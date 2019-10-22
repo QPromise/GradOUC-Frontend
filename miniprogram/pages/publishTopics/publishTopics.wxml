@@ -26,7 +26,7 @@
       <view class="tiptittle">发布到</view>
       <radio-group name="visibility" class="radio-group">
         <view wx:for="{{radioitems}}" wx:key="value">
-          <radio bindtap="checkedradio" value="{{item.value}}" data-value="{{item.value}}" checked="{{item.checked}}" color="#3A47DB" />
+          <radio bindtap="checkedradio" value="{{item.value}}" data-value="{{item.value}}" checked="{{item.checked}}" color="#ffbb12" />
           <text bindtap='clickRadio' data-value="{{item.value}}"  class="radiotext {{item.value===currentvalue?'radiotextchecked':''}}">{{item.text}}</text>
         </view>
       </radio-group>

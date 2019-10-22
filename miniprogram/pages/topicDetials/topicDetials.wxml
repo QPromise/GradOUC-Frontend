@@ -23,11 +23,11 @@
           <!-- 评论与点赞个数 -->
           <view class="comments_thumbsup">
             <view class='comments'>
-              <image src="../../images/comments.png"></image>
+              <image src="../../images/comment.png"></image>
               <text>{{commNum}}</text>
             </view>
             <view bindtap='onLikePublic'>
-              <image src="../../images/thumbup.png"></image>
+              <image src="../../images/like.png"></image>
               <text>{{contentdetail.praiseNum}}</text>
             </view>
           </view>
@@ -54,7 +54,7 @@
     </view>
     <view class='write-icon'>
       <image class='icon' src='/images/write.png'></image>
-      <text class='write' bind:tap='jump' data-commid='{{"-1"}}'>友善的评论是交流的起点</text>
+      <text class='write' bind:tap='jump' data-commid='{{"-1"}}' >友善的评论是交流的起点</text>
     </view>
   </view>
   <!-- 弹出评论区 -->

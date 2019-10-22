@@ -1,0 +1,49 @@
+<view class = "container" >
+      <!-- <image class="title" src="../../images/welcoming.png"></image> -->
+      <view class="content">
+        <view class="hd" style="transform:rotateZ({{angle}}deg);">
+          <image class="logo" src="../../images/school_logo.jpg"></image>
+          <image class="wave" src="../../images/new_wave.png" mode="aspectFill"></image>
+          <image class="wave wave-bg" src="../../images/new_wave.png" mode="aspectFill"></image>
+        </view>
+      </view>
+
+ 
+  <form bindsubmit="formSubmit" bindreset="formReset">
+<view class="profile-form">
+  <view class="items">
+    <image class="icon" src="../../images/edit_nickname.png"></image>
+    <text class="text">修改昵称</text>
+    <input name="nickname" placeholder="请输入昵称" />
+  </view>
+
+    <view class="items">
+    <image class="icon" src="../../images/student_type.png"></image>
+    <text class="text">学生类别</text>
+     <picker name = "student_type" bindchange="bindStudentChange" value="{{typeIndex}}" range="{{typeArray}}">
+      <view class="picker">
+      <text>{{typeArray[typeIndex]}}</text>
+      </view>
+      </picker>
+  </view>
+  <view class="items">
+  <image class="icon" src="../../images/department_type.png"></image>
+    <text class="text">选择院系</text>
+     <picker name = "department" bindchange="bindDepartmentChange" value="{{departmentIndex}}" range="{{departmentArray}}">
+      <view class="picker">
+      <text>{{departmentArray[departmentIndex]}}</text>
+      </view>
+      </picker>
+  </view>
+
+  </view>
+  <view class="publishbtn">
+      <button class="btn1" formType="submit">保存</button>
+      <!-- <button class="btn2" formType="reset">重置</button> -->
+    </view>
+</form>
+
+</view>
+      
+
+

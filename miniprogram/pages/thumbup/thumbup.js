@@ -1,5 +1,6 @@
 var util = require('../../utils/util.js');
 var th = require('../../utils/throttle/throttle.js');
+console.log("来到了thmubup这里");
 const app = getApp();
 Page({
   /**
@@ -283,6 +284,10 @@ Page({
     wx.showModal({
       title: '提示',
       content: '确定要取消点赞吗？',
+      cancelText: '取消',
+      cancelColor: '#576B95',
+      confirmText: '确定',
+      confirmColor: '#576B95',
       success: function (res) {
         if (res.confirm) {
           //确定

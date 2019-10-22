@@ -1,20 +1,42 @@
 var util = require('../../utils/util.js');
 var th = require('../../utils/throttle/throttle.js');
-
+var startPoint;
 var avoidPreviewImageOnShow; //避免预览图片后，触发onShow函数
+//考研倒计时
+function countDown() {
+  var fuTime = new Date("2019/12/21 00:00:00");
+  var now = new Date();
+  var day = parseInt((fuTime - now) / 1000 / 60 / 60 / 24) + 1;
+  var hour = parseInt((fuTime - now) % (1000 * 60 * 60 * 24) / 1000 / 60 / 60);
+  var min = parseInt((fuTime - now) % (1000 * 60 * 60) / 1000 / 60);
+  var sec = parseInt((fuTime - now) % (1000 * 60) / 1000);
+  var ans = "距离2020考研还有" + day  + " 天 " ;
+  return ans;
+}
 
 //index.js
 const app = getApp()
 Page({
   data: {
+    "swiper_height": 80,
+    "notices": [{
+      url: "",
+      pic: "../../images/top1.jpg"
+    },
+      {
+        url: "",
+        pic: "../../images/top2.jpg"
+      }
+    ],
     openId: null,
     currentIndexNav: 0,
     canshow: false,
     navList: [
-      {'index':0,'text':'树洞广场'},
-      {'index':1,'text':'我的树洞'}
+      {'index':0,'text':'最新'},
+      {'index':1,'text':'我的学院'},
+      {'index':2,'text':'我的问答'}
     ],
-
+    topText:countDown(),
     userInfo: null,
     pageIndex: 1,
     pageSize: 5,
@@ -26,11 +48,17 @@ Page({
     date: null,
     text: null,
     onLikePublic: null,
-    onLikePrivate: null
+    onLikePrivate: null,
+    buttonTop: 0,
+    buttonLeft: 0,
+    windowHeight: '',
+    windowWidth: ''
 
   },
 
   onLoad: function() {
+    let that = this;
+    console.log("来到了index");
     if (app.globalData.openId) {
       //开启未读消息自动刷新
       showMessage(app.globalData.openId);
@@ -52,8 +80,86 @@ Page({
     this.setData({
       userInfo: app.globalData.userInfo
     })
+    wx.getSystemInfo({
+      success: function (res) {
+        console.log(res);
+        // 屏幕宽度、高度
+        console.log('height=' + res.windowHeight);
+        console.log('width=' + res.windowWidth);
+        // px转换到rpx的比例
+        let pxToRpxScale = 750 / res.windowWidth;
+        // 状态栏的高度
+        let ktxStatusHeight = res.statusBarHeight * pxToRpxScale
+        console.log('ktxStatusHeight=' + ktxStatusHeight);
+        // 导航栏的高度
+        let navigationHeight = 44 * pxToRpxScale
+        console.log('navigationHeight=' + navigationHeight);
+        // window的宽度
+        let ktxWindowWidth = res.windowWidth * pxToRpxScale
+        console.log('ktxWindowWidth=' + ktxWindowWidth);
+        // window的高度
+        let ktxWindowHeight = res.windowHeight * pxToRpxScale
+        console.log('ktxWindowHeight=' + ktxWindowHeight);
+        // 屏幕的高度
+        let ktxScreentHeight = res.screenHeight * pxToRpxScale
+        console.log('ktxScreentHeight=' + ktxScreentHeight);
+        // 底部tabBar的高度
+        let tabBarHeight = ktxScreentHeight - ktxStatusHeight - navigationHeight - ktxWindowHeight
+        console.log('tabBarHeight=' + tabBarHeight);
+        // 高度,宽度 单位为px
+        that.setData({
+          windowHeight: res.windowHeight,
+          windowWidth: res.windowWidth,
+          buttonTop: (ktxWindowHeight - tabBarHeight -30) / pxToRpxScale,
+          buttonLeft: (ktxWindowWidth - 115) / pxToRpxScale,
+        })
+      }
+    })
   },
-
+  clicks: function () {
+    let that = this;
+    const db = wx.cloud.database();
+    db.collection('profile').where({ '_openid': app.globalData.openId }).get({
+      success: (res) => {
+        if (res.data.length == 1) {
+          that.data.canPublish = res.data[0].canPublish;
+          if (that.data.canPublish) {
+            console.log("可以发布");
+            wx.navigateTo({
+              url: '../publishTopics/publishTopics',
+            })
+          }
+          else {
+            wx.showModal({
+              title: '提示',
+              content: '请先去完善个人信息',
+              cancelText: '取消',
+              cancelColor: '#576B95',
+              confirmText: '去完善',
+              confirmColor: '#576B95',
+              success: function (res) {
+                if (res.confirm) {
+                  //确定
+                  wx.navigateTo({
+                    url: '../profile/profile',
+                  })
+                }
+                else if (res.cancel) {
+                  wx.navigateTo({
+                    url: '../index/index',
+                  })
+                  console.log("跳转到index");
+                }
+              }
+            }
+            )
+          }
+          console.log("不用写入");
+        }
+      }
+    }
+    )
+  },
   /**
    * 生命周期函数--监听页面显示
    */
@@ -62,6 +168,7 @@ Page({
       avoidPreviewImageOnShow = false;
       return;
     }
+    showMessage(app.globalData.openId);
     let that = this;
     const db = wx.cloud.database();
     if (that.data.currentIndexNav == 0) {
@@ -83,7 +190,7 @@ Page({
       });
     }
   },
-  
+
   onPullDownRefresh: function () {
     //下拉刷新记录列表
     this.data.pageIndex = 1;
@@ -112,7 +219,7 @@ Page({
   },
   
   fetchUtterancePublicDocList: function (title, visibility) {
-    //获取树洞广场数据列表
+    //获取广场数据列表
     let that = this;
     let pageIndex = that.data.pageIndex;
     let pageSize = that.data.pageSize;
@@ -173,7 +280,7 @@ Page({
   },
 
   fetchUtterancePrivateDocList: function (title, openId) {
-    //获取我的树洞列表
+    //获取列表
     let that = this;
     let pageIndex = that.data.pageIndex;
     let pageSize = that.data.pageSize;
@@ -389,6 +496,7 @@ Page({
       }
     });
   },
+
   deletePraiseDoc: function (recordId) {
     wx.cloud.callFunction({
       // 要调用的云函数名称
@@ -405,6 +513,7 @@ Page({
       // handle error
     })
   },
+  
   gotoTopicDetials: function (event) {
   let _id = event.currentTarget.dataset.recordid
     wx.navigateTo({
@@ -429,7 +538,6 @@ Page({
             [state]: true
           });
         } else {
-          console.log("用户不喜欢");
           //添加不喜欢键值对id:false
           let state = "onLikePublic." + id;
           that.setData({
@@ -439,7 +547,6 @@ Page({
       },
       fail: function (res) {
         //获取失败,默认是不喜欢
-        console.log("默认用户不喜欢");
         //添加不喜欢键值对id:true
         let state = "onLikePublic." + id;
         that.setData({
@@ -475,7 +582,6 @@ Page({
             [state]: true
           });
         } else {
-          console.log("用户不喜欢");
           //添加不喜欢键值对id:false
           let state = "onLikePrivate." + id;
           that.setData({
@@ -485,7 +591,6 @@ Page({
       },
       fail: function (res) {
         //获取失败,默认是不喜欢
-        console.log("默认用户不喜欢");
         //添加不喜欢键值对id:true
         let state = "onLikePrivate." + id;
         that.setData({
@@ -504,11 +609,12 @@ Page({
       }
     });
   },
+ 
   /**
    * 点赞响应事件(已添加节流函数，防止恶意点击)
    */
   onLikePublic: th.throttle(function (that, event) {
-    //点赞获取点赞者的openid和记录的id和点赞数
+    //获取点赞者的openid和记录的id和点赞数
     let localopenid = app.globalData.openId;
     let _id = event.currentTarget.dataset.id;
     let tempList = that.data.uploadDocList;
@@ -519,6 +625,37 @@ Page({
     let summary;
     let i;
     let flag;
+    let repeatPraise_flag;
+    const db = wx.cloud.database();
+    console.log(_id);
+    console.log(localopenid);
+    try {
+      db.collection('praiseDoc').where({
+          recordId: _id,
+        clickUserId: localopenid
+      }).count({
+        success: function (res) {
+          if (res.total != 0) {
+            repeatPraise_flag = 1;
+
+            console.log("有点赞过")
+            console.log(res)
+          } else {
+            repeatPraise_flag = 0;
+            console.log("没有点赞过")
+            console.log(res)
+          }
+        },
+        fail: function (res) {
+          console("数据库无法找到此记录");
+        },
+        complete: function (res) {
+
+        }
+      })
+    } catch (e) {
+      console("数据库无法找到此记录");
+    }
     for (i = 0; i < tempList.length; i++) {
       if (_id == tempList[i]._id) {
         recordUserOpenId = tempList[i]._openid;
@@ -532,9 +669,11 @@ Page({
         break;
       }
     }
-    if (!that.data.onLikePublic[_id]) { //点赞
+
+    if (!that.data.onLikePublic[_id] && !repeatPraise_flag) { //点赞
       console.log(tempList[i].praiseNum);
       tempList[i].praiseNum = tempList[i].praiseNum + 1;
+      console.log(tempList[i].praiseNum);
       flag = 1;
       wx.showToast({
         title: '点赞成功',
@@ -550,10 +689,12 @@ Page({
       [state]: !that.data.onLikePublic[_id],
       uploadDocList: tempList
     });
-
+    console.log("执行了onLikePublic");
+    console.log(flag);
     //修改云端数据
+
     that.upLoadLikeNumber(flag, _id, localopenid, recordUserOpenId, recordUserName, firstImage, summary);
-  }, 2000),
+  }, 1000),
   onLikePrivate: th.throttle(function (that, event) {
     //点赞获取点赞者的openid和记录的id和点赞数
     let localopenid = app.globalData.openId;
@@ -596,10 +737,9 @@ Page({
       [state]: !that.data.onLikePrivate[_id],
       uploadDocList: tempList
     });
-
     //修改云端数据
-    that.upLoadLikeNumber(flag, _id, localopenid, recordUserOpenId, recordUserName, firstImage, summary);
-  }, 2000),
+    that.upLoadLikeNumber(flag,  _id, localopenid, recordUserOpenId, recordUserName, firstImage, summary);
+  }, 1000),
 
   getSummary: function(content){
     if(content.length <= 50){
@@ -618,7 +758,8 @@ Page({
     //生成大致点赞时间
     let time = util.formatTime(new Date(), "Y-M-D h:m:s");
     let clickUserName = app.globalData.userInfo.nickName;
-    console.log(recordUserOpenId)
+    console.log(flag);
+    console.log(recordUserOpenId);
     //调用点赞数的云函数
     wx.cloud.callFunction({
       // 云函数名称
@@ -629,6 +770,7 @@ Page({
         flag: flag,
       },
       success: function (res) {
+        console.log(res);
         wx.cloud.callFunction({
           // 调用获取指定数据的云函数
           name: 'praiseOperate',
@@ -763,7 +905,7 @@ function showMessage(openId) {
   }).catch((error) => {
     console.log(error)
   });
-  setTimeout(function () {
-    showMessage(openId);
-  }, 1000);
+  // setTimeout(function () {
+  //   showMessage(openId);
+  // }, 1000);
 }

@@ -5,7 +5,9 @@
       <text wx:if="{{informations.contentdetail.publisher}}">{{informations.contentdetail.publisher}}</text>
       <text wx:if="{{replyComm.byreviewInfo.reviewerName}}">{{replyComm.byreviewInfo.reviewerName}}</text>
     </view>
-    <textarea name='content' class='input-content' auto-height='true' maxlength='-1' auto-focus='true' cursor-spacing='50' ></textarea>
-    <button class='input-confirm' form-type='submit'>发布</button>
+    <view class="input-panel">
+    <textarea name='content' class='input-content' placeholder= "写点什么吧..." auto-height='true' maxlength='-1' auto-focus='true' cursor-spacing='10' ></textarea>
+    <button class='input-confirm' form-type='submit'>发送</button>
+    </view>
   </view>
 </form>

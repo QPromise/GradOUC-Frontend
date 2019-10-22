@@ -16,13 +16,13 @@
   margin-top: 20rpx;
 }
 .texteare textarea{
-  font-size:26rpx;
+  font-size:34rpx;
   font-family:SourceHanSansCN-Regular;
   width: 690rpx;
   height: 100%;
 }
 .placeholderclass{
-  font-size:26rpx;
+  font-size:34rpx;
   font-family:SourceHanSansCN-Regular;
   font-weight:400;
   color:rgba(156,162,187,1);
@@ -132,7 +132,7 @@ radio .wx-radio-input{
   color:rgba(156,162,187,1);
 }
 .radiotextchecked{
-  color:rgba(58,71,219,1);
+  color:#ffbb12;
 }
 
 
@@ -151,7 +151,7 @@ radio .wx-radio-input{
   font-family:SourceHanSansCN-Medium;
   font-weight:500;
   color:rgba(255,255,255,1);
-  background:#3B49E0;
+  background:#ffbb12;
   border-radius:44px;
 }
 .btn2{
@@ -161,7 +161,7 @@ radio .wx-radio-input{
   font-family:SourceHanSansCN-Medium;
   font-weight:500;
   color:rgba(255,255,255,1);
-  background:#3B49E0;
+  background:#ffbb12;
   border-radius:44px;
 }
 

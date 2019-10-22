@@ -1,6 +1,7 @@
 var util = require('../../utils/util.js');
 var th = require('../../utils/throttle/throttle.js');
 // miniprogram/pages/publishTopics/publishTopics.js
+
 const app = getApp();
 Page({
 
@@ -12,9 +13,12 @@ Page({
     content: null,
     visibility: null,
     imageList: null,
+    openId:null,
+    departmentType:null,
+    canPublish:0,
     radioitems:[
-      { text: '树洞广场和我的树洞，对所有人可见', value: 0, checked: true},
-      { text: '我的树洞，仅对自己可见' , value: 1, checked: false}
+      { text: '问答广场和我的问答，对所有人可见', value: 0, checked: true},
+      { text: '我的问答，仅对自己可见' , value: 1, checked: false}
     ],
     currentvalue:0
   },
@@ -22,13 +26,17 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log("来到了publishTopics这里");
     this.data.userInfo = app.globalData.userInfo;
+    this.data.openId = app.globalData.openId;
+
+    
   },
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-   
+ 
   },
   chooseImages: function () {
     //回调函数里又有新的this对象，所以必须在外部保存this（即Page对象）引用
@@ -182,6 +190,12 @@ Page({
       }
     });
   },
+  findDepartment:()=>{
+    let that = this;
+    let openId = app.globalData.openId;
+    
+    
+  },
   addUtteranceDoc: function (time, imageUrls) {
     let that = this;
     //头像
@@ -196,35 +210,73 @@ Page({
     let commentNum = 0;
     //点赞数
     let praiseNum = 0; 
-    //获得数据库引用
+    //获取当前openId的departmentType
+    console.log("获取departmentType");
+    console.log(that.data.openId);
+    console.log(this.data.openId);
+    //更新院系
     const db = wx.cloud.database();
-    //把上传的图片添加到数据库，并生成话题记录
-    db.collection("utteranceDoc").add({
-      data: {
-        icon: icon,
-        publisher: name,
-        time: util.formatTime(time, "Y-M-D h:m:s"),
-        content: content,
-        imageUrls: imageUrls,
-        visibility: visibility,
-        commentNum: commentNum,
-        praiseNum: praiseNum
-      },
-      success: function (res) {
-        console.log("话语添加到数据库成功");
-      },
-      fail: function (res) {
-        console.log("话语添加到数据库失败");
-      },
-      complete: function (res) {
-        //上传完成
-        wx.hideLoading();
-        //跳转到记录显示页面
-        wx.switchTab({
-          url: '../index/index'
+    db.collection('profile').where({ "_openid":that.data.openId}).get({
+      success:(res)=>  {
+        if (res.data.length == 1) {
+          that.setData({ departmentType: res.data[0].departmentType });
+          console.log(that.data, that.data.departmentType);
+          //把上传的图片添加到数据库，并生成话题记录
+          db.collection("utteranceDoc").add({
+            data: {
+              icon: icon,
+              publisher: name,
+              departmentType: that.data.departmentType,
+              time: util.formatTime(time, "Y-M-D h:m:s"),
+              content: content,
+              imageUrls: imageUrls,
+              visibility: visibility,
+              commentNum: commentNum,
+              praiseNum: praiseNum
+            },
+            success: function (res) {
+              
+              console.log("发布内容添加到数据库成功");
+            },
+            fail: function (res) {
+              console.log("发布内容添加到数据库失败");
+            },
+            complete: function (res) {
+              //上传完成
+              wx.hideLoading();
+              //跳转到记录显示页面
+              wx.switchTab({
+                url: '../index/index'
+              })
+            }
+          });
+        }
+        else {
+          console.log(res.data, res.data[0].departmentType);
+          console.log("数据库存在多个相同openid用户表或者读取异常:");
+          // that.setData({ nickName: that.userInfo.nickName })
+          wx.showToast({
+            icon: 'none',
+            title: '请尝试重新登录或修改个人信息',
+            duration:1500
+          })
+          setTimeout(function () {
+            wx.hideToast()
+          }, 1500)
+        }
+      }, fail: err => {
+        wx.showToast({
+          icon: 'none',
+          title: '查询记录失败',
+          duration:1500
         })
+        setTimeout(function () {
+          wx.hideToast()
+        }, 1500)
+        console.error('[数据库] [查询记录] 失败：', err)
       }
-    });
+    })
+   
   },
   formReset: function () {
     console.log('form发生了reset事件');

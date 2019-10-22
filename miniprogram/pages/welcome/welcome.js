@@ -6,11 +6,11 @@ Page({
    */
   data:{
     welcomeimg:
-    "https://6a6f-jorey-qzv8r-1259540582.tcb.qcloud.la/CJRXHTreeHole/images/welcome.png?sign=aae08fbb39e73a2a67b72d08fe6c6d2a&t=1562631370",
+    "../../images/welcoming.png",
     background:
-    "../../images/init_background.jpg"
-    ,
-
+    "../../images/init_background.jpg",
+    information:
+      "../../images/information.png",
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo')
   },
@@ -58,6 +58,38 @@ Page({
         userInfo: e.detail.userInfo,
         hasUserInfo: true
       });
+      const db = wx.cloud.database();
+      console.log("用户点击了登录", app.globalData.openId);
+      if (app.globalData.openId != null){
+        db.collection('profile').where({ '_openid': app.globalData.openId }).count(
+          {
+
+            success: function (res) {
+              if (res.total == 0) {
+                app.globalData.canPublish = 0;
+                console.log(2, app.globalData.userInfo);
+                db.collection('profile').add({
+                  // data 字段表示需新增的 JSON 数据
+                  data: {
+                    nickName: app.globalData.userInfo.nickName,
+                    gender: app.globalData.userInfo.gender,
+                    avatarUrl: app.globalData.userInfo.avatarUrl,
+                    departmentType: null,
+                    studentType: null,
+                  }
+                })
+              }
+              else{
+            
+                console.log("不用写入");
+              }
+               
+            }
+          }
+        )
+      }
+      else
+      console.log("问题");
       wx.switchTab({
         url: '../index/index'
       });

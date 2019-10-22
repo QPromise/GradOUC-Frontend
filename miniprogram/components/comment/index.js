@@ -25,11 +25,11 @@ Component({
       var recordId = event.target.dataset.recordid;
       var that = this;
       wx.showModal({
-        title: '删除',
+        title: '提示',
         content: '是否删除评论',
         showCancel: true,
         cancelText: '取消',
-        cancelColor: '#3B49E0',
+        cancelColor: '#576B95',
         confirmText: '确定',
         confirmColor: '#576B95',
         success: function(res) {

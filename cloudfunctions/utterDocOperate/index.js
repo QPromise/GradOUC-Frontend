@@ -35,6 +35,18 @@ exports.main = async(event, context) => {
         .then(console.log)
         .catch(console.error)
       break;
+    case 'updateDepartment': //评论数减1
+      console.log('更新院系');
+      console.log(event.operate);
+      await db.collection('utteranceDoc').where({ "_openid": event._openid }).update({
+        // data 传入需要局部更新的数据
+        data: {
+          departmentType: event.departmentType
+        }
+      })
+        .then(console.log)
+        .catch(console.error)
+      break;
   }
 
 }

@@ -1,10 +1,12 @@
 var util = require('../../utils/util.js');
 var th = require('../../utils/throttle/throttle.js');
+
 const app = getApp();
 Page({
   /**
    * 页面的初始数据
    */
+  
   data: {
     openId: null,
     canshow: false,
@@ -25,6 +27,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log("来到了comments");
     if (app.globalData.openId) {
       //全局应用已有openId
       this.setData({
@@ -280,11 +283,11 @@ Page({
     var recordId = event.target.dataset.recordid;
     var that = this;
     wx.showModal({
-      title: '删除',
+      title: '提示',
       content: '是否删除评论',
       showCancel: true,
       cancelText: '取消',
-      cancelColor: '#3B49E0',
+      cancelColor: '#576B95',
       confirmText: '确定',
       confirmColor: '#576B95',
       success: function (res) {
