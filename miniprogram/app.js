@@ -175,13 +175,13 @@ App({
     });
   }, 
 
-  server: '',
+  server: 'https://leoqin.fun/',
   // http://127.0.0.1:8000/do_login
-  
-  local_server: '',
+  //'https://leoqin.fun/static/images/'
+  local_server: 'https://leoqin.fun/',
   cache: {},
   globalData: {
-    imgCDN: '',
+    imgCDN: 'https://leoqin.fun/static/images/',
     map:[],
     openId: null,
     userInfo: null,
