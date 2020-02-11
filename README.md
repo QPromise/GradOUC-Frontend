@@ -11,5 +11,5 @@
 
 ## 扫码查看
 
-![QQ图片20200211202912.jpg](https://i.loli.net/2020/02/11/Rs1kTVrwlX6mY2H.jpg)
+![研在OUC小程序码](https://i.loli.net/2020/02/11/Rs1kTVrwlX6mY2H.jpg)
 
