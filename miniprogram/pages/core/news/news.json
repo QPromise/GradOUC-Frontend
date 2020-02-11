@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "wux-pagination": "../../../components/pagination/index",
+      "i-notice-bar": "../../components/notice-bar/index"
+  }
+}

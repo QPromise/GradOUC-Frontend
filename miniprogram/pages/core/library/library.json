@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "wux-accordion-group": "../../../components/accordion-group/index",
+    "wux-accordion": "../../../components/accordion/index"
+  }
+}

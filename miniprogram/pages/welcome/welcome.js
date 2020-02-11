@@ -24,7 +24,8 @@ Page({
       this.setData({
         userInfo: app.globalData.userInfo,
         hasUserInfo: true
-      })
+      });
+      
     } else if (this.data.canIUse) {
       // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回 
       // 所以此处加入 callback 以防止这种情况 
@@ -59,39 +60,8 @@ Page({
         hasUserInfo: true
       });
       const db = wx.cloud.database();
-      console.log("用户点击了登录", app.globalData.openId);
-      if (app.globalData.openId != null){
-        db.collection('profile').where({ '_openid': app.globalData.openId }).count(
-          {
-
-            success: function (res) {
-              if (res.total == 0) {
-                app.globalData.canPublish = 0;
-                console.log(2, app.globalData.userInfo);
-                db.collection('profile').add({
-                  // data 字段表示需新增的 JSON 数据
-                  data: {
-                    nickName: app.globalData.userInfo.nickName,
-                    gender: app.globalData.userInfo.gender,
-                    avatarUrl: app.globalData.userInfo.avatarUrl,
-                    departmentType: null,
-                    studentType: null,
-                  }
-                })
-              }
-              else{
-            
-                console.log("不用写入");
-              }
-               
-            }
-          }
-        )
-      }
-      else
-      console.log("问题");
       wx.switchTab({
-        url: '../index/index'
+        url: '../home/home'
       });
     }
   },
@@ -106,7 +76,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    
   },
 
   /**

@@ -1,0 +1,136 @@
+/* pages/map/map.wxss */
+.top{
+  display: flex;
+}
+.building-item {
+  height: 50px;
+  border-bottom: 1px solid #e0e0e0;
+  padding: 10px;
+}
+.xq-switch{
+  width: 20%;
+  display: flex;
+  background-color: #009cff;
+  height: 6vh;
+  color: white;
+  font-size: 30rpx;
+}
+.xq{
+  height: 65rpx;
+  margin: auto;
+}
+.x{
+  border-color: #086083;
+  box-lines: solid;
+}
+.top-switch {
+  align-items: center;
+  background-color: #009cff;
+  height: 6vh;
+  color: white;
+  display: flex;
+  justify-content: space-around;
+}
+
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
+}
+
+.top-switch-btn {
+  background-color: none;
+  letter-spacing: 3rpx;
+  height: 65rpx;
+  color: #fff;
+  font-size: 30rpx;
+}
+
+.active {
+  border-bottom: solid white;
+  height: 60rpx;
+  display: inline-block;
+}
+
+button {
+  font-size: 26rpx;
+  height: 6vh;
+}
+
+.img-view {
+  height: 100%;
+  display: flex;
+}
+
+.img {
+  width: 85%;
+  height: 100%;
+  display: flex;
+}
+
+.img image {
+  width: 60px;
+  height: 90%;
+  margin: auto 7rpx;
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  margin: auto 0;
+}
+
+.itemName {
+  margin: 0 20rpx;
+  font-size: 32rpx;
+}
+
+.itemFloor {
+  margin: 0 20rpx;
+  font-size: 28rpx;
+  color: #555;
+}
+
+.text {
+  margin: auto 15px;
+  width: 13%;
+}
+
+.text image {
+  width: 60rpx;
+  height: 60rpx;
+}
+
+.controls {
+  border-radius: 8rpx;
+  position: absolute;
+  bottom: 55rpx;
+  right: 26rpx;
+  /* display: flex; */
+}
+
+
+.controls .bg {
+   margin-bottom: -150rpx;
+   z-index: 999;
+}
+
+.controls .bg_img {
+   width: 60rpx;
+   height: 160rpx;
+}
+
+.controls .icon_search {
+   margin-bottom: 20rpx;
+   width: 60rpx;
+   height: 60rpx;
+}
+
+.controls .icon_location {
+   width: 60rpx;
+   height: 60rpx;
+}
+
+.full {
+  top: 75%;
+}

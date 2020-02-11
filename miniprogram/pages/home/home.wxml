@@ -1,0 +1,288 @@
+<navigationBar id="navigationBar" color="{{color}}" title="{{'研在OUC'}}" back="{{true}}"></navigationBar>
+<view class="page">
+  <view class='page_hd'>
+    <i-notice-bar wx:if="{{shownews}}" icon="systemprompt" loop closable speed='700' class='notice-bar' getindex='{{getindex}}'>
+      {{text}}
+    </i-notice-bar>
+    <view class="swiper">
+      <swiper indicator-dots="true"  indicator-active-color="#fff" autoplay="true" interval="4500" duration="1000" circular="true">
+       <!-- <swiper-item>
+       <view>
+       <navigator cl style="background-image: url('/images/test1.png');">
+          <text>123</text>
+       </navigator>
+       </view>
+        </swiper-item> -->
+      
+        <block wx:for="{{swiimgs}}" wx:for-item="item" wx:key="item">
+          <swiper-item>
+            <image src="{{item.image}}" bindtap="navTo" data-id="{{item.url}}" class="pic" />
+          </swiper-item>
+        </block>
+      </swiper>
+    </view>
+  </view>
+  <view class='page_bd'>
+    <view class="news_title">
+      <image class="title" src="/images/news_title1.png"></image>
+    </view>
+    <swiper duration="500">
+      <swiper-item>
+        <view class='menu-body'>
+          <view class='menu-items'>
+            <view class='menu-item-box'>
+              <view bindtap="goSchedule" class='nav-item' hover-class="none">
+                <view class='menu-item-content'>
+                  <view class='menu-items-img'>
+                    <image src='/images/core/schedule.png'></image>
+                  </view>
+                </view>
+                <view class='menu-items-txt'>
+                  <text>我的课表</text>
+                </view>
+              </view>
+            </view>
+            <view class='menu-item-box'>
+              <view bindtap="goCourse" class='nav-item' hover-class="none">
+                <view class='menu-item-content '>
+                  <view class='menu-items-img'>
+                    <image src='/images/core/course.png'></image>
+                  </view>
+                </view>
+                <view class='menu-items-txt'>
+                  <text>我的课程</text>
+                </view>
+              </view>
+            </view>
+            <view class='menu-item-box'>
+              <view bindtap="goScore" class='nav-item' hover-class="none">
+                <view class='menu-item-content '>
+                  <view class='menu-items-img'>
+                    <image src='/images/core/score.png'></image>
+                  </view>
+                </view>
+                <view class='menu-items-txt'>
+                  <text>成绩查询</text>
+                </view>
+              </view>
+            </view>
+            <view class='menu-item-box'>
+              <view class='nav-item' bindtap='goLibrary'>
+                <view class='menu-item-content waiting'>
+                  <view class='menu-items-img'>
+                    <image src='/images/core/library.png'></image>
+                  </view>
+                </view>
+                <view class='menu-items-txt'>
+                  <text>图书馆</text>
+                </view>
+              </view>
+            </view>
+
+          </view>
+
+          <view class='solid-line-88'></view>
+        
+          <view class='menu-items'>
+        
+            <!-- <view class='menu-item-box'>
+              <view bindtap="goSchoolCourse" class='nav-item' hover-class="none">
+                <view class='menu-item-content '>
+                  <view class='menu-items-img'>
+                    <image src='/images/core/schoolCourse.png'></image>
+                  </view>
+                </view>
+                <view class='menu-items-txt'>
+                  <text>开课查询</text>
+                </view>
+              </view>
+            </view> -->
+             <view class='menu-item-box'>
+              <view bindtap="goCampusTours" class='nav-item' hover-class="none">
+                <view class='menu-item-content '>
+                  <view class='menu-items-img'>
+                    <image src='/images/core/campusTours.png'></image>
+                  </view>
+                </view>
+                <view class='menu-items-txt'>
+                  <text>校园导览</text>
+                </view>
+              </view>
+            </view>
+
+            <view class='menu-item-box'>
+              <view bindtap="goCar" class='nav-item' hover-class="none">
+                <view class='menu-item-content '>
+                  <view class='menu-items-img'>
+                    <image src='/images/core/car.png'></image>
+                  </view>
+                </view>
+                <view class='menu-items-txt'>
+                  <text>校 车</text>
+                </view>
+              </view>
+            </view>
+
+            <view class='menu-item-box'>
+              <view bindtap="goCalendar" class='nav-item' hover-class="none">
+                <view class='menu-item-content '>
+                  <view class='menu-items-img'>
+                    <image src='/images/core/calendar.png'></image>
+                  </view>
+                </view>
+                <view class='menu-items-txt'>
+                  <text>校 历</text>
+                </view>
+              </view>
+            </view>
+            <view class='menu-item-box'>
+              <view class='nav-item' bindtap='showMoreTips'>
+                <view class='menu-item-content waiting'>
+                  <view class='menu-items-img'>
+                    <image src='/images/core/more.png'></image>
+                  </view>
+                </view>
+                <view class='menu-items-txt'>
+                  <text>更多</text>
+                </view>
+              </view>
+            </view>
+ 
+          </view>
+        </view>
+      </swiper-item>
+      <!-- <swiper-item>
+      <view class='menu-body'>
+          <view class='menu-items'>
+            <view class='menu-item-box'>
+              <view class='nav-item' bindtap='showMoreTips'>
+                <view class='menu-item-content waiting'>
+                  <view class='menu-items-img'>
+                    <image src='/images/core/more.png'></image>
+                  </view>
+                </view>
+                <view class='menu-items-txt'>
+                  <text>更多</text>
+                </view>
+              </view>
+            </view>
+         <view class='menu-item-box'>
+              
+            </view>
+          <view class='menu-item-box'>
+              
+            </view>
+           <view class='menu-item-box'>
+              
+            </view>
+
+          </view>
+
+          <view class='solid-line-88'></view>
+        
+          <view class='menu-items'>
+
+       <view class='menu-item-box'>
+              
+            </view>
+            <view class='menu-item-box'>
+              
+            </view>
+
+        <view class='menu-item-box'>
+              
+            </view>
+
+            <view class='menu-item-box'>
+              
+            </view>
+
+
+            
+
+           
+          </view>
+        </view>
+      
+      </swiper-item> -->
+    </swiper>
+
+    <view class='tips-box'>
+
+    </view>
+
+  </view>
+
+  <view class='news-box'>
+  
+    <view class="news_title">
+      <image class="title" src="/images/news_title2.png"></image>
+    </view>
+    <view class='menu-body'>
+      <view class='menu-items'>
+        <view class='menu-item-box'>
+          <view class='nav-item' bindtap="navArticle" data-url="/pages/core/news/news" data-type="1001">
+            <view class='menu-item-content waiting'>
+              <view class='menu-items-img'>
+                <image src='/images/core/yanzhao.png'></image>
+              </view>
+            </view>
+            <view class='menu-items-txt'>
+              <text>研招网</text>
+            </view>
+          </view>
+        </view>
+        <view class='menu-item-box'>
+          <view class='nav-item' bindtap="navArticle" data-url="/pages/core/news/news" data-type="1003">
+            <view class='menu-item-content waiting'>
+              <view class='menu-items-img'>
+                <image src='/images/core/backup.png'></image>
+              </view>
+            </view>
+            <view class='menu-items-txt'>
+              <text>后勤公告</text>
+            </view>
+          </view>
+        </view>
+        <view class='menu-item-box'>
+          <view class='nav-item' bindtap="navArticle" data-url="/pages/core/news/news" data-type="1002">
+            <view class='menu-item-content waiting'>
+              <view class='menu-items-img'>
+                <image src='/images/core/xueshu.png'></image>
+              </view>
+            </view>
+            <view class='menu-items-txt'>
+              <text>学术讲座</text>
+            </view>
+          </view>
+        </view>
+        
+        <view class='menu-item-box'>
+       <view class='nav-item'>
+            <view class='menu-item-content waiting'>
+              <view class='menu-items-img'>
+                <image src='/images/core/countDown.png'></image>
+              </view>
+            </view>
+            <view class='menu-items-txt'>
+              <text style="color:red">{{countDays}}天</text>
+            </view>
+          </view>
+       </view>
+      </view>
+    </view>
+  </view>
+<jun-mask show="{{isTiptrue}}">
+  <view  style="width:100%;height:100%;">
+    <view class="guide-item" >
+      <image src="/images/share.png" class="guide-item-img-share"></image>
+      <view class="guide-item-text">如果喜欢，可以点击这里添加到我的小程序</view>
+      <view class="guide-item-text">也可以分享给同学哦</view>
+      <view class='bottom' bindtap='closeGuide'>知道啦</view>
+    </view>
+  </view>
+</jun-mask>
+<view>
+<ad unit-id="adunit-fd61b1cb094c221e"></ad>
+</view>
+</view>

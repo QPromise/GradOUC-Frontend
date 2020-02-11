@@ -1,0 +1,23 @@
+<navigationBar id="navigationBar" title="{{'校历'}}" back="{{true}}"></navigationBar>
+<view class="page">
+  <view class='page__hd'>
+    <view class='xiaoli-title'>
+      <view class='xiaoli-title-txt'></view>
+      <view class='solid-line'></view>
+    </view>
+  </view>
+  <view class='page__bd'>
+    <view class='xiaoli-body'>
+      <view class='xiaoli-item'>
+        <view class='xiaoli-item-title'></view>
+        <view class='xiaoli-item-desc'></view>
+        <view class='xiaoli-item-img'>
+          <image src='https://leoqin.fun/static/images/calendar.jpg'></image>
+        </view>
+      </view>
+    </view>
+    </view>
+  
+  <official-account></official-account>
+</view>
+<view class='full-some'></view>

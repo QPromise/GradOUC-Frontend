@@ -1,0 +1,25 @@
+<!--miniprogram/pages/core/library/bookDetail.wxml-->
+<navigationBar id="navigationBar" title="{{'图书详情'}}" back="{{true}}"></navigationBar>
+<view class="container">
+  <view class="book-item">
+    <view class="book-cover">
+      <image mode="widthFix" class="cover-image" src="{{bookDetail.cover_image ? bookDetail.cover_image : 'http://222.195.226.30/tpl/images/nobook.jpg'}}"></image>
+    </view>
+    <view class="book-detail">
+      <view class="book-name">{{bookDetail.title}} </view>
+      <view class="book-other">作者:{{bookDetail.author}}</view>
+      <view class="book-other">出版:{{bookDetail.publisher+" "+bookDetail.pubYear}}</view>
+      <view wx:if="{{bookDetail.isbn.length > 0}}" class="book-other">ISBN:{{bookDetail.isbn}}</view>
+    </view>
+  </view>
+</view>
+<view class="container collection">
+  <view class="collection-title">馆藏详情</view>
+  <view wx:for="{{bookAvailableDetail}}" class="collection-detail">
+    <view>索书号:{{item.number}}</view>
+    <view>条码号:{{item.barcode}}</view>
+    <view>年卷期:{{item.date}}</view>
+    <view>馆藏地:<text style="{{item.status == '可借' ?'color:#139700':'color:#666'}}">{{item.location}}</text></view>
+    <view>书刊状态:<text style="{{item.status == '可借' ?'color:#139700':'color:#666'}}">{{item.status}}</text></view>
+  </view>
+</view>

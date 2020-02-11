@@ -1,0 +1,70 @@
+<!--login.wxml-->
+<navigationBar id="navigationBar" title="{{'绑定'}}" back="{{true}}"></navigationBar>
+<view class="container">
+  <view class="remind-box" wx:if="{{remind}}">
+    <image class="remind-img" src="/images/loading.gif"></image>
+  </view>
+  <block wx:else>
+  <view class="head">
+        <!-- <view class="hd" style="transform:rotateZ({{angle}}deg);"> -->
+        <view class="hd">
+          <image class="logo" src="../../images/school_logo.jpg"></image>
+          <image class="wave" src="../../images/new_wave.png" mode="aspectFill"></image>
+          <image class="wave wave-bg" src="../../images/new_wave.png" mode="aspectFill"></image>
+        </view>
+      </view>
+  <view class="content">
+    
+    <!-- <image class="title" src="/images/more/title.png"></image>
+    
+      <view class="hd" style="transform:rotateZ({{angle}}deg);">
+          <image class="logo" src="/images/more/logo.png"></image>
+          <image class="wave" src="/images/more/wave.png" mode="aspectFill"></image>
+          <image class="wave wave-bg" src="/images/more/wave.png" mode="aspectFill"></image>
+      </view> -->
+      <view class="bd">
+        <form class="login-form">
+          <view class="input-group {{sno_focus ? 'active' : ''}}">
+            <text class="input-label">帐号</text>
+            <input type="number" cursor-spacing="30" id="sno" maxlength="13" placeholder="请输入学号/工号" bindinput="snoInput" bindfocus="inputFocus" bindblur="inputBlur" />
+          </view>
+          <view class="input-group {{passwd_focus ? 'active' : ''}}">
+            <text class="input-label">密码</text>
+            <input password="true" cursor-spacing="30" id="passwd" placeholder="初始密码为身份证号12到17位" bindinput="passwdInput" bindfocus="inputFocus" bindblur="inputBlur" />
+          </view>
+          <view class="login-help" bindtap="showHelp">
+            <text>帮助</text>
+            <image class="login-help-img" src="/images/help.png"></image>
+          </view>
+        </form>
+        <view class="confirm-btn" bindtap="bind">
+            <text>确认绑定</text>
+        </view>
+      </view>
+
+      <view class="help" id="help" wx:if="{{help_status}}" bindtap="tapHelp">
+        <view class="box">
+          <view class="box-hd">
+            <text class="box-title">帮助</text>
+            <image class="box-close" src="/images/close.png" bindtap="hideHelp"></image>
+          </view>
+          <view class="box-bd">
+            <view class="help-q">1、帐号和密码是什么？</view>
+            <view class="help-a">
+              <text>帐号：信息门户登录账号（学生为学号，教职工为工号）</text>
+              <text>密码：初始密码或者已更改密码（系统登录默认密码为个人身份证号12位到17位）</text>
+              <text></text>
+            </view>
+            <view class="help-q">2、忘记密码？</view>
+            <view class="help-a">
+              <text bindtap="setwebsite">请访问统一身份认证平台找回或者修改密码(点击网址复制):<text style="color:#009cff;" >http://id.ouc.edu.cn:8071/findPassword/index.action</text></text>
+              
+            </view>
+          </view>
+        </view>
+      </view>
+
+    </view>
+  </block>
+
+</view>

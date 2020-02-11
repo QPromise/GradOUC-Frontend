@@ -1,0 +1,323 @@
+
+//获取应用实例
+const app = getApp();
+console.log('now_day',parseInt(new Date().getDay()));
+let rewardedVideoAd = null;
+Page({
+  data: {
+    userid: "",
+    userpwd: "",
+    indexxq: 0,
+    arrayxq: ['2019-2020夏秋'],
+    indexzc: 0,
+    arrayzc: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
+    indexjcAdd1: 0,
+    indexjcAdd2: 2,
+    indexweekAdd: 0,
+    kcb:null,
+    isshowimg1: false,
+    isshowimg2: false,
+    hiddenmodalput: true, //课程详细
+    maskFlag: true,
+    name: "",
+    leader: "",
+    room: "",
+    time: "",
+    today:undefined,
+    arrayth: [
+      { week: "周一", date: "" },
+      { week: "周二", date: "" },
+      { week: "周三", date: "" },
+      { week: "周四", date: "" },
+      { week: "周五", date: "" },
+      { week: "周六", date: "" },
+      { week: "周日", date: "" }],
+    arraykcb: [],
+    trans:0.75
+  },
+  getDay:function(){
+    var today = parseInt(new Date().getDay());
+    if (today == 0) {
+     this.setData({
+       today:6
+     })
+    } else{
+     this.setData({
+       today:today - 1 
+     })
+    }
+  },
+  //改变了周次
+  zcChange: function (e) {
+    var that = this;
+    that.setData({
+      indexzc: e.detail.value,
+    });
+    that.reFreshKCB();
+  },
+  //事件处理函数
+  bindViewTap: function () {
+  },
+  cmpDate: function () { // 现在是否大于指定的时间。
+    var now = parseInt(Date.parse(new Date()) / 1000)
+    console.log(now)
+    var date = parseInt(app.cache.begin_day)
+    console.log(date)
+    return now > date
+  },
+  onLoad: function () {
+    var that = this;
+    //获取开学和放假日期，计算当前周
+    that.setData({
+      arrayxq: [app.cache.xq],
+      indexzc: app.cache.nowzc - 1,
+    });
+    //计算当前选择周1至周5日期
+    that.caculateDate();
+  },
+
+  onReady: function () {
+    var that = this;
+    that.getDay();
+    //fix first time not current week BUG: delay 1s for data update
+    setTimeout(function () {
+      console.log("延迟调用============");
+      var weeks = that.data.arrayzc[that.data.indexzc];
+      console.log("onReady weeks:" + weeks);
+      if (!that.cmpDate()) {
+        wx.showModal({
+          title: '提示',
+          content: '当前不在学期时间范围内，课表无法查看，如需查看课程可以到【我的课程】中进行查看。',
+          showCancel: false,
+          success(res) {
+            if (res.confirm) {
+              wx.navigateBack({
+                
+              })
+            } 
+          }
+        })
+      }
+      else{
+        that.reFreshKCB();
+      }
+    }, 1000)
+
+  },
+
+  //计算日期
+  caculateDate: function () {
+    var that = this;
+    //计算当前选择周1至周5日期
+    var selzc = that.data.arrayzc[that.data.indexzc];
+    var everyMonday = (selzc - 1) * 7; //周次x7,获取没周一距离开学那天的天数
+    var itemF = new Date(app.cache.begin_day * 1000);
+    var YearY = itemF.getFullYear();
+    var MonthM = itemF.getMonth() + 1 < 10 ? '0' + (itemF.getMonth() + 1) : itemF.getMonth() + 1;
+    var DayD = itemF.getDate();
+    var firstDayTime = new Date(YearY + "/" + MonthM + "/" + DayD + " 00:00:00");  //IOS系统的坑，用‘-’会加载不出来，只能用‘/’
+    var firstDayTime = firstDayTime.valueOf();
+    var addtoarrayth = that.data.arrayth;
+    for (var i = 0; i < 7; i++) {
+      var nextDate = new Date(firstDayTime + (everyMonday + i) * 24 * 60 * 60 * 1000); //后一天
+      var nextMonth = nextDate.getMonth() + 1 < 10 ? '0' + (nextDate.getMonth() + 1) : nextDate.getMonth() + 1;
+      var nextDay = nextDate.getDate() < 10 ? '0' + nextDate.getDate() : nextDate.getDate();
+      addtoarrayth[i].date = nextMonth + "." + nextDay;
+    }
+    that.setData({
+      arrayth: addtoarrayth,
+    });
+  },
+  onShareAppMessage: function () {
+    return {
+      title: '我的课表',
+      desc: '可查详细的课程表、详细成绩，更多查询功能欢迎体验！',
+      path: '/pages/core/schedule/schedule'
+    };
+  },
+  //课程表刷新
+  reFreshKCB: function () {
+    var that = this;
+    //先清空课程表 为显示出刷新的效果
+    that.setData({
+      arraykcb: []
+    });
+    //计算当前选择周1至周5日期
+    that.caculateDate();
+    //显示等待提示
+    wx.showToast({
+      title: '正在获取课表',
+      icon: 'loading',
+      duration: 4000
+    });
+    //选择学期
+    var xj;
+    var items = that.data.arrayxq[0];
+    if (items.indexOf("夏秋")){
+      xj = 11
+    }
+    else{
+      xj = 12
+    }
+    wx.request({
+      url: app.local_server + 'get_schedule/',
+      method: 'POST',
+      data: {
+        sno:app.cache.sno,
+        passwd:app.cache.passwd,
+        zc:that.data.arrayzc[that.data.indexzc],
+        xn:app.cache.xn,
+        xj:xj
+      },
+      header: { "Content-Type": "application/x-www-form-urlencoded" },
+      success: (res)=> {
+        console.log(res.data);
+        if (res.data.message == "fault" && res.statusCode == 200) {
+          wx.hideToast();
+          wx.showModal({
+            title: "加载失败",
+            content: '获取课表失败,请重新绑定后再试',
+            showCancel: true,
+            confirmText: "前往绑定",
+            success: (res)=> {
+              if (res.confirm) {
+                wx.navigateTo({
+                  url: '../../my/login',
+                })
+              }
+            }
+          });
+        }
+        else if(res.data.message == "success" && res.statusCode == 200) {
+          //对课程表进行上色并更新显示数据
+          that.beautifyAndResetKcb(res.data.schedule); 
+        }
+      },
+      fail: function (res) {
+        wx.hideToast();
+        wx.showModal({
+          title:"加载失败",
+          content: '获取课表失败，可能是服务器出了问题',
+          showCancel: false,
+          confirmText: "确定",
+          success: function (res) {
+            if (res.confirm) {
+            }
+          }
+        });
+      },
+      complete: function (res) {
+      }
+    });
+
+  },
+  onShow: function () {
+  },
+  //判断课程和教室字数加起来是否超出小方块
+  isOverLength: function (name,room) {
+    if (name.length + room.length > 21) {
+      return true
+    }
+    else return false;
+  },
+  //显示课程的详细信息
+  showdetail: function (e) {
+    var that = this;
+    var gname = e.currentTarget.dataset.name;
+    var groom = e.currentTarget.dataset.room;
+    var gleader = e.currentTarget.dataset.leader;
+    var gtime = e.currentTarget.dataset.time;
+    var gperiod = e.currentTarget.dataset.period;
+    if (gname == "") {
+    } else {
+      that.setData({
+        hiddenmodalput: false,
+        name: gname,
+        room: groom,
+        leader: gleader,
+        time: gtime,
+        period:gperiod
+      })
+    }
+  },
+  //是否隐藏课程详细
+  confirm: function () {
+    this.setData({
+      hiddenmodalput: true,
+    })
+  },
+  //对课程表数据进行上色渲染
+  beautifyAndResetKcb: function (data) {
+    console.log("课表",data);
+    let that = this;
+    let trans = that.data.trans;  //透明度设置获取
+    var tdcolors = [
+      'rgba(72,61,139,' + trans + ')', 'rgba(100,149,237,' + trans + ')', 'rgba(0,139,139,' + trans + ')',
+      'rgba(216,191,216,' + trans + ')', 'rgba(106,96,205,' + trans + ')', 'rgba(240,128,128,' + trans + ')',
+      'rgba(210,180,140,' + trans + ')', 'rgba(144,238,144,' + trans + ')', 'rgba(255,165,0,' + trans + ')',
+      'rgba(0,206,209,' + trans + ')',
+      'rgba(204,154,168,' + trans + ')', 'rgba(231,202,202,' + trans + ')', 'rgba(126,171,117,' + trans + ')', 'rgba(127,156,172,' + trans + ')',
+      'rgba(0,107,86,' + trans + ')', 'rgba(125,147,186,' + trans + ')', 'rgba(64,75,115,' + trans + ')'
+    ];
+    //对同一科目进行标号
+    let index = 1;
+    for (let row = 0; row < 12; row++) {
+      for (let i = 0; i < 7; i++) {
+        if (data[row][i].name != "" && data[row][i].index == "") {
+          let tmp_name = data[row][i].name;
+          for (let h = row; h < 12; h++) {//向下搜寻相同课程，名称
+            for (let j = 0; j < 7; j++) {
+              if (data[h][j].name == tmp_name && data[h][j].index == "") {
+                data[h][j].index = index;//标号
+              }
+            }
+          }
+          index++;
+        }
+      }
+    }
+    // { name: "", room: "", leader: "", time: "", color: "" }
+    // console.log("添加的颜色：");
+    // console.log(data);
+    var ontime = [
+      "08:00~08:50", "09:00~09:50",
+      "10:10~11:00", "11:10~12:00",
+      "13:30~14:20", "14:30~15:20",
+      "15:30~16:20", "16:30~17:20",
+      "17:30~18:20", "18:30~19:20",
+      "19:30~20:20", "20:30~21:20"];
+    var changeKCB = new Array();
+    for (var row = 0; row < 12; row++) {
+      changeKCB[row] = new Array();
+      for (var i = 0; i < 7; i++) {
+        changeKCB[row][i] = new Object();
+        if (that.isOverLength(data[row][i].name, data[row][i].room))
+          {
+          changeKCB[row][i].name = data[row][i].name.substring(0,6) + "...";
+          }
+        else{
+          changeKCB[row][i].name = data[row][i].name;
+          }
+        changeKCB[row][i].room = data[row][i].room;
+        changeKCB[row][i].leader = data[row][i].leader;
+        changeKCB[row][i].period = data[row][i].period;
+        changeKCB[row][i].color = tdcolors[(data[row][i].index - 1) % tdcolors.length];
+        changeKCB[row][i].time = ontime[row]
+      }
+      that.setData({ arraykcb: changeKCB});
+    }
+  },
+  
+  //colorUI
+  showModal(e) {
+    this.setData({
+      modalName: e.currentTarget.dataset.target
+    })
+  },
+  hideModal(e) {
+    this.setData({
+      modalName: null
+    })
+  },
+
+})

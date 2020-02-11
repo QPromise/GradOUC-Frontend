@@ -2,14 +2,24 @@
 	"miniprogramRoot": "miniprogram/",
 	"cloudfunctionRoot": "cloudfunctions/",
 	"setting": {
-		"urlCheck": true,
+		"urlCheck": false,
 		"es6": true,
 		"postcss": true,
 		"minified": true,
-		"newFeature": true
+		"newFeature": true,
+		"coverView": true,
+		"autoAudits": false,
+		"checkInvalidKey": true,
+		"checkSiteMap": true,
+		"uploadWithSourceMap": true,
+		"babelSetting": {
+			"ignore": [],
+			"disablePlugins": [],
+			"outputPath": ""
+		}
 	},
 	"appid": "wx2217b0fce3891980",
-	"projectname": "CJRXHTreeHole",
+	"projectname": "WeOcean",
 	"libVersion": "2.7.4",
 	"simulatorType": "wechat",
 	"simulatorPluginLibVersion": {},
@@ -41,7 +51,7 @@
 				},
 				{
 					"id": -1,
-					"name": "OUC问答",
+					"name": "问答",
 					"pathName": "pages/index/index",
 					"query": "",
 					"scene": null
@@ -55,8 +65,15 @@
 				},
 				{
 					"id": -1,
-					"name": "消息页",
-					"pathName": "pages/message/message",
+					"name": "个人中心",
+					"pathName": "pages/my/my",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "登录",
+					"pathName": "pages/my/login",
 					"query": "",
 					"scene": null
 				},
@@ -85,6 +102,12 @@
 					"id": -1,
 					"name": "点赞页",
 					"pathName": "pages/thumbup/thumbup",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "主页",
+					"pathName": "pages/home/home",
 					"scene": null
 				}
 			]

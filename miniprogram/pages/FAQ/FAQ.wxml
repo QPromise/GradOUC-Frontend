@@ -1,0 +1,21 @@
+<!--pages/FAQ/FAQ.wxml-->
+<navigationBar id="navigationBar"  title="{{'FAQ'}}" back="{{true}}" ></navigationBar>
+<view class="page">
+  <view class="page__hd">
+    <view class="page__title">FAQ</view>
+    <view class="page__desc">常见问题与解答</view>
+  </view>
+  <view class="page__bd">
+    <wux-accordion-group>
+      <wux-accordion title="本小程序的使用范围？" content="目前仅适合在校的研究生以及不使用登陆功能的其他同学使用。"></wux-accordion>
+      <wux-accordion title="数据是怎么来的？" content="后台模拟手工登录查询。"></wux-accordion>
+      <wux-accordion title="登录会暴露我的隐私吗？" content="账号密码均不在服务器存储，只存在于你的本地缓存，数据传输过程中也会进行加密处理。"></wux-accordion>
+      <wux-accordion title="其他查课表、成绩的方法？" content="可以通过信息门户进入18级新版研究生信息管理系统查询，这也是唯一的官方信息查询途径。小程序展现的数据仅供参考。"></wux-accordion>
+      <wux-accordion title="如何登录研究生信息管理系统？" content="①首先登录信息门户(https://ca.nuc.edu.cn),之后可以在首页看到研究生系统(2018级)链接，点击进行访问。②直接在浏览器网址输入(http://pgs.ouc.edu.cn/page/home.htm)进行访问。"></wux-accordion>
+      <!-- <wux-accordion title="这个小程序和学校有关系吗？" content="本项目属于个人项目，与学校没有合作，也不保证和承担任何数据有效性，只作为便捷查询方式，一切结果以研究生信息管理系统信息为准。"></wux-accordion> -->
+      <wux-accordion title="数据加载缓慢。" content="一般情况下数据会在十秒内展现出来，如出现数据加载缓慢可能是服务器负载过高可以错开这个时间访问。"></wux-accordion>
+      <wux-accordion title="出现服务器错误。" content="很有可能是学校的服务器系统出现了问题。"></wux-accordion>
+      <wux-accordion title="这里没有我的问题。" content="请发送邮件到qcs@stu.ouc.edu.cn，说明下问题，最好附上问题截图，非常感谢。"></wux-accordion>
+    </wux-accordion-group>
+  </view>
+</view>

@@ -32,9 +32,9 @@ Component({
         content: '是否删除评论',
         showCancel: true,
         cancelText: '取消',
-        cancelColor: '#576B95',
+      
         confirmText: '确定',
-        confirmColor: '#576B95',
+  
         success: function(res) {
           if (res.confirm) {
             wx.showLoading({

@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "jun-modal": "../../../components/jun-modal/jun-modal"
+  }
+}

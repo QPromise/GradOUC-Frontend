@@ -1,0 +1,10 @@
+{
+  "usingComponents": {
+    "jun-modal": "../../components/jun-modal/jun-modal",
+    "jun-mask": "../../components/jun-mask/jun-mask"
+
+    },
+
+  "enablePullDownRefresh": false,
+  "onReachBottomDistance": 0
+}

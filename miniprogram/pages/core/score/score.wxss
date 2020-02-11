@@ -1,0 +1,81 @@
+/* pages/Grade/Grade.wxss */
+@import "../../../utils/weui.wxss";
+@import "../../../utils/showModel.wxss";
+
+
+.term {
+  display: flex;
+  flex-direction: row;
+  color: #9b9b9b;
+}
+.mean{
+  
+  box-shadow: 1px 2px 3px #ddd;
+  margin: 0 30rpx;
+  background-color:  #7acfa6; 
+  display: flex;
+  flex-direction: column;
+  font-size: 30rpx;
+  height: 90rpx;
+  line-height: 90rpx;
+  align-items: center;
+  margin-top:5rpx;
+  border-radius:9px;
+ 
+}
+.mean text{
+ display: flex;
+  flex: 1;
+  font-size: 32rpx;
+  color: white;
+  text-align: center;
+}
+.term-item {
+  flex: 1;
+  text-align: center;
+  margin: 10rpx 30rpx;
+  padding: 10rpx 5rpx;
+}
+
+.term-select {
+  color: #fff;
+  border-radius: 50rpx;
+  background: #6c9;
+}
+
+.grade-head {
+  margin-top:5rpx;
+  border-top: 1rpx solid #f2f2f2;
+  border-bottom: 1rpx solid #f2f2f2;
+  background-color: #f9f9f9;
+  font-weight: 600;
+  display: flex;
+  flex-direction: row;
+}
+
+.grade-head-item {
+  padding: 15rpx 0;
+  color: #92979b;
+  text-align: center;
+}
+
+.grade {
+  border-bottom: 1rpx solid #f0f0f0;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+
+.grade-item {
+  padding: 15rpx 0;
+  color: #333;
+  text-align: center;
+}
+
+.tips{
+  margin-top:2rpx;
+  text-align: center;
+  color: lightcoral;
+  font-size: 25rpx;
+
+}

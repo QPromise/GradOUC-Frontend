@@ -1,0 +1,79 @@
+<navigationBar id="navigationBar" title="{{'课表'}}" back="{{true}}"></navigationBar>
+<view class="page" style="">
+  <view class='page_hd'>
+    <view class='kcb-top'>
+       <view class='kcb-xq'>
+          <picker value="{{indexxq}}" range="{{arrayxq}}">
+            <view>学期：{{arrayxq[indexxq]}}</view>
+          </picker>
+        </view>
+        <view class='kcb-zc'>
+          <picker bindchange="zcChange" value="{{indexzc}}" range="{{arrayzc}}">
+            <view style='margin-left:5px;'>第 {{arrayzc[indexzc]}} 周</view>
+          </picker>
+        </view>
+    </view>
+  </view>
+
+  <view class='page_bd'>
+    <view class='kcb-body'>
+      <view class='kcb-body-table'>
+        <view class='kcb-body-fill' style= "font-weight:500;">1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12</view>
+        <view class='kcb-body-table-box'>
+          <scroll-view scroll-x="true" style="width: 710rpx;" >
+            <view class='kcb-body-head-header' style="background-color:#7acfa6" >
+                <view class='table-th'style="background-color:{{idxth== today? '#1ea363':'#7acfa6'}}" wx:for="{{arrayth}}" wx:for-index="idxth" wx:for-item="thitem" wx:key="week">
+                  <view class='table-th-z'>{{thitem.week}}</view>
+                  <view class='table-th-t'>{{thitem.date}}</view>
+                </view>
+            </view>
+            <view class='table-tr' wx:for="{{arraykcb}}" wx:for-index="trindex" wx:for-item="tritem" wx:key="{{trindex}}">
+                <view class='table-td'
+                      wx:for="{{tritem}}" wx:for-index="nowindex" wx:for-item="nowitem" wx:key="{{nowindex}}"
+                      style="background-color:{{nowitem.color}}; " 
+                      bindtap='showdetail' 
+                      bindlongpress='showAddOrEditKCB' 
+                      data-hang='{{trindex}}' 
+                      data-week='{{nowindex}}'
+                      data-kid='{{nowitem.kid}}' 
+                      data-name='{{nowitem.name}}' 
+                      data-room='{{nowitem.room}}' 
+                      data-leader='{{nowitem.leader}}' 
+                      data-time='{{nowitem.time}}'
+                      data-period='{{nowitem.period}}'
+                      >
+                  <text>{{nowitem.name}}\n{{nowitem.room}}</text>
+                </view>
+            </view>
+
+          </scroll-view>
+        </view>
+      </view>
+    </view>
+
+
+    <jun-modal show="{{!hiddenmodalput}}" title="课程详细" content-color="#363636" confirm-text="确定" confirm-color="black" bindconfirm="confirm" no-cancel='true'>
+        <view style='display:flex;flex-direction:row;font-size:32rpx;'>
+          <view style="width:200rpx;">课程名称：</view><view style="flex:1">{{name}} </view>
+        </view>
+        <view style='display:flex;flex-direction:row;font-size:32rpx;'>
+          <view style="width:200rpx;">任课教师：</view><view style="flex:1;padding-right:12rpx;">{{leader}} </view>
+        </view>
+        <view style='display:flex;flex-direction:row;font-size:32rpx;'>
+          <view style="width:200rpx;">课程地点：</view><view style="flex:1">{{room}} </view>
+        </view>
+        <view style='display:flex;flex-direction:row;font-size:32rpx;'>
+          <view style="width:200rpx;">上课时间：</view>
+          <view style='flex:1;display:flex;flex-direction:column;'>
+            <view>{{time}}</view>
+          </view>
+        </view>
+         <view style='display:flex;flex-direction:row;font-size:32rpx;'>
+          <view style="width:200rpx;">课程周期：</view>
+          <view style='flex:1;display:flex;flex-direction:column;'>
+            <view>{{period}}周</view>
+          </view>
+          </view>
+    </jun-modal>
+  </view>
+</view>

@@ -1,0 +1,30 @@
+<navigationBar id="navigationBar"  title="{{'搜索地点'}}" back="{{true}}" ></navigationBar>
+<view class="search-bar">
+<view class="search">
+  <view class="search-form">
+    <form>
+      <input  auto-focus='{{true}}'bindinput="bindSearchInput" type="text" name="search" placeholder="请输入名称关键词" value="{{keyword}}" style="font-size: 30rpx;" />
+    </form>
+  </view>
+</view>
+<view class="search-button"  bindtap="reset">重置</view>
+</view>
+<wux-prompt visible="{{ visible }}" icon="https://dreace.top/res/empty.png" title="这里是空的" text="在搜索框键入自动搜索"/>
+<view wx:for="{{showData}}" wx:key="name" class="building-item">
+  <view style="height:100%; display: flex;">
+    <navigator class="img" url='details?tid={{item.tid}}&bid={{item.bid}}'>
+      <image src="{{imgCDN}}{{item.img[0]}}" mode="aspectFill"> </image>
+      <view class="item">
+        <view class="itemName">
+          {{item.name}}
+        </view>
+        <!-- <view class="itemFloor" wx:if="{{item.floor}}">
+          {{item.floor}}
+        </view> -->
+      </view>
+    </navigator>
+     <view class="text" bindtap='openLocation' data-name="{{item.name}}" data-latitude="{{item.latitude}}" data-longitude='{{item.longitude}}'>
+      <image src="/images/location.png"> </image>
+    </view>
+  </view>
+</view>

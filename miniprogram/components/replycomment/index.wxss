@@ -41,7 +41,7 @@
 }
 
 .date{
-  font-size: 20rpx;
+  font-size: 24rpx;
   font-weight: 400;
 }
 

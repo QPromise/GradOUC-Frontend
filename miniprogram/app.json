@@ -1,20 +1,32 @@
 {
   "pages": [
-    "pages/welcome/welcome",
-    "pages/index/index",
-    "pages/message/message",
-    "pages/profile/profile",
-    "pages/publishTopics/publishTopics",
-    "pages/comments/comments",
-    "pages/thumbup/thumbup",
-    "pages/topicDetials/topicDetials"
+    "pages/home/home",
+    "pages/my/my",
+    "pages/my/login",
+    "pages/core/schedule/schedule",
+    "pages/core/course/course",
+    "pages/core/score/score",
+    "pages/core/car/car",
+    "pages/core/calendar/calendar",
+    "pages/FAQ/FAQ",
+    "pages/core/library/library",
+    "pages/core/library/searchResults",
+    "pages/core/library/bookDetail",
+    "pages/feedback/feedback",
+    "pages/core/news/news",
+    "pages/core/news/content",
+    "pages/core/campusTours/campusTours",
+    "pages/core/campusTours/details",
+    "pages/core/campusTours/search",
+    "pages/web/web",
+    "pages/core/schoolCourse/schoolCourse"
   ],
   "window": {
-    "backgroundColor": "#ffbb12",
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "white",
-    "navigationBarTitleText": "OUC问答",
-    "navigationBarTextStyle": "black"
+    "navigationBarBackgroundColor": "#009cff",
+    "navigationBarTitleText": "研在OUC",
+    "navigationBarTextStyle": "white",
+    "navigationStyle": "custom"
   },
   "tabBar": {
     "color": "black",
@@ -22,21 +34,26 @@
     "borderStyle": "black",
     "list": [
       {
-        "selectedIconPath": "./images/shouye2.png",
-        "iconPath": "./images/shouye1.png",
-        "pagePath": "pages/index/index",
-        "text": "问答广场"
+        "selectedIconPath": "./images/home_selected.png",
+        "iconPath": "./images/home.png",
+        "pagePath": "pages/home/home",
+        "text": "主页"
       },
-     
       {
-        "selectedIconPath": "./images/user_select.png",
+        "selectedIconPath": "./images/user_selected.png",
         "iconPath": "./images/user.png",
-        "pagePath": "pages/message/message",
+        "pagePath": "pages/my/my",
         "text": "个人中心"
       }
     ]
   },
+  "usingComponents": {
+    "navigationBar": "/components/navigationBar/index"
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "您的位置信息将用于校园导览"
+    }
+  },
   "sitemapLocation": "sitemap.json"
 }
-
-

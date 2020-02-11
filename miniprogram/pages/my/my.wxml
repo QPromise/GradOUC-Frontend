@@ -1,0 +1,68 @@
+<!--more.wxml-->
+<navigationBar id="navigationBar" title="{{'个人中心'}}" back="{{true}}"></navigationBar>
+<view class="container">
+
+  <view class="user-info-box">
+  <block wx:if="{{is_bind}}">
+      <view class="user-info">
+        <view class="info-hd">
+          <open-data type = "userAvatarUrl" class = "user-avatar"></open-data>
+          <view class="user-title">
+            <text class="user-name">{{name}}</text>
+            <text class="user-id">{{sno}}</text>
+          </view>
+        </view>
+      </view>
+    </block>
+    <navigator url="/pages/my/login" class="user-info" wx:else>
+      <view class="info-hd">
+        <open-data type = "userAvatarUrl" class = "user-avatar"></open-data>
+        <view class="user-title">
+        <open-data type = "userNickName" lang = "zh_CN" class = "user-name"></open-data>
+        <text class="user-id">未绑定</text>
+        </view>
+        <text class="bind-btn">前往绑定</text>
+        <view class="btn-open">
+          <image class="btn-enter" src="/images/enter.png"></image>
+        </view>
+      </view>
+    </navigator>
+
+  </view>
+
+  <view class="more-list">
+
+    <navigator url="/pages/FAQ/FAQ" class="about-link">
+      <view class="more-btn">
+        <image class="btn-icon" src="/images/my/QA.png"></image>
+        <text class="btn-text">常见问题</text>
+        <view class="btn-open">
+            <image class="btn-enter" src="/images/enter.png"></image>
+        </view>
+      </view>
+    </navigator>
+    <navigator url="/pages/feedback/feedback" class="about-link">
+      <view class="more-btn">
+        <image class="btn-icon" src="/images/my/feedback.png"></image>
+        <text class="btn-text">意见反馈</text>
+        <view class="btn-open">
+            <image class="btn-enter" src="/images/enter.png"></image>
+        </view>
+      </view>
+    </navigator>
+    <!-- <view url="" class="about-link">
+    <view wx:if="{{is_bind}}" class="more-btn">
+      <image class="btn-icon" src="/images/my/notice.png"></image>
+      <text class="btn-text">成绩通知</text>
+      <switch bindchange='notice' checked="{{is_notice}}" />
+    </view>
+    </view> -->
+  </view>
+    
+
+  <navigator url="/pages/my/login" class="login-btn">
+    <text wx:if="{{is_bind}}">切换绑定</text>
+    <text wx:else>立即绑定</text>
+  </navigator>
+
+</view>
