@@ -196,10 +196,6 @@
             <view class='menu-item-box'>
               
             </view>
-
-
-            
-
            
           </view>
         </view>
@@ -282,7 +278,7 @@
     </view>
   </view>
 </jun-mask>
-<view>
+<!-- <view>
 <ad unit-id="adunit-fd61b1cb094c221e"></ad>
-</view>
+</view> -->
 </view>

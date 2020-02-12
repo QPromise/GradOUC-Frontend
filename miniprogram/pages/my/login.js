@@ -104,6 +104,14 @@ Page({
             }
           })
         }
+        else if (data.message == "fault" && res.statusCode != 200){
+          wx.hideLoading()
+          wx.showToast({
+            icon: 'none',
+            title: '研究生系统当前无法访问',
+            duration: 2000
+          });
+        }
         else{
           wx.hideLoading();
           app.showErrorModal(res.errMsg, '绑定失败');

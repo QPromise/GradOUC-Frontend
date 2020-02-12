@@ -198,7 +198,7 @@ Page({
             }
           })
         }
-        else if (res.data.message == "success" && res.statusCode == 500 && res.data.have_class == 2) {
+        else if (res.data.message == "fault" && res.statusCode != 200) {
           that.setData({
             have_class: res.data.have_class
           })

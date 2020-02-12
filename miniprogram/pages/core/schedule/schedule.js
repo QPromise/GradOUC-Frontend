@@ -1,24 +1,14 @@
-
 //获取应用实例
 const app = getApp();
 console.log('now_day',parseInt(new Date().getDay()));
-let rewardedVideoAd = null;
 Page({
   data: {
-    userid: "",
-    userpwd: "",
     indexxq: 0,
     arrayxq: ['2019-2020夏秋'],
     indexzc: 0,
     arrayzc: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
-    indexjcAdd1: 0,
-    indexjcAdd2: 2,
-    indexweekAdd: 0,
     kcb:null,
-    isshowimg1: false,
-    isshowimg2: false,
     hiddenmodalput: true, //课程详细
-    maskFlag: true,
     name: "",
     leader: "",
     room: "",
@@ -35,6 +25,7 @@ Page({
     arraykcb: [],
     trans:0.75
   },
+ //获取当前日期
   getDay:function(){
     var today = parseInt(new Date().getDay());
     if (today == 0) {
@@ -58,13 +49,15 @@ Page({
   //事件处理函数
   bindViewTap: function () {
   },
-  cmpDate: function () { // 现在是否大于指定的时间。
+  // 现在是否大于指定的时间
+  cmpDate: function () { 
     var now = parseInt(Date.parse(new Date()) / 1000)
     console.log(now)
     var date = parseInt(app.cache.begin_day)
     console.log(date)
     return now > date
   },
+  //加载页面
   onLoad: function () {
     var that = this;
     //获取开学和放假日期，计算当前周
@@ -79,9 +72,8 @@ Page({
   onReady: function () {
     var that = this;
     that.getDay();
-    //fix first time not current week BUG: delay 1s for data update
     setTimeout(function () {
-      console.log("延迟调用============");
+      console.log("延迟1s调用============");
       var weeks = that.data.arrayzc[that.data.indexzc];
       console.log("onReady weeks:" + weeks);
       if (!that.cmpDate()) {
@@ -145,11 +137,9 @@ Page({
     //计算当前选择周1至周5日期
     that.caculateDate();
     //显示等待提示
-    wx.showToast({
-      title: '正在获取课表',
-      icon: 'loading',
-      duration: 4000
-    });
+    wx.showLoading({
+      title: '课表加载中',
+    })
     //选择学期
     var xj;
     var items = that.data.arrayxq[0];
@@ -171,9 +161,9 @@ Page({
       },
       header: { "Content-Type": "application/x-www-form-urlencoded" },
       success: (res)=> {
+        wx.hideLoading();
         console.log(res.data);
         if (res.data.message == "fault" && res.statusCode == 200) {
-          wx.hideToast();
           wx.showModal({
             title: "加载失败",
             content: '获取课表失败,请重新绑定后再试',
@@ -188,13 +178,26 @@ Page({
             }
           });
         }
+        else if (res.data.message == "fault" && res.statusCode != 200){
+          wx.showModal({
+            title: "提示",
+            content: '研究生系统目前无法访问',
+            showCancel: false,
+            success(res) {
+              if (res.confirm) {
+                wx.navigateBack({
+                })
+              } 
+            }
+          });
+        }
         else if(res.data.message == "success" && res.statusCode == 200) {
           //对课程表进行上色并更新显示数据
           that.beautifyAndResetKcb(res.data.schedule); 
         }
       },
       fail: function (res) {
-        wx.hideToast();
+        wx.hideLoading();
         wx.showModal({
           title:"加载失败",
           content: '获取课表失败，可能是服务器出了问题',
