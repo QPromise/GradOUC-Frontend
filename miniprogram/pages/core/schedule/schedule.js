@@ -63,6 +63,7 @@ Page({
     //获取开学和放假日期，计算当前周
     that.setData({
       arrayxq: [app.cache.xq],
+      
       indexzc: app.cache.nowzc - 1,
     });
     //计算当前选择周1至周5日期
@@ -143,12 +144,14 @@ Page({
     //选择学期
     var xj;
     var items = that.data.arrayxq[0];
-    if (items.indexOf("夏秋")){
+    console.log(items.indexOf("夏秋"))
+    if (items.indexOf("夏秋") != -1){
       xj = 11
     }
     else{
       xj = 12
     }
+    console.log(xj)
     wx.request({
       url: app.local_server + 'get_schedule/',
       method: 'POST',
@@ -162,8 +165,21 @@ Page({
       header: { "Content-Type": "application/x-www-form-urlencoded" },
       success: (res)=> {
         wx.hideLoading();
-        console.log(res.data);
-        if (res.data.message == "fault" && res.statusCode == 200) {
+        console.log(res);
+        if (res.data.message == "timeout"){
+          wx.showModal({
+            title: '请求超时',
+            content: '可能是研究生系统问题，请稍后重试',
+            showCancel: false,
+            success(res) {
+              if (res.confirm) {
+                wx.navigateBack({
+                })
+              }
+            }
+          })
+        }
+        else if (res.data.message == "fault" && res.statusCode == 200) {
           wx.showModal({
             title: "加载失败",
             content: '获取课表失败,请重新绑定后再试',
@@ -195,6 +211,9 @@ Page({
           //对课程表进行上色并更新显示数据
           that.beautifyAndResetKcb(res.data.schedule); 
         }
+        else{
+          app.showErrorModal('服务器出现了问题', '提示');
+        }
       },
       fail: function (res) {
         wx.hideLoading();
@@ -205,6 +224,9 @@ Page({
           confirmText: "确定",
           success: function (res) {
             if (res.confirm) {
+              wx.navigateBack({
+                
+              })
             }
           }
         });

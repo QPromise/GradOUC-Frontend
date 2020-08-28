@@ -1,7 +1,7 @@
 {
 "usingComponents": {
-  "wux-fab-button": "../../components/fab-button/index",
-  "wux-prompt": "../../components/prompt2/index"
+  "wux-fab-button": "../../../components/fab-button/index",
+  "wux-prompt": "../../../components/prompt2/index"
 },
   "enablePullDownRefresh": false,
   "onReachBottomDistance": 0

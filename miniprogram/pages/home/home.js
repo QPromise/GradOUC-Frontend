@@ -111,17 +111,17 @@ Page({
     })
   },
   guide:function(){
-  let firstOpen = app.cache.firstOpen
-  console.log("是否首次打开本页面==", firstOpen)
-  if(firstOpen == undefined || firstOpen == '') { //根据缓存周期决定是否显示新手引导
-  this.setData({
-    isTiptrue: true,
-  })
-} else {
-  this.setData({
-    isTiptrue: false,
-  })
-}
+    let firstOpen = app.cache.firstOpen
+    console.log("是否首次打开本页面==", firstOpen)
+    if(firstOpen == undefined || firstOpen == '') { //根据缓存周期决定是否显示新手引导
+    this.setData({
+      isTiptrue: true,
+    })
+  } else {
+    this.setData({
+      isTiptrue: false,
+    })
+  }
 
 },
 //考研倒计时

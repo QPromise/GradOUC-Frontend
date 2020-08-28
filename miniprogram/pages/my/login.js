@@ -7,6 +7,7 @@ Page({
     help_status: false,
     sno_focus: false,
     passwd_focus: false,
+    is_hide_passwd: true,
     sno: '',
     passwd: '',
     angle: 0
@@ -73,10 +74,23 @@ Page({
         'Content-Type': 'application/x-www-form-urlencoded'
       },
       success:(res)=>{
+        wx.hideLoading();
         console.log(res);
         var data = res.data;
-        if (data.message == 'fault' && res.statusCode == 200){
-          wx.hideLoading()
+        if (data.message == "timeout"){
+          wx.showModal({
+            title: '请求超时',
+            content: '可能是研究生系统问题，请稍后重试',
+            showCancel: false,
+            success(res) {
+              if (res.confirm) {
+              
+              }
+            }
+          })
+        }
+        else if (data.message == 'fault' && res.statusCode == 200){
+
           wx.showToast({
             icon: 'none',
             title: '账号或密码不正确',
@@ -86,7 +100,7 @@ Page({
         }
         
         else if (data.message == 'success' && res.statusCode == 200){
-          wx.hideLoading();
+
           app.removeAllCache;
           app.saveCache("sno",data.sno);
           app.saveCache("passwd", data.passwd);
@@ -105,7 +119,7 @@ Page({
           })
         }
         else if (data.message == "fault" && res.statusCode != 200){
-          wx.hideLoading()
+
           wx.showToast({
             icon: 'none',
             title: '研究生系统当前无法访问',
@@ -113,8 +127,8 @@ Page({
           });
         }
         else{
-          wx.hideLoading();
-          app.showErrorModal(res.errMsg, '绑定失败');
+
+          app.showErrorModal('小程序服务器出现了问题', '绑定失败');
         }
       },
       fail:(res)=>{
@@ -162,6 +176,19 @@ Page({
   tapHelp: function (e) {
     if (e.target.id == 'help') {
       this.hideHelp();
+    }
+  },
+  showPasswd: function(e){
+    var that = this;
+    if(that.data.is_hide_passwd){
+      this.setData({
+        'is_hide_passwd': false
+      });
+    }
+    else{
+      this.setData({
+        'is_hide_passwd': true
+      });
     }
   },
   showHelp: function (e) {

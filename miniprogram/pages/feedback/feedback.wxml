@@ -8,7 +8,7 @@
         <view class='feed-box-head-con' bindtap='setemail'>
           <view class='feed-box-head-con-logo'><image src='../../images/welcoming.png'></image></view>
           <view class='feed-box-head-con-text'>
-            <text class='feet-box-head-con-text-email'>作者邮箱：qcs@stu.ouc.edu.cn</text>
+            <text class='feet-box-head-con-text-email'>作者邮箱：cs_qin@qq.com</text>
             <text class='con-item-text-detail'>（点击复制）</text>
           </view>
         </view>

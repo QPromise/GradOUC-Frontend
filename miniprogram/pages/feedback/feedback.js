@@ -20,7 +20,7 @@ Page({
   },
   setemail: function () {
     wx.setClipboardData({
-      data: 'qcs@stu.ouc.edu.cn',
+      data: 'cs_qin@qq.com',
       success: function (res) {
         wx.getClipboardData({
           success: function (res) {

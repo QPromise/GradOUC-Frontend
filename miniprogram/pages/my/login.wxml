@@ -26,11 +26,14 @@
         <form class="login-form">
           <view class="input-group {{sno_focus ? 'active' : ''}}">
             <text class="input-label">帐号</text>
-            <input type="number" cursor-spacing="30" id="sno" maxlength="13" placeholder="请输入学号/工号" bindinput="snoInput" bindfocus="inputFocus" bindblur="inputBlur" />
+            <input type="number" cursor-spacing="30" id="sno" maxlength="13" placeholder="请输入学号" bindinput="snoInput" bindfocus="inputFocus" bindblur="inputBlur" />
           </view>
           <view class="input-group {{passwd_focus ? 'active' : ''}}">
             <text class="input-label">密码</text>
-            <input password="true" cursor-spacing="30" id="passwd" placeholder="初始密码为身份证号12到17位" bindinput="passwdInput" bindfocus="inputFocus" bindblur="inputBlur" />
+            <input password="{{is_hide_passwd}}" cursor-spacing="30" id="passwd" placeholder="请输入研究生系统密码" bindinput="passwdInput" bindfocus="inputFocus" bindblur="inputBlur" />
+            <view class="see">
+            <image class="login-help-img" bindtap="showPasswd" src="{{is_hide_passwd ? '/images/see.png' : '/images/nosee.png'}}"></image>
+            </view>
           </view>
           <view class="login-help" bindtap="showHelp">
             <text>帮助</text>

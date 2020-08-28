@@ -15,7 +15,7 @@
       <!-- <wux-accordion title="这个小程序和学校有关系吗？" content="本项目属于个人项目，与学校没有合作，也不保证和承担任何数据有效性，只作为便捷查询方式，一切结果以研究生信息管理系统信息为准。"></wux-accordion> -->
       <wux-accordion title="数据加载缓慢。" content="一般情况下数据会在十秒内展现出来，如出现数据加载缓慢可能是服务器负载过高可以错开这个时间访问。"></wux-accordion>
       <wux-accordion title="出现服务器错误。" content="很有可能是学校的服务器系统出现了问题。"></wux-accordion>
-      <wux-accordion title="这里没有我的问题。" content="请发送邮件到qcs@stu.ouc.edu.cn，说明下问题，最好附上问题截图，非常感谢。"></wux-accordion>
+      <wux-accordion title="这里没有我的问题。" content="请发送邮件到cs_qin@qq.com，说明下问题，最好附上问题截图，非常感谢。"></wux-accordion>
     </wux-accordion-group>
   </view>
 </view>

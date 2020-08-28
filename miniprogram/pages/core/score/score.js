@@ -126,7 +126,20 @@ Page({
         wx.hideLoading();
         console.log(res);
         console.log(res.data.courses);
-        if (res.data.message == "fault" && res.statusCode == 200) {
+        if (res.data.message == "timeout"){
+          wx.showModal({
+            title: '请求超时',
+            content: '可能是研究生系统问题，请稍后重试',
+            showCancel: false,
+            success(res) {
+              if (res.confirm) {
+                wx.navigateBack({
+                })
+              }
+            }
+          })
+        }
+        else if (res.data.message == "fault" && res.statusCode == 200) {
           wx.showModal({
             title: "加载失败",
             content: '获取成绩列表失败,请重新绑定后再试',
@@ -215,6 +228,9 @@ Page({
             }
           })
         }
+        else{
+          app.showErrorModal('服务器出现了问题', '提示');
+        }
       },
       fail: function (res) {
         wx.hideLoading();
@@ -225,6 +241,9 @@ Page({
           confirmText: "确定",
           success: function (res) {
             if (res.confirm) {
+              wx.navigateBack({
+                
+              })
             }
           }
         });

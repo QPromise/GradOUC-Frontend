@@ -74,6 +74,8 @@ Page({
           confirmText: "确定",
           success: function (res) {
             if (res.confirm) {
+              wx.navigateBack({
+              })
             }
           }
         });

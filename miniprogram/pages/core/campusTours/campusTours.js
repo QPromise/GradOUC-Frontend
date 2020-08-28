@@ -38,9 +38,7 @@ Page({
             showCancel: false,
             success(res) {
               if (res.confirm) {
-
               } else if (res.cancel) {
-
               }
             }
           })
@@ -87,6 +85,7 @@ Page({
           buildlData: res.data.map,
           xq: that.data.arrayxq[that.data.indexxq] + '▼'
         })
+        console.log(this.data.buildlData)
         app.globalData.map = res.data.map
         wx.hideLoading()
       },
@@ -115,6 +114,7 @@ Page({
     this.setData({
       isSelectedBuild: e.markerId
     })
+    console.log(e)
   },
   navigateSearch() {
     wx.navigateTo({

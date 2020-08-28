@@ -278,7 +278,7 @@
     </view>
   </view>
 </jun-mask>
-<!-- <view>
+<view  class='page_bd'>
 <ad unit-id="adunit-fd61b1cb094c221e"></ad>
-</view> -->
+</view>
 </view>

@@ -5,23 +5,20 @@
           <view class="xq" value="{{indexxq}}" range="{{arrayxq}}">
             <view class="input-left" bindtap="xqChange">{{xq}}</view>
           </view>
-        </view>
+  </view>
   <scroll-view scroll-x="true" style="width:80%;">
-    <view class="top-switch" style="width:{{buildlData.length * 120 < windowWidth ? windowWidth: buildlData.length * 120}}rpx;" wx:if="{{!fullscreen}}">
-   
+    <view class="top-switch" style="width:{{buildlData.length * 120 < windowWidth ? windowWidth: buildlData.length * 120}}rpx;" >
       <label wx:for="{{buildlData}}" wx:key="id" id="{{index}}" bindtap="changePage" class="top-switch-btn {{isSelectedBuildType == index ? 'active' : ''}}">{{item.name}}
       </label>
     </view>
   </scroll-view>
   </view>
-  <map subkey="6QIBZ-RBQ3S-B5TOQ-6MQBC-CL2WV-TRBMA" longitude="{{longitude}}" latitude="{{latitude}}" scale="{{buildlData[isSelectedBuildType].scale}}" markers="{{buildlData[isSelectedBuildType].data}}" bindmarkertap="markertap" bindregionchange="regionchange" include-points="{{buildlData[isSelectedBuildType].data}}"
-    show-location="{{islocation? 'true': 'false'}}" enable-overlooking="true" enable-3D="true" style="width: auto; height:{{fullscreen ? 85 : 40}}vh;">
+  <map subkey="6QIBZ-RBQ3S-B5TOQ-6MQBC-CL2WV-TRBMA" longitude="{{longitude}}" latitude="{{latitude}}" scale="{{buildlData[isSelectedBuildType].scale}}" scale="{{buildlData[isSelectedBuildType].scale}}" markers="{{buildlData[isSelectedBuildType].data}}" bindmarkertap="markertap" bindregionchange="regionchange" include-points="{{buildlData[isSelectedBuildType].data}}"
+    show-location="{{islocation? 'true': 'false'}}" enable-overlooking="true" enable-3D="true" style="width: auto; height:{{fullscreen ? 70 : 40}}vh;">
     <cover-view class="controls {{fullscreen ? 'full' : ''}}">
-
          <cover-view class="bg" bindtap="navigateSearch">
             <cover-image class="bg_img" src="/images/map_nav_bg.png" />
          </cover-view>
-
          <cover-view class="content">
             <cover-view bindtap="navigateSearch">
                <cover-image class="icon_search" src="/images/search.png" />
@@ -33,7 +30,7 @@
     </cover-view>
   </map>
   <button bindtap="clickButton">
-    共有{{" "+buildlData[isSelectedBuildType].data.length+" "}}个地点
+    共有{{" "+buildlData[isSelectedBuildType].data.length+" "}}个地点，{{fullscreen ? "点我缩小地图" : "点我放大地图"}}
   </button>
   <scroll-view scroll-y="true" style="height:{{fullscreen ? 0 : 40}}vh" scroll-top="{{(isSelectedBuild -1 ) * 70}}">
     <view wx:for="{{buildlData[isSelectedBuildType].data}}" wx:key="id" class="building-item" style="{{isSelectedBuild == index ? 'background-color: #d5d5d5;' : ''}}">

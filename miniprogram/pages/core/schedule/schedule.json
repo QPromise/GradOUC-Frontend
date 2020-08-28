@@ -1,7 +1,7 @@
 {
   "usingComponents": {
-    "jun-modal": "../../components/jun-modal/jun-modal",
-    "jun-mask": "../../components/jun-mask/jun-mask"
+    "jun-modal": "../../../components/jun-modal/jun-modal",
+    "jun-mask": "../../../components/jun-mask/jun-mask"
 
     },
 
