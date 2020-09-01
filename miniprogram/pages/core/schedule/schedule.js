@@ -1,6 +1,6 @@
 //获取应用实例
 const app = getApp();
-console.log('now_day',parseInt(new Date().getDay()));
+//console.log('now_day',parseInt(new Date().getDay()));
 Page({
   data: {
     indexxq: 0,
@@ -52,9 +52,9 @@ Page({
   // 现在是否大于指定的时间
   cmpDate: function () { 
     var now = parseInt(Date.parse(new Date()) / 1000)
-    console.log(now)
+    //console.log(now)
     var date = parseInt(app.cache.begin_day)
-    console.log(date)
+    //console.log(date)
     return now > date
   },
   //加载页面
@@ -74,9 +74,9 @@ Page({
     var that = this;
     that.getDay();
     setTimeout(function () {
-      console.log("延迟1s调用============");
+      //console.log("延迟1s调用============");
       var weeks = that.data.arrayzc[that.data.indexzc];
-      console.log("onReady weeks:" + weeks);
+      //console.log("onReady weeks:" + weeks);
       if (!that.cmpDate()) {
         wx.showModal({
           title: '提示',
@@ -94,7 +94,7 @@ Page({
       else{
         that.reFreshKCB();
       }
-    }, 1000)
+    }, 500)
 
   },
 
@@ -144,14 +144,14 @@ Page({
     //选择学期
     var xj;
     var items = that.data.arrayxq[0];
-    console.log(items.indexOf("夏秋"))
+    //console.log(items.indexOf("夏秋"))
     if (items.indexOf("夏秋") != -1){
       xj = 11
     }
     else{
       xj = 12
     }
-    console.log(xj)
+    //console.log(xj)
     wx.request({
       url: app.local_server + 'get_schedule/',
       method: 'POST',
@@ -165,11 +165,11 @@ Page({
       header: { "Content-Type": "application/x-www-form-urlencoded" },
       success: (res)=> {
         wx.hideLoading();
-        console.log(res);
+        //console.log(res);
         if (res.data.message == "timeout"){
           wx.showModal({
             title: '请求超时',
-            content: '可能是研究生系统问题，请稍后重试',
+            content: '可能是你的网络问题，请稍后重试',
             showCancel: false,
             success(res) {
               if (res.confirm) {
@@ -239,17 +239,22 @@ Page({
   onShow: function () {
   },
   //判断课程和教室字数加起来是否超出小方块
-  isOverLength: function (name,room) {
-    if (name.length + room.length > 21) {
-      return true
+  isOverLength: function (name, room) {
+    if (name.length + room.length > 16) {
+      if (room.length > 13){
+        return 1; //两个都需要缩短
+      }
+      else{
+        return 2; //只缩短课程名称
+      }
     }
-    else return false;
+    return 3; //两个都不需要缩短
   },
   //显示课程的详细信息
   showdetail: function (e) {
     var that = this;
-    var gname = e.currentTarget.dataset.name;
-    var groom = e.currentTarget.dataset.room;
+    var gname = e.currentTarget.dataset.name_long;
+    var groom = e.currentTarget.dataset.room_long;
     var gleader = e.currentTarget.dataset.leader;
     var gtime = e.currentTarget.dataset.time;
     var gperiod = e.currentTarget.dataset.period;
@@ -273,7 +278,7 @@ Page({
   },
   //对课程表数据进行上色渲染
   beautifyAndResetKcb: function (data) {
-    console.log("课表",data);
+    //console.log("课表",data);
     let that = this;
     let trans = that.data.trans;  //透明度设置获取
     var tdcolors = [
@@ -316,14 +321,22 @@ Page({
       changeKCB[row] = new Array();
       for (var i = 0; i < 7; i++) {
         changeKCB[row][i] = new Object();
-        if (that.isOverLength(data[row][i].name, data[row][i].room))
+        let over_type = that.isOverLength(data[row][i].name, data[row][i].room)
+        if (over_type == 1)
           {
-          changeKCB[row][i].name = data[row][i].name.substring(0,6) + "...";
+          changeKCB[row][i].name_short = data[row][i].name.substring(0,5) + "..";
+          changeKCB[row][i].room_short = data[row][i].room.substring(0,2) + ".." + data[row][i].room.substring(data[row][i].room.length - 9,data[row][i].room.length - 1);
           }
-        else{
-          changeKCB[row][i].name = data[row][i].name;
+        else if (over_type == 2){
+          changeKCB[row][i].name_short = data[row][i].name.substring(0,5) + "..";
+          changeKCB[row][i].room_short = data[row][i].room;
+        }
+        else if (over_type == 3){
+          changeKCB[row][i].name_short = data[row][i].name;
+          changeKCB[row][i].room_short = data[row][i].room;
           }
-        changeKCB[row][i].room = data[row][i].room;
+        changeKCB[row][i].name_long = data[row][i].name;
+        changeKCB[row][i].room_long = data[row][i].room;
         changeKCB[row][i].leader = data[row][i].leader;
         changeKCB[row][i].period = data[row][i].period;
         changeKCB[row][i].color = tdcolors[(data[row][i].index - 1) % tdcolors.length];

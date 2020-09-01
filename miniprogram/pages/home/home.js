@@ -199,9 +199,14 @@ closeGuide:function() {
    */
   goSchoolCourse: function () {
     var that = this;
-    wx.navigateTo({
-      url: '../core/schoolCourse/schoolCourse',
-    })
+    if (that.data.is_bind) {
+      wx.navigateTo({
+        url: '../core/schoolCourse/schoolCourse',
+      })
+    }
+    else {
+      that.showNeedBind();
+    }
   },
   goCampusTours: function () {
     wx.navigateTo({

@@ -1,4 +1,4 @@
-<!--more.wxml-->
+
 <navigationBar id="navigationBar" title="{{'个人中心'}}" back="{{true}}"></navigationBar>
 <view class="container">
 
@@ -31,7 +31,15 @@
   </view>
 
   <view class="more-list">
-
+      <navigator wx:if="{{is_bind}}" url="/pages/profile/profile" class="about-link">
+      <view class="more-btn">
+        <image class="btn-icon" src="/images/my/profile.png"></image>
+        <text class="btn-text">我的信息</text>
+        <view class="btn-open">
+            <image class="btn-enter" src="/images/enter.png"></image>
+        </view>
+      </view>
+    </navigator>
     <navigator url="/pages/FAQ/FAQ" class="about-link">
       <view class="more-btn">
         <image class="btn-icon" src="/images/my/QA.png"></image>
@@ -41,15 +49,26 @@
         </view>
       </view>
     </navigator>
-    <navigator url="/pages/feedback/feedback" class="about-link">
+    <navigator class="about-link" bindtap="toFeedback">
       <view class="more-btn">
         <image class="btn-icon" src="/images/my/feedback.png"></image>
-        <text class="btn-text">意见反馈</text>
+        <text class="btn-text">交流社区</text>
         <view class="btn-open">
             <image class="btn-enter" src="/images/enter.png"></image>
         </view>
       </view>
     </navigator>
+    <navigator url="/pages/feedback/feedback" class="about-link">
+      <view class="more-btn">
+        <image class="btn-icon" src="/images/my/contact.png"></image>
+        <text class="btn-text">联系我</text>
+        <view class="btn-open">
+            <image class="btn-enter" src="/images/enter.png"></image>
+        </view>
+      </view>
+    </navigator>
+
+
     <!-- <view url="" class="about-link">
     <view wx:if="{{is_bind}}" class="more-btn">
       <image class="btn-icon" src="/images/my/notice.png"></image>

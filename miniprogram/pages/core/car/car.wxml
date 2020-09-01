@@ -12,8 +12,10 @@
         <view class='xiaoli-item-title'></view>
         <view class='xiaoli-item-desc'></view>
         <view class='xiaoli-item-img'>
-          <image src='http://hqjt.ouc.edu.cn/_upload/article/53/8a/3803e0664edc906b47ef5b921921/a40097cc-12e4-46a0-abc9-07be740727cf_1.png'></image>
-          <image src="http://hqjt.ouc.edu.cn/_upload/article/53/8a/3803e0664edc906b47ef5b921921/a40097cc-12e4-46a0-abc9-07be740727cf_2.png"></image>
+          <image src='https://leoqin.fun/static/images/car1.jpeg'></image>
+          <image src="https://leoqin.fun/static/images/car2.jpeg"></image>
+          <!-- <image src='http://hqjt.ouc.edu.cn/_upload/article/53/8a/3803e0664edc906b47ef5b921921/a40097cc-12e4-46a0-abc9-07be740727cf_1.png'></image>
+          <image src="http://hqjt.ouc.edu.cn/_upload/article/53/8a/3803e0664edc906b47ef5b921921/a40097cc-12e4-46a0-abc9-07be740727cf_2.png"></image> -->
         </view>
       </view>
     </view>

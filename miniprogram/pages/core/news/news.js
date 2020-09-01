@@ -57,7 +57,6 @@ Page({
       success: res => {
         wx.hideLoading();
         var news = that.data.news
-        console.log(news)
         news = news.concat(res.data.news)
         that.setData({
           news: news,
@@ -91,7 +90,6 @@ Page({
   },
   onLoad: function (options) {
     var type = options.type
-    console.log(91,type)
     var that = this
     that.setData({
       type:type,

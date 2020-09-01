@@ -23,7 +23,6 @@ Page({
   bindCheckbox: function (e) {
     //取下标值
     var index = parseInt(e.currentTarget.dataset.index);
-    console.log(index)
     //原始的icon状态
     var selected = this.data.arraycj[index].selected;
     console.log(selected)
@@ -124,12 +123,10 @@ Page({
       header: { "Content-Type": "application/x-www-form-urlencoded" },
       success: function (res) {
         wx.hideLoading();
-        console.log(res);
-        console.log(res.data.courses);
         if (res.data.message == "timeout"){
           wx.showModal({
             title: '请求超时',
-            content: '可能是研究生系统问题，请稍后重试',
+            content: '可能是你的网络问题，请稍后重试',
             showCancel: false,
             success(res) {
               if (res.confirm) {
@@ -189,7 +186,6 @@ Page({
             change.disabled = res.data.courses[i].disabled;
             Eduarray[i] = change;
           }
-          console.log(Eduarray);
           that.setData({
             arraycj: Eduarray
           });

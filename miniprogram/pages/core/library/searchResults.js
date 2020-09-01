@@ -34,7 +34,6 @@ Page({
       })
       return
     }
-    console.log(page)
     wx.showToast({
       title: '搜索中',
       icon: 'loading',
@@ -51,8 +50,6 @@ Page({
       },
       header: { "Content-Type": "application/x-www-form-urlencoded" },
       success: res => {
-        console.log(res);
-        console.log(res.data);
         if (res.data.total_records == 0) {
           wx.hideToast();
           wx.showModal({
@@ -74,7 +71,6 @@ Page({
             var bookList = this.data.bookList
             bookList = bookList.concat(res.data.list)
             totalPages = Math.ceil(res.data["total_records"] / 20)
-            console.log(totalPages)
             that.setData({
               bookList: bookList
             })

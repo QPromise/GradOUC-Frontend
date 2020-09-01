@@ -183,6 +183,11 @@ form {
   font-size: 10pt;
   color: #bbb;
 }
+.login-see-img {
+  width: 13pt;
+  height: 13pt;
+  margin: 0 5rpx;
+}
 .login-help-img {
   width: 11pt;
   height: 11pt;

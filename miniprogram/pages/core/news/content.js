@@ -40,7 +40,6 @@ Page({
         that.setData({
           content: res.data
         })
-        console.log(that.data.content)
       },
       fail: function (res) {
         wx.hideLoading();

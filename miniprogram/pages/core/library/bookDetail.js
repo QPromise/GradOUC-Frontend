@@ -1,4 +1,6 @@
-// miniprogram/pages/core/library/bookDetail.js
+
+ 
+ // miniprogram/pages/core/library/bookDetail.js
 var app = getApp()
 Page({
 
@@ -39,8 +41,6 @@ Page({
       },
       header: { "Content-Type": "application/x-www-form-urlencoded" },
       success: res => {
-        console.log(res);
-        console.log(res.data);
         wx.hideToast();
         //有借阅的信息
         if (res.data.have_info == "1"){

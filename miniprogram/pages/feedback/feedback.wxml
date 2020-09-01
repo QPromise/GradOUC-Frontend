@@ -1,4 +1,4 @@
-<navigationBar id="navigationBar" title="{{'意见反馈'}}" back="{{true}}"></navigationBar>
+<navigationBar id="navigationBar" title="{{'联系我'}}" back="{{true}}"></navigationBar>
 <view class="page">
   <view class='page__hd'>
   </view>
@@ -15,7 +15,7 @@
       </view>
       <view class='feed-box-body'>
         <view class='feed-box-body-text'>
-          <text>小程序可能某些地方存在没有被发现的问题，希望大家积极反馈和谅解。另外还有什么功能改进、功能需求均可以给我发邮件或者公众号【GradOUC】给我留言，很感谢大家帮助我完善和使用小程序！</text>
+          <text>小程序可能某些地方存在没有被发现的问题，大家可以去上面的【交流社区】留言反馈。有什么问题都可以随时通过本页面联系方式联系我，感谢大家使用研在OUC小程序！</text>
           <text></text>
         </view>
         <view class='feed-box-body-con'>

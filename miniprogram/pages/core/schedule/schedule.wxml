@@ -31,18 +31,19 @@
                 <view class='table-td'
                       wx:for="{{tritem}}" wx:for-index="nowindex" wx:for-item="nowitem" wx:key="{{nowindex}}"
                       style="background-color:{{nowitem.color}}; " 
-                      bindtap='showdetail' 
-                      bindlongpress='showAddOrEditKCB' 
+                      bindtap='showdetail'  
                       data-hang='{{trindex}}' 
                       data-week='{{nowindex}}'
                       data-kid='{{nowitem.kid}}' 
-                      data-name='{{nowitem.name}}' 
-                      data-room='{{nowitem.room}}' 
+                      data-name_short='{{nowitem.name_short}}' 
+                      data-name_long='{{nowitem.name_long}}'
+                      data-room_short='{{nowitem.room_short}}' 
+                      data-room_long='{{nowitem.room_long}}'
                       data-leader='{{nowitem.leader}}' 
                       data-time='{{nowitem.time}}'
                       data-period='{{nowitem.period}}'
                       >
-                  <text>{{nowitem.name}}\n{{nowitem.room}}</text>
+                  <text style="font-size: 20rpx;" wx:if="{{nowitem.name_short}}">{{nowitem.name_short}}\n{{nowitem.room_short}}\n{{nowitem.time}}</text>
                 </view>
             </view>
 

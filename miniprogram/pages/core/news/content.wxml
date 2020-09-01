@@ -9,3 +9,6 @@
 <view style='width:92%;margin-left:4%;margin-top:1rpx;'>
   <wemark md="{{content.content}}" link highlight type="wemark"></wemark>
 </view>
+<view style='width:92%;margin-left:4%;margin-top:1rpx;'>
+<ad unit-id="adunit-4452f94d8c4c203f"></ad>
+</view>

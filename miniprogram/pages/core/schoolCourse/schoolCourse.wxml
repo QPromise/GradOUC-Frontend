@@ -9,44 +9,46 @@
   </view>
   <view class = "info-input">
   <text>课程名称：</text>
-  <input type="text" name="course" bindinput="bindCourseInput" placeholder="输入课程名称（选填）" confirm-type="search"></input></view>
+  <input type="text" name="course" bindinput="bindCourseInput" placeholder="输入课程名称（选填）" confirm-type="search"></input>
+  </view>
   <view class = "info-input">
   <text>授课老师：</text>
-  <input type="text" name="teacher" bindinput="bindTeacherInput" placeholder="输入授课老师（选填）" confirm-type="search"></input></view>
+  <input type="text" name="teacher" bindinput="bindTeacherInput" placeholder="输入授课老师（选填）" confirm-type="search"></input>
+  </view>
   <view class="search-btn" bindtap="bindSearch">
     <text>开始查询</text>
   </view>
-  <view class='tips'>提示: 点击可以查看详细哦~.</view>
+  <!-- <view class='tips'>提示: 点击可以查看详细哦~.</view> -->
   </view>
 
   <view class='page_bd'>
     <view class='body-con'>
     <view class="content">
+    <view class='tips'wx:if="{{number != 0}}">- 共{{number}}条查询结果 -</view>
+    <view class='tips'wx:else>- 暂无查询结果 -</view>
   <block wx:for="{{schoolCourses}}"wx:for-index="index" wx:for-item="item" wx:key="item.index">
-    <view class="list-item s1014" bindtap='showdetail' data-id='{{item.id}}' data-name='{{item.name}}' data-xq='{{item.xq}}' data-xn='{{item.xn}}' data-select='{{item.select}}' data-teacher='{{item.teacher}}' data-credit='{{item.credit}}' data-type='{{item.type}} 'data-process='{{item.process}}'>
+    <view class="list-item s1014" bindtap='showdetail' data-xq='{{item.xq}}' data-xn='{{item.xn}}' data-id='{{item.id}}' data-name='{{item.name}}' data-department='{{item.department}}' data-capacity='{{item.capacity}}' data-language='{{item.language}}' data-info='{{item.info}}'data-campus='{{item.campus}}' data-teacher='{{item.teacher}}' data-department='{{item.department}}'>
       <view class="list-item-left">
-        <text class="list-item-title">[{{index+1}}]{{item.name}} || {{item.process}} </text>
-        <text class="list-item-time " wx:if = "{{item.teacher}}">{{item.teacher}} · {{item.select}} · {{item.type}} · {{item.credit}}学分</text>
-        <text class="list-item-time " wx:else>{{item.select}} · {{item.type}} · {{item.credit}}学分</text>
+        <text class="list-item-title">{{item.name}} · {{item.teacher}}</text>
+        <text class="list-item-time ">{{item.campus}}}</text>
+
       </view>
     </view>
   </block>
 </view>
-    
-    
-    </view>
+</view>
   
   </view>
   <jun-modal show="{{!hiddenmodalput}}" title="{{name}}" content-color="#363636" confirm-text="确定" confirm-color="black"  bindconfirm="confirm" no-cancel='true'>
-      <view class='modal-hang'><view class='modal-hang-left'>选修或必修：</view><view class='modal-hang-right'>{{select}}</view></view>
+      <view class='modal-hang'><view class='modal-hang-left'>学年：</view><view class='modal-hang-right'>{{xn}}</view></view>
+      <view class='modal-hang'><view class='modal-hang-left'>学期：</view><view class='modal-hang-right'>{{xq}}</view></view>
       <view class='modal-hang'><view class='modal-hang-left'>课程编号：</view><view class='modal-hang-right'>{{id}}</view></view>
       <view class='modal-hang'><view class='modal-hang-left'>课程名称：</view><view class='modal-hang-right'>{{name}}</view></view>
-      <view class='modal-hang'><view class='modal-hang-left'>课程性质：</view><view class='modal-hang-right'>{{type}}</view></view>
-      <view class='modal-hang'><view class='modal-hang-left'>学分：</view><view class='modal-hang-right'>{{credit}}</view></view>
-      <view class='modal-hang'><view class='modal-hang-left'>选修学年：</view><view class='modal-hang-right'>{{xn}}</view></view>
-      <view class='modal-hang'><view class='modal-hang-left'>学期：</view><view class='modal-hang-right'>{{xq}}</view></view>
+      <view class='modal-hang'><view class='modal-hang-left'>开课学院：</view><view class='modal-hang-right'>{{department}}</view></view>
+      <view class='modal-hang'><view class='modal-hang-left'>容量：</view><view class='modal-hang-right'>{{capacity}}</view></view>
+      <view class='modal-hang'><view class='modal-hang-left'>上课语言：</view><view class='modal-hang-right'>{{language}}</view></view>
       <view class='modal-hang'><view class='modal-hang-left'>任课老师：</view><view class='modal-hang-right'>{{teacher}}</view></view>
-      <view class='modal-hang'><view class='modal-hang-left'>修读类型：</view><view class='modal-hang-right'>{{process}}</view></view>
+      <view class='modal-hang'><view class='modal-hang-left'>其它信息：</view><view class='modal-hang-right'>{{info}}</view></view>
   </jun-modal>
 </view>
 <view class='full-some'></view>

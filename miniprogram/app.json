@@ -19,7 +19,8 @@
     "pages/core/campusTours/details",
     "pages/core/campusTours/search",
     "pages/web/web",
-    "pages/core/schoolCourse/schoolCourse"
+    "pages/core/schoolCourse/schoolCourse",
+    "pages/profile/profile"
   ],
   "window": {
     "backgroundTextStyle": "light",

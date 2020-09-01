@@ -20,6 +20,15 @@ Page({
   onLoad: function (options) {
 
   },
+
+  toFeedback: function () {
+    wx.navigateToMiniProgram({
+      appId: 'wx8abaf00ee8c3202e',
+      extraData: {
+        id: '273731',
+      },
+    });
+  },
   onShow: function () {
     var that = this;
     that.setData({

@@ -76,7 +76,7 @@ Page({
         if (res.data.message == "timeout"){
           wx.showModal({
             title: '请求超时',
-            content: '可能是研究生系统问题，请稍后重试',
+            content: '可能是你的网络问题，请稍后重试',
             showCancel: false,
             success(res) {
               if (res.confirm) {
@@ -136,9 +136,6 @@ Page({
           });
         }
         else if (res.data.message == "success" && res.statusCode == 200 && res.data.have_class == 2) {
-          that.setData({
-            have_class: res.data.have_class
-          })
           wx.showModal({
             title: '提示',
             content: '研究生系统【我的课程】目前无法访问',
@@ -153,9 +150,6 @@ Page({
           })
         }
         else if (res.data.message == "fault" && res.statusCode != 200) {
-          that.setData({
-            have_class: res.data.have_class
-          })
           wx.showModal({
             title: '提示',
             content: '研究生系统目前无法访问',

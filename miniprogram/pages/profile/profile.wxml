@@ -1,0 +1,35 @@
+<!--miniprogram/pages/profile/profile.wxml-->
+<navigationBar id="navigationBar" title="{{'我的信息'}}" back="{{true}}"></navigationBar>
+
+	<view>
+		<view class="top">
+			<view class="center">
+				<view class="center_top">
+					<view class="center_img" wx:if="{{sno != null}}">
+						<image  src="https://imgshenpi.ouc.edu.cn/avatarNew/{{sno}}.jpg"></image>
+					</view>
+          <view class="center_img" wx:else >
+            <open-data type = "userAvatarUrl" class = "user-avatar"></open-data>
+          </view>
+					<view class="center_info" >
+						<!-- <view class="center_phone">phone:{{phone}}</view> -->
+						<view class="center_phone"><text>姓名：</text><text>{{name}}</text></view>
+            <view class="center_phone"><text>专业：</text><text>{{profession}}</text></view>
+            <view class="center_phone"><text>研究方向：</text><text>{{research}}</text></view>
+            <view class="center_phone"><text>导师：</text><text>{{supervisor}}</text></view>
+					</view>
+				</view>
+				<!-- <view class="center_down">
+					<view class="center_rank" >
+						<image class="rank_icon" src="../../static/rank.png"></image>
+						<text class="rank_text">我的排名</text>
+					</view>
+					<view class="center_score" >
+						<image class="rank_icon" src="../../static/points.png"></image>
+						<text class="rank_text">我的积分</text>
+					</view>
+				</view> -->
+			</view>
+			<image src='https://6661-fatdown-wxapp-sg2p1-1300398887.tcb.qcloud.la/wave.gif?sign=045605c672f482a8c3d428abed669aa7&t=1570674356' mode='scaleToFill' class='gif-wave'></image>
+		</view>
+	</view>
