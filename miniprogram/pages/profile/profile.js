@@ -45,14 +45,15 @@ Page({
       url: app.local_server + 'get_profile/',
       method: 'POST',
       data: {
+        openid: app.globalData.openId,
         sno:app.cache.sno,
         passwd: app.cache.passwd
       },
       header: { "Content-Type": "application/x-www-form-urlencoded" },
       success: function (res) {
         wx.hideLoading();
-        console.log("success", res);
-        console.log(res.data.info);
+        //console.log("success", res);
+        //console.log(res.data.info);
         if (res.data.message == "timeout"){
           wx.showModal({
             title: '请求超时',
@@ -160,7 +161,7 @@ Page({
 
       },
       complete: function (res) {
-        console.log("complete", res);
+        //console.log("complete", res);
       }
     });
 

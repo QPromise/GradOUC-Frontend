@@ -3,6 +3,18 @@ App({
   offline: false,
   network:"有网络",
   onLaunch: function () {
+    wx.getSystemInfo({
+      success: e => {
+        this.globalData.StatusBar = e.statusBarHeight;
+        let capsule = wx.getMenuButtonBoundingClientRect();
+		if (capsule) {
+		 	this.globalData.Custom = capsule;
+			this.globalData.CustomBar = capsule.bottom + capsule.top - e.statusBarHeight;
+		} else {
+			this.globalData.CustomBar = e.statusBarHeight + 50;
+		}
+      }
+    })
     //1.获取缓存
     var that = this;
     try {
@@ -16,6 +28,7 @@ App({
           that.saveCache("end_day", res.data.end_day)
           that.saveCache("xn", res.data.xn)
           that.saveCache("xq", res.data.xq)
+          that.saveCache("is_open_subscribe", res.data.is_open_subscribe)
           that.getWeek(res.data.begin_day)
           console.log(that.cache);
         },
@@ -24,7 +37,6 @@ App({
       if (data && data.keys.length) {
         data.keys.forEach(key=> {
           var value = wx.getStorageSync(key);
-          console.log(value);
           if (value) {
             that.cache[key] = value;
           }
@@ -90,7 +102,7 @@ App({
         traceUser: true,
       })
     }
-    // 获取用户openid
+    // 4.获取用户openid
     wx.cloud.callFunction({
       name: 'WeOceanLogin',
       complete: res => {
@@ -102,7 +114,7 @@ App({
       }
     })
 
-    // 获取用户信息
+    // 5.获取用户信息
     wx.getSetting({
       success: res => {
         if (res.authSetting['scope.userInfo']) {
@@ -143,7 +155,7 @@ App({
     return now > date
   },
   saveCache: function (key, value) {
-    if (!key || !value) { return; }
+    if (!key || value == undefined || value == null) { return; }
     var that = this;
     that.cache[key] = value;
     wx.setStorageSync(key,value);
@@ -186,5 +198,4 @@ App({
     openId: null,
     userInfo: null,
   }
-
 })

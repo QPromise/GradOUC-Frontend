@@ -20,7 +20,10 @@
     "pages/core/campusTours/search",
     "pages/web/web",
     "pages/core/schoolCourse/schoolCourse",
-    "pages/profile/profile"
+    "pages/profile/profile",
+    "pages/core/users/users"
+   
+    
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -49,8 +52,8 @@
     ]
   },
   "usingComponents": {
-    "navigationBar": "/components/navigationBar/index"
-  },
+    "navigationBar":"/components/navigationBar/index"
+},
   "permission": {
     "scope.userLocation": {
       "desc": "您的位置信息将用于校园导览"

@@ -17,7 +17,10 @@ Page({
     process:"",
     index: 0,
     index2: 0,
-    array: [],
+    arrDict:{},
+    school_require_credit:0.0,
+    select_credit:0.0,
+    get_credit:0.0
   },
 
   /**
@@ -65,14 +68,15 @@ Page({
       url: app.local_server + 'get_course/',
       method: 'POST',
       data: {
+        openid: app.globalData.openId,
         sno:app.cache.sno,
         passwd: app.cache.passwd
       },
       header: { "Content-Type": "application/x-www-form-urlencoded" },
       success: function (res) {
         wx.hideLoading();
-        console.log("success", res);
-        console.log(res.data.courses);
+        //console.log("success", res);
+        //console.log(res.data.courses);
         if (res.data.message == "timeout"){
           wx.showModal({
             title: '请求超时',
@@ -117,6 +121,14 @@ Page({
         }
         else if (res.data.message == "success" && res.statusCode == 200 && res.data.have_class == 1) {
           var Eduarray = [];
+          let arrDict = {};
+          for (var i = 0; i< res.data.courses.length; i++) {
+            let key = res.data.courses[i].xn + res.data.courses[i].xq;
+            if (key == ""){
+              key = "其它";
+            }
+            arrDict[key] = [];
+          }
           for (var i = 0; i< res.data.courses.length; i++) {
               var change = new Object();
               change.name = that.isOver16(res.data.courses[i].name);
@@ -129,11 +141,69 @@ Page({
               change.xn = res.data.courses[i].xn;
               change.xq = res.data.courses[i].xq;
               Eduarray[i] = change;
+              let key = res.data.courses[i].xn + res.data.courses[i].xq;
+              if (key == ""){
+                key = "其它";
+              }
+              arrDict[key].push(change);
           }
-          console.log(Eduarray);
+          //console.log(Eduarray);
+         // console.log(arrDict);
+         if (res.data.get_credit == 0){
           that.setData({
-            array: Eduarray
+            get_credit: res.data.get_credit
+          })
+          let i = 0;
+        numDH();
+        function numDH() {
+          if (i < Math.min(res.data.school_require_credit, res.data.select_credit)) {
+            setTimeout(function () {
+              that.setData({
+                school_require_credit: i,
+                select_credit: i
+              })
+              i++
+              numDH();
+            }, 20)
+          } else {
+            that.setData({
+              school_require_credit: res.data.school_require_credit,
+              select_credit:res.data.select_credit
+            })
+          }
+        }
+        }
+        else{
+          let i = 0;
+        numDH();
+        function numDH() {
+          if (i < res.data.get_credit) {
+            setTimeout(function () {
+              that.setData({
+                school_require_credit: i,
+                get_credit: i,
+                select_credit: i
+              })
+              i++
+              numDH();
+            }, 20)
+          } else {
+            that.setData({
+              school_require_credit: res.data.school_require_credit,
+              get_credit: res.data.get_credit,
+              select_credit:res.data.select_credit
+            })
+          }
+        }
+        }
+         const orderedArrDict = {}; 
+         Object.keys(arrDict).sort().forEach(function(key) { orderedArrDict[key] = arrDict[key]; });
+          that.setData({
+            arrDict:orderedArrDict,
           });
+
+
+          
         }
         else if (res.data.message == "success" && res.statusCode == 200 && res.data.have_class == 2) {
           wx.showModal({
@@ -185,7 +255,7 @@ Page({
 
       },
       complete: function (res) {
-        console.log("complete", res);
+        //console.log("complete", res);
       }
     });
 
@@ -197,7 +267,7 @@ Page({
     else return str;
   },
   showdetail: function (e) {
-    console.log(e);
+    //console.log(e);
     var that = this;
     var noshow = false;
     var name = e.currentTarget.dataset.name;

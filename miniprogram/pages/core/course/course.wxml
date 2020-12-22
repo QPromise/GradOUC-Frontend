@@ -1,25 +1,72 @@
-<navigationBar id="navigationBar" title="{{'我的课程'}}" back="{{true}}"></navigationBar>
-<view class="page">
-  <view class='page_hd'>
+<cu-custom isBack="{{true}}" >
+	<view slot="content" style="color:white;font-weight:bold;">我的课程</view>
+</cu-custom>
+
+<view class="cu-bar bg-white" style="min-height:70rpx;">
+  <view class="action">
+   <text class="cuIcon-titles text-blue"></text>
+      <text class="text-bold">学分</text>
   </view>
-  <view class='page_bd'>
-    <view class='body-con'>
-    <view class="content">
-  <block wx:for="{{array}}"wx:for-index="index" wx:for-item="item" wx:key="item.index">
-    <view class="list-item s1014" bindtap='showdetail' data-id='{{item.id}}' data-name='{{item.name}}' data-xq='{{item.xq}}' data-xn='{{item.xn}}' data-select='{{item.select}}' data-teacher='{{item.teacher}}' data-credit='{{item.credit}}' data-type='{{item.type}} 'data-process='{{item.process}}'>
-      <view class="list-item-left">
-        <text class="list-item-title">[{{index+1}}]{{item.name}} || {{item.process}} </text>
-        <text class="list-item-time " wx:if = "{{item.teacher}}">{{item.teacher}} · {{item.select}} · {{item.type}} · {{item.credit}}学分</text>
-        <text class="list-item-time " wx:else>{{item.select}} · {{item.type}} · {{item.credit}}学分</text>
-      </view>
-    </view>
-  </block>
 </view>
-    <view class='tips'>提示: 点击可以查看详细哦~.</view>
-    
-    </view>
-  
+<view class="bg-white">
+	<view class="flex padding justify-around" style="padding:20rpx">
+		<view class="cu-avatar xl round  bg-olive">
+    <text class="avatar-text">{{get_credit}}</text>
   </view>
+  <view class="cu-avatar xl round  bg-orange">
+    <text class="avatar-text">{{select_credit}}</text>
+  </view>
+   <view class="cu-avatar xl round  bg-red">
+    <text class="avatar-text">{{school_require_credit}}</text>
+  </view>
+	</view>
+  	<view class="flex padding justify-around" style="padding:20rpx;padding-top:5rpx">
+		<view class="xl round">
+    <text class="avatar-text">已修学分</text>
+  </view>
+  <view class="xl round">
+    <text class="avatar-text">计划学分</text>
+  </view>
+   <view class="xl round">
+    <text class="avatar-text">毕业学分</text>
+  </view>
+	</view>
+</view>
+<view class="cu-bar bg-white"style="min-height:70rpx;">
+  <view class="action">
+    <text class="cuIcon-titles text-blue"></text>
+      <text class="text-bold">课程</text>
+    <view class="text-sm padding">
+    <text class="cuIcon-infofill text-gray"></text>
+        <text class="text-grey">点击课程可查看课程详情</text>
+      </view>
+  </view>
+</view>
+<view wx:for="{{arrDict}}" wx:for-index="key"  wx:for-item="value">
+
+<view class="bg-white padding-lr">
+ <view class="flex padding justify-center" style="padding:5rpx;">
+      <view class="bg-grey padding-sm margin-xs radius" style="padding:10rpx;">{{key}}</view>
+</view>
+<block wx:for="{{value}}"wx:for-index="index" wx:for-item="item" wx:key="item.index">
+
+<view class="cu-bar bg-white"style="min-height:50rpx;" bindtap='showdetail' data-id='{{item.id}}' data-name='{{item.name}}' data-xq='{{item.xq}}' data-xn='{{item.xn}}' data-select='{{item.select}}' data-teacher='{{item.teacher}}' data-credit='{{item.credit}}' data-type='{{item.type}} 'data-process='{{item.process}}'>
+  <view class="action">
+    <view class="cu-tag sm bg-brown" style="margin-right:5rpx">{{index + 1}}</view>
+    <view class="text-df">{{item.name}}</view>
+  </view>
+   <view class="margin-xs text-df">{{item.process}}</view>
+</view>
+<view class="padding-lr bg-white" bindtap='showdetail' data-id='{{item.id}}' data-name='{{item.name}}' data-xq='{{item.xq}}' data-xn='{{item.xn}}' data-select='{{item.select}}' data-teacher='{{item.teacher}}' data-credit='{{item.credit}}' data-type='{{item.type}} 'data-process='{{item.process}}'>
+  <view class="text-left text-sm text-grey padding solid-bottom" style="padding-top:5rpx;padding-bottom:15rpx;" wx:if = "{{item.teacher}}">{{item.teacher}} · {{item.select}} · {{item.type}} · {{item.credit}}学分</view>
+  <view class="text-left text-sm text-grey padding solid-bottom" style="padding-top:5rpx;padding-bottom:15rpx;" wx:else>{{item.select}} · {{item.type}} · {{item.credit}}学分</view>
+</view>
+
+</block>
+</view>
+
+</view>
+
   <jun-modal show="{{!hiddenmodalput}}" title="{{name}}" content-color="#363636" confirm-text="确定" confirm-color="black"  bindconfirm="confirm" no-cancel='true'>
       <view class='modal-hang'><view class='modal-hang-left'>选修或必修：</view><view class='modal-hang-right'>{{select}}</view></view>
       <view class='modal-hang'><view class='modal-hang-left'>课程编号：</view><view class='modal-hang-right'>{{id}}</view></view>
@@ -31,6 +78,6 @@
       <view class='modal-hang'><view class='modal-hang-left'>任课老师：</view><view class='modal-hang-right'>{{teacher}}</view></view>
       <view class='modal-hang'><view class='modal-hang-left'>修读类型：</view><view class='modal-hang-right'>{{process}}</view></view>
   </jun-modal>
-</view>
+
 <view class='full-some'></view>
 

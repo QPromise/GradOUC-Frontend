@@ -6,8 +6,8 @@
     </view>
     <view class="style-normal {{navigationBarTextStyle}}" wx:if="{{backStyle==='normal'}}">
       <view class="icon-fanhui icon" bind:tap="navigateBack"></view>
-      <view class="split"></view>
-      <view class="back-home icon" style="" bind:tap="navigateBackHome"></view>
+      <!-- <view class="split"></view>
+      <view class="back-home icon" style="" bind:tap="navigateBackHome"></view> -->
     </view>
   </view>
   <view class="back" wx:if="{{showSwitch}}" style="padding-top:{{paddingTop}}px;height:{{height}}px;line-height:{{height}}px;">

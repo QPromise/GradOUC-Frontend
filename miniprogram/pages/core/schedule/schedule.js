@@ -92,6 +92,7 @@ Page({
         })
       }
       else{
+        console.log("执行这里95")
         that.reFreshKCB();
       }
     }, 500)
@@ -156,6 +157,7 @@ Page({
       url: app.local_server + 'get_schedule/',
       method: 'POST',
       data: {
+        openid: app.globalData.openId,
         sno:app.cache.sno,
         passwd:app.cache.passwd,
         zc:that.data.arrayzc[that.data.indexzc],

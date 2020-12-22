@@ -1,5 +1,5 @@
 
-<navigationBar id="navigationBar" title="{{'个人中心'}}" back="{{true}}"></navigationBar>
+<navigationBar id="navigationBar" title="{{'个人中心'}}"></navigationBar>
 <view class="container">
 
   <view class="user-info-box">
@@ -31,6 +31,15 @@
   </view>
 
   <view class="more-list">
+   <!-- <navigator wx:if="{{sno == '21180231272'}}" url="/pages/core/users/users" class="about-link">
+      <view class="more-btn">
+        <image class="btn-icon" src="/images/my/users.png"></image>
+        <text class="btn-text">查看用户</text>
+        <view class="btn-open">
+            <image class="btn-enter" src="/images/enter.png"></image>
+        </view>
+      </view>
+    </navigator> -->
       <navigator wx:if="{{is_bind}}" url="/pages/profile/profile" class="about-link">
       <view class="more-btn">
         <image class="btn-icon" src="/images/my/profile.png"></image>
@@ -56,12 +65,13 @@
         <view class="btn-open">
             <image class="btn-enter" src="/images/enter.png"></image>
         </view>
+        
       </view>
     </navigator>
     <navigator url="/pages/feedback/feedback" class="about-link">
       <view class="more-btn">
         <image class="btn-icon" src="/images/my/contact.png"></image>
-        <text class="btn-text">联系我</text>
+        <text class="btn-text">意见反馈</text>
         <view class="btn-open">
             <image class="btn-enter" src="/images/enter.png"></image>
         </view>
@@ -69,13 +79,22 @@
     </navigator>
 
 
-    <!-- <view url="" class="about-link">
+    <view url="" class="about-link">
+    <view wx:if="{{is_open_subscribe == 1}}">
     <view wx:if="{{is_bind}}" class="more-btn">
       <image class="btn-icon" src="/images/my/notice.png"></image>
       <text class="btn-text">成绩通知</text>
-      <switch bindchange='notice' checked="{{is_notice}}" />
+      <switch bindtap='scoreSubscribe' checked="{{score_notice}}" />
     </view>
-    </view> -->
+    </view>
+    <view wx:elif="{{is_open_subscribe == 2 && (sno == 21180231272 || sno == 21200231213)}}">
+    <view wx:if="{{is_bind}}" class="more-btn">
+      <image class="btn-icon" src="/images/my/notice.png"></image>
+      <text class="btn-text">成绩通知</text>
+      <switch bindtap='scoreSubscribe' checked="{{score_notice}}" />
+    </view>
+    </view>
+  </view>
   </view>
     
 

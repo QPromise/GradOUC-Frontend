@@ -25,7 +25,7 @@ Page({
     var index = parseInt(e.currentTarget.dataset.index);
     //原始的icon状态
     var selected = this.data.arraycj[index].selected;
-    console.log(selected)
+    //console.log(selected)
     var arraycj = this.data.arraycj;
     // 对勾选状态取反
     arraycj[index].selected = !selected;
@@ -83,7 +83,7 @@ Page({
    */
   onShareAppMessage: function () {
     return {
-      title: '成绩查询',
+      title: '我的成绩',
       desc: '可查详细的课程表、详细成绩，更多查询功能欢迎体验！',
       path: '/pages/core/score/score'
     };
@@ -117,6 +117,7 @@ Page({
       url: app.local_server + 'get_score/',
       method: 'POST',
       data: {
+        openid: app.globalData.openId,
         sno: app.cache.sno,
         passwd: app.cache.passwd
       },

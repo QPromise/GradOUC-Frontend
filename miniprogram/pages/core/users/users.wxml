@@ -1,45 +1,54 @@
-<navigationBar id="navigationBar" title="{{'全校开课'}}" back="{{true}}"></navigationBar>
-<view class="page">
-  <view class='page_hd'>
-  <view class='department-picker'>
-    <text>开课学院：</text>
-    <picker bindchange="departmentChange" value="{{departmentIndex}}" range="{{departmentArray}}">
-      <view>{{departmentArray[departmentIndex]}}</view>
+<cu-custom isBack="{{true}}">
+	<view slot="content" style="color:white;font-weight:bold;">全校开课</view>
+</cu-custom>
+<view class="bg-white padding-xl fixed" style="padding-top:0rpx;padding-bottom:0rpx;">
+<form>
+  <view class="cu-form-group margin-top">
+		<view class="title">
+    <text class="cuIcon-title text-blue"></text>
+    <text>开课学院</text></view> 
+		 <picker bindchange="departmentChange" value="{{departmentIndex}}" range="{{departmentArray}}">
+      <view class="picker" style="text-align:left">{{departmentArray[departmentIndex]}}</view>
     </picker>
+	</view>
+	<view class="cu-form-group" >
+		<view class="title">
+    <text class="cuIcon-title text-blue"></text>
+    <text>课程名称</text>
+    </view>
+		<input name="course" bindinput="bindCourseInput" placeholder="输入课程名称(选填)"></input>
+	</view>
+  	<view class="cu-form-group" style="border-bottom:1rpx solid #eee;">
+		<view class="title">
+    <text class="cuIcon-title text-blue"></text>
+    <text>授课老师</text>
+    </view>
+		<input  name="teacher" bindinput="bindTeacherInput" placeholder="输入授课老师(选填)"></input>
+	</view>
+   <view class="cu-bar btn-group" style="margin-top:10rpx;">
+    <button bindtap="bindSearch" class="cu-btn bg-green shadow-blur lg">开始查询</button>
   </view>
-  <view class = "info-input">
-  <text>课程名称：</text>
-  <input type="text" name="course" bindinput="bindCourseInput" placeholder="输入课程名称（选填）" confirm-type="search"></input>
-  </view>
-  <view class = "info-input">
-  <text>授课老师：</text>
-  <input type="text" name="teacher" bindinput="bindTeacherInput" placeholder="输入授课老师（选填）" confirm-type="search"></input>
-  </view>
-  <view class="search-btn" bindtap="bindSearch">
-    <text>开始查询</text>
-  </view>
-  <!-- <view class='tips'>提示: 点击可以查看详细哦~.</view> -->
+  </form>
   </view>
 
   <view class='page_bd'>
     <view class='body-con'>
-    <view class="content">
     <view class='tips'wx:if="{{number != 0}}">- 共{{number}}条查询结果 -</view>
     <view class='tips'wx:else>- 暂无查询结果 -</view>
+<scroll-view scroll-y style="height:calc(100vh - 300px)" scroll-with-animation="true" bindscrolltolower="onReachBottom" enable-back-to-top="true">
   <block wx:for="{{schoolCourses}}"wx:for-index="index" wx:for-item="item" wx:key="item.index">
     <view class="list-item s1014" bindtap='showdetail' data-xq='{{item.xq}}' data-xn='{{item.xn}}' data-id='{{item.id}}' data-name='{{item.name}}' data-department='{{item.department}}' data-capacity='{{item.capacity}}' data-language='{{item.language}}' data-info='{{item.info}}'data-campus='{{item.campus}}' data-teacher='{{item.teacher}}' data-department='{{item.department}}'>
       <view class="list-item-left">
         <text class="list-item-title">{{item.name}} · {{item.teacher}}</text>
         <text class="list-item-time ">{{item.campus}}}</text>
-
       </view>
     </view>
   </block>
+</scroll-view>
 </view>
 </view>
-  
-  </view>
-  <jun-modal show="{{!hiddenmodalput}}" title="{{name}}" content-color="#363636" confirm-text="确定" confirm-color="black"  bindconfirm="confirm" no-cancel='true'>
+
+<jun-modal show="{{!hiddenmodalput}}" title="{{name}}" content-color="#363636" confirm-text="确定" confirm-color="black"  bindconfirm="confirm" no-cancel='true'>
       <view class='modal-hang'><view class='modal-hang-left'>学年：</view><view class='modal-hang-right'>{{xn}}</view></view>
       <view class='modal-hang'><view class='modal-hang-left'>学期：</view><view class='modal-hang-right'>{{xq}}</view></view>
       <view class='modal-hang'><view class='modal-hang-left'>课程编号：</view><view class='modal-hang-right'>{{id}}</view></view>
@@ -50,6 +59,4 @@
       <view class='modal-hang'><view class='modal-hang-left'>任课老师：</view><view class='modal-hang-right'>{{teacher}}</view></view>
       <view class='modal-hang'><view class='modal-hang-left'>其它信息：</view><view class='modal-hang-right'>{{info}}</view></view>
   </jun-modal>
-</view>
 <view class='full-some'></view>
-

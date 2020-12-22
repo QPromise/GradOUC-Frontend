@@ -1,0 +1,98 @@
+@import "../../../utils/colorui/main.wxss";
+@import "../../../utils/colorui/icon.wxss";
+@import "../../../utils/weui.wxss";
+.page_bd{
+  z-index: 0;
+  margin-top: 5px;
+  
+}
+
+
+.body-con{
+  /* margin-bottom:15rpx; */
+  /* margin-left:10rpx;
+  margin-right:10rpx; */
+  /* border: 1px darkgray solid; */
+  display: flex;
+  flex-direction: column;
+  font-size: 25rpx;
+  color: rgb(85, 81, 81);
+}
+.tips{
+  text-align: center;
+  color:rgb(165, 164, 164);
+  font-size: 25rpx;
+  margin-bottom: 10px;
+  /* border-top: 1px #00adf1a1 solid; */
+}
+.list-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* height: 105rpx; */
+  margin-bottom: 10rpx;
+  /* border-radius: 3px; */
+  /* box-shadow: 1px 2px 3px #ddd; */
+  box-shadow:1px 0px 2px #ddd;
+  padding: 0 30rpx;
+  color: rgb(241, 236, 236);
+}
+/* .list-item.s1014 {
+  background-color: #73b4ef;
+} */
+
+.list-item-left {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding-right: 10rpx;
+}
+
+.list-item-title {
+  color:#6698cb;
+  line-height: 175%;
+  font-size: 27rpx;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 100%;
+  overflow: hidden;
+}
+
+.list-item-time {
+  color: #ABB6C8;
+  font-size: 26rpx;
+  line-height: 125%;
+  opacity: 0.6;
+  width: 100%;
+  margin: 5px 0 8rpx 0;
+
+}
+
+.list-item-icon {
+  flex: 0 0 60rpx;
+  height: 60rpx;
+  width: 60rpx;
+  border-left: 1px solid #fff;
+  padding-left: 25rpx;
+}
+
+.modal-hang{
+  display: flex;
+  flex-direction: row;
+  margin-top: 10rpx;
+}
+.modal-hang-left{
+  display: flex;
+  flex: 1;
+  /* border-bottom: 1px darkgray solid; */
+  /* 右对齐，不知道为什么text-align:right不行 */
+  justify-content:flex-end;
+}
+.modal-hang-right{
+  display: flex;
+  flex: 1;
+  /* border-bottom: 1px darkgray solid; */
+  padding-left: 5rpx;
+  justify-content:flex-start;
+}

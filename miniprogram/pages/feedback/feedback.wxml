@@ -1,4 +1,4 @@
-<navigationBar id="navigationBar" title="{{'联系我'}}" back="{{true}}"></navigationBar>
+<navigationBar id="navigationBar" title="{{'意见反馈'}}" back="{{true}}"></navigationBar>
 <view class="page">
   <view class='page__hd'>
   </view>

@@ -61,13 +61,13 @@
 }
 
 .white {
-  background: rgba(0, 0, 0, 0.15);
+  /* background: rgba(0, 0, 0, 0.15); */
   border-color: rgba(255, 255, 255, 0.25) !important;
 }
 
 .style-normal {
-  border: 1px solid #ededed;
-  border-radius: 32rpx;
+  /* border: 1px solid #ededed;
+  border-radius: 32rpx; */
   height: 64rpx;
   width: 176rpx;
   display: flex;

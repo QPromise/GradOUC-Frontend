@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "cu-custom": "../../../utils/colorui/components/cu-custom",
+    "jun-modal": "../../../components/jun-modal/jun-modal"
+  }
+}

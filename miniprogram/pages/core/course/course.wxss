@@ -1,4 +1,6 @@
 @import "../../../utils/weui.wxss";
+@import "../../../utils/colorui/main.wxss";
+@import "../../../utils/colorui/icon.wxss";
 .page{
   background-color:white;
 }
@@ -168,7 +170,7 @@
   color: #fff;
 }
 .list-item.s1014 {
-  background-color: #73b4ef;
+  background-image: linear-gradient( 135deg, #3C8CE7 10%, #00EAFF 100%);
 }
 
 .list-item-left {
