@@ -86,9 +86,10 @@ Page({
     });
   },
   onShow: function () {
-    page = 1
+    
   },
   onLoad: function (options) {
+    page = 1
     var type = options.type
     var that = this
     that.setData({
