@@ -187,6 +187,7 @@ App({
     });
   }, 
 
+  
   server: 'https://leoqin.fun/',
   // http://127.0.0.1:8000/do_login
   //'https://leoqin.fun/static/images/'

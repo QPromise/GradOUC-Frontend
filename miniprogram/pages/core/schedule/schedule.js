@@ -193,6 +193,10 @@ Page({
                   url: '../../my/login',
                 })
               }
+              if(res.cancel){
+                wx.navigateBack({
+                })
+              }
             }
           });
         }
@@ -214,14 +218,25 @@ Page({
           that.beautifyAndResetKcb(res.data.schedule); 
         }
         else{
-          app.showErrorModal('服务器出现了问题', '提示');
+          wx.showModal({
+            title: '提示',
+            content: '可能是您的网络或者服务器出了问题，请稍后重试',
+            showCancel: false,
+            success(res) {
+              if (res.confirm) {
+                wx.navigateBack({
+
+                })
+              }
+            }
+          })
         }
       },
       fail: function (res) {
         wx.hideLoading();
         wx.showModal({
           title:"加载失败",
-          content: '获取课表失败，可能是服务器出了问题',
+          content: '获取课表失败，可能是您的网络或者服务器出了问题，请稍后重试',
           showCancel: false,
           confirmText: "确定",
           success: function (res) {
@@ -323,7 +338,7 @@ Page({
       changeKCB[row] = new Array();
       for (var i = 0; i < 7; i++) {
         changeKCB[row][i] = new Object();
-        let over_type = that.isOverLength(data[row][i].name, data[row][i].room)
+        let over_type = that.isOverLength(data[row][i].name, data[row][i].room+ "哇哇哇")
         if (over_type == 1)
           {
           changeKCB[row][i].name_short = data[row][i].name.substring(0,5) + "..";

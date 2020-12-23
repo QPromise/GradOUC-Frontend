@@ -43,7 +43,7 @@
                       data-time='{{nowitem.time}}'
                       data-period='{{nowitem.period}}'
                       >
-                  <text style="font-size: 20rpx;" wx:if="{{nowitem.name_short}}">{{nowitem.name_short}}\n{{nowitem.room_short}}\n{{nowitem.time}}</text>
+                  <text wx:if="{{nowitem.name_short}}">{{nowitem.name_short}}\n{{nowitem.room_short}}\n{{nowitem.time}}</text>
                 </view>
             </view>
 

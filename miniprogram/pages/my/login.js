@@ -119,7 +119,6 @@ Page({
           })
         }
         else if (data.message == "fault" && res.statusCode != 200){
-
           wx.showToast({
             icon: 'none',
             title: '研究生系统当前无法访问',
@@ -127,7 +126,6 @@ Page({
           });
         }
         else{
-
           app.showErrorModal('小程序服务器出现了问题', '绑定失败');
         }
       },

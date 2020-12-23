@@ -102,6 +102,10 @@ Page({
                   url: '../../my/login',
                 })
               }
+              if(res.cancel){
+                wx.navigateBack({
+                })
+              }
             }
           });
         }
@@ -177,6 +181,7 @@ Page({
           let i = 0;
         numDH();
         function numDH() {
+          console.log(res.data.get_credit, i < res.data.get_credit)
           if (i < res.data.get_credit) {
             setTimeout(function () {
               that.setData({
@@ -234,14 +239,25 @@ Page({
           })
         }
         else{
-          app.showErrorModal('服务器出现了问题', '提示');
+          wx.showModal({
+            title: '提示',
+            content: '可能是您的网络或者服务器出了问题，请稍后重试',
+            showCancel: false,
+            success(res) {
+              if (res.confirm) {
+                wx.navigateBack({
+
+                })
+              }
+            }
+          })
         }
       },
       fail: function (res) {
         wx.hideLoading();
         wx.showModal({
           title: "加载失败",
-          content: '获取课程失败，可能是服务器出了问题',
+          content: '获取课程失败，可能是您的网络或者服务器出了问题，请稍后重试',
           showCancel: false,
           confirmText: "确定",
           success: function (res) {

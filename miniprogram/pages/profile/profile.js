@@ -79,6 +79,10 @@ Page({
                   url: '../../my/login',
                 })
               }
+              if(res.cancel){
+                wx.navigateBack({
+                })
+              }
             }
           });
         }
