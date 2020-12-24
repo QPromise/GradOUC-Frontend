@@ -257,10 +257,10 @@ Page({
     })
   },
   onShow: function () {
-    page = 1
+    
   },
   onLoad: function () {
-    
+    page = 1
   },
   onShareAppMessage() {
     return {

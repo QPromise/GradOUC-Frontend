@@ -338,7 +338,7 @@ Page({
       changeKCB[row] = new Array();
       for (var i = 0; i < 7; i++) {
         changeKCB[row][i] = new Object();
-        let over_type = that.isOverLength(data[row][i].name, data[row][i].room+ "哇哇哇")
+        let over_type = that.isOverLength(data[row][i].name, data[row][i].room)
         if (over_type == 1)
           {
           changeKCB[row][i].name_short = data[row][i].name.substring(0,5) + "..";
