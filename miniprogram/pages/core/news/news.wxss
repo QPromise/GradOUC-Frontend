@@ -100,18 +100,6 @@
   padding: 0 30rpx;
   color: #fff;
 }
-.list-item.s1003 {
-  background-color: #f4a0a0;
-}
-
-/* .list-item.s1003 {
-  background-color: #73b4ef;
-}
-
-.list-item.s1003 {
-  background-color: #ffcb63;
-} */
-
 .list-item.s1002 {
   background-color: #e78ab0;
 }
@@ -119,7 +107,16 @@
 .list-item.s1001 {
   background-color: #7acfa6;
 }
+.list-item.s1003 {
+  background-color: #f4a0a0;
+}
 
+.list-item.s1004 {
+  background-color: #8ec06c;
+}
+.list-item.s1005 {
+  background-color: #61b3de;
+}
 .list-item-left {
   flex: 1 1 auto;
   display: flex;

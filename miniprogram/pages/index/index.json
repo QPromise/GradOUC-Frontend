@@ -1,0 +1,12 @@
+{
+  "usingComponents": {
+    "cu-custom": "../../../utils/colorui/components/cu-custom",
+    "jun-modal": "../../components/jun-modal/jun-modal",
+    "jun-mask": "../../components/jun-mask/jun-mask",
+    "wxc-popup": "../../components/wxc-popup/dist/index",
+    "i-notice-bar": "../../components/notice-bar/index",
+    "list-loading": "../../components/list-loading/index"
+  },
+  "enablePullDownRefresh": true,
+  "backgroundTextStyle":"dark"
+}

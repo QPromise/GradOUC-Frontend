@@ -3,6 +3,8 @@ const typeName = {
   "1001": "研招网",
   "1002": "学术论坛",
   "1003": "后勤公告",
+  "1004": "校园通知",
+  "1005": "研究生院"
   
 }
 var id = ""
@@ -14,6 +16,7 @@ Page({
    */
   data: {
     content: undefined,
+    news_url:""
   },
 
   /**
@@ -38,7 +41,8 @@ Page({
       success: res => {
         wx.hideLoading();
         that.setData({
-          content: res.data
+          content: res.data,
+          news_url:  res.data.news_url
         })
       },
       fail: function (res) {
@@ -59,6 +63,22 @@ Page({
 
       }
     });
+  },
+  getNewsUrl: function () {
+    let that = this
+    wx.setClipboardData({
+      data: that.data.news_url,
+      success: function (res) {
+        wx.getClipboardData({
+          success: function (res) {
+            wx.showToast({
+              title: '网址复制成功！',
+              duration: 1000
+            });
+          }
+        })
+      }
+    })
   },
   onShareAppMessage() {
     return {

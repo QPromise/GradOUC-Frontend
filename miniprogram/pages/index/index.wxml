@@ -1,0 +1,172 @@
+<cu-custom>
+	<view slot="content" style="color:white;font-weight:bold;">研在OUC</view>
+</cu-custom>
+
+  <view class='page_hd'>
+    <i-notice-bar wx:if="{{shownews}}" icon="systemprompt" loop closable speed='700' class='notice-bar' getindex='{{getindex}}'>
+      {{text}}
+    </i-notice-bar>
+
+    <view class="swiper">
+    <swiper class="square-dot" indicator-dots="{{swiimgs.length>1?true:false}}"  indicator-active-color="#fff" autoplay="true" interval="6000" duration="1000" circular="true">
+        <block wx:for="{{swiimgs}}" wx:for-item="item" wx:key="item">
+          <swiper-item>
+            <image src="{{item.image}}" bindtap="navTo" data-id="{{item.url}}" class="pic" />
+          </swiper-item>
+        </block>
+      </swiper>
+    </view>
+  </view>
+ <view class="contain">
+  <view class="cu-list grid col-5 no-border tools">
+    <view class="cu-item" bindtap="goSchedule">
+      <view class="app-icon">
+        <image mode="widthFix" src="/images/core/schedule.png"></image>
+      </view>
+      <text>我的课表</text>
+    </view>
+
+     <view class="cu-item" bindtap="goCourse">
+      <view class="app-icon">
+        <image mode="widthFix" src="/images/core/course.png"></image>
+      </view>
+      <text>我的课程</text>
+    </view>
+       <view class="cu-item" bindtap="goScore">
+      <view class="app-icon">
+        <image mode="widthFix" src="/images/core/score.png"></image>
+      </view>
+      <text>我的成绩</text>
+    </view>
+
+     <view class="cu-item" bindtap="goSchoolCourse">
+      <view class="app-icon">
+        <image mode="widthFix" src="/images/core/schoolCourse.png"></image>
+      </view>
+      <text>全校开课</text>
+    </view>
+       <view class="cu-item" bindtap="goLibrary">
+      <view class="app-icon">
+        <image mode="widthFix" src="/images/core/library.png"></image>
+      </view>
+      <text>图书馆</text>
+    </view>
+
+     <view class="cu-item" bindtap="goCampusTours">
+      <view class="app-icon">
+        <image mode="widthFix" src="/images/core/campusTours.png"></image>
+      </view>
+      <text>校园导览</text>
+    </view>
+     <view class="cu-item" bindtap="navArticle" data-url="/pages/core/news/news" data-type="1004">
+      <view class="app-icon">
+        <image mode="widthFix" src="/images/core/school.png"></image>
+      </view>
+      <text>校园通知</text>
+    </view>
+    <view class="cu-item" bindtap="goCar">
+      <view class="app-icon">
+        <image mode="widthFix" src="/images/core/car.png"></image>
+      </view>
+      <text>校 车</text>
+    </view>
+    <view class="cu-item" bindtap="goCalendar">
+      <view class="app-icon">
+        <image mode="widthFix" src="/images/core/calendar.png"></image>
+      </view>
+      <text>校 历</text>
+    </view>
+  </view>
+  </view>
+
+  <view class="cu-bar bg-white arrow"style="min-height:70rpx;margin-top:12rpx;">
+  <view class="action">
+    <text class="cuIcon-titles text-blue" style="margin-left:-0.9em;margin-right:0.1em;"></text>
+      <text class="text-bold">今日课表</text>
+      </view>
+      <!-- <view class="action">
+        18 周 星期五
+      </view> -->
+</view>
+
+<view class='box' wx:if="{{!is_bind}}">
+<view class="cu-list menu" >
+    <view class='other_condition'>
+    <view class="cu-tag line-black" bindtap='goBind'>
+    <text style="font-size:27rpx">点击绑定账号</text>
+    </view> 
+ </view>
+</view>
+</view>
+
+<list-loading wx:if="{{is_bind}}" loading="{{loading}}"></list-loading>
+<view class='box' wx:if="{{is_bind && !loading}}">
+<view class="cu-list menu" wx:if="{{course.length>0}}" >
+<block wx:for="{{course}}"wx:for-index="index" wx:for-item="item" wx:key="item.index">
+<view class="cu-bar bg-white"style="min-height:50rpx;">
+  <view class="action">
+  <text class="cuIcon-title text-blue" style="margin-right:5rpx"></text>
+    <view class="text-df">{{item.name}}</view>
+  </view>
+   <view class="text-sm" style="margin-right:3rpx">
+   <text class="cuIcon-location" style="margin-right:3rpx"></text>{{item.room}}
+   </view>
+</view>
+<view class="padding-left bg-white">
+  <view class="text-left text-sm text-grey padding-left {{course.length == 1 ? '': 'solid-bottom'}}" style="padding-top:5rpx;padding-bottom:15rpx;">
+  <text>上课:{{item.time_begin}}  下课:{{item.time_end}}</text>
+  <text style="float:right;marin-right:10rpx;">{{item.span}}节</text>
+  </view>
+</view>
+</block>
+</view>
+
+<view wx:if="{{course.length<=0}}" class="other_condition">
+  <text class="cuIcon-info text-gray text-sm" style="margin-right:5rpx;"></text>{{content}}
+</view>
+</view>
+ 
+  <!-- <view class="cu-bar bg-white solid-bottom" style="min-height:80rpx;">
+  <view class="action">
+    <text class="cuIcon-titles text-blue"></text> 最新通知
+  </view>
+</view> -->
+  <!-- <view class="cu-bar bg-white arrow"style="min-height:70rpx;margin-top:12rpx;">
+  <view class="action">
+    <text class="cuIcon-titles text-blue" style="margin-left:-0.9em;margin-right:0.1em;"></text>
+      <text class="text-bold">学校新闻</text>
+      </view>
+      <view class="action" bindtap='goCourse'>
+        更多
+      </view>
+</view>
+  <block wx:for="{{value}}"wx:for-index="index" wx:for-item="item" wx:key="item.index">
+
+<view class="cu-bar bg-white" style="min-height:50rpx;" bindtap='showdetail'>
+  <view class="action">
+    <view class="cu-tag sm line-cyan" style="margin-right:5rpx">1</view>
+    <view class="text-sm">疫情防控政策知识指南</view>
+  </view>
+   <view class="margin-xs text-sm">2020-12-13</view>
+</view>
+
+</block>  -->
+
+
+<jun-mask show="{{isTiptrue}}">
+  <view  style="width:100%;height:100%;">
+    <view class="guide-item" >
+      <image src="/images/share.png" class="guide-item-img-share"></image>
+      <view class="guide-item-text">如果喜欢，可以点击这里添加到我的小程序</view>
+      <view class="guide-item-text">也可以分享给同学哦</view>
+      <view class='bottom' bindtap='closeGuide'>知道啦</view>
+    </view>
+  </view>
+</jun-mask>
+
+
+<view  class='page_bd'>
+<ad unit-id="adunit-fd61b1cb094c221e"></ad>
+</view>
+
+

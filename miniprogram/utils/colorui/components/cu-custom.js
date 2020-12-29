@@ -41,9 +41,23 @@ Component({
    */
   methods: {
     BackPage() {
-      wx.navigateBack({
-        delta: 1
-      });
+      if (!this.properties.backEvent) {
+        this.runBack();
+        return;
+      }
+      this.triggerEvent('back');
+    },
+    runBack() {
+      let pages = getCurrentPages();
+      if (pages.length < 2 && pages[0].route != __wxConfig.pages[0]) {
+        wx.reLaunch({
+          url: '/' + __wxConfig.pages[0]
+        })
+      } else {
+        wx.navigateBack({
+          delta: 1
+        });
+      }
     },
     toHome(){
       wx.reLaunch({

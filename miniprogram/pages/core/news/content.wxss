@@ -1,3 +1,5 @@
+@import "../../../utils/colorui/main.wxss";
+@import "../../../utils/colorui/icon.wxss";
 page {
   background-color: rgb(255, 255, 255);
   font-size: 16px;

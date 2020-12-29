@@ -6,14 +6,6 @@
     </i-notice-bar>
     <view class="swiper">
       <swiper indicator-dots="true"  indicator-active-color="#fff" autoplay="true" interval="6000" duration="1000" circular="true">
-       <!-- <swiper-item>
-       <view>
-       <navigator cl style="background-image: url('/images/test1.png');">
-          <text>123</text>
-       </navigator>
-       </view>
-        </swiper-item> -->
-      
         <block wx:for="{{swiimgs}}" wx:for-item="item" wx:key="item">
           <swiper-item>
             <image src="{{item.image}}" bindtap="navTo" data-id="{{item.url}}" class="pic" />

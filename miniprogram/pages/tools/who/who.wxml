@@ -1,0 +1,27 @@
+<!--miniprogram/pages/tools/who/who.wxml-->
+<cu-custom isBack="{{true}}" >
+	<view slot="content" style="color:white;font-weight:bold;">谁去跑腿</view>
+</cu-custom>
+
+<view class='who'>
+  <view class='info padding'>
+  <text class="cuIcon-infofill text-gray"></text>
+  <text class="text-gray">用力戳下面的数字</text>
+  </view>
+    <view class='num' bindtap='click' data-num='{{num}}'>
+      <text>{{num}}</text>
+    </view>
+    <view class='control'>
+      <button class='cu-btn margin-left-sm margin-right-sm' bindtap='stop'>{{press}}</button>
+      <button class='cu-btn margin-left-sm margin-right-sm' bindtap='clear'>重置</button>
+      <button class='cu-btn  margin-left-sm margin-right-sm' open-type='share'>分享</button>
+    </view>
+  <view class='list'>
+    <view class="li {{item==min?'min':''}}" wx:for="{{data}}" wx:key="key">
+      <view class='top'>{{index+1}}</view>
+      <view class='tip' wx:if="{{item==min}}">就你最小啦，乖乖去跑腿吧</view>
+      <view class='data'>{{item}}</view>
+    </view>
+  </view>
+</view>
+

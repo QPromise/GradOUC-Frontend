@@ -1,0 +1,18 @@
+<!--miniprogram/pages/tools/tiangou/tiangou.wxml-->
+<cu-custom isBack="{{true}}" >
+	<view slot="content" style="color:white;font-weight:bold;">舔狗日记</view>
+</cu-custom>
+<view class="container">
+  <view class="box-side" style="height:{{winHeight * 0.68}}px">
+    <view class="box">
+      <text><text wx:for="{{arr}}" wx:key="key" class="{{index%2==1?'mark':''}}">{{item}}</text></text>
+    </view>
+  </view>
+  <view class="options text-center">
+    <view><button class="cu-btn line-theme" open-type="share">分享</button></view>
+    <view class="get" bindtap="get"><image src="/images/new_img/tools/tiangou/tiangou.gif"></image></view>
+    <view><button class="cu-btn line-yellow" bindtap="copy">复制</button></view>
+  </view>
+  <view class="padding"style="text-align:center;"> <text class="cuIcon-infofill text-gray text-sm"></text>
+  <text class="text-gray text-sm">戳狗头试试</text></view>
+</view>

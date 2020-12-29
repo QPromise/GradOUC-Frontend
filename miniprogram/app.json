@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/index/index",
     "pages/home/home",
     "pages/my/my",
     "pages/my/login",
@@ -21,9 +22,10 @@
     "pages/web/web",
     "pages/core/schoolCourse/schoolCourse",
     "pages/profile/profile",
-    "pages/core/users/users"
-   
-    
+    "pages/core/users/users",
+    "pages/tools/tools",
+    "pages/tools/who/who",
+    "pages/tools/tiangou/tiangou"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -40,8 +42,14 @@
       {
         "selectedIconPath": "./images/home_selected.png",
         "iconPath": "./images/home.png",
-        "pagePath": "pages/home/home",
+        "pagePath": "pages/index/index",
         "text": "主页"
+      },
+      {
+        "selectedIconPath": "./images/tools_selected.png",
+        "iconPath": "./images/tools.png",
+        "pagePath": "pages/tools/tools",
+        "text": "应用"
       },
       {
         "selectedIconPath": "./images/user_selected.png",
@@ -52,8 +60,8 @@
     ]
   },
   "usingComponents": {
-    "navigationBar":"/components/navigationBar/index"
-},
+    "navigationBar": "/components/navigationBar/index"
+  },
   "permission": {
     "scope.userLocation": {
       "desc": "您的位置信息将用于校园导览"

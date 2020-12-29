@@ -1,7 +1,7 @@
 <view class="cu-custom" style="height:{{CustomBar}}px">
   <view class="cu-bar fixed" style="background-color:#009cff;height:{{CustomBar}}px;padding-top:{{StatusBar}}px;{{bgImage?'background-image:url(' + bgImage+')':''}}">
     <view class="action" bindtap="BackPage" wx:if="{{isBack}}">
-      <text class="cuIcon-back" style="color:white"></text>
+      <text class="cuIcon-back" style="color:white;font-size:45rpx;margin-left:0rpx;"></text>
       <slot name="backText" style="color:white"></slot>
     </view>
     <view class="action border-custom"  wx:if="{{isCustom}}" style="width:{{Custom.width}}px;height:{{Custom.height}}px;margin-left:calc(750rpx - {{Custom.right}}px)">

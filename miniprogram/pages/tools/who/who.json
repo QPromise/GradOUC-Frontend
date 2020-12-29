@@ -1,6 +1,7 @@
 {
   "usingComponents": {
-    "wemark": "../../../components/wemark/wemark",
     "cu-custom": "../../../utils/colorui/components/cu-custom"
-  }
+  },
+  "enablePullDownRefresh": false,
+  "onReachBottomDistance": 0
 }

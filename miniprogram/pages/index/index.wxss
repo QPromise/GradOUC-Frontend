@@ -1,0 +1,77 @@
+/* pages/more/more.wxss */
+@import "../../utils/colorui/main.wxss";
+@import "../../utils/colorui/icon.wxss";
+page {
+  width: 100%;
+  height: 100%;
+  color: #f6f6f6;
+  position: relative;
+}
+.cu-list.grid>.cu-item text{
+  color:black;
+}
+.app-icon{
+  margin-top: 10rpx;
+  text-align: center;
+}
+.app-icon image{
+  width: 56rpx!important;
+  height: 56rpx!important;
+}
+.box{
+  width: 100%;
+  background: #fff;
+  padding: 0 3% 40rpx;
+}
+.other_condition{
+  text-align: center;
+  color: grey;
+  font-size: 27rpx; 
+  padding: 50rpx 30rpx
+}
+swiper {
+  height: 383rpx;
+  
+}
+.contain{
+  box-sizing: border-box;
+}
+
+.page_bd {
+  background-color: white;
+  margin: 15rpx 0rpx;
+}
+
+.pic {
+  width: 100%;
+  height: 100%;
+  
+}
+
+.guide-item{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+.guide-item-text{
+  width: 100%;
+  font-size: 30rpx;
+  letter-spacing: 2px;
+  text-align: center;
+}
+.guide-item-img-share{
+  margin-top:180rpx;
+  margin-left: 300rpx;
+  width: 300rpx;
+  height: 300rpx;
+}
+.bottom{
+  width:40%;
+  font-size:30rpx;
+  line-height:72rpx;
+  text-align:center;
+  border-radius:44rpx;
+  border:1px solid #fff;
+  margin:10% auto 0 auto;
+  color:#fff;
+}

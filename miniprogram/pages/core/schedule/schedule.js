@@ -63,7 +63,6 @@ Page({
     //获取开学和放假日期，计算当前周
     that.setData({
       arrayxq: [app.cache.xq],
-      
       indexzc: app.cache.nowzc - 1,
     });
     //计算当前选择周1至周5日期
@@ -92,7 +91,6 @@ Page({
         })
       }
       else{
-        console.log("执行这里95")
         that.reFreshKCB();
       }
     }, 500)
@@ -295,7 +293,7 @@ Page({
   },
   //对课程表数据进行上色渲染
   beautifyAndResetKcb: function (data) {
-    //console.log("课表",data);
+    console.log("课表",data);
     let that = this;
     let trans = that.data.trans;  //透明度设置获取
     var tdcolors = [
@@ -342,7 +340,7 @@ Page({
         if (over_type == 1)
           {
           changeKCB[row][i].name_short = data[row][i].name.substring(0,5) + "..";
-          changeKCB[row][i].room_short = data[row][i].room.substring(0,2) + ".." + data[row][i].room.substring(data[row][i].room.length - 9,data[row][i].room.length - 1);
+          changeKCB[row][i].room_short = data[row][i].room.substring(0,2) + ".." + data[row][i].room.substring(data[row][i].room.length - 8,data[row][i].room.length);
           }
         else if (over_type == 2){
           changeKCB[row][i].name_short = data[row][i].name.substring(0,5) + "..";

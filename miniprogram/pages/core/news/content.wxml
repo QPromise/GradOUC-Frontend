@@ -1,14 +1,25 @@
 <!--pages/More/News/Content/Content.wxml-->
-<navigationBar id="navigationBar" title="{{'正文'}}" back="{{true}}"></navigationBar>
-<view class="page">
+<cu-custom isBack="{{true}}" >
+	<view slot="content" style="color:white;font-weight:bold;">正文</view>
+</cu-custom>
+<view class="page" wx:if="{{content != undefined && content.title}}">
   <view class="page__hd" style='padding:20rpx;margin-bottom:1rpx;'>
     <view class="page__title" style=''>{{content.title}}</view>
-    <view class="page__desc" style=' text-align: center;'>{{content.time}}</view>
+    <view class="flex padding justify-around" style="padding:30rpx 30rpx 0rpx 30rpx;">
+    <view class="margin-left-sm margin-right-sm">
+    <text class="cuIcon-calendar text-gray text-sm"></text>
+    <text class="text-gray text-sm">{{content.time}}</text>
+    </view>
+    <view class="margin-left-sm margin-right-sm">
+    <text class="cuIcon-link text-gray text-sm"></text>
+     <text class="text-gray text-sm" bindtap="getNewsUrl">点击复制原文地址</text>
+  </view>
+    </view>
   </view>
 </view>
-<view style='width:92%;margin-left:4%;margin-top:1rpx;'>
+<view style='padding:0 3%;margin-top:1rpx;'>
   <wemark md="{{content.content}}" link highlight type="wemark"></wemark>
 </view>
-<view style='width:92%;margin-left:4%;margin-top:1rpx;'>
+<view style='padding:0 3%; margin-top:10rpx;'>
 <ad unit-id="adunit-4452f94d8c4c203f"></ad>
 </view>
