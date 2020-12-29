@@ -101,7 +101,7 @@ Page({
         
         else if (data.message == 'success' && res.statusCode == 200){
 
-          app.removeAllCache;
+          app.removeAllCache();
           app.saveCache("sno",data.sno);
           app.saveCache("passwd", data.passwd);
           app.saveCache("name", data.name);
@@ -126,12 +126,12 @@ Page({
           });
         }
         else{
-          app.showErrorModal('小程序服务器出现了问题', '绑定失败');
+          app.showErrorModal('可能是您的网络或者服务器出了问题，请稍后重试', '绑定失败');
         }
       },
       fail:(res)=>{
         wx.hideLoading();
-        app.showErrorModal(res.errMsg, '绑定失败');
+        app.showErrorModal('可能是您的网络或者服务器出了问题，请稍后重试', '绑定失败');
       }
 
     });

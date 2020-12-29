@@ -84,9 +84,11 @@
     <text class="cuIcon-titles text-blue" style="margin-left:-0.9em;margin-right:0.1em;"></text>
       <text class="text-bold">今日课表</text>
       </view>
-      <!-- <view class="action">
-        18 周 星期五
-      </view> -->
+      <view class="action" style="margin-right:3%" bindtap="goSchedule" wx:if="{{showTodayInfo != ''}}">
+      <text class="cuIcon-calendar text-blue text-sm" style="margin-right:3rpx;"></text>
+    <text>{{showTodayInfo}}</text>
+        
+      </view>
 </view>
 
 <view class='box' wx:if="{{!is_bind}}">
@@ -109,7 +111,7 @@
     <view class="text-df">{{item.name}}</view>
   </view>
    <view class="text-sm" style="margin-right:3rpx">
-   <text class="cuIcon-location" style="margin-right:3rpx"></text>{{item.room}}
+   <text class="cuIcon-location text-blue" style="margin-right:3rpx"></text>{{item.room}}
    </view>
 </view>
 <view class="padding-left bg-white">
@@ -122,7 +124,7 @@
 </view>
 
 <view wx:if="{{course.length<=0}}" class="other_condition">
-  <text class="cuIcon-info text-gray text-sm" style="margin-right:5rpx;"></text>{{content}}
+  <text class="cuIcon-info text-sm" style="margin-right:5rpx;"></text>{{content}}
 </view>
 </view>
  

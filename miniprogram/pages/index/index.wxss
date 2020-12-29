@@ -21,7 +21,7 @@ page {
 .box{
   width: 100%;
   background: #fff;
-  padding: 0 3% 40rpx;
+  padding: 10rpx 3% 35rpx 3%;
 }
 .other_condition{
   text-align: center;

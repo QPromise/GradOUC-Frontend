@@ -1,5 +1,5 @@
 // pages/More/Library/SearchResults.js
-var app = getApp()
+const app = getApp()
 var page = 1
 var totalPages = Infinity
 var data = ""
@@ -19,13 +19,6 @@ Page({
       url: 'bookDetail?detail=' +JSON.stringify(this.data.bookList[e.currentTarget.dataset.index]),
     })
   },
-  // onShareAppMessage: function () {
-  //   return {
-  //     title: '书籍查找结果',
-  //     desc: '可查详细的课程表、详细成绩，更多查询功能欢迎体验！',
-  //     path: '/pages/core/library/searchResults?bookName = ' + inputValue + "&type=" + typeListConvert[typeList[typeListIndex]]
-  //   };
-  // },
   searchBook(e) {
     if (page > totalPages) {
       wx.showToast({
@@ -66,7 +59,7 @@ Page({
             }
           });
         }
-        else {
+        else if (res.statusCode == 200) {
             wx.hideToast();
             var bookList = this.data.bookList
             bookList = bookList.concat(res.data.list)
@@ -75,29 +68,15 @@ Page({
               bookList: bookList
             })
         }
+        else{
+          app.showFailBackModel()
+        }
       },
       fail: function (res) {
-        wx.hideToast();
-        wx.showModal({
-          title: "加载失败",
-          content: '获取失败，可能是服务器出了问题',
-          showCancel: false,
-          confirmText: "确定",
-          success: function (res) {
-            if (res.confirm) {
-            }
-          }
-        });
-        //停止刷新
-        wx.stopPullDownRefresh();
-        // 隐藏顶部刷新图标
-        wx.hideNavigationBarLoading();
+       app.showFailBackModel()
       },
       complete: function (res) {
-        //停止刷新
-        wx.stopPullDownRefresh();
-        // 隐藏顶部刷新图标
-        wx.hideNavigationBarLoading();
+        wx.hideToast();
       }
     });
   },

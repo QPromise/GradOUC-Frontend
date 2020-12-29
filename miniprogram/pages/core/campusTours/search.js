@@ -69,39 +69,6 @@ Page({
     });
     
   },
-  // bindSearchInput: function (e) {
-  //   let showData = new Array();
-  //   let searchdata = this.data.buildlData;
-  //   if (e.detail.cursor >= this.data.cursor) {
-  //     //输入文字
-  //     let inputData = e.detail.value
-  //     if (inputData) {
-  //       let z = 0
-  //       for (var b in searchdata) {
-  //         for (var i in searchdata[b].data) {
-  //           if (searchdata[b].data[i].name.indexOf(inputData) != -1) {
-  //             let build = searchdata[b].data[i];
-  //             build.tid = b;
-  //             build.bid = i;
-  //             z = z + 1;
-  //             build.index = z;
-  //             showData.push(build);
-  //           }
-  //         }
-  //       }
-  //       this.setData({
-  //         showData: showData,
-  //         visible: false
-  //       });
-  //     }
-  //   } else {
-  //     this.setData({
-  //       showData: null,
-  //       visible: true
-  //     });
-  //   }
-  //   this.data.cursor = e.detail.cursor;
-  // },
   reset: function () {
     this.setData({
       keyword: null,

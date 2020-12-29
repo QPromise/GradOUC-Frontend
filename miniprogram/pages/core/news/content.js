@@ -46,21 +46,10 @@ Page({
         })
       },
       fail: function (res) {
-        wx.hideLoading();
-        wx.showModal({
-          title: "加载失败",
-          content: '获取失败，可能是您的网络或者服务器出了问题，请稍后重试',
-          showCancel: false,
-          confirmText: "确定",
-          success: function (res) {
-            if (res.confirm) {
-            }
-          }
-        });
-
+        app.showFailBackModel()
       },
       complete: function (res) {
-
+        wx.hideLoading();
       }
     });
   },

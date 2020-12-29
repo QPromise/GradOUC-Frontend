@@ -231,7 +231,6 @@ Page({
         }
       },
       fail: function (res) {
-        wx.hideLoading();
         wx.showModal({
           title:"加载失败",
           content: '获取课表失败，可能是您的网络或者服务器出了问题，请稍后重试',
@@ -247,6 +246,7 @@ Page({
         });
       },
       complete: function (res) {
+        wx.hideLoading();
       }
     });
 

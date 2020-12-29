@@ -5,7 +5,6 @@ Page({
    * 页面的初始数据
    */
   data: {
-    tabCur:0,
     isTiptrue:false,
     swiimgs: [
     ],
@@ -21,7 +20,8 @@ Page({
     course:[],
     loading:false,
     content: "",
-    icons:[]
+    showTodayInfo:"",
+    todayArr:["周一","周二","周三","周四","周五","周六","周日"]
   },
 
   shareconfirm: function () {
@@ -80,9 +80,7 @@ Page({
   // 现在是否大于指定的时间
   cmpDate: function () { 
     var now = parseInt(Date.parse(new Date()) / 1000)
-    //console.log(now)
     var date = parseInt(app.cache.begin_day)
-    //console.log(date)
     return now > date
   },
   //获取今天的课程
@@ -100,7 +98,6 @@ Page({
     //选择学期
     var xj;
     var items = that.data.xq;
-    //console.log(items.indexOf("夏秋"))
     if (items.indexOf("夏秋") != -1){
       xj = 11
     }
@@ -150,11 +147,11 @@ Page({
           }
           that.setData({
             course:tmp_course,
+            showTodayInfo: "第" + app.cache.nowzc + "周 " + that.data.todayArr[that.data.today],
             content:"今天没有课程哦,去做点有意义的事情吧~"
           }) 
         }
         else{
-          console.log(res.data.message, res.data.course, res.statusCode);
           that.setData({
             content: '服务器开小差啦'
           })
@@ -502,10 +499,7 @@ goSchedule:function(){
     wx.request({
       url: app.local_server+"get_news/",
       success: function (res) {
-        //consolconsole.log(res);
-        //console.log(res.data.index);
         var newsindex = wx.getStorageSync("newsindex");
-        //console.log(newsindex)
         if (newsindex != undefined && newsindex != "" && newsindex != null) {
           if (newsindex < res.data.index) {
             that.setData({

@@ -57,8 +57,8 @@ App({
       success: res=> {
         if (res.networkType == "none") { //无网络
           this.offline = true;
-          this.network = "无网络";
-          this.showErrorModal("提醒",this.network);
+          this.network = "没有网络，请检查您的网络是否良好";
+          this.showErrorModal(this.network, "提醒");
         } else { // 有网络则请求服务器
           this.offline = false;
           console.log(this.network);
@@ -178,6 +178,20 @@ App({
       showCancel: false
     });
   },
+  showFailBackModel: function(){
+    wx.showModal({
+      title: '加载失败',
+      content: '可能是您的网络或者服务器出了问题，请稍后重试',
+      showCancel: false,
+      success(res) {
+        if (res.confirm) {
+          wx.navigateBack({
+
+          })
+        }
+      }
+    })
+  },
   showLoadToast: function (title, duration) {
     wx.showToast({
       title: title || '加载中',
@@ -187,7 +201,6 @@ App({
     });
   }, 
 
-  
   server: 'https://leoqin.fun/',
   // http://127.0.0.1:8000/do_login
   //'https://leoqin.fun/static/images/'

@@ -51,7 +51,6 @@ Page({
       },
       header: { "Content-Type": "application/x-www-form-urlencoded" },
       success: function (res) {
-        wx.hideLoading();
         //console.log("success", res);
         //console.log(res.data.info);
         if (res.data.message == "timeout"){
@@ -144,27 +143,14 @@ Page({
           })
         }
         else{
-          app.showErrorModal('服务器出现了问题', '提示');
+          app.showFailBackModel()
         }
       },
       fail: function (res) {
-        wx.hideLoading();
-        wx.showModal({
-          title: "加载失败",
-          content: '获取信息失败，可能是服务器出了问题',
-          showCancel: false,
-          confirmText: "确定",
-          success: function (res) {
-            if (res.confirm) {
-              wx.navigateBack({
-                
-              })
-            }
-          }
-        });
-
+        app.showFailBackModel()
       },
       complete: function (res) {
+        wx.hideLoading();
         //console.log("complete", res);
       }
     });

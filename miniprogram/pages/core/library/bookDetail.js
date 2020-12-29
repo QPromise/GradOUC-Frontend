@@ -1,7 +1,5 @@
-
- 
- // miniprogram/pages/core/library/bookDetail.js
-var app = getApp()
+// miniprogram/pages/core/library/bookDetail.js
+const app = getApp()
 Page({
 
   /**
@@ -23,6 +21,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var that = this
     var bookDetail = JSON.parse(options.detail)
     this.setData({
       bookDetail: bookDetail
@@ -32,7 +31,6 @@ Page({
       icon: 'loading',
       duration: 4000
     });
-    var that = this
     wx.request({
       url: app.local_server + 'get_bookDetail/',
       method: 'POST',
@@ -57,26 +55,9 @@ Page({
       }
       },
       fail: function (res) {
-        wx.showModal({
-          title: "加载失败",
-          content: '获取失败，可能是服务器出了问题',
-          showCancel: false,
-          confirmText: "确定",
-          success: function (res) {
-            if (res.confirm) {
-            }
-          }
-        });
-        //停止刷新
-        wx.stopPullDownRefresh();
-        // 隐藏顶部刷新图标
-        wx.hideNavigationBarLoading();
+        app.showFailBackModel()
       },
       complete: function (res) {
-        //停止刷新
-        wx.stopPullDownRefresh();
-        // 隐藏顶部刷新图标
-        wx.hideNavigationBarLoading();
       }
     });
 

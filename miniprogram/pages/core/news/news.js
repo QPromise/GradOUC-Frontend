@@ -57,7 +57,6 @@ Page({
       },
       header: { "Content-Type": "application/x-www-form-urlencoded" },
       success: res => {
-        wx.hideLoading();
         var news = that.data.news
         news = news.concat(res.data.news)
         that.setData({
@@ -67,23 +66,11 @@ Page({
 
       },
       fail: function (res) {
-        wx.hideLoading();
-        wx.showModal({
-          title: "加载失败",
-          content: '获取失败，可能是服务器出了问题',
-          showCancel: false,
-          confirmText: "确定",
-          success: function (res) {
-            if (res.confirm) {
-              wx.navigateBack({
-              })
-            }
-          }
-        });
+        app.showFailBackModel()
 
       },
       complete: function (res) {
-
+        wx.hideLoading();
       }
     });
   },
