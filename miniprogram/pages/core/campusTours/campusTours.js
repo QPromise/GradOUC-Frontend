@@ -67,7 +67,7 @@ Page({
           windowHeight: res.windowHeight,
           windowWidth: res.windowWidth,
         })
-        console.log(res.windowWidth)
+        //console.log(res.windowWidth)
       }
     })
     that.getData();
@@ -81,13 +81,12 @@ Page({
     wx.request({
       url: app.local_server + "static/data/laoshan.json",
       success: (res) => {
+        wx.hideLoading()
         that.setData({
           buildlData: res.data.map,
           xq: that.data.arrayxq[that.data.indexxq] + '▼'
         })
-        console.log(this.data.buildlData)
-        app.globalData.map = res.data.map
-        wx.hideLoading()
+        app.globalData.map = res.data.map 
       },
       fail: (res) => {
         wx.hideLoading()

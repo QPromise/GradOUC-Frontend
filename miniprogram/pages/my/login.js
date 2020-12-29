@@ -100,8 +100,7 @@ Page({
         }
         
         else if (data.message == 'success' && res.statusCode == 200){
-
-          app.removeAllCache();
+          //console.log(app.removeAllCache);
           app.saveCache("sno",data.sno);
           app.saveCache("passwd", data.passwd);
           app.saveCache("name", data.name);

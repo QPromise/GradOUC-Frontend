@@ -3,10 +3,13 @@
 @import "../../../utils/weui.wxss";
 .page_bd{
   z-index: 0;
-  margin-top: 5px;
-  
-}
+  margin-top: 32%;
+  background-color: white;
 
+}
+page{
+  color:#666;
+}
 
 .body-con{
   /* margin-bottom:15rpx; */
