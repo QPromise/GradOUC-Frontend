@@ -6,7 +6,7 @@ Page({
     indexxq: 0,
     arrayxq: ['2019-2020夏秋'],
     indexzc: 0,
-    arrayzc: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
+    arrayzc: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21],
     kcb:null,
     hiddenmodalput: true, //课程详细
     name: "",
@@ -46,9 +46,6 @@ Page({
     });
     that.reFreshKCB();
   },
-  //事件处理函数
-  bindViewTap: function () {
-  },
   // 现在是否大于指定的时间
   cmpDate: function () { 
     var now = parseInt(Date.parse(new Date()) / 1000)
@@ -61,10 +58,29 @@ Page({
   onLoad: function () {
     var that = this;
     //获取开学和放假日期，计算当前周
-    that.setData({
-      arrayxq: [app.cache.xq],
-      indexzc: app.cache.nowzc - 1,
-    });
+    if(app.cache.nowzc > 21){
+      that.setData({
+        arrayxq: [app.cache.xq],
+        indexzc: 20,
+      });
+      wx.showModal({
+        title: '提示',
+        content: '本学期课程已结束，课表不再更新，期末考试加油！',
+        showCancel: false,
+        success(res) {
+          if (res.confirm) {
+          } 
+        }
+      })
+
+    }
+    else{
+      that.setData({
+        arrayxq: [app.cache.xq],
+        indexzc: app.cache.nowzc - 1,
+      });
+
+    }
     //计算当前选择周1至周5日期
     that.caculateDate();
   },
@@ -79,12 +95,11 @@ Page({
       if (!that.cmpDate()) {
         wx.showModal({
           title: '提示',
-          content: '当前不在学期时间范围内，课表无法查看，如需查看课程可以到【我的课程】中进行查看。',
+          content: '本学期课程已结束，课表无法查看，如需查看课程可以到【我的课程】中进行查看。',
           showCancel: false,
           success(res) {
             if (res.confirm) {
               wx.navigateBack({
-                
               })
             } 
           }
@@ -94,7 +109,7 @@ Page({
         that.reFreshKCB();
       }
     }, 500)
-
+    
   },
 
   //计算日期
@@ -293,7 +308,7 @@ Page({
   },
   //对课程表数据进行上色渲染
   beautifyAndResetKcb: function (data) {
-    console.log("课表",data);
+    //console.log("课表",data);
     let that = this;
     let trans = that.data.trans;  //透明度设置获取
     var tdcolors = [

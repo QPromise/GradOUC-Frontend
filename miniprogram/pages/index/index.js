@@ -145,9 +145,18 @@ Page({
               tmp_course[i].room = tmp_course[i].room.substring(0,3) + ".." + tmp_course[i].room.substring(tmp_course[i].room.length - 6,tmp_course[i].room.length);
             }
           }
+          if(app.cache.nowzc > 21){
+            that.setData({
+              showTodayInfo:""
+            })
+          }
+          else{
+            that.setData({
+              showTodayInfo:"第" + app.cache.nowzc + "周 " + that.data.todayArr[that.data.today]
+            })
+          }
           that.setData({
             course:tmp_course,
-            showTodayInfo: "第" + app.cache.nowzc + "周 " + that.data.todayArr[that.data.today],
             content:"今天没有课程哦,去做点有意义的事情吧~"
           }) 
         }

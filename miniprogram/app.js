@@ -146,7 +146,7 @@ App({
     var nowtimestamp = Date.parse(nowtime);  //当前时间的时间戳（毫秒）最后三位000
     var day = ((nowtimestamp / 1000 - begin_day) / 86400); //与开学时间的时间差（天）
     var nowzc = Math.ceil(day / 7); //向上取整
-    if (nowzc > 23) nowzc = 23;
+    //if (nowzc > 21) nowzc = 21;
     that.saveCache("nowzc",nowzc);
   },
   cmpDate: function (date) { // 现在是否大于指定的时间。
