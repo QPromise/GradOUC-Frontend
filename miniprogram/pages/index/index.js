@@ -470,7 +470,7 @@ goSchedule:function(){
   goCalendar:function(){
     var that = this;
     wx.navigateTo({
-      url: '../core/calendar/calendar',
+      url: '/pages/web/web?url=' + "https://mp.weixin.qq.com/s/mG1X9LpvCmrB3-1UZyOEEw",
     })
   },
   goLibrary: function () {

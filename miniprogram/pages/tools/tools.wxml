@@ -62,6 +62,9 @@
     <view class="cu-item" bindtap="goCalendar">
       <view class="app-icon">
         <image mode="widthFix" src="/images/core/calendar.png"></image>
+        <view class="cu-tag badge">
+          <block>新</block>
+        </view>
       </view>
       <text>校 历</text>
     </view>

@@ -1,7 +1,6 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/home/home",
     "pages/my/my",
     "pages/my/login",
     "pages/core/schedule/schedule",
@@ -22,7 +21,6 @@
     "pages/web/web",
     "pages/core/schoolCourse/schoolCourse",
     "pages/profile/profile",
-    "pages/core/users/users",
     "pages/tools/tools",
     "pages/tools/who/who",
     "pages/tools/tiangou/tiangou"
