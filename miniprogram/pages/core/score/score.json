@@ -1,7 +1,8 @@
 {
 "usingComponents": {
   "wux-fab-button": "../../../components/fab-button/index",
-  "wux-prompt": "../../../components/prompt2/index"
+  "wux-prompt": "../../../components/prompt2/index",
+  "share-box": "../../../components/shareBox/index"
 },
   "enablePullDownRefresh": false,
   "onReachBottomDistance": 0

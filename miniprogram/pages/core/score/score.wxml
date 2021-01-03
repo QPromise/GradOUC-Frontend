@@ -1,12 +1,24 @@
 <navigationBar id="navigationBar" title="{{'我的成绩'}}" back="{{true}}"></navigationBar>
-<view class = "mean">
-  <text>平均学分绩：{{mean}}</text>
- </view>
- <view class='tips'>平均学分绩=∑(所修课程学分×成绩) / ∑所修课程学分.</view>
+
+<button class="intro"  wx:if="{{loadFull}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo">
+<text>点我生成成绩单</text>
+</button>
+<share-box isCanDraw="{{isCanDraw}}" bind:initData="createShareImage" />
+
+
+<!-- <view class = "mean">
+  <text></text>
+ </view> -->
+
   
  
 <view wx:if='{{arraycj.length>0}}'>
-  <view class='grade-head'>
+<view class='grade-head' style="margin-top:5rpx; border-top: 1rpx solid #f2f2f2;">
+    <view class='grade-head-item' style='flex:{{index==1?2:1}};'><text style='font-weight:bold;font-size:30rpx;color:lightcoral;'>平均学分绩：{{mean}}</text>
+     <view class='tips' bindtap="goDetail">平均学分绩=∑(所修课程学分×成绩) / ∑所修课程学分. <text style="text-decoration:underline">详细</text></view>
+    </view>
+  </view>
+  <view class='grade-head' style="border-bottom: 1rpx solid #f2f2f2;">
     <view wx:for='{{heads}}' class='grade-head-item' style='flex:{{index==1?2:1}};font-size:30rpx;'>{{item}}</view>
   </view>
   <view class='grade' wx:for='{{arraycj}}'>
