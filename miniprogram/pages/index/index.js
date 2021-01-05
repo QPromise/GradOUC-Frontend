@@ -153,7 +153,7 @@ Page({
               tmp_course[i].room = tmp_course[i].room.substring(0,3) + ".." + tmp_course[i].room.substring(tmp_course[i].room.length - 6,tmp_course[i].room.length);
             }
           }
-          if(app.cache.nowzc > 21){
+          if(app.cache.nowzc > 22){
             that.setData({
               showTodayInfo:""
             })

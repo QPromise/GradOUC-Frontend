@@ -6,7 +6,7 @@ Page({
     indexxq: 0,
     arrayxq: ['2019-2020夏秋'],
     indexzc: 0,
-    arrayzc: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21],
+    arrayzc: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22],
     kcb:null,
     hiddenmodalput: true, //课程详细
     name: "",
@@ -58,14 +58,14 @@ Page({
   onLoad: function () {
     var that = this;
     //获取开学和放假日期，计算当前周
-    if(app.cache.nowzc > 21){
+    if(app.cache.nowzc > 22){
       that.setData({
         arrayxq: [app.cache.xq],
-        indexzc: 20,
+        indexzc: 21,
       });
       wx.showModal({
         title: '提示',
-        content: '本学期课程已结束，课表不再更新，期末考试加油！',
+        content: '本学期课程已结束，课表不再更新',
         showCancel: false,
         success(res) {
           if (res.confirm) {

@@ -204,7 +204,12 @@ Page({
       curScore.css.top = (335 + gapUnit * legal)+ "rpx"
       curScore.css.right = "180rpx"
       curScore.css.fontSize = fontSize
-      curScore.css.color = '#3c3c3c'
+      if (courses[i].score < 70){
+        curScore.css.color = 'red'
+      }
+      else{
+        curScore.css.color = '#139700'
+      }
       cacheCourses.push(curCourse, curScore);
       legal += 1
     } 
