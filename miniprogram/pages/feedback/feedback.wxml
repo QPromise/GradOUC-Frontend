@@ -15,7 +15,7 @@
       </view>
       <view class='feed-box-body'>
         <view class='feed-box-body-text'>
-          <text>小程序可能某些地方存在没有被发现的问题，大家可以去上面的【交流社区】留言反馈。有什么问题都可以随时通过本页面联系方式联系我，感谢大家使用研在OUC小程序！</text>
+          <text>小程序可能某些地方存在没有被发现的问题，大家可以去上面的【意见反馈】模块给我留言，我收到会给大家回复。有其它任何问题都可以随时通过本页面联系方式联系我，感谢大家使用研在OUC小程序！</text>
           <text></text>
         </view>
         <view class='feed-box-body-con'>

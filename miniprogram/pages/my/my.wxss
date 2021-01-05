@@ -1,4 +1,29 @@
 /**more.wxss**/
+@import "../../utils/colorui/main.wxss";
+@import "../../utils/colorui/icon.wxss";
+.add_tips{
+  position: absolute;
+  right: 10px;
+  padding: 8px 10px;
+  background:#009cff;
+  color: #fff;
+  border-radius: 4px;
+  z-index: 9999;
+  opacity: 0.8;
+}
+.add_tips .icon-close{
+  padding: 10px 2px;
+}
+.add_tips::before{
+  content: " ";
+  position: absolute;
+  top: -22px;
+  right: 50px;
+  border-width: 14px;
+  border-style: solid;
+  border-color: transparent#009cff transparent transparent;
+  transform: rotate(90deg);
+}
 .container{
   background-color: #f6f6f6;
   padding: 0;

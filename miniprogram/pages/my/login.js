@@ -20,6 +20,9 @@ Page({
       });
     }, 1000);
   },
+  onLoad: function () {
+
+  },
   setwebsite: function () {
     wx.setClipboardData({
       data: 'http://id.ouc.edu.cn:8071/findPassword/index.action',
@@ -43,14 +46,14 @@ Page({
     }
     if (!that.data.sno || !that.data.passwd) {
       wx.showToast({
-        icon:'none',
+        icon: 'none',
         title: '账号或密码不能为空',
         duration: 1000
       });
       //app.showErrorModal('账号或密码不能为空', '提醒');
       return false;
     }
-    if (that.data.sno.length<=6 || that.data.passwd.length<6){
+    if (that.data.sno.length <= 6 || that.data.passwd.length < 6) {
       wx.showToast({
         icon: 'none',
         title: '账号或密码格式不正确',
@@ -73,23 +76,22 @@ Page({
       header: {
         'Content-Type': 'application/x-www-form-urlencoded'
       },
-      success:(res)=>{
+      success: (res) => {
         wx.hideLoading();
         console.log(res);
         var data = res.data;
-        if (data.message == "timeout"){
+        if (data.message == "timeout") {
           wx.showModal({
             title: '请求超时',
             content: '可能是研究生系统问题，请稍后重试',
             showCancel: false,
             success(res) {
               if (res.confirm) {
-              
+
               }
             }
           })
-        }
-        else if (data.message == 'fault' && res.statusCode == 200){
+        } else if (data.message == 'fault' && res.statusCode == 200) {
 
           wx.showToast({
             icon: 'none',
@@ -97,11 +99,9 @@ Page({
             duration: 1500
           });
           //app.showErrorModal('账号或者密码不正确','提醒')
-        }
-        
-        else if (data.message == 'success' && res.statusCode == 200){
+        } else if (data.message == 'success' && res.statusCode == 200) {
           //console.log(app.removeAllCache);
-          app.saveCache("sno",data.sno);
+          app.saveCache("sno", data.sno);
           app.saveCache("passwd", data.passwd);
           app.saveCache("name", data.name);
           app.saveCache("is_bind", true);
@@ -114,21 +114,20 @@ Page({
               wx.reLaunch({
                 url: '/pages/my/my',
               })
+             
             }
           })
-        }
-        else if (data.message == "fault" && res.statusCode != 200){
+        } else if (data.message == "fault" && res.statusCode != 200) {
           wx.showToast({
             icon: 'none',
             title: '研究生系统当前无法访问',
             duration: 2000
           });
-        }
-        else{
+        } else {
           app.showErrorModal('可能是您的网络或者服务器出了问题，请稍后重试', '绑定失败');
         }
       },
-      fail:(res)=>{
+      fail: (res) => {
         wx.hideLoading();
         app.showErrorModal('可能是您的网络或者服务器出了问题，请稍后重试', '绑定失败');
       }
@@ -175,14 +174,13 @@ Page({
       this.hideHelp();
     }
   },
-  showPasswd: function(e){
+  showPasswd: function (e) {
     var that = this;
-    if(that.data.is_hide_passwd){
+    if (that.data.is_hide_passwd) {
       this.setData({
         'is_hide_passwd': false
       });
-    }
-    else{
+    } else {
       this.setData({
         'is_hide_passwd': true
       });

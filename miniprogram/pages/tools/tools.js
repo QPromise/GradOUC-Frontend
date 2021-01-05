@@ -174,6 +174,17 @@ goSchedule:function(){
       that.showNeedBind();
     }
   },
+  goProfile: function () {
+    var that = this;
+    if (that.data.is_bind) {
+      wx.navigateTo({
+        url: '/pages/profile/profile',
+      })
+    }
+    else {
+      that.showNeedBind();
+    }
+  },
   /**
    * 
    */
@@ -202,6 +213,18 @@ goSchedule:function(){
     var that = this;
     wx.navigateTo({
       url: '/pages/web/web?url=' + "https://mp.weixin.qq.com/s/mG1X9LpvCmrB3-1UZyOEEw",
+    })
+  },
+  goTravel:function(){
+    var that = this;
+    wx.navigateTo({
+      url: '/pages/web/web?url=' + "https://mp.weixin.qq.com/s/5nmnRkVBHZnwJfevCZrkgA",
+    })
+  },
+  goWaimai:function(){
+    var that = this;
+    wx.navigateTo({
+      url: '/pages/web/web?url=' + "https://mp.weixin.qq.com/s/WH09TrP5NdzTQnrWfRD7cg",
     })
   },
   goLibrary: function () {

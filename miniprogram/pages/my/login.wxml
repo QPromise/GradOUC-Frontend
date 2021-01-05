@@ -60,13 +60,11 @@
             </view>
             <view class="help-q">2、忘记密码？</view>
             <view class="help-a">
-              <text bindtap="setwebsite">请访问统一身份认证平台找回或者修改密码(点击网址复制):<text style="color:#009cff;" >http://id.ouc.edu.cn:8071/findPassword/index.action</text></text>
-              
+              <text bindtap="setwebsite">请访问统一身份认证平台找回或者修改密码(点击网址复制):<text style="color:#009cff;" >http://id.ouc.edu.cn:8071/findPassword/index.action</text></text>  
             </view>
           </view>
         </view>
       </view>
-
     </view>
   </block>
 

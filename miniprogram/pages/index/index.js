@@ -16,7 +16,6 @@ Page({
     is_bind: app.cache.is_bind,//判断是否绑定用户了
     is_open_subscribe: app.cache.is_open_subscribe, //判断是否打开了成绩通知模式
     today:undefined,
-    xq:app.cache.xq,
     course:[],
     loading:false,
     content: "",
@@ -35,7 +34,6 @@ Page({
   onLoad: function (options) {
     this.setData({
       is_bind: app.cache.is_bind,
-      xq:app.cache.xq
     });
     this.getTopbarImg();
     this.guide();
@@ -60,22 +58,32 @@ Page({
   },
    /** 下拉刷新 */
    onPullDownRefresh:function(){
-    var that = this;
+    var that = this
     wx.showNavigationBarLoading() 
     that.setData({
       is_bind: app.cache.is_bind,
-      xq:app.cache.xq
-    });
-    that.getTopbarImg();
-    that.getDay();
-    that.getnews();
-    that.getIsOpenSubscribe();
-    that.getTodayCourse();
+    })
+    that.getWeek(app.cache.begin_day)
+    that.getTopbarImg()
+    that.getDay()
+    that.getnews()
+    that.getIsOpenSubscribe()
+    that.getTodayCourse()
     //模拟加载
     setTimeout(function () {
       wx.hideNavigationBarLoading(); //完成停止加载
       wx.stopPullDownRefresh(); //停止下拉刷新
     })
+  },
+  getWeek:function(begin_day){
+    var that = this;
+    //当前周次设置
+    var nowtime = new Date();  //当前时间 用于平时
+    var nowtimestamp = Date.parse(nowtime);  //当前时间的时间戳（毫秒）最后三位000
+    var day = ((nowtimestamp / 1000 - begin_day) / 86400); //与开学时间的时间差（天）
+    var nowzc = Math.ceil(day / 7); //向上取整
+    //if (nowzc > 21) nowzc = 21;
+    app.saveCache("nowzc",nowzc);
   },
   // 现在是否大于指定的时间
   cmpDate: function () { 
@@ -97,7 +105,7 @@ Page({
     })
     //选择学期
     var xj;
-    var items = that.data.xq;
+    var items = app.cache.xq;
     if (items.indexOf("夏秋") != -1){
       xj = 11
     }
@@ -219,7 +227,7 @@ Page({
     wx.request({
       url:app.local_server + "get_subscribe_status?openid="+app.globalData.openId,
       success: (res) =>{
-        console.log(res.data.open_failure_popup, res.data.score_notice)
+        //console.log(res.data.open_failure_popup, res.data.score_notice)
         if (res.data.open_failure_popup){
           if(!res.data.score_notice){
             wx.showModal({
@@ -237,7 +245,7 @@ Page({
                        //登录(获取用户授权码，服务端记录用户订阅次数用到)
                        wx.login({
                          success: function(res) {
-                           console.log(res.code)
+                           //console.log(res.code)
                            //调用后端接口，记录订阅次数
                            wx.request({
                              url:app.local_server + "subscribe_score?openid="+app.globalData.openId,
@@ -380,6 +388,85 @@ Page({
       }
     })
   },
+  scoreSubscribe: function(){
+    let that = this
+    wx.requestSubscribeMessage({
+      tmplIds: ["LxOu_CBTn3H88ndcz_S9aeRO_lTaR3lgKrIU2VoOuZo"],
+      success: (res) => {
+       if (res['LxOu_CBTn3H88ndcz_S9aeRO_lTaR3lgKrIU2VoOuZo'] === 'accept'){
+         //登录(获取用户授权码，服务端记录用户订阅次数用到)
+         wx.login({
+           success: function(res) {
+             //console.log(res.code)
+             //调用后端接口，记录订阅次数
+             wx.request({
+               url:app.local_server + "subscribe_score?openid="+app.globalData.openId,
+               success: (res) =>{
+                 if (res.data.message == "success")
+                 {
+                  wx.showModal({
+                    title: '订阅成功',
+                    content: '成绩将在出来后及时通知你，为方便后续多次成绩通知，建议多次点击成绩通知按钮并同意去增加通知次数，不然很可能会错过部分成绩通知',
+                    showCancel: false,
+                    success(res) {
+                    }
+                  })
+
+                 }
+                 else if (res.data.message == "fault")
+                 {
+                  wx.showModal({
+                    title: '订阅失败',
+                    content: '请重新绑定后再试',
+                    showCancel: true,
+                    confirmText: '去绑定',
+                    cancelText: '取消',
+                    success(res) {
+                      if (res.confirm) {
+                        wx.navigateTo({
+                          url: '../my/login',
+                        })
+                      } else if (res.cancel) {
+                      }
+                    }
+                  })
+
+                 }
+                 else if (res.data.message == "repeated")
+                 {
+                  wx.showToast({
+                    title: '成绩通知次数增加啦！记得多点几次呀！',
+                    icon: 'none',
+                    duration: 2500
+                })
+
+                 }
+               }
+               ,fail: (res)=>{
+                that.setData({
+                  score_notice: false
+                })
+                wx.showToast({
+                  title: '订阅失败！',
+                  icon: 'none',
+                  duration: 1500
+              })
+               }
+             })
+           }
+         });
+       }
+       else{
+        wx.showToast({
+          title: '增加成绩通知次数失败！',
+          icon: 'none',
+          duration: 1500
+      })
+       }
+      }
+   })
+
+  },
   guide:function(){
     let firstOpen = app.cache.firstOpen
     console.log("是否首次打开本页面==", firstOpen)
@@ -438,14 +525,92 @@ goSchedule:function(){
       wx.navigateTo({
         url: '../core/score/score',
       })
+      wx.requestSubscribeMessage({
+        tmplIds: ["LxOu_CBTn3H88ndcz_S9aeRO_lTaR3lgKrIU2VoOuZo"],
+        success: (res) => {
+         if (res['LxOu_CBTn3H88ndcz_S9aeRO_lTaR3lgKrIU2VoOuZo'] === 'accept'){
+           //登录(获取用户授权码，服务端记录用户订阅次数用到)
+           wx.login({
+             success: function(res) {
+               //调用后端接口，记录订阅次数
+               wx.request({
+                 url:app.local_server + "subscribe_score?openid="+app.globalData.openId,
+                 success: (res) =>{
+                   if (res.data.message == "success")
+                   {
+                    wx.showModal({
+                      title: '订阅成功',
+                      content: '成绩将在出来后及时通知你，为方便后续多次成绩通知，建议去【个人中心】多次点击成绩通知按钮并同意去增加通知次数，不然很可能会错过部分成绩通知',
+                      showCancel: false,
+                      success(res) {
+                      }
+                    })
+  
+                   }
+                   else if (res.data.message == "fault")
+                   {
+                    wx.showModal({
+                      title: '订阅失败',
+                      content: '请重新绑定后再试',
+                      showCancel: true,
+                      confirmText: '去绑定',
+                      cancelText: '取消',
+                      success(res) {
+                        if (res.confirm) {
+                          wx.navigateTo({
+                            url: '../my/login',
+                          })
+                        } else if (res.cancel) {
+                        }
+                      }
+                    })
+  
+                   }
+                   else if (res.data.message == "repeated")
+                   {
+                    wx.showModal({
+                      title: '订阅成功',
+                      content: '成绩通知次数增加啦！记得去【个人中心】多点几次呀！',
+                      showCancel: false,
+                      success(res) {
+                      }
+                    })
+                   }
+                 }
+                 ,fail: (res)=>{
+                  wx.showModal({
+                    title: '订阅失败',
+                    content: '可能是您的网络或者服务器出现了问题，请稍后重新订阅！',
+                    showCancel: false,
+                    success(res) {
+                    }
+                  })
+                 }
+               })
+             }
+           });
+         }
+         else{
+
+         }
+        }
+     })
     }
     else {
       that.showNeedBind();
     }
   },
-  /**
-   * 
-   */
+  goProfile: function () {
+    var that = this;
+    if (that.data.is_bind) {
+      wx.navigateTo({
+        url: '/pages/profile/profile',
+      })
+    }
+    else {
+      that.showNeedBind();
+    }
+  },
   goSchoolCourse: function () {
     var that = this;
     if (that.data.is_bind) {
@@ -471,6 +636,12 @@ goSchedule:function(){
     var that = this;
     wx.navigateTo({
       url: '/pages/web/web?url=' + "https://mp.weixin.qq.com/s/mG1X9LpvCmrB3-1UZyOEEw",
+    })
+  },
+    goWaimai:function(){
+    var that = this;
+    wx.navigateTo({
+      url: '/pages/web/web?url=' + "https://mp.weixin.qq.com/s/WH09TrP5NdzTQnrWfRD7cg",
     })
   },
   goLibrary: function () {

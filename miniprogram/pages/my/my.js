@@ -15,6 +15,7 @@ Page({
     gender: null,
     department: null,
     score_notice: false,
+    customBar: app.globalData.CustomBar
   },
   /**
    * 生命周期函数--监听页面加载
@@ -163,7 +164,16 @@ Page({
       },
     });
   },
-
+  showAddTip:function(){
+    this.setData({
+      add_tips: true
+    })
+  },
+  closeAddTip:function(){
+    this.setData({
+      add_tips: false
+    })
+  },
   /**
    * 生命周期函数--监听页面隐藏
    */

@@ -30,6 +30,6 @@
 					</view>
 				</view> -->
 			</view>
-			<image src='https://6661-fatdown-wxapp-sg2p1-1300398887.tcb.qcloud.la/wave.gif?sign=045605c672f482a8c3d428abed669aa7&t=1570674356' mode='scaleToFill' class='gif-wave'></image>
+			<image src='https://raw.githubusercontent.com/weilanwl/ColorUI/master/demo/images/wave.gif' mode='scaleToFill' class='gif-wave'></image>
 		</view>
 	</view>

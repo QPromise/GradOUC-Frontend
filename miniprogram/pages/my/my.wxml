@@ -1,7 +1,12 @@
 
-<navigationBar id="navigationBar" title="{{'个人中心'}}"></navigationBar>
+<cu-custom>
+	<view slot="content" style="color:white;font-weight:bold;">个人中心</view>
+</cu-custom>
+<view class="add_tips shadow" style="top:{{customBar + 8}}px" wx:if="{{add_tips}}">
+  <view>点击<text class="cuIcon-more"></text>添加到我的小程序  <text class="cuIcon-close" bindtap="closeAddTip"></text></view>
+  <view>微信下拉就能找到我啦</view>
+</view>
 <view class="container">
-
   <view class="user-info-box">
   <block wx:if="{{is_bind}}">
       <view class="user-info">
@@ -40,7 +45,25 @@
         </view>
       </view>
     </navigator> -->
-      <navigator wx:if="{{is_bind}}" url="/pages/profile/profile" class="about-link">
+     <view url="" class="about-link">
+      <view class="more-btn" bindtap="showAddTip">
+        <image class="btn-icon" src="/images/my/saveMini.png"></image>
+        <text class="btn-text">添加到我的小程序</text>
+        <view class="btn-open">
+            <image class="btn-enter" src="/images/enter.png"></image>
+        </view>
+      </view>
+    </view>
+    <view url="" class="about-link" >
+      <button class="more-btn" open-type="feedback">
+        <image class="btn-icon" src="/images/my/feedback.png"></image>
+        <text class="btn-text" style="text-align:left">意见反馈</text>
+        <view class="btn-open">
+            <image class="btn-enter" src="/images/enter.png"></image>
+        </view>
+      </button>
+    </view>
+      <!-- <navigator wx:if="{{is_bind}}" url="/pages/profile/profile" class="about-link">
       <view class="more-btn">
         <image class="btn-icon" src="/images/my/profile.png"></image>
         <text class="btn-text">我的信息</text>
@@ -48,8 +71,8 @@
             <image class="btn-enter" src="/images/enter.png"></image>
         </view>
       </view>
-    </navigator>
-    <navigator url="/pages/FAQ/FAQ" class="about-link">
+    </navigator> -->
+     <navigator url="/pages/FAQ/FAQ" class="about-link">
       <view class="more-btn">
         <image class="btn-icon" src="/images/my/QA.png"></image>
         <text class="btn-text">常见问题</text>
@@ -58,20 +81,19 @@
         </view>
       </view>
     </navigator>
-    <navigator class="about-link" bindtap="toFeedback">
+    <!-- <navigator class="about-link" bindtap="toFeedback">
       <view class="more-btn">
-        <image class="btn-icon" src="/images/my/feedback.png"></image>
+        <image class="btn-icon" src="/images/my/question.png"></image>
         <text class="btn-text">交流社区</text>
         <view class="btn-open">
             <image class="btn-enter" src="/images/enter.png"></image>
         </view>
-        
       </view>
-    </navigator>
+    </navigator> -->
     <navigator url="/pages/feedback/feedback" class="about-link">
       <view class="more-btn">
         <image class="btn-icon" src="/images/my/contact.png"></image>
-        <text class="btn-text">意见反馈</text>
+        <text class="btn-text">联系我们</text>
         <view class="btn-open">
             <image class="btn-enter" src="/images/enter.png"></image>
         </view>

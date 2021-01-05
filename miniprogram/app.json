@@ -41,13 +41,13 @@
         "selectedIconPath": "./images/home_selected.png",
         "iconPath": "./images/home.png",
         "pagePath": "pages/index/index",
-        "text": "主页"
+        "text": "我的主页"
       },
       {
         "selectedIconPath": "./images/tools_selected.png",
         "iconPath": "./images/tools.png",
         "pagePath": "pages/tools/tools",
-        "text": "应用"
+        "text": "全部应用"
       },
       {
         "selectedIconPath": "./images/user_selected.png",

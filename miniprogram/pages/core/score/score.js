@@ -11,7 +11,6 @@ Page({
     nickName: '',
     avatarUrl: '',
     isCanDraw: false,
-
     loadFull:false,
     hiddenmodalput: true,
     name: "",
@@ -28,15 +27,6 @@ Page({
   },
   getUserInfo(e) {
     if(this.data.nickName == ""){
-      // wx.showModal({
-      //   title: '嗨，同学',
-      //   content: '生成成绩单仅需要你的头像和昵称，请放心同意系统使用相应权限。',
-      //   showCancel: false,
-      //   success(res) {
-      //     if (res.confirm) {
-      //     }
-      //   }
-      // })
       wx.showToast({
         title: '生成成绩单仅需要你的头像和昵称，请放心同意系统使用相应权限。',
         icon: 'none',
@@ -76,6 +66,7 @@ Page({
       url: '/pages/web/web?url=' + "https://mp.weixin.qq.com/s/zCD7AycGgEqp1a3-8imOgQ",
     })
   },
+
   bindCheckbox: function (e) {
     //取下标值
     var index = parseInt(e.currentTarget.dataset.index);
@@ -125,13 +116,14 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var that = this;
-    that.refreshCJ();
+    let that = this
+    that.refreshCJ()
   },
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+  
   },
 
   /**
@@ -240,12 +232,11 @@ Page({
   },
   //成绩刷新
   refreshCJ: function () {
-    var that = this;
+    var that = this
     wx.showLoading({
       title: '成绩加载中',
     })
-    that.requestCJ();
-
+    that.requestCJ()
   },
   //成绩请求单独作为一个方法
   requestCJ: function () {
@@ -260,7 +251,6 @@ Page({
       },
       header: { "Content-Type": "application/x-www-form-urlencoded" },
       success: function (res) {
-        wx.hideLoading();
         if (res.data.message == "timeout"){
           wx.showModal({
             title: '请求超时',
@@ -389,7 +379,6 @@ Page({
         }
       },
       fail: function (res) {
-        wx.hideLoading();
         wx.showModal({
           title: "加载失败",
           content: '获取成绩列表失败，可能是您的网络或者服务器出了问题，请稍后重试',
@@ -404,14 +393,12 @@ Page({
           }
         });
 
+        
       },
       complete: function (res) {
+        wx.hideLoading();  
       }
     });
-    //停止刷新
-    wx.stopPullDownRefresh();
-    // 隐藏顶部刷新图标
-    wx.hideNavigationBarLoading();
   },
   isOver16: function (str) {
     if (str.length > 16) {

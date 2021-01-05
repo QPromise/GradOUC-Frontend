@@ -27,6 +27,12 @@
       </view>
       <text>我的成绩</text>
     </view>
+    <view class="cu-item"  bindtap="goProfile">
+      <view class="app-icon">
+        <image mode="widthFix" src="/images/core/profile.png"></image>
+      </view>
+      <text>我的信息</text>
+    </view>
     <view class="cu-item"  bindtap="goSchoolCourse">
       <view class="app-icon">
         <image mode="widthFix" src="/images/core/schoolCourse.png"></image>
@@ -77,18 +83,12 @@
         <view class="cu-item" bindtap="navArticle" data-url="/pages/core/news/news" data-type="1004">
       <view class="app-icon">
         <image mode="widthFix" src="/images/core/school.png"></image>
-        <view class="cu-tag badge">
-          <block>新</block>
-        </view>
       </view>
       <text>学校</text>
     </view>
         <view class="cu-item" bindtap="navArticle" data-url="/pages/core/news/news" data-type="1005">
       <view class="app-icon">
         <image mode="widthFix" src="/images/core/yanyuan.png"></image>
-        <view class="cu-tag badge">
-          <block>新</block>
-        </view>
       </view>
       <text>研院</text>
     </view>
@@ -131,20 +131,32 @@
     <view class="cu-item" bindtap="goPaoTui">
       <view class="app-icon">
         <image mode="widthFix" src="/images/new_img/tools/paotui.png"></image>
-        <view class="cu-tag badge">
-          <block>新</block>
-        </view>
       </view>
       <text>谁去跑腿</text>
     </view>
      <view class="cu-item" bindtap="goTianGou">
       <view class="app-icon">
         <image mode="widthFix" src="/images/new_img/tools/tiangou.png"></image>
+      </view>
+      <text>舔狗日记</text>
+    </view>
+      <view class="cu-item" bindtap="goWaimai">
+      <view class="app-icon">
+        <image mode="widthFix" src="/images/new_img/tools/waimai.png"></image>
+        <view class="cu-tag badge">
+          <block>超全</block>
+        </view>
+      </view>
+      <text>外卖红包</text>
+    </view>
+      <view class="cu-item" bindtap="goTravel">
+      <view class="app-icon">
+        <image mode="widthFix" src="/images/new_img/tools/travel.png"></image>
         <view class="cu-tag badge">
           <block>新</block>
         </view>
       </view>
-      <text>舔狗日记</text>
+      <text>出行优惠</text>
     </view>
 
   </view>

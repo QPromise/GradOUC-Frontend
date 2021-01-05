@@ -3,7 +3,7 @@
 </cu-custom>
 
   <view class='page_hd'>
-    <i-notice-bar wx:if="{{shownews}}" icon="systemprompt" loop closable speed='700' class='notice-bar' getindex='{{getindex}}'>
+    <i-notice-bar wx:if="{{shownews}}" icon="systemprompt" loop closable speed='500' class='notice-bar' getindex='{{getindex}}'>
       {{text}}
     </i-notice-bar>
 
@@ -38,7 +38,12 @@
       </view>
       <text>我的成绩</text>
     </view>
-
+  <view class="cu-item"  bindtap="goProfile">
+      <view class="app-icon">
+        <image mode="widthFix" src="/images/core/profile.png"></image>
+      </view>
+      <text>我的信息</text>
+    </view>
      <view class="cu-item" bindtap="goSchoolCourse">
       <view class="app-icon">
         <image mode="widthFix" src="/images/core/schoolCourse.png"></image>
@@ -78,6 +83,15 @@
         </view>
       </view>
       <text>校 历</text>
+    </view>
+         <view class="cu-item" bindtap="goWaimai">
+      <view class="app-icon">
+        <image mode="widthFix" src="/images/core/waimai.png"></image>
+        <view class="cu-tag badge">
+          <block>超全</block>
+        </view>
+      </view>
+      <text>外卖红包</text>
     </view>
   </view>
   </view>
@@ -170,8 +184,8 @@
 </jun-mask>
 
 
-<view  class='page_bd'>
+<!-- <view  class='page_bd'>
 <ad unit-id="adunit-fd61b1cb094c221e"></ad>
-</view>
+</view> -->
 
 

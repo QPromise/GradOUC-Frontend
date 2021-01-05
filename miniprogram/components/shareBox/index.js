@@ -89,6 +89,18 @@ Component({
     preventDefault() { },
     // 保存图片
     savePhoto(path) {
+                // 在页面中定义插屏广告
+let interstitialAd = null
+
+// 在页面onLoad回调事件中创建插屏广告实例
+if (wx.createInterstitialAd) {
+  interstitialAd = wx.createInterstitialAd({
+    adUnitId: 'adunit-4c8e480d285edcaa'
+  })
+  interstitialAd.onLoad(() => {})
+  interstitialAd.onError((err) => {})
+  interstitialAd.onClose(() => {})
+}
       wx.showLoading({
         title: '正在保存...',
         mask: true
@@ -108,6 +120,14 @@ Component({
               visible: false
             })
           }, 500)
+
+
+// 在适合的场景显示插屏广告
+if (interstitialAd) {
+  interstitialAd.show().catch((err) => {
+    console.error(err)
+  })
+}
         },
         fail: (res) => {
           wx.getSetting({
