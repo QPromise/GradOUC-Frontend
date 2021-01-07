@@ -78,7 +78,7 @@ Page({
       },
       success: (res) => {
         wx.hideLoading();
-        console.log(res);
+        //console.log(res);
         var data = res.data;
         if (data.message == "timeout") {
           wx.showModal({
@@ -92,11 +92,10 @@ Page({
             }
           })
         } else if (data.message == 'fault' && res.statusCode == 200) {
-
           wx.showToast({
             icon: 'none',
-            title: '账号或密码不正确',
-            duration: 1500
+            title: '账号或密码不正确，请检查与信息门户账号密码是否一致',
+            duration: 2000
           });
           //app.showErrorModal('账号或者密码不正确','提醒')
         } else if (data.message == 'success' && res.statusCode == 200) {

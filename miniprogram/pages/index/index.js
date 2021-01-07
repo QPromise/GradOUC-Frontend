@@ -232,7 +232,7 @@ Page({
           if(!res.data.score_notice){
             wx.showModal({
               title: '订阅失效',
-              content: '成绩通知订阅已经失效，系统检测到你已经错过一次成绩通知，请订阅成绩通知',
+              content: '成绩通知订阅已经失效，订阅一次的有效期为七天，请订阅成绩通知',
               showCancel: true,
               confirmText: '去订阅',
               cancelText: '取消提示',

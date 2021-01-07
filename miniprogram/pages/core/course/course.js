@@ -80,7 +80,7 @@ Page({
         if (res.data.message == "timeout"){
           wx.showModal({
             title: '请求超时',
-            content: '可能是你的网络问题，请稍后重试',
+            content: '可能是研究生系统问题，请稍后重试',
             showCancel: false,
             success(res) {
               if (res.confirm) {
@@ -181,7 +181,7 @@ Page({
           let i = 0;
         numDH();
         function numDH() {
-          console.log(res.data.get_credit, i < res.data.get_credit)
+          //console.log(res.data.get_credit, i < res.data.get_credit)
           if (i < res.data.get_credit) {
             setTimeout(function () {
               that.setData({

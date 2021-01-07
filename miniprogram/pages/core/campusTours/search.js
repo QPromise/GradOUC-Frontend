@@ -20,7 +20,7 @@ Page({
     })
   },
   openLocation: function (e) {
-    console.log(e)
+    //console.log(e)
     wx.openLocation({
       latitude: Number(e.currentTarget.dataset["latitude"]),
       longitude: Number(e.currentTarget.dataset["longitude"]),

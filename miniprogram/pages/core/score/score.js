@@ -167,7 +167,7 @@ Page({
       fontSize = "9rpx"
       gapUnit = 16
     }
-    console.log(legalCourseLen)
+    //console.log(legalCourseLen)
     let curScore = new Object()
     curScore.type = "text"
     curScore.text = aveScore + ""
@@ -259,7 +259,7 @@ Page({
         if (res.data.message == "timeout"){
           wx.showModal({
             title: '请求超时',
-            content: '可能是你的网络问题，请稍后重试',
+            content: '可能是研究生系统问题，请稍后重试',
             showCancel: false,
             success(res) {
               if (res.confirm) {

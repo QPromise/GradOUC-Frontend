@@ -184,7 +184,7 @@ Page({
         if (res.data.message == "timeout"){
           wx.showModal({
             title: '请求超时',
-            content: '可能是你的网络问题，请稍后重试',
+            content: '可能是研究生系统问题，请稍后重试',
             showCancel: false,
             success(res) {
               if (res.confirm) {
@@ -229,6 +229,7 @@ Page({
         else if(res.data.message == "success" && res.statusCode == 200) {
           //对课程表进行上色并更新显示数据
           that.beautifyAndResetKcb(res.data.schedule); 
+          console.log(res.data.schedule)
         }
         else{
           wx.showModal({

@@ -105,7 +105,7 @@
     <view wx:if="{{is_open_subscribe == 1}}">
     <view wx:if="{{is_bind}}" class="more-btn">
       <image class="btn-icon" src="/images/my/notice.png"></image>
-      <text class="btn-text">成绩通知</text>
+      <text class="btn-text">成绩通知<text class="text-gray text-sm" style="margin-left:10rpx;">剩余次数：{{times}}</text></text>
       <switch bindtap='scoreSubscribe' checked="{{score_notice}}" />
     </view>
     </view>

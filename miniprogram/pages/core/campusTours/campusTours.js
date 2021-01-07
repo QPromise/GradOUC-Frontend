@@ -108,14 +108,14 @@ Page({
   onShow: function () {
   },
   regionchange(e) {
-    console.log(e.type);
+    //console.log(e.type);
   },
   markertap(e) {
     // 选中 其对应的框
     this.setData({
       isSelectedBuild: e.markerId
     })
-    console.log(e)
+    //console.log(e)
   },
   navigateSearch() {
     wx.navigateTo({
@@ -143,7 +143,7 @@ Page({
     })
   },
   clickButton: function (e) {
-    console.log(this.data.fullscreen)
+    //console.log(this.data.fullscreen)
     //打印所有关于点击对象的信息
     this.setData({
       fullscreen: !this.data.fullscreen

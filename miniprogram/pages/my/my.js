@@ -10,6 +10,7 @@ Page({
     is_bind: app.cache.is_bind,
     is_open_subscribe:app.cache.is_open_subscribe,
     name: null,
+    times:"--",
     sno:null,
     openId: null,
     gender: null,
@@ -45,7 +46,6 @@ Page({
     wx.request({
       url: app.local_server + 'get_config/',
       success: function (res) {
-        console.log(res.data.is_open_subscribe)
         app.saveCache("is_open_subscribe", res.data.is_open_subscribe)
         that.setData({
           is_open_subscribe: res.data.is_open_subscribe
@@ -56,7 +56,8 @@ Page({
             success: (res) =>{
               //console.log(res.data.score_notice)
               that.setData({
-                score_notice:res.data.score_notice
+                score_notice:res.data.score_notice,
+                times:res.data.times + "次"
               })
             }
             ,fail: (res)=>{
@@ -85,6 +86,15 @@ Page({
                success: (res) =>{
                  if (res.data.message == "success")
                  {
+                  wx.request({
+                    url:app.local_server + "get_subscribe_status?openid="+app.globalData.openId,
+                    success: (res) =>{
+                      //console.log(res.data.score_notice)
+                      that.setData({
+                        times:res.data.times + "次"
+                      })
+                    }
+                  })
                   wx.showModal({
                     title: '订阅成功',
                     content: '成绩将在出来后及时通知你，为方便后续多次成绩通知，建议多次点击成绩通知按钮并同意去增加通知次数，不然很可能会错过部分成绩通知',
@@ -119,6 +129,15 @@ Page({
                  }
                  else if (res.data.message == "repeated")
                  {
+                  wx.request({
+                    url:app.local_server + "get_subscribe_status?openid="+app.globalData.openId,
+                    success: (res) =>{
+                      //console.log(res.data.score_notice)
+                      that.setData({
+                        times:res.data.times + "次"
+                      })
+                    }
+                  })
                   wx.showToast({
                     title: '成绩通知次数增加啦！记得多点几次呀！',
                     icon: 'none',

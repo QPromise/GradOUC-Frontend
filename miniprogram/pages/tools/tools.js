@@ -109,7 +109,7 @@ countDate:function() {
   if (that.cmpDate(fuTime)){
     fuTime = new Date("2021/12/25 00:00:00");
   }
-  console.log('compare date',that.cmpDate(fuTime))
+  //console.log('compare date',that.cmpDate(fuTime))
   var now = new Date();
   var day = parseInt((fuTime - now) / 1000 / 60 / 60 / 24) + 1;
   var hour = parseInt((fuTime - now) % (1000 * 60 * 60 * 24) / 1000 / 60 / 60);
