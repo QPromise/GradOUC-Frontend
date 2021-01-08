@@ -229,10 +229,20 @@ Page({
       success: (res) =>{
         //console.log(res.data.open_failure_popup, res.data.score_notice)
         if (res.data.open_failure_popup){
-          if(!res.data.score_notice){
+          if(!res.data.score_notice || res.data.times == 1){
+            let title = '订阅失效'
+            let content = '你的成绩通知订阅已经失效，订阅一次的有效期为七天，请订阅成绩通知'
+            if (res.data.times == 1){
+              title = '提示'
+              content = '你的成绩通知订阅次数只有【1】次，请订阅成绩通知增加次数'
+            }
+            else{
+              title = '订阅失效'
+              content = '你的成绩通知订阅已经失效，订阅一次的有效期为七天，请订阅成绩通知'
+            }
             wx.showModal({
-              title: '订阅失效',
-              content: '成绩通知订阅已经失效，订阅一次的有效期为七天，请订阅成绩通知',
+              title: title,
+              content: content,
               showCancel: true,
               confirmText: '去订阅',
               cancelText: '取消提示',
@@ -254,13 +264,10 @@ Page({
                                {
                                 wx.showModal({
                                   title: '订阅成功',
-                                  content: '为方便后续多次成绩通知，建议去个人中心多次点击成绩通知按钮并同意去增加通知次数，不然很可能会错过下次的成绩通知',
+                                  content: '请去个人中心点击成绩通知按钮增加通知次数(保证次数大于一次)，不然很可能会错过成绩通知',
                                   showCancel: false,
                                   success(res) {
                                   }
-                                })
-                                that.setData({
-                                  score_notice: true
                                 })
                                }
                                else if (res.data.message == "fault")
@@ -280,9 +287,6 @@ Page({
                                     }
                                   }
                                 })
-                                that.setData({
-                                  score_notice: false
-                                })
                                }
                                else if (res.data.message == "repeated")
                                {
@@ -291,15 +295,9 @@ Page({
                                   icon: 'none',
                                   duration: 2500
                               })
-                              that.setData({
-                                score_notice: true
-                              })
                                }
                              }
                              ,fail: (res)=>{
-                              that.setData({
-                                score_notice: false
-                              })
                               wx.showToast({
                                 title: '订阅失败！',
                                 icon: 'none',
@@ -388,85 +386,6 @@ Page({
       }
     })
   },
-  scoreSubscribe: function(){
-    let that = this
-    wx.requestSubscribeMessage({
-      tmplIds: ["LxOu_CBTn3H88ndcz_S9aeRO_lTaR3lgKrIU2VoOuZo"],
-      success: (res) => {
-       if (res['LxOu_CBTn3H88ndcz_S9aeRO_lTaR3lgKrIU2VoOuZo'] === 'accept'){
-         //登录(获取用户授权码，服务端记录用户订阅次数用到)
-         wx.login({
-           success: function(res) {
-             //console.log(res.code)
-             //调用后端接口，记录订阅次数
-             wx.request({
-               url:app.local_server + "subscribe_score?openid="+app.globalData.openId,
-               success: (res) =>{
-                 if (res.data.message == "success")
-                 {
-                  wx.showModal({
-                    title: '订阅成功',
-                    content: '成绩将在出来后及时通知你，为方便后续多次成绩通知，建议多次点击成绩通知按钮并同意去增加通知次数，不然很可能会错过部分成绩通知',
-                    showCancel: false,
-                    success(res) {
-                    }
-                  })
-
-                 }
-                 else if (res.data.message == "fault")
-                 {
-                  wx.showModal({
-                    title: '订阅失败',
-                    content: '请重新绑定后再试',
-                    showCancel: true,
-                    confirmText: '去绑定',
-                    cancelText: '取消',
-                    success(res) {
-                      if (res.confirm) {
-                        wx.navigateTo({
-                          url: '../my/login',
-                        })
-                      } else if (res.cancel) {
-                      }
-                    }
-                  })
-
-                 }
-                 else if (res.data.message == "repeated")
-                 {
-                  wx.showToast({
-                    title: '成绩通知次数增加啦！记得多点几次呀！',
-                    icon: 'none',
-                    duration: 2500
-                })
-
-                 }
-               }
-               ,fail: (res)=>{
-                that.setData({
-                  score_notice: false
-                })
-                wx.showToast({
-                  title: '订阅失败！',
-                  icon: 'none',
-                  duration: 1500
-              })
-               }
-             })
-           }
-         });
-       }
-       else{
-        wx.showToast({
-          title: '增加成绩通知次数失败！',
-          icon: 'none',
-          duration: 1500
-      })
-       }
-      }
-   })
-
-  },
   guide:function(){
     let firstOpen = app.cache.firstOpen
     console.log("是否首次打开本页面==", firstOpen)
@@ -525,76 +444,72 @@ goSchedule:function(){
       wx.navigateTo({
         url: '../core/score/score',
       })
-      wx.requestSubscribeMessage({
-        tmplIds: ["LxOu_CBTn3H88ndcz_S9aeRO_lTaR3lgKrIU2VoOuZo"],
-        success: (res) => {
-         if (res['LxOu_CBTn3H88ndcz_S9aeRO_lTaR3lgKrIU2VoOuZo'] === 'accept'){
-           //登录(获取用户授权码，服务端记录用户订阅次数用到)
-           wx.login({
-             success: function(res) {
-               //调用后端接口，记录订阅次数
-               wx.request({
-                 url:app.local_server + "subscribe_score?openid="+app.globalData.openId,
-                 success: (res) =>{
-                   if (res.data.message == "success")
-                   {
-                    wx.showModal({
-                      title: '订阅成功',
-                      content: '成绩将在出来后及时通知你，为方便后续多次成绩通知，建议去【个人中心】多次点击成绩通知按钮并同意去增加通知次数，不然很可能会错过部分成绩通知',
-                      showCancel: false,
-                      success(res) {
-                      }
-                    })
-  
+      if (that.data.is_open_subscribe == 1 || that.data.is_open_subscribe == 2){
+        wx.requestSubscribeMessage({
+          tmplIds: ["LxOu_CBTn3H88ndcz_S9aeRO_lTaR3lgKrIU2VoOuZo"],
+          success: (res) => {
+           if (res['LxOu_CBTn3H88ndcz_S9aeRO_lTaR3lgKrIU2VoOuZo'] === 'accept'){
+             //登录(获取用户授权码，服务端记录用户订阅次数用到)
+             wx.login({
+               success: function(res) {
+                 //调用后端接口，记录订阅次数
+                 wx.request({
+                   url:app.local_server + "subscribe_score?openid="+app.globalData.openId,
+                   success: (res) =>{
+                     if (res.data.message == "success")
+                     {
+                      wx.showModal({
+                        title: '订阅成功',
+                        content: '请去个人中心点击成绩通知按钮增加通知次数(保证次数大于一次)，不然很可能会错过成绩通知',
+                        showCancel: false,
+                        success(res) {
+                        }
+                      })
+    
+                     }
+                     else if (res.data.message == "fault")
+                     {
+                      wx.showModal({
+                        title: '订阅失败',
+                        content: '请重新绑定后再试',
+                        showCancel: true,
+                        confirmText: '去绑定',
+                        cancelText: '取消',
+                        success(res) {
+                          if (res.confirm) {
+                            wx.navigateTo({
+                              url: '../my/login',
+                            })
+                          } else if (res.cancel) {
+                          }
+                        }
+                      })
+    
+                     }
+                     else if (res.data.message == "repeated")
+                     {
+                     
+                     }
                    }
-                   else if (res.data.message == "fault")
-                   {
+                   ,fail: (res)=>{
                     wx.showModal({
                       title: '订阅失败',
-                      content: '请重新绑定后再试',
-                      showCancel: true,
-                      confirmText: '去绑定',
-                      cancelText: '取消',
-                      success(res) {
-                        if (res.confirm) {
-                          wx.navigateTo({
-                            url: '../my/login',
-                          })
-                        } else if (res.cancel) {
-                        }
-                      }
-                    })
-  
-                   }
-                   else if (res.data.message == "repeated")
-                   {
-                    wx.showModal({
-                      title: '订阅成功',
-                      content: '成绩通知次数增加啦！记得去【个人中心】多点几次呀！',
+                      content: '可能是您的网络或者服务器出现了问题，请稍后重新订阅！',
                       showCancel: false,
                       success(res) {
                       }
                     })
                    }
-                 }
-                 ,fail: (res)=>{
-                  wx.showModal({
-                    title: '订阅失败',
-                    content: '可能是您的网络或者服务器出现了问题，请稍后重新订阅！',
-                    showCancel: false,
-                    success(res) {
-                    }
-                  })
-                 }
-               })
-             }
-           });
-         }
-         else{
-
-         }
-        }
-     })
+                 })
+               }
+             });
+           }
+           else{
+  
+           }
+          }
+       })
+      }
     }
     else {
       that.showNeedBind();

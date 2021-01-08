@@ -93,11 +93,12 @@ Page({
                       that.setData({
                         times:res.data.times + "次"
                       })
+                      console.log(that.data.times)
                     }
                   })
                   wx.showModal({
                     title: '订阅成功',
-                    content: '成绩将在出来后及时通知你，为方便后续多次成绩通知，建议多次点击成绩通知按钮并同意去增加通知次数，不然很可能会错过部分成绩通知',
+                    content: '成绩将在出来后及时通知你，为防止错过成绩通知，请点击成绩通知按钮增加通知次数(保证次数大于一次)',
                     showCancel: false,
                     success(res) {
                     }
