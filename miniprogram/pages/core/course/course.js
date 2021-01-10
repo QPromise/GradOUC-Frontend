@@ -14,13 +14,16 @@ Page({
     xq: "",
     teacher: "",
     type: "",
-    process:"",
+    process: "",
     index: 0,
     index2: 0,
-    arrDict:{},
-    school_require_credit:0.0,
-    select_credit:0.0,
-    get_credit:0.0
+    arrDict: {},
+    unplannedArrDict: {},
+    unplannedCourses: [],
+    loadFull: false,
+    school_require_credit: 0.0,
+    select_credit: 0.0,
+    get_credit: 0.0
   },
 
   /**
@@ -32,7 +35,7 @@ Page({
   },
 
   onShow: function () {
-    
+
   },
 
   /**
@@ -69,28 +72,28 @@ Page({
       method: 'POST',
       data: {
         openid: app.globalData.openId,
-        sno:app.cache.sno,
+        sno: app.cache.sno,
         passwd: app.cache.passwd
       },
-      header: { "Content-Type": "application/x-www-form-urlencoded" },
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
       success: function (res) {
         wx.hideLoading();
         //console.log("success", res);
         //console.log(res.data.courses);
-        if (res.data.message == "timeout"){
+        if (res.data.message == "timeout") {
           wx.showModal({
             title: '请求超时',
             content: '可能是研究生系统问题，请稍后重试',
             showCancel: false,
             success(res) {
               if (res.confirm) {
-                wx.navigateBack({
-                })
+                wx.navigateBack({})
               }
             }
           })
-        }
-        else if (res.data.message == "fault" && res.statusCode == 200) {
+        } else if (res.data.message == "fault" && res.statusCode == 200) {
           wx.showModal({
             title: "加载失败",
             content: '获取课表失败,请重新绑定后再试',
@@ -102,14 +105,12 @@ Page({
                   url: '../../my/login',
                 })
               }
-              if(res.cancel){
-                wx.navigateBack({
-                })
+              if (res.cancel) {
+                wx.navigateBack({})
               }
             }
           });
-        }
-        else if (res.data.message == "success" && res.statusCode == 200 && res.data.have_class == 0){
+        } else if (res.data.message == "success" && res.statusCode == 200 && res.data.have_class == 0) {
           wx.showModal({
             title: '提示',
             content: '当前没有课程',
@@ -122,95 +123,137 @@ Page({
               }
             }
           })
-        }
-        else if (res.data.message == "success" && res.statusCode == 200 && res.data.have_class == 1) {
-          var Eduarray = [];
+        } else if (res.data.message == "success" && res.statusCode == 200 && res.data.have_class == 1) {
+          let Eduarray = [];
           let arrDict = {};
-          for (var i = 0; i< res.data.courses.length; i++) {
+          let unplannedArrDict = {};
+          let unplannedCourses = [];
+          if (res.data.unplanned_courses.length > 0) {
+            that.setData({
+              unplannedCourses: res.data.unplanned_courses
+            })
+            for (var i = 0; i < res.data.unplanned_courses.length; i++) {
+              let key = res.data.unplanned_courses[i].xn + res.data.unplanned_courses[i].xq;
+              if (key == "") {
+                key = "其它";
+              }
+              unplannedArrDict[key] = [];
+            }
+            for (var i = 0; i < res.data.unplanned_courses.length; i++) {
+              var change = new Object();
+              change.name = that.isOver13(res.data.unplanned_courses[i].name);
+              change.id = res.data.unplanned_courses[i].id;
+              change.type = res.data.unplanned_courses[i].type;
+              change.process = res.data.unplanned_courses[i].process;
+              change.select = res.data.unplanned_courses[i].select;
+              change.credit = res.data.unplanned_courses[i].credit;
+              change.teacher = res.data.unplanned_courses[i].teacher;
+              change.xn = res.data.unplanned_courses[i].xn;
+              change.xq = res.data.unplanned_courses[i].xq;
+              unplannedCourses[i] = change;
+              let key = res.data.unplanned_courses[i].xn + res.data.unplanned_courses[i].xq;
+              if (key == "") {
+                key = "其它";
+              }
+              unplannedArrDict[key].push(change);
+            }
+            const orderedUnplannedArrDict = {};
+            Object.keys(unplannedArrDict).sort().forEach(function (key) {
+            orderedUnplannedArrDict[key] = unplannedArrDict[key];
+          });
+          that.setData({
+            unplannedArrDict: orderedUnplannedArrDict,
+          });
+          }
+          else{
+            that.setData({
+              unplannedCourses: res.data.unplanned_courses
+            })
+          }
+          for (var i = 0; i < res.data.courses.length; i++) {
             let key = res.data.courses[i].xn + res.data.courses[i].xq;
-            if (key == ""){
+            if (key == "") {
               key = "其它";
             }
             arrDict[key] = [];
           }
-          for (var i = 0; i< res.data.courses.length; i++) {
-              var change = new Object();
-              change.name = that.isOver16(res.data.courses[i].name);
-              change.id = res.data.courses[i].id;
-              change.type = res.data.courses[i].type;
-              change.process = res.data.courses[i].process;
-              change.select = res.data.courses[i].select;
-              change.credit = res.data.courses[i].credit;
-              change.teacher = res.data.courses[i].teacher;
-              change.xn = res.data.courses[i].xn;
-              change.xq = res.data.courses[i].xq;
-              Eduarray[i] = change;
-              let key = res.data.courses[i].xn + res.data.courses[i].xq;
-              if (key == ""){
-                key = "其它";
-              }
-              arrDict[key].push(change);
+          for (var i = 0; i < res.data.courses.length; i++) {
+            var change = new Object();
+            change.name = that.isOver13(res.data.courses[i].name);
+            change.id = res.data.courses[i].id;
+            change.type = res.data.courses[i].type;
+            change.process = res.data.courses[i].process;
+            change.select = res.data.courses[i].select;
+            change.credit = res.data.courses[i].credit;
+            change.teacher = res.data.courses[i].teacher;
+            change.xn = res.data.courses[i].xn;
+            change.xq = res.data.courses[i].xq;
+            Eduarray[i] = change;
+            let key = res.data.courses[i].xn + res.data.courses[i].xq;
+            if (key == "") {
+              key = "其它";
+            }
+            arrDict[key].push(change);
           }
           //console.log(Eduarray);
-         // console.log(arrDict);
-         if (res.data.get_credit == 0){
-          that.setData({
-            get_credit: res.data.get_credit
-          })
-          let i = 0;
-        numDH();
-        function numDH() {
-          if (i < Math.min(res.data.school_require_credit, res.data.select_credit)) {
-            setTimeout(function () {
-              that.setData({
-                school_require_credit: i,
-                select_credit: i
-              })
-              i++
-              numDH();
-            }, 20)
-          } else {
+          // console.log(arrDict);
+          if (res.data.get_credit == 0) {
             that.setData({
-              school_require_credit: res.data.school_require_credit,
-              select_credit:res.data.select_credit
+              get_credit: res.data.get_credit
             })
-          }
-        }
-        }
-        else{
-          let i = 0;
-        numDH();
-        function numDH() {
-          //console.log(res.data.get_credit, i < res.data.get_credit)
-          if (i < res.data.get_credit) {
-            setTimeout(function () {
-              that.setData({
-                school_require_credit: i,
-                get_credit: i,
-                select_credit: i
-              })
-              i++
-              numDH();
-            }, 20)
+            let i = 0;
+            numDH();
+            function numDH() {
+              if (i < Math.min(res.data.school_require_credit, res.data.select_credit)) {
+                setTimeout(function () {
+                  that.setData({
+                    school_require_credit: i,
+                    select_credit: i
+                  })
+                  i++
+                  numDH();
+                }, 20)
+              } else {
+                that.setData({
+                  school_require_credit: res.data.school_require_credit,
+                  select_credit: res.data.select_credit
+                })
+              }
+            }
           } else {
-            that.setData({
-              school_require_credit: res.data.school_require_credit,
-              get_credit: res.data.get_credit,
-              select_credit:res.data.select_credit
-            })
+            let i = 0;
+            numDH();
+            function numDH() {
+              //console.log(res.data.get_credit, i < res.data.get_credit)
+              if (i < res.data.get_credit) {
+                setTimeout(function () {
+                  that.setData({
+                    school_require_credit: i,
+                    get_credit: i,
+                    select_credit: i
+                  })
+                  i++
+                  numDH();
+                }, 20)
+              } else {
+                that.setData({
+                  school_require_credit: res.data.school_require_credit,
+                  get_credit: res.data.get_credit,
+                  select_credit: res.data.select_credit
+                })
+              }
+            }
           }
-        }
-        }
-         const orderedArrDict = {}; 
-         Object.keys(arrDict).sort().forEach(function(key) { orderedArrDict[key] = arrDict[key]; });
+          const orderedArrDict = {};
+          Object.keys(arrDict).sort().forEach(function (key) {
+            orderedArrDict[key] = arrDict[key];
+          });
           that.setData({
-            arrDict:orderedArrDict,
+            arrDict: orderedArrDict,
+            loadFull: true
           });
 
-
-          
-        }
-        else if (res.data.message == "success" && res.statusCode == 200 && res.data.have_class == 2) {
+        } else if (res.data.message == "success" && res.statusCode == 200 && res.data.have_class == 2) {
           wx.showModal({
             title: '提示',
             content: '研究生系统【我的课程】目前无法访问',
@@ -223,8 +266,7 @@ Page({
               }
             }
           })
-        }
-        else if (res.data.message == "fault" && res.statusCode != 200) {
+        } else if (res.data.message == "fault" && res.statusCode != 200) {
           wx.showModal({
             title: '提示',
             content: '研究生系统目前无法访问',
@@ -237,8 +279,7 @@ Page({
               }
             }
           })
-        }
-        else{
+        } else {
           wx.showModal({
             title: '提示',
             content: '可能是您的网络或者服务器出了问题，请稍后重试',
@@ -263,7 +304,7 @@ Page({
           success: function (res) {
             if (res.confirm) {
               wx.navigateBack({
-                
+
               })
             }
           }
@@ -276,11 +317,10 @@ Page({
     });
 
   },
-  isOver16: function (str) {
-    if (str.length > 16) {
-      return str.substring(0, 15) + "...";
-    }
-    else return str;
+  isOver13: function (str) {
+    if (str.length > 13) {
+      return str.substring(0, 12) + "...";
+    } else return str;
   },
   showdetail: function (e) {
     //console.log(e);
@@ -306,7 +346,7 @@ Page({
       xn: xn,
       xq: xq,
       teacher: teacher,
-      process:process
+      process: process
     })
   },
   confirm: function () {
