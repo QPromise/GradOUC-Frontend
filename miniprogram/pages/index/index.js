@@ -234,7 +234,7 @@ Page({
             let content = '你的成绩通知订阅已经失效，订阅一次的有效期为七天，请订阅成绩通知'
             if (res.data.times == 1){
               title = '提示'
-              content = '你的成绩通知订阅次数只有【1】次，请订阅成绩通知增加次数'
+              content = '你的成绩通知订阅次数只有[1]次，请订阅成绩通知增加次数'
             }
             else{
               title = '订阅失效'
@@ -320,7 +320,7 @@ Page({
                 } else if (res.cancel) {
                   wx.showModal({
                     title: '提示',
-                    content: '是否要关闭提示，关闭之后成绩通知订阅失效将不能通知你',
+                    content: '关闭后无法重新开启，当订阅「只剩1次」及「失效」的时候将不能通知你',
                     showCancel: true,
                     confirmText: '确定关闭',
                     cancelText: '不关闭',
