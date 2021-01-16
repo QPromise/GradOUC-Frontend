@@ -1,4 +1,9 @@
 /**login.wxss**/
+.user-agreement {
+  text-align: center;
+  font-size: 10pt;
+  color: #bbb;
+}
 .remind-box {
   flex: 1;
   display: flex;

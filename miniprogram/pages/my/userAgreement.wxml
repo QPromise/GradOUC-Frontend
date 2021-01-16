@@ -1,0 +1,7 @@
+<!--miniprogram/pages/my/userAgreement.wxml-->
+<cu-custom isBack="{{true}}">
+	<view slot="content" style="color:white;font-weight:bold;">用户协议</view>
+</cu-custom>
+<view style='padding:0 3%;margin-top:1rpx;'>
+  <wemark md="{{content}}" link highlight type="wemark"></wemark>
+</view>

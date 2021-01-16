@@ -46,7 +46,7 @@
 
 <view class="bg-white padding-lr">
  <view class="flex padding justify-center" style="padding:3rpx;">
-      <view class="bg-grey padding-sm margin-xs radius" style="padding:2px 6px 2px 6px;">{{key}}</view>
+      <view class="bg-gray padding-sm margin-xs radius" style="width:40%;text-align:center;padding:4px;">{{key}}</view>
 </view>
 <block wx:for="{{value}}"wx:for-index="index" wx:for-item="item" wx:key="item.index">
 <view class="cu-bar bg-white"style="min-height:50rpx;" bindtap='showdetail' data-id='{{item.id}}' data-name='{{item.name}}' data-xq='{{item.xq}}' data-xn='{{item.xn}}' data-select='{{item.select}}' data-teacher='{{item.teacher}}' data-credit='{{item.credit}}' data-type='{{item.type}} 'data-process='{{item.process}}'>
@@ -78,7 +78,7 @@
 <view wx:if="{{unplannedCourses.length == 0}}">
 <view class="bg-white padding-lr">
  <view class="flex padding justify-center" style="padding:3rpx;">
-      <view class="bg-grey padding-sm margin-xs radius" style="padding:2px 6px 2px 6px;">没有计划外的课程</view>
+      <view class="bg-gray padding-sm margin-xs radius" style="padding:4px;"><text class="cuIcon-info text-sm" style="margin-right:5rpx;"></text>没有计划外的课程</view>
 </view>
 </view>
 </view>
@@ -86,7 +86,7 @@
 <view wx:for="{{unplannedArrDict}}" wx:for-index="key"  wx:for-item="value">
 <view class="bg-white padding-lr">
  <view class="flex padding justify-center" style="padding:3rpx;">
-      <view class="bg-grey padding-sm margin-xs radius" style="padding:2px 6px 2px 6px;">{{key}}</view>
+      <view class="bg-gray padding-sm margin-xs radius" style="width:40%;text-align:center;padding:4px;">{{key}}</view>
 </view>
 <block wx:for="{{value}}"wx:for-index="index" wx:for-item="item" wx:key="item.index">
 <view class="cu-bar bg-white"style="min-height:50rpx;" bindtap='showdetail' data-id='{{item.id}}' data-name='{{item.name}}' data-xq='{{item.xq}}' data-xn='{{item.xn}}' data-select='{{item.select}}' data-teacher='{{item.teacher}}' data-credit='{{item.credit}}' data-type='{{item.type}} 'data-process='{{item.process}}'>

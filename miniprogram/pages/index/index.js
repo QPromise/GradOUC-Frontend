@@ -515,6 +515,17 @@ goSchedule:function(){
       that.showNeedBind();
     }
   },
+  goExam: function () {
+    var that = this;
+    if (that.data.is_bind) {
+      wx.navigateTo({
+        url: '../core/exam/exam',
+      })
+    }
+    else {
+      that.showNeedBind();
+    }
+  },
   goProfile: function () {
     var that = this;
     if (that.data.is_bind) {
@@ -569,6 +580,12 @@ goSchedule:function(){
     wx.navigateTo({
       url: '../core/news/news',
     })
+  },
+  goLife: function () {
+    wx.navigateToMiniProgram({
+      appId: 'wxb036cafe2994d7d0',
+      path: '/portal/group-profile/group-profile?group_id=13104377280441629&invite_ticket=BgAAWyBp197_I9ZvBKuql_NvRg&fromScene=bizArticle',
+    });
   },
   navArticle: function (e) {
     wx.navigateTo({

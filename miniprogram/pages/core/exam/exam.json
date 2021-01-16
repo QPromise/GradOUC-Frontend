@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "jun-modal": "../../../components/jun-modal/jun-modal",
+    "cu-custom": "../../../utils/colorui/components/cu-custom"
+  },
+  "enablePullDownRefresh": true,
+  "backgroundTextStyle":"dark"
+}

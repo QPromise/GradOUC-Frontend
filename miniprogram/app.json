@@ -23,7 +23,9 @@
     "pages/profile/profile",
     "pages/tools/tools",
     "pages/tools/who/who",
-    "pages/tools/tiangou/tiangou"
+    "pages/tools/tiangou/tiangou",
+    "pages/my/userAgreement",
+    "pages/core/exam/exam"
   ],
   "window": {
     "backgroundTextStyle": "light",

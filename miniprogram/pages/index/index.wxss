@@ -10,6 +10,9 @@ page {
 .cu-list.grid>.cu-item text{
   color:black;
 }
+.cu-list.grid.no-border{
+  padding:15rpx 10rpx;
+}
 .app-icon{
   margin-top: 10rpx;
   text-align: center;

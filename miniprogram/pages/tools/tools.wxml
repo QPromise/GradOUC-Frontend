@@ -27,6 +27,15 @@
       </view>
       <text>我的成绩</text>
     </view>
+    <view class="cu-item" bindtap="goExam">
+      <view class="app-icon">
+        <image mode="widthFix" src="/images/core/exam.png"></image>
+        <view class="cu-tag badge">
+          <block>新</block>
+        </view>
+      </view>
+      <text>我的考试</text>
+    </view>
     <view class="cu-item"  bindtap="goProfile">
       <view class="app-icon">
         <image mode="widthFix" src="/images/core/profile.png"></image>
@@ -45,7 +54,6 @@
     <text class='title'>校园生活</text>
   </view>
     <view class="cu-list grid col-5 no-border tools">
-
        <view class="cu-item" bindtap="goLibrary">
       <view class="app-icon">
         <image mode="widthFix" src="/images/core/library.png"></image>
@@ -59,6 +67,7 @@
       </view>
       <text>校园导览</text>
     </view>
+
     <view class="cu-item" bindtap="goCar">
       <view class="app-icon">
         <image mode="widthFix" src="/images/core/car.png"></image>
@@ -68,11 +77,30 @@
     <view class="cu-item" bindtap="goCalendar">
       <view class="app-icon">
         <image mode="widthFix" src="/images/core/calendar.png"></image>
+      </view>
+      <text>校 历</text>
+    </view>
+       <!-- <view class="cu-item"  bindtap="goLostAndFound">
+      <view class="app-icon">
+        <image mode="widthFix" src="/images/core/lost_found.png"></image>
+      </view>
+      <text>失物招领</text>
+    </view>
+       <view class="cu-item"  bindtap="goIdle">
+      <view class="app-icon">
+        <image mode="widthFix" src="/images/core/idle.png"></image>
+      </view>
+      <text>闲置交易</text>
+    </view> -->
+
+               <view class="cu-item"  bindtap="goLife">
+      <view class="app-icon">
+        <image mode="widthFix" src="/images/core/life.png"></image>
         <view class="cu-tag badge">
           <block>新</block>
         </view>
       </view>
-      <text>校 历</text>
+      <text>海小圈</text>
     </view>
   </view>
 

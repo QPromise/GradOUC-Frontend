@@ -173,6 +173,11 @@ Page({
       this.hideHelp();
     }
   },
+  goUserAgreement: function(e){
+    wx.navigateTo({
+      url: './userAgreement',
+    })
+  },
   showPasswd: function (e) {
     var that = this;
     if (that.data.is_hide_passwd) {

@@ -1,0 +1,33 @@
+/* miniprogram/pages/core/exam/exam.wxss */
+@import "../../../utils/colorui/main.wxss";
+@import "../../../utils/colorui/icon.wxss";
+page{
+  background-color:white;
+}
+.other_condition{
+  text-align: center;
+  color: grey;
+  font-size: 27rpx; 
+  padding: 50rpx 30rpx
+}
+
+.modal-hang{
+  display: flex;
+  flex-direction: row;
+  margin-top: 10rpx;
+}
+.modal-hang-left{
+  display: flex;
+  flex: 1;
+  /* border-bottom: 1px darkgray solid; */
+  /* 右对齐，不知道为什么text-align:right不行 */
+  justify-content:flex-end;
+}
+.modal-hang-right{
+  display: flex;
+  flex: 1;
+  /* border-bottom: 1px darkgray solid; */
+  padding-left: 5rpx;
+  justify-content:flex-start;
+}
+
