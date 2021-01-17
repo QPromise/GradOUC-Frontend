@@ -6,7 +6,7 @@
   <view>点击<text class="cuIcon-more"></text>添加到我的小程序  <text class="cuIcon-close" bindtap="closeAddTip"></text></view>
   <view>微信下拉就能找到我啦</view>
 </view>
-<view class="container">
+
   <view class="user-info-box">
   <block wx:if="{{is_bind}}">
       <view class="user-info">
@@ -125,12 +125,31 @@
     </view>
     </view>
   </view>
-  </view>
-    
-
-  <navigator url="/pages/my/login" class="login-btn">
+    <navigator url="/pages/my/login" class="login-btn">
     <text wx:if="{{is_bind}}">切换绑定</text>
     <text wx:else>立即绑定</text>
   </navigator>
-
+   <view class="padding" style="margin-top:5rpx;text-align:center;">
+      <text class="text-gray">使用【研在OUC】即代表你同意</text>
+      <view class="padding-xs" style="margin-top:5rpx;">
+      <text style="color:#009cff;" bindtap="openUserAgreement" catchtouchmove="preventTouchMove">《用户协议》</text>
+      </view>
+  </view>
+ 
+  <view class="cu-modal {{showUserAgreement?'show':''}}" style="font-size: 29rpx;  z-index: 99999999999999;background: rgba(0, 0, 0, 0.3);" catchtouchmove="preventTouchMove">
+	<view class="cu-dialog">
+		<view class="cu-bar bg-white justify-end">
+			<view class="content" style="font-size:33rpx">用户协议</view>
+		</view>
+		<view class="padding-xl" style="text-align: left;">
+			<scroll-view scroll-y style="height: 40vh;">
+				<rich-text style="line-height:36rpx" nodes="{{userAgreement}}" type="text" space="nbsp"></rich-text>
+			</scroll-view>
+		</view>
+		<view class="cu-bar bg-white">
+			<view class="action margin-0 flex-sub  text-green solid-left" bindtap="closeUserAgreement" style="font-size:33rpx">关闭</view>
+		</view>
+	</view>
 </view>
+</view>
+

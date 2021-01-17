@@ -24,7 +24,6 @@
     "pages/tools/tools",
     "pages/tools/who/who",
     "pages/tools/tiangou/tiangou",
-    "pages/my/userAgreement",
     "pages/core/exam/exam",
     "pages/test/test"
   ],

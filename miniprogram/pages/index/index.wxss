@@ -10,7 +10,7 @@ page {
 .swiper_container {
   background-color: white;
   color:gray;
-  height: 40rpx;
+  height: 34rpx;
   width: 100%;
  }
   

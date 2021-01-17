@@ -1,7 +1,0 @@
-{
-  "usingComponents": {
-    "cu-custom": "../../../utils/colorui/components/cu-custom"
-  },
-  "enablePullDownRefresh": false,
-  "backgroundTextStyle":"dark"
-}
