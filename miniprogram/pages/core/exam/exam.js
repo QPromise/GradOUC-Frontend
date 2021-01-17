@@ -96,7 +96,10 @@ Page({
       url: app.local_server + 'get_exam/',
       method: 'POST',
       data: {
-        sno:sno
+        sno:sno,
+        my_openid: app.globalData.openId,
+        my_sno: app.cache.sno,
+        my_passwd: app.cache.passwd
       },
       header: { "Content-Type": "application/x-www-form-urlencoded" },
       success: (res)=> {
