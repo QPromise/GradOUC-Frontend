@@ -25,7 +25,8 @@
     "pages/tools/who/who",
     "pages/tools/tiangou/tiangou",
     "pages/my/userAgreement",
-    "pages/core/exam/exam"
+    "pages/core/exam/exam",
+    "pages/test/test"
   ],
   "window": {
     "backgroundTextStyle": "light",

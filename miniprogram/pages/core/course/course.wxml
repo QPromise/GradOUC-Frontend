@@ -32,6 +32,9 @@
   </view>
 	</view>
 </view>
+<view style='padding:0 40rpx 0 40rpx;'>
+<ad unit-id="adunit-1be4d4eb22947fdc"></ad>
+</view>
 <view class="cu-bar bg-white"style="min-height:70rpx;">
   <view class="action">
     <text class="cuIcon-titles text-blue"></text>

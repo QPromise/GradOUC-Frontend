@@ -20,7 +20,7 @@ Page({
     loading:false,
     content: "",
     showTodayInfo:"",
-    useNews:[{ url: "url", title: "欢迎最棒的你使用研在OUC！" }],
+    useNews:[{ url: "url", title: "欢迎使用研在OUC！" }],
     todayArr:["周一","周二","周三","周四","周五","周六","周日"]
   },
 
@@ -90,7 +90,7 @@ Page({
         }
         else{
           that.setData({
-            useNews:[{ url: "url", title: "欢迎最棒的你使用研在OUC！" }]
+            useNews:[{ url: "url", title: "欢迎使用研在OUC！" }]
           })
         }
       },

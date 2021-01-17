@@ -45,7 +45,9 @@
     <button class="cu-btn  line-theme margin-left-xl margin-right-xl" bindtap="showModal" data-target="DialogModal1">查询</button>
   </view>
 
-
+<view style='padding:0 40rpx 0 40rpx;margin-top:40rpx;'>
+<ad unit-id="adunit-e323f9e9e7e49c5e"></ad>
+</view>
 
 <view class="cu-modal {{modalName=='DialogModal1'?'show':''}}">
   <view class="cu-dialog">

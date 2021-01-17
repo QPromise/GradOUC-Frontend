@@ -1,0 +1,10 @@
+<!--miniprogram/pages/test/test.wxml-->
+<cu-custom isBack="{{true}}" >
+	<view slot="content" style="color:white;font-weight:bold;">测试空间</view>
+</cu-custom>
+<view>
+<ad unit-id="adunit-70d16ae53f906da5" ad-type="video" ad-theme="white"></ad>
+<ad unit-id="adunit-1feebb7c646fc4e9" ad-type="grid" grid-opacity="0.8" grid-count="5" ad-theme="white"></ad>
+<ad unit-id="adunit-1be4d4eb22947fdc"></ad>
+</view>
+

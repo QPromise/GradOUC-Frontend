@@ -6,11 +6,11 @@ Page({
    * 页面的初始数据
    */
   data: {
-    sno:null,
-    name:"",
-    profession:"",
-    research:"",
-    supervisor:""
+    sno: null,
+    name: "",
+    profession: "",
+    research: "",
+    supervisor: ""
   },
 
   /**
@@ -38,6 +38,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+
   },
   getProfile: function () {
     var that = this;
@@ -46,27 +47,27 @@ Page({
       method: 'POST',
       data: {
         openid: app.globalData.openId,
-        sno:app.cache.sno,
+        sno: app.cache.sno,
         passwd: app.cache.passwd
       },
-      header: { "Content-Type": "application/x-www-form-urlencoded" },
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
       success: function (res) {
         //console.log("success", res);
         //console.log(res.data.info);
-        if (res.data.message == "timeout"){
+        if (res.data.message == "timeout") {
           wx.showModal({
             title: '请求超时',
             content: '可能是研究生系统问题，请稍后重试',
             showCancel: false,
             success(res) {
               if (res.confirm) {
-                wx.navigateBack({
-                })
+                wx.navigateBack({})
               }
             }
           })
-        }
-        else if (res.data.message == "fault" && res.statusCode == 200) {
+        } else if (res.data.message == "fault" && res.statusCode == 200) {
           wx.showModal({
             title: "加载失败",
             content: '获取信息失败,请重新绑定后再试',
@@ -78,14 +79,12 @@ Page({
                   url: '../../my/login',
                 })
               }
-              if(res.cancel){
-                wx.navigateBack({
-                })
+              if (res.cancel) {
+                wx.navigateBack({})
               }
             }
           });
-        }
-        else if (res.data.message == "success" && res.statusCode == 200 && res.data.have_info == 0){
+        } else if (res.data.message == "success" && res.statusCode == 200 && res.data.have_info == 0) {
           wx.showModal({
             title: '提示',
             content: '当前没有个人信息',
@@ -98,17 +97,15 @@ Page({
               }
             }
           })
-        }
-        else if (res.data.message == "success" && res.statusCode == 200 && res.data.have_info == 1) {
+        } else if (res.data.message == "success" && res.statusCode == 200 && res.data.have_info == 1) {
           let info = res.data.info
           that.setData({
             name: info["name"],
-            profession:info["profession"],
-            research:info["research"],
-            supervisor:info["supervisor"]
+            profession: info["profession"],
+            research: info["research"],
+            supervisor: info["supervisor"]
           })
-        }
-        else if (res.data.message == "success" && res.statusCode == 200 && res.data.have_info == 2) {
+        } else if (res.data.message == "success" && res.statusCode == 200 && res.data.have_info == 2) {
           that.setData({
             have_info: res.data.have_info
           })
@@ -124,8 +121,7 @@ Page({
               }
             }
           })
-        }
-        else if (res.data.message == "fault" && res.statusCode != 200) {
+        } else if (res.data.message == "fault" && res.statusCode != 200) {
           that.setData({
             have_info: res.data.have_info
           })
@@ -141,8 +137,7 @@ Page({
               }
             }
           })
-        }
-        else{
+        } else {
           app.showFailBackModel()
         }
       },

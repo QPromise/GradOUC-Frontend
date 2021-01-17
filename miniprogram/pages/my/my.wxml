@@ -100,7 +100,15 @@
       </view>
     </navigator>
 
-
+     <navigator url="/pages/test/test" class="about-link">
+      <view class="more-btn">
+        <image class="btn-icon" src="/images/my/test.png"></image>
+        <text class="btn-text">测试空间</text>
+        <view class="btn-open">
+            <image class="btn-enter" src="/images/enter.png"></image>
+        </view>
+      </view>
+    </navigator>
     <view url="" class="about-link">
     <view wx:if="{{is_open_subscribe == 1}}">
     <view wx:if="{{is_bind}}" class="more-btn">

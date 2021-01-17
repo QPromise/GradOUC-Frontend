@@ -32,4 +32,8 @@
 			</view>
 			<image src='https://raw.githubusercontent.com/weilanwl/ColorUI/master/demo/images/wave.gif' mode='scaleToFill' class='gif-wave'></image>
 		</view>
+		   <view style='margin-top:15rpx;'>
+			<ad unit-id="adunit-fd61b1cb094c221e"></ad>
+			</view>
+			
 	</view>
