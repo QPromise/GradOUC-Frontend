@@ -7,6 +7,19 @@ page {
   color: #f6f6f6;
   position: relative;
 }
+.swiper_container {
+  background-color: white;
+  color:gray;
+  height: 40rpx;
+  width: 100%;
+ }
+  
+ .swiper_item {
+  font-size: 27rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+ }
 .cu-list.grid>.cu-item text{
   color:black;
 }

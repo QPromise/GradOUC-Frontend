@@ -20,7 +20,7 @@ Page({
     arrDict: {},
     unplannedArrDict: {},
     unplannedCourses: [],
-    loadFull: false,
+    loading: false,
     school_require_credit: 0.0,
     select_credit: 0.0,
     get_credit: 0.0
@@ -37,7 +37,20 @@ Page({
   onShow: function () {
 
   },
-
+  /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh: function () {
+    let that = this
+    wx.showNavigationBarLoading() 
+    that.refreshEDU()
+    //模拟加载
+    setTimeout(function () {
+      wx.hideNavigationBarLoading(); //完成停止加载
+      wx.stopPullDownRefresh(); //停止下拉刷新
+    })
+  
+  },
   /**
    * 用户点击右上角分享
    */
@@ -51,15 +64,6 @@ Page({
   //课程刷新
   refreshEDU: function () {
     var that = this;
-    //显示等待提示
-    // wx.showToast({
-    //   title: '正在获取课程',
-    //   icon: 'loading',
-    //   duration: 15000
-    // });
-    wx.showLoading({
-      title: '课程加载中',
-    })
     that.requestEDU();
 
   },
@@ -67,6 +71,12 @@ Page({
   //请求单独作为一个方法
   requestEDU: function () {
     var that = this;
+    wx.showLoading({
+      title: '课程加载中',
+    })
+    that.setData({
+      loading:true
+    })
     wx.request({
       url: app.local_server + 'get_course/',
       method: 'POST',
@@ -250,7 +260,6 @@ Page({
           });
           that.setData({
             arrDict: orderedArrDict,
-            loadFull: true
           });
 
         } else if (res.data.message == "success" && res.statusCode == 200 && res.data.have_class == 2) {
@@ -312,7 +321,9 @@ Page({
 
       },
       complete: function (res) {
-        //console.log("complete", res);
+        that.setData({
+          loading:false
+        })
       }
     });
 

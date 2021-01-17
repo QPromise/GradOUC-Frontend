@@ -11,7 +11,7 @@ Page({
     nickName: '',
     avatarUrl: '',
     isCanDraw: false,
-    loadFull:false,
+    loading:false,
     hiddenmodalput: true,
     name: "",
     help_status: false,
@@ -125,7 +125,20 @@ Page({
   onShow: function () {
   
   },
-
+  /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh: function () {
+    let that = this
+    wx.showNavigationBarLoading() 
+    that.refreshCJ()
+    //模拟加载
+    setTimeout(function () {
+      wx.hideNavigationBarLoading(); //完成停止加载
+      wx.stopPullDownRefresh(); //停止下拉刷新
+    })
+  
+  },
   /**
    * 用户点击右上角分享
    */
@@ -238,14 +251,17 @@ Page({
   //成绩刷新
   refreshCJ: function () {
     var that = this
-    wx.showLoading({
-      title: '成绩加载中',
-    })
     that.requestCJ()
   },
   //成绩请求单独作为一个方法
   requestCJ: function () {
     var that = this;
+    that.setData({
+      loading:true
+    })
+    wx.showLoading({
+      title: '成绩加载中',
+    })
     wx.request({
       url: app.local_server + 'get_score/',
       method: 'POST',
@@ -330,7 +346,6 @@ Page({
           that.setData({
             arraycj: Eduarray,
             legalCourseLen: legalCourseLen,
-            loadFull:true
           });
           that.cacheScore(res.data.courses, res.data.mean);
         }
@@ -401,7 +416,10 @@ Page({
         
       },
       complete: function (res) {
-        wx.hideLoading();  
+        wx.hideLoading(); 
+        that.setData({
+          loading:false
+        }) 
       }
     });
   },

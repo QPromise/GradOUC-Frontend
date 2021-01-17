@@ -4,6 +4,6 @@
   "wux-prompt": "../../../components/prompt2/index",
   "share-box": "../../../components/shareBox/index"
 },
-  "enablePullDownRefresh": false,
-  "onReachBottomDistance": 0
+"enablePullDownRefresh": true,
+"backgroundTextStyle":"dark"
 }

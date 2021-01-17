@@ -49,11 +49,10 @@ Page({
   // 现在是否大于指定的时间
   cmpDate: function () { 
     var now = parseInt(Date.parse(new Date()) / 1000)
-    //console.log(now)
     var date = parseInt(app.cache.begin_day)
-    //console.log(date)
     return now > date
   },
+  
   //加载页面
   onLoad: function () {
     var that = this;

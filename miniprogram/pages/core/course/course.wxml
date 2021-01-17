@@ -1,7 +1,7 @@
 <cu-custom isBack="{{true}}" >
 	<view slot="content" style="color:white;font-weight:bold;">我的课程</view>
 </cu-custom>
-<view wx:if="{{loadFull}}">
+<view wx:if="{{!loading}}">
 <view class="cu-bar bg-white" style="min-height:70rpx;">
   <view class="action">
    <text class="cuIcon-titles text-blue"></text>

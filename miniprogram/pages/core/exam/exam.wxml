@@ -8,17 +8,25 @@
       <view class="bg-gray padding-sm margin-xs radius" style="text-align:center;padding:10px;">{{name}}</view>
 </view>
 <block wx:for="{{exams}}"wx:for-index="index" wx:for-item="item" wx:key="item.index">
+<view style="opacity:{{item.over ?'0.5':'1'}}">
 <view class="cu-bar bg-white"style="min-height:40rpx;" bindtap='showdetail' data-sno='{{item.sno}}' data-department='{{item.department}}' data-profession='{{item.profession}}' data-course_num='{{item.course_num}}' data-course_name='{{item.course_name}}' data-area='{{item.area}}' data-room_num='{{item.room_num}}' data-seat_num='{{item.seat_num}}' data-build='{{item.build}}' data-room='{{item.room}}' data-time='{{item.time}}'>
   <view class="action">
     <view class="cu-tag sm bg-blue" style="margin-right:5rpx">{{index + 1}}</view>
     <view class="text-df">{{item.course_name}}</view>
   </view>
+  <view class="text" style="margin-right:30rpx" wx:if="{{item.over}}">
+   <text class="cuIcon-title text-grey" style="margin-right:3rpx"></text>已结束
+   </view>
+   <view class="text" style="margin-right:30rpx" wx:if="{{!item.over}}">
+   <text class="cuIcon-title text-blue" style="margin-right:3rpx"></text>未结束
+   </view>
 </view>
 <view style="margin-bottom: 10px" class="padding-lr bg-white" bindtap='showdetail'  data-sno='{{item.sno}}' data-department='{{item.department}}' data-profession='{{item.profession}}' data-course_num='{{item.course_num}}' data-course_name='{{item.course_name}}' data-area='{{item.area}}' data-room_num='{{item.room_num}}' data-seat_num='{{item.seat_num}}' data-build='{{item.build}}' data-room='{{item.room}}' data-time='{{item.time}}'>
   <view class="cu-item" style="margin:10rpx 0rpx"><view class="content"><text class="cuIcon-location text-blue" style="margin-right:3rpx"></text><text class="text-grey">第{{item.room_num}}考场: {{item.build}} · {{item.room}} </text></view></view>
   <view class="cu-item" style="margin:10rpx 0rpx"><view class="content"><text class="cuIcon-people text-blue" style="margin-right:3rpx"></text><text class="text-grey">座号: {{item.seat_num}}</text></view></view>
   <view class="cu-item solid-bottom" style="margin:10rpx 0rpx; padding:0 0 6rpx 0"><view class="content"><text class="cuIcon-time text-blue" style="margin-right:3rpx"></text><text class="text-grey">时间: {{item.time}}</text></view></view>
   <!-- <view class="text-left text-sm text-grey padding solid-bottom" style="padding-top:5rpx;padding-bottom:15rpx;">{{item.teacher}} · {{item.select}} · {{item.type}} · {{item.credit}}学分</view> -->
+</view>
 </view>
 </block>
 <view wx:if="{{exams.length<=0 && !loading}}" class="other_condition">
@@ -33,8 +41,8 @@
 
 
 <view class="options text-center" wx:if="{{!loading}}">
-    <button class="cu-btn line-yellow margin-left-xl margin-right-xl" open-type="feedback">有问题</button>
-    <button class="cu-btn  line-theme margin-left-xl margin-right-xl" bindtap="showModal" data-target="DialogModal1">查别人</button>
+    <button class="cu-btn line-yellow margin-left-xl margin-right-xl" open-type="feedback">反馈</button>
+    <button class="cu-btn  line-theme margin-left-xl margin-right-xl" bindtap="showModal" data-target="DialogModal1">查询</button>
   </view>
 
 

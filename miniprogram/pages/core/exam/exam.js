@@ -36,9 +36,14 @@ Page({
     // console.log(wx.getStorageSync(app.cache.sno + 'exams'))
     // console.log(wx.getStorageSync(app.cache.sno + 'exam') == "")
     if (wx.getStorageSync(app.cache.sno + 'exams')){
-      that.setData({
-        exams:wx.getStorageSync(app.cache.sno + 'exams')
-      })
+      let tmp_exams = wx.getStorageSync(app.cache.sno + 'exams')
+          for(let i = 0; i < tmp_exams.length; i++){
+            let cur_date = that.dateTransfer(tmp_exams[i].time)
+            tmp_exams[i]["over"] = that.cmpDate(cur_date)
+          }
+          that.setData({
+            exams:tmp_exams,
+          }) 
     }
     else{
       that.getExam(app.cache.sno);
@@ -56,6 +61,29 @@ Page({
       that.getExam(that.data.snoName)
     }
   },
+  // 现在是否大于指定的时间
+  cmpDate: function (date) { 
+    var now = parseInt(Date.parse(new Date()) / 1000)
+    var date = parseInt(Date.parse(date) / 1000)
+    return now > date
+  },
+  dateTransfer:function(str){
+    let year = str.split("年")[0]
+    str = str.split("年")[1]
+    let month = str.split("月")[0]
+    if(month < 10){
+    month = "0" + month
+    }
+    str = str.split("月")[1]
+    let day = str.split("日")[0]
+    if(day < 10){
+    day = "0" + day
+    }
+    str = str.split("日")[1]
+    let time = str.split("-")[1]
+    let date = year + "-" + month + "-" + day + " " + time + ":00"
+    return date
+},
   getExam:function(sno){
     let that = this
     that.setData({
@@ -87,6 +115,10 @@ Page({
         }
         else if(res.data.message == "success" && res.statusCode == 200) {
           let tmp_exams = res.data.exams
+          for(let i = 0; i < tmp_exams.length; i++){
+            let cur_date = that.dateTransfer(tmp_exams[i].time)
+            tmp_exams[i]["over"] = that.cmpDate(cur_date)
+          }
           that.setData({
             exams:tmp_exams,
           }) 
@@ -104,6 +136,7 @@ Page({
         }
         else if(res.data.message == "empty" && res.statusCode == 200) {
           let tmp_exams = res.data.exams
+    
           that.setData({
             exams:tmp_exams,
           }) 

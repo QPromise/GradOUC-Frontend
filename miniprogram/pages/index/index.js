@@ -20,6 +20,7 @@ Page({
     loading:false,
     content: "",
     showTodayInfo:"",
+    useNews:[{ url: "url", title: "欢迎最棒的你使用研在OUC！" }],
     todayArr:["周一","周二","周三","周四","周五","周六","周日"]
   },
 
@@ -39,6 +40,7 @@ Page({
     this.guide();
     this.getDay();
     this.getTodayCourse();
+   
   },
 
   /**
@@ -54,7 +56,7 @@ Page({
     var that = this;
     that.getnews();//当重新回到此页面时，再次请求
     that.getIsOpenSubscribe();
-    
+    that.getRecentlyUse();
   },
    /** 下拉刷新 */
    onPullDownRefresh:function(){
@@ -69,10 +71,29 @@ Page({
     that.getnews()
     that.getIsOpenSubscribe()
     that.getTodayCourse()
+    that.getRecentlyUse()
     //模拟加载
     setTimeout(function () {
       wx.hideNavigationBarLoading(); //完成停止加载
       wx.stopPullDownRefresh(); //停止下拉刷新
+    })
+  },
+  getRecentlyUse: function(){
+    let that = this
+    wx.request({
+      url: app.local_server + 'get_recently_use/',
+      success: function (res) {
+        if (res.data.message == "success"){
+          that.setData({
+            useNews:res.data.use_news
+          })
+        }
+        else{
+          that.setData({
+            useNews:[{ url: "url", title: "欢迎最棒的你使用研在OUC！" }]
+          })
+        }
+      },
     })
   },
   getWeek:function(begin_day){

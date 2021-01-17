@@ -17,7 +17,20 @@
       </swiper>
     </view>
   </view>
- <view class="contain">
+   <view class="padding-sm bg-white" style="padding:20rpx 10rpx 10rpx 10rpx">
+      <view class="bg-white text">
+       <swiper class="swiper_container" vertical="true" autoplay="true" circular="true" interval="3000">
+        <block wx:for="{{useNews}}">
+        <navigator url="/pages/index/index?title={{item.url}}" open-type="navigate">
+          <swiper-item>
+          <view class="swiper_item"><text class="cuIcon-notification text-blue" style="margin-right:10rpx;"></text>{{item.title}}</view>
+          </swiper-item>
+        </navigator>
+        </block>
+        </swiper>
+      </view>
+</view>
+ <view class="contain" style="margin-top:8rpx;">
   <view class="cu-list grid col-5 no-border tools">
     <view class="cu-item" bindtap="goSchedule">
       <view class="app-icon">
@@ -110,10 +123,14 @@
     </view>
   </view>
   </view>
-<view class="bg-img" bindtap="goLife" style="padding:0rpx 0 10rpx 0;text-align: center;background-color: white;margin: 0rpx 0rpx 0rpx 0rpx;">
+<!-- <view class="bg-img" bindtap="goLife" style="padding:0rpx 0 10rpx 0;text-align: center;background-color: white;margin: 0rpx 0rpx 0rpx 0rpx;">
 <image mode="widthFix" style="height:auto" src="/images/core/go_life.png"></image>
-</view>
-  <view class="cu-bar bg-white arrow"style="min-height:70rpx;margin-top:10rpx;">
+</view> -->
+
+
+
+
+  <view class="cu-bar bg-white arrow"style="min-height:70rpx;margin-top:8rpx;">
   <view class="action">
     <text class="cuIcon-titles text-blue" style="margin-left:-0.9em;margin-right:0.1em;"></text>
       <text class="text-bold">今日课表</text>
