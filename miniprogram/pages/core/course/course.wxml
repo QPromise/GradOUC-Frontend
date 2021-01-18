@@ -52,14 +52,14 @@
       <view class="bg-gray padding-sm margin-xs radius" style="width:40%;text-align:center;padding:4px;">{{key}}</view>
 </view>
 <block wx:for="{{value}}"wx:for-index="index" wx:for-item="item" wx:key="item.index">
-<view class="cu-bar bg-white"style="min-height:50rpx;" bindtap='showdetail' data-id='{{item.id}}' data-name='{{item.name}}' data-xq='{{item.xq}}' data-xn='{{item.xn}}' data-select='{{item.select}}' data-teacher='{{item.teacher}}' data-credit='{{item.credit}}' data-type='{{item.type}} 'data-process='{{item.process}}'>
+<view class="cu-bar bg-white"style="min-height:50rpx;" bindtap='showdetail' data-id='{{item.id}}' data-name='{{item.name}}' data-full_name='{{item.full_name}}' data-xq='{{item.xq}}' data-xn='{{item.xn}}' data-select='{{item.select}}' data-teacher='{{item.teacher}}' data-credit='{{item.credit}}' data-type='{{item.type}} 'data-process='{{item.process}}'>
   <view class="action">
     <view class="cu-tag sm bg-brown" style="margin-right:5rpx">{{index + 1}}</view>
     <view class="text-df">{{item.name}}</view>
   </view>
    <view class="margin-xs text-df">{{item.process}}</view>
 </view>
-<view class="padding-lr bg-white" bindtap='showdetail' data-id='{{item.id}}' data-name='{{item.name}}' data-xq='{{item.xq}}' data-xn='{{item.xn}}' data-select='{{item.select}}' data-teacher='{{item.teacher}}' data-credit='{{item.credit}}' data-type='{{item.type}} 'data-process='{{item.process}}'>
+<view class="padding-lr bg-white" bindtap='showdetail' data-id='{{item.id}}' data-name='{{item.name}}' data-full_name='{{item.full_name}}' data-xq='{{item.xq}}' data-xn='{{item.xn}}' data-select='{{item.select}}' data-teacher='{{item.teacher}}' data-credit='{{item.credit}}' data-type='{{item.type}} 'data-process='{{item.process}}'>
   <view class="text-left text-sm text-grey padding solid-bottom" style="padding-top:5rpx;padding-bottom:15rpx;" wx:if = "{{item.teacher}}">{{item.teacher}} · {{item.select}} · {{item.type}} · {{item.credit}}学分</view>
   <view class="text-left text-sm text-grey padding solid-bottom" style="padding-top:5rpx;padding-bottom:15rpx;" wx:else>{{item.select}} · {{item.type}} · {{item.credit}}学分</view>
 </view>
@@ -92,14 +92,14 @@
       <view class="bg-gray padding-sm margin-xs radius" style="width:40%;text-align:center;padding:4px;">{{key}}</view>
 </view>
 <block wx:for="{{value}}"wx:for-index="index" wx:for-item="item" wx:key="item.index">
-<view class="cu-bar bg-white"style="min-height:50rpx;" bindtap='showdetail' data-id='{{item.id}}' data-name='{{item.name}}' data-xq='{{item.xq}}' data-xn='{{item.xn}}' data-select='{{item.select}}' data-teacher='{{item.teacher}}' data-credit='{{item.credit}}' data-type='{{item.type}} 'data-process='{{item.process}}'>
+<view class="cu-bar bg-white"style="min-height:50rpx;" bindtap='showdetail' data-id='{{item.id}}' data-name='{{item.name}}' data-full_name='{{item.full_name}}' data-xq='{{item.xq}}' data-xn='{{item.xn}}' data-select='{{item.select}}' data-teacher='{{item.teacher}}' data-credit='{{item.credit}}' data-type='{{item.type}} 'data-process='{{item.process}}'>
   <view class="action">
     <view class="cu-tag sm bg-brown" style="margin-right:5rpx">{{index + 1}}</view>
     <view class="text-df">{{item.name}}</view>
   </view>
    <view class="margin-xs text-df">{{item.process}}</view>
 </view>
-<view class="padding-lr bg-white" bindtap='showdetail' data-id='{{item.id}}' data-name='{{item.name}}' data-xq='{{item.xq}}' data-xn='{{item.xn}}' data-select='{{item.select}}' data-teacher='{{item.teacher}}' data-credit='{{item.credit}}' data-type='{{item.type}} 'data-process='{{item.process}}'>
+<view class="padding-lr bg-white" bindtap='showdetail' data-id='{{item.id}}' data-name='{{item.name}}' data-full_name='{{item.full_name}}' data-xq='{{item.xq}}' data-xn='{{item.xn}}' data-select='{{item.select}}' data-teacher='{{item.teacher}}' data-credit='{{item.credit}}' data-type='{{item.type}} 'data-process='{{item.process}}'>
   <view class="text-left text-sm text-grey padding solid-bottom" style="padding-top:5rpx;padding-bottom:15rpx;" wx:if = "{{item.teacher}}">{{item.teacher}} · {{item.select}} · {{item.type}} · {{item.credit}}学分</view>
   <view class="text-left text-sm text-grey padding solid-bottom" style="padding-top:5rpx;padding-bottom:15rpx;" wx:else>{{item.select}} · {{item.type}} · {{item.credit}}学分</view>
 </view>
@@ -108,10 +108,10 @@
 
 </view>
 </view>
-  <jun-modal show="{{!hiddenmodalput}}" title="{{name}}" content-color="#363636" confirm-text="确定" confirm-color="black"  bindconfirm="confirm" no-cancel='true'>
+  <jun-modal show="{{!hiddenmodalput}}" title="{{full_name}}" content-color="#363636" confirm-text="确定" confirm-color="black"  bindconfirm="confirm" no-cancel='true'>
       <view class='modal-hang'><view class='modal-hang-left'>选修或必修：</view><view class='modal-hang-right'>{{select}}</view></view>
       <view class='modal-hang'><view class='modal-hang-left'>课程编号：</view><view class='modal-hang-right'>{{id}}</view></view>
-      <view class='modal-hang'><view class='modal-hang-left'>课程名称：</view><view class='modal-hang-right'>{{name}}</view></view>
+      <view class='modal-hang'><view class='modal-hang-left'>课程名称：</view><view class='modal-hang-right'>{{full_name}}</view></view>
       <view class='modal-hang'><view class='modal-hang-left'>课程性质：</view><view class='modal-hang-right'>{{type}}</view></view>
       <view class='modal-hang'><view class='modal-hang-left'>学分：</view><view class='modal-hang-right'>{{credit}}</view></view>
       <view class='modal-hang'><view class='modal-hang-left'>选修学年：</view><view class='modal-hang-right'>{{xn}}</view></view>

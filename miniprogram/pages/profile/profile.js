@@ -76,7 +76,7 @@ Page({
             success: (res) => {
               if (res.confirm) {
                 wx.navigateTo({
-                  url: '../../my/login',
+                  url: '../my/login',
                 })
               }
               if (res.cancel) {

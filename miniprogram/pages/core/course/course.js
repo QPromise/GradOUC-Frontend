@@ -8,6 +8,7 @@ Page({
     hiddenmodalput: true,
     id: "",
     name: "",
+    full_name:"",
     credit: "",
     select: "",
     xn: "",
@@ -152,6 +153,7 @@ Page({
             for (var i = 0; i < res.data.unplanned_courses.length; i++) {
               var change = new Object();
               change.name = that.isOver13(res.data.unplanned_courses[i].name);
+              change.full_name = res.data.unplanned_courses[i].name;
               change.id = res.data.unplanned_courses[i].id;
               change.type = res.data.unplanned_courses[i].type;
               change.process = res.data.unplanned_courses[i].process;
@@ -190,6 +192,7 @@ Page({
           for (var i = 0; i < res.data.courses.length; i++) {
             var change = new Object();
             change.name = that.isOver13(res.data.courses[i].name);
+            change.full_name = res.data.courses[i].name;
             change.id = res.data.courses[i].id;
             change.type = res.data.courses[i].type;
             change.process = res.data.courses[i].process;
@@ -337,6 +340,7 @@ Page({
     //console.log(e);
     var that = this;
     var noshow = false;
+    var full_name = e.currentTarget.dataset.full_name;
     var name = e.currentTarget.dataset.name;
     var id = e.currentTarget.dataset.id;
     var credit = e.currentTarget.dataset.credit;
@@ -346,9 +350,10 @@ Page({
     var teacher = e.currentTarget.dataset.teacher;
     var type = e.currentTarget.dataset.type;
     var process = e.currentTarget.dataset.process;
-    if (name == "") noshow = true;
+    if (full_name == "") noshow = true;
     that.setData({
       hiddenmodalput: noshow,
+      full_name:full_name,
       name: name,
       id: id,
       type: type,

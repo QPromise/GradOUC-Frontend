@@ -33,6 +33,13 @@ Page({
       }
     })
   },
+  previewImage: function(e) {
+    var current = e.target.dataset.src;
+    wx.previewImage({
+      current: current,
+      urls: [current]
+    })
+  },
   setwx: function () {
     wx.setClipboardData({
       data: 'GradOUC',
@@ -40,7 +47,7 @@ Page({
         wx.getClipboardData({
           success: function (res) {
             wx.showToast({
-              title: '微信复制成功！',
+              title: '名字复制成功！',
               duration: 1000
             });
           }

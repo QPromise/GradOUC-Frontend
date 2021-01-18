@@ -228,7 +228,6 @@ Page({
         else if(res.data.message == "success" && res.statusCode == 200) {
           //对课程表进行上色并更新显示数据
           that.beautifyAndResetKcb(res.data.schedule); 
-          console.log(res.data.schedule)
         }
         else{
           wx.showModal({
@@ -283,20 +282,20 @@ Page({
   //显示课程的详细信息
   showdetail: function (e) {
     var that = this;
-    var gname = e.currentTarget.dataset.name_long;
-    var groom = e.currentTarget.dataset.room_long;
-    var gleader = e.currentTarget.dataset.leader;
-    var gtime = e.currentTarget.dataset.time;
-    var gperiod = e.currentTarget.dataset.period;
-    if (gname == "") {
+    var name = e.currentTarget.dataset.name_long;
+    var room = e.currentTarget.dataset.room_long;
+    var leader = e.currentTarget.dataset.leader;
+    var time = e.currentTarget.dataset.time;
+    var period = e.currentTarget.dataset.period;
+    if (name == "") {
     } else {
       that.setData({
         hiddenmodalput: false,
-        name: gname,
-        room: groom,
-        leader: gleader,
-        time: gtime,
-        period:gperiod
+        name: name,
+        room: room,
+        leader: leader,
+        time: time,
+        period:period
       })
     }
   },
