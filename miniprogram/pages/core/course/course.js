@@ -107,7 +107,7 @@ Page({
         } else if (res.data.message == "fault" && res.statusCode == 200) {
           wx.showModal({
             title: "加载失败",
-            content: '获取课表失败,请重新绑定后再试',
+            content: '获取课程失败,请重新绑定后再试',
             showCancel: true,
             confirmText: "前往绑定",
             success: (res) => {

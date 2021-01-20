@@ -4,7 +4,7 @@ const app = getApp();
 Page({
   data: {
     indexxq: 0,
-    arrayxq: ['2019-2020夏秋'],
+    arrayxq: ['2020-2021春'],
     indexzc: 0,
     arrayzc: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22],
     kcb:null,
@@ -48,6 +48,7 @@ Page({
   },
   // 现在是否大于指定的时间
   cmpDate: function () { 
+    console.log(new Date())
     var now = parseInt(Date.parse(new Date()) / 1000)
     var date = parseInt(app.cache.begin_day)
     return now > date
@@ -55,60 +56,58 @@ Page({
   
   //加载页面
   onLoad: function () {
-    var that = this;
-    //获取开学和放假日期，计算当前周
-    if(app.cache.nowzc > 22){
-      that.setData({
-        arrayxq: [app.cache.xq],
-        indexzc: 21,
-      });
-      wx.showModal({
-        title: '提示',
-        content: '本学期课程已结束，课表不再更新',
-        showCancel: false,
-        success(res) {
-          if (res.confirm) {
-          } 
-        }
-      })
-
-    }
-    else{
-      that.setData({
-        arrayxq: [app.cache.xq],
-        indexzc: app.cache.nowzc - 1,
-      });
-
-    }
-    //计算当前选择周1至周5日期
-    that.caculateDate();
+   
   },
 
   onReady: function () {
     var that = this;
     that.getDay();
     setTimeout(function () {
-      //console.log("延迟1s调用============");
-      var weeks = that.data.arrayzc[that.data.indexzc];
-      //console.log("onReady weeks:" + weeks);
       if (!that.cmpDate()) {
+        that.setData({
+          arrayxq: [app.cache.xq],
+          indexzc: 0,
+        });
+        that.reFreshKCB();
         wx.showModal({
           title: '提示',
-          content: '本学期课程已结束，课表无法查看，如需查看课程可以到【我的课程】中进行查看。',
+          content: '本学期课程已结束，当前为新学期课表，如需查看其它课程可以到【我的课程】中进行查看。',
           showCancel: false,
           success(res) {
             if (res.confirm) {
-              wx.navigateBack({
-              })
             } 
           }
         })
       }
       else{
+        if(app.cache.nowzc > 22){
+          that.setData({
+            arrayxq: [app.cache.xq],
+            indexzc: 21,
+          });
+          wx.showModal({
+            title: '提示',
+            content: '本学期课程已结束，课表不再更新',
+            showCancel: false,
+            success(res) {
+              if (res.confirm) {
+              } 
+            }
+          })
+        }
+        else{
+          that.setData({
+            arrayxq: [app.cache.xq],
+            indexzc: app.cache.nowzc - 1,
+          });
+    
+        }
+        
         that.reFreshKCB();
       }
     }, 500)
-    
+    //计算当前选择周1至周5日期
+    that.caculateDate();
   },
 
   //计算日期
