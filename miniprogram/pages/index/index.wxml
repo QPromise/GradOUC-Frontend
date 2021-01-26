@@ -53,12 +53,18 @@
     </view>
        <view class="cu-item" bindtap="goExam">
       <view class="app-icon">
-        <image mode="widthFix" src="/images/core/exam.png"></image>
-        <view class="cu-tag badge">
+        <image mode="widthFix" src="/images/core/exam.png"></image>  
+      </view>
+      <text>我的考试</text>
+    </view>
+     <view class="cu-item"  bindtap="goScoreRank">
+      <view class="app-icon">
+        <image mode="widthFix" src="/images/core/score_rank.png"></image>
+         <view class="cu-tag badge">
           <block>新</block>
         </view>
       </view>
-      <text>我的考试</text>
+      <text>成绩排名</text>
     </view>
   <view class="cu-item"  bindtap="goProfile">
       <view class="app-icon">
@@ -103,6 +109,15 @@
       </view>
       <text>校 历</text>
     </view>
+            <view class="cu-item" bindtap="goLife">
+      <view class="app-icon">
+        <image mode="widthFix" src="/images/core/life.png"></image>
+        <view class="cu-tag badge">
+          <block>新</block>
+        </view>
+      </view>
+      <text>海小圈</text>
+    </view>
          <view class="cu-item" bindtap="goWaimai">
       <view class="app-icon">
         <image mode="widthFix" src="/images/core/waimai.png"></image>
@@ -112,15 +127,7 @@
       </view>
       <text>外卖红包</text>
     </view>
-        <view class="cu-item" bindtap="goLife">
-      <view class="app-icon">
-        <image mode="widthFix" src="/images/core/life.png"></image>
-        <view class="cu-tag badge">
-          <block>新</block>
-        </view>
-      </view>
-      <text>海小圈</text>
-    </view>
+
   </view>
   </view>
 <!-- <view class="bg-img" bindtap="goLife" style="padding:0rpx 0 10rpx 0;text-align: center;background-color: white;margin: 0rpx 0rpx 0rpx 0rpx;">

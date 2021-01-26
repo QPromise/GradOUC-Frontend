@@ -29,6 +29,8 @@ App({
           that.saveCache("xn", res.data.xn)
           that.saveCache("xq", res.data.xq)
           that.saveCache("is_open_subscribe", res.data.is_open_subscribe)
+          that.saveCache("get_score_rank_nj_min", res.data.get_score_rank_nj_min)
+          that.saveCache("get_score_rank_nj_max", res.data.get_score_rank_nj_max)
           that.getWeek(res.data.begin_day)
           console.log(that.cache);
         },

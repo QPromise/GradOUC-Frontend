@@ -10,6 +10,8 @@ Page({
     size: 14,
     is_bind: app.cache.is_bind,//判断是否绑定用户了
     countDays:undefined,
+    get_score_rank_nj_min:app.cache.get_score_rank_nj_min,
+    get_score_rank_nj_max:app.cache.get_score_rank_nj_max,
   },
 
   shareconfirm: function () {
@@ -180,6 +182,40 @@ goSchedule:function(){
       wx.navigateTo({
         url: '../core/exam/exam',
       })
+    }
+    else {
+      that.showNeedBind();
+    }
+  },
+  isInScoreRankNj:function(){
+    let that = this
+    if (app.cache.sno){
+      let snoPrefix = parseInt(app.cache.sno.substring(0, 4))
+      if(snoPrefix >= parseInt(that.data.get_score_rank_nj_min) && snoPrefix <= parseInt(that.data.get_score_rank_nj_max)){
+          return true;
+      }
+      return false;
+    }
+    return false
+  },
+  goScoreRank:function(){
+    var that = this;
+    if (that.data.is_bind) {
+      if (that.isInScoreRankNj()){
+        wx.navigateTo({
+        url: '../core/scoreRank/scoreRank',
+      })}
+      else{
+        let tips = '当前仅限学号前四位为' + that.data.get_score_rank_nj_min + '-' + that.data.get_score_rank_nj_max + '的同学访问'
+        if (that.data.get_score_rank_nj_min == that.data.get_score_rank_nj_max){
+          tips = '当前仅限学号前四位为' + that.data.get_score_rank_nj_max + '的同学访问'
+        }
+        wx.showToast({
+          icon: 'none',
+          title: tips,
+          duration: 2000
+        });
+      }
     }
     else {
       that.showNeedBind();

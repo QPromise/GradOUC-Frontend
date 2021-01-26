@@ -30,11 +30,17 @@
     <view class="cu-item" bindtap="goExam">
       <view class="app-icon">
         <image mode="widthFix" src="/images/core/exam.png"></image>
-        <view class="cu-tag badge">
+      </view>
+      <text>我的考试</text>
+    </view>
+         <view class="cu-item"  bindtap="goScoreRank">
+      <view class="app-icon">
+        <image mode="widthFix" src="/images/core/score_rank.png"></image>
+         <view class="cu-tag badge">
           <block>新</block>
         </view>
       </view>
-      <text>我的考试</text>
+      <text>成绩排名</text>
     </view>
     <view class="cu-item"  bindtap="goProfile">
       <view class="app-icon">

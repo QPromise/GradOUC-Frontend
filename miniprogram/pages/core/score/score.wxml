@@ -20,7 +20,7 @@
     <view wx:for='{{heads}}' class='grade-head-item' style='flex:{{index==1?2:1}};font-size:30rpx;'>{{item}}</view>
   </view>
   <view class='grade' wx:for='{{arraycj}}'>
-  <checkbox bindtap="bindCheckbox" data-index="{{index}}" disabled = '{{item.disabled}}'checked='{{item.selected}}' value="check1" color="#009cff" style='flex:1;text-align: left;font-size:27rpx;padding-left:30rpx;' class='text-caption sc-checkbox-main'></checkbox>
+  <checkbox bindtap="bindCheckbox" data-index="{{index}}" disabled = '{{item.disabled}}' checked='{{item.selected}}' value="check1" color="#009cff" style='flex:1;text-align: left;font-size:27rpx;padding-left:30rpx;' class='text-caption sc-checkbox-main'></checkbox>
     <view class='grade-item' style='flex:2;text-align:left;font-size:27rpx; '>{{item.name}}</view>
     <view class='grade-item' style='flex:1;color:#9b9b9b;font-size:27rpx;'>{{item.type}}</view>
     <view class='grade-item' style='flex:1;color:#9b9b9b;font-size:27rpx;'>{{item.credit}}</view>

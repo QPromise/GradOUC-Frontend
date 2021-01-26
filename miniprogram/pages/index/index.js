@@ -20,6 +20,8 @@ Page({
     loading:false,
     content: "",
     showTodayInfo:"",
+    get_score_rank_nj_min:app.cache.get_score_rank_nj_min,
+    get_score_rank_nj_max:app.cache.get_score_rank_nj_max,
     useNews:[{ url: "url", title: "欢迎使用研在OUC！" }],
     todayArr:["周一","周二","周三","周四","周五","周六","周日"]
   },
@@ -40,7 +42,6 @@ Page({
     this.guide();
     this.getDay();
     this.getTodayCourse();
-   
   },
 
   /**
@@ -55,7 +56,7 @@ Page({
   onShow: function () {
     var that = this;
     that.getnews();//当重新回到此页面时，再次请求
-    that.getIsOpenSubscribe();
+    that.getConfig();
     that.getRecentlyUse();
   },
    /** 下拉刷新 */
@@ -69,7 +70,7 @@ Page({
     that.getTopbarImg()
     that.getDay()
     that.getnews()
-    that.getIsOpenSubscribe()
+    that.getConfig()
     that.getTodayCourse()
     that.getRecentlyUse()
     //模拟加载
@@ -224,15 +225,19 @@ Page({
     /**
    * 检测系统是否开启成绩通知了
    */
-  getIsOpenSubscribe: function(){
+  getConfig: function(){
     let that = this
     wx.request({
       url: app.local_server + 'get_config/',
       success: function (res) {
-        //console.log(res.data.is_open_subscribe)
+        //console.log(res.data.get_score_rank_nj_min, res.data.get_score_rank_nj_max)
         app.saveCache("is_open_subscribe", res.data.is_open_subscribe)
+        app.saveCache("get_score_rank_nj_min", res.data.get_score_rank_nj_min)
+        app.saveCache("get_score_rank_nj_max", res.data.get_score_rank_nj_max)
         that.setData({
-          is_open_subscribe: res.data.is_open_subscribe
+          is_open_subscribe: res.data.is_open_subscribe,
+          get_score_rank_nj_min: res.data.get_score_rank_nj_min,
+          get_score_rank_nj_max: res.data.get_score_rank_nj_max
         })
         if (that.data.is_open_subscribe == 1 || that.data.is_open_subscribe == 2){
           that.failurePopup();
@@ -407,6 +412,17 @@ Page({
       }
     })
   },
+  isInScoreRankNj:function(){
+    let that = this
+    if (app.cache.sno){
+      let snoPrefix = parseInt(app.cache.sno.substring(0, 4))
+      if(snoPrefix >= parseInt(that.data.get_score_rank_nj_min) && snoPrefix <= parseInt(that.data.get_score_rank_nj_max)){
+          return true;
+      }
+      return false;
+    }
+    return false
+  },
   guide:function(){
     let firstOpen = app.cache.firstOpen
     console.log("是否首次打开本页面==", firstOpen)
@@ -542,6 +558,29 @@ goSchedule:function(){
       wx.navigateTo({
         url: '../core/exam/exam',
       })
+    }
+    else {
+      that.showNeedBind();
+    }
+  },
+  goScoreRank:function(){
+    var that = this;
+    if (that.data.is_bind) {
+      if (that.isInScoreRankNj()){
+        wx.navigateTo({
+        url: '../core/scoreRank/scoreRank',
+      })}
+      else{
+        let tips = '当前仅限学号前四位为' + that.data.get_score_rank_nj_min + '-' + that.data.get_score_rank_nj_max + '的同学访问'
+        if (that.data.get_score_rank_nj_min == that.data.get_score_rank_nj_max){
+          tips = '当前仅限学号前四位为' + that.data.get_score_rank_nj_max + '的同学访问'
+        }
+        wx.showToast({
+          icon: 'none',
+          title: tips,
+          duration: 2000
+        });
+      }
     }
     else {
       that.showNeedBind();

@@ -25,7 +25,8 @@
     "pages/tools/who/who",
     "pages/tools/tiangou/tiangou",
     "pages/core/exam/exam",
-    "pages/test/test"
+    "pages/test/test",
+    "pages/core/scoreRank/scoreRank"
   ],
   "window": {
     "backgroundTextStyle": "light",

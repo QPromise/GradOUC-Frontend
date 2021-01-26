@@ -1,0 +1,149 @@
+<!--miniprogram/pages/core/scoreRank/scoreRank.wxml-->
+<cu-custom isBack="{{true}}" >
+	<view slot="content" style="color:white;font-weight:bold;">成绩排名</view>
+</cu-custom>
+<scroll-view scroll-x class="bg-blue nav text-center" style="background-color:#009cff;">
+  <view class="cu-item {{0==tabCur?'text-white cur':''}}" style="padding:0 50rpx;" bindtap="tabSelect" data-id="0">
+    <text class="cuIcon-myfill"></text> 我的排名
+  </view>
+  <view class="cu-item {{1==tabCur?'text-white cur':''}}" style="padding:0 50rpx;" bindtap="tabSelect" data-id="1">
+    <text class="cuIcon-upstagefill"></text> 查看排行
+  </view>
+</scroll-view>
+<view wx:if="{{tabCur == 0}}">
+   <i-notice-bar icon="systemprompt" loop speed='600' class='notice-bar'>
+      数据源于当前登录小程序的用户，每日整体更新，仅供参考，排名默认是你的平均学分绩在你研究方向的排名，需要你手动设置参与排名的研究方向。
+    </i-notice-bar>
+<view class="cu-bar bg-white" style="margin-top:60rpx;">
+  <view class="action">
+    <text class="cuIcon-title text-orange "></text>姓名 / 学号
+  </view>
+  <view class="action">
+    {{name}} / {{sno}}
+  </view>
+</view>
+<view class="cu-bar bg-white">
+  <view class="action">
+    <text class="cuIcon-title text-orange "></text>平均学分绩
+  </view>
+  <view class="action">
+    {{avg_score}} 
+    <view bindtap="refreshRank" class="text-orange" style="margin-left:13rpx;"><text class="cuIcon-refresh text-orange"></text> 刷新</view>
+  </view>
+</view>
+
+<view class="cu-bar bg-white">
+  <view class="action">
+    <text class="cuIcon-title text-orange "></text>排名(含同分)
+  </view>
+  <view class="action">
+  <text class="cuIcon-rank text-orange"></text>第{{rank}}名 (前{{rank_rate}}%)
+  </view>
+</view>
+
+<view class="cu-bar bg-white">
+  <view class="action">
+    <text class="cuIcon-title text-orange "></text>排名(不含同分)
+  </view>
+  <view class="action">
+  <text class="cuIcon-rank text-orange"></text>第{{add_same_rank}}名 (前{{add_same_rank_rate}}%)
+  </view>
+</view>
+
+<view class="cu-bar bg-white">
+  <view class="action">
+    <text class="cuIcon-title text-orange "></text>同分人数
+  </view>
+  <view class="action">
+  {{same_student}}人
+  </view>
+</view>
+
+<view class="cu-bar bg-white">
+  <view class="action">
+    <text class="cuIcon-title text-orange "></text>参与排名的总人数
+  </view>
+  <view class="action">
+    {{all_student}}人
+  </view>
+</view>
+
+<view class="cu-bar bg-white">
+  <view class="action">
+    <text class="cuIcon-title text-orange "></text>参与排名的研究方向
+  </view>
+  <view class="action">
+    <button class="cu-btn bg-green shadow" bindtap="getAllDepartmentResearch" data-target="RadioModal" style="height:56rpx;font-size:25rpx;">设置</button>
+  </view>
+</view>
+<view style="font-size:23rpx;color:grey;background-color: #f6f6f6;margin:10rpx 30rpx 10rpx 30rpx;padding:15rpx 15rpx">
+<view wx:for="{{research_list}}" wx:for-item="item" class="cu-tag line-grey" style="margin:5rpx 5rpx;">
+      {{item}}
+  </view>
+</view>
+<view class="cu-modal {{modalName=='RadioModal'?'show':''}}">
+  <view class="cu-dialog" style="background-color:white;max-width:85%">
+  <view class="cu-bar bg-white justify-end">
+			<view class="content" style="font-size:30rpx">研究方向列表(可滚动)
+      </view>
+          
+		</view>
+  <scroll-view scroll-y style="height: 40vh;">
+		<checkbox-group class="block">
+      <view class="cu-list menu text-left">
+        <view class="cu-item" wx:for="{{all_research_list}}" wx:for-key="index" wx:for-item="item">
+          <label class="flex justify-between align-center flex-sub">
+            <view class="flex-sub">{{item.name}}<text class="flex-sub text-grey text-sm" style="margin-left:15rpx;" wx:if="{{item.disabled}}">不可取消</text></view>
+            <checkbox bindtap="setResearchListChange" data-index="{{index}}" class="round" data-value="{{item.value}}" disabled='{{item.disabled}}' checked='{{item.checked}}'></checkbox>
+          </label>
+        </view>
+      </view>
+    </checkbox-group>
+		</scroll-view>
+     <view class="text-sm padding-sm">
+    <text class="cuIcon-info text-gray"></text>
+      <text class="text-grey" style="margin-left:10rpx;">排名一般按照本系所有专硕/学硕进行排名，具体方向可参照当年研究生考试大纲</text>
+      </view>
+     <view class="cu-bar bg-white">
+      <view class="action text-blue" style="font-size:30rpx;margin-left:10%" bindtap="hideModal">取消</view>
+      <view class="action text-green" style="font-size:30rpx;margin-right:10%" bindtap="setSelectResearch">确定</view>
+    </view>
+  </view>
+</view>
+<view style="margin-top:10rpx;padding:30rpx">
+<ad unit-id="adunit-0c8e045227a4ffc8"></ad>
+</view>
+</view>
+<view wx:if="{{tabCur == 1}}">
+<i-notice-bar icon="systemprompt" loop speed='800' class='notice-bar'>
+      当前排行为你设置的研究方向的排名，仅展示大约前百分之四十。
+</i-notice-bar>
+<view style="margin-top:80rpx;"></view>
+<block wx:for="{{top_forty_percent_students}}" wx:for-index="index" wx:for-item="item" wx:key="item.index">
+<view class="padding-sm radius shadow-warp bg-white margin-top" style="margin-top:20rpx; padding:15rpx;">
+<view class="cu-bar bg-white" style="min-height:40rpx;">
+  <view class="action">
+    <view class="cu-tag sm bg-orange" style="margin-right:5rpx">{{index + 1}}</view>
+    <view class="text-df" style="margin-left:10rpx">{{item.full_name}}
+    <view class="cu-tag line-red" style="height:45rpx;" wx:if="{{item.sno == sno}}">
+      我在这里
+    </view>
+    </view>
+  </view>
+   <view class="text" style="margin-right:30rpx">
+   <text class="text-orange text-bold" style="margin-right:3rpx"></text>{{item.avg_score}}分
+   </view>
+</view>
+<view style="margin-top: 10px" class="padding-lr bg-white">
+  <view class="cu-item" style="margin:10rpx 0rpx"><view class="content"><text class="cuIcon-tag text-orange" style="margin-right:3rpx"></text><text class="text-grey">{{item.profession_research}}</text></view></view>
+</view>
+</view>
+</block>
+<view wx:if="{{top_forty_percent_students.length>0}}" class="other_condition" style="color:#6666;padding:30rpx;">
+  <text class="cuIcon-info text-sm" style="margin-right:5rpx;"></text>到底啦，当前排名仅展示大约前百分之四十
+</view>
+<view wx:if="{{top_forty_percent_students.length<=0}}" class="other_condition">
+  <text class="cuIcon-info text-sm" style="margin-right:5rpx;"></text>暂无排名
+</view>
+
+</view>
