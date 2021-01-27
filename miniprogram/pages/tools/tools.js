@@ -77,6 +77,8 @@ Page({
     var that = this;
     that.setData({
       is_bind: app.cache.is_bind,
+      get_score_rank_nj_min:app.cache.get_score_rank_nj_min,
+      get_score_rank_nj_max:app.cache.get_score_rank_nj_max,
     });
     that.countDate();
   },

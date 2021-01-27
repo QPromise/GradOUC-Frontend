@@ -35,9 +35,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.setData({
-      is_bind: app.cache.is_bind,
-    });
     this.getTopbarImg();
     this.guide();
     this.getDay();
@@ -55,6 +52,11 @@ Page({
    */
   onShow: function () {
     var that = this;
+    that.setData({
+      is_bind: app.cache.is_bind,
+      get_score_rank_nj_min:app.cache.get_score_rank_nj_min,
+      get_score_rank_nj_max:app.cache.get_score_rank_nj_max,
+    });
     that.getnews();//当重新回到此页面时，再次请求
     that.getConfig();
     that.getRecentlyUse();
