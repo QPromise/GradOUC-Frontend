@@ -91,7 +91,7 @@ Page({
               }
             }
           })
-        } else if (data.message == 'fault' && res.statusCode == 200) {
+        } else if (data.message == 'incorrect' && res.statusCode == 200) {
           wx.showToast({
             icon: 'none',
             title: '账号或密码不正确，请检查与信息门户账号密码是否一致',

@@ -95,6 +95,28 @@ Page({
           duration: 2000
         });
        }
+       else if (res.data.message == "incorrect") {
+        wx.hideLoading({
+          complete: (res) => {},
+        })
+        wx.showModal({
+          title: "加载失败",
+          content: '获取平均学分绩失败,请重新绑定后再试',
+          showCancel: true,
+          confirmText: "前往绑定",
+          success: (res) => {
+            if (res.confirm) {
+              wx.navigateTo({
+                url: '../../my/login',
+              })
+            }
+            if(res.cancel){
+              wx.navigateBack({
+              })
+            }
+          }
+        });
+      }
        else if (res.data.message == "illegal"){
         wx.hideLoading({
           complete: (res) => {},

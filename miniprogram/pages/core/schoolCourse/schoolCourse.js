@@ -123,7 +123,7 @@ Page({
             }
           })
         }
-        else if (res.data.message == "fault" && res.statusCode == 200) {
+        else if (res.data.message == "incorrect" && res.statusCode == 200) {
           wx.showModal({
             title: "加载失败",
             content: '获取课程失败,请重新绑定后再试',
