@@ -27,8 +27,25 @@
     <text class="cuIcon-title text-orange "></text>平均学分绩
   </view>
   <view class="action">
-    {{avg_score}} 
+    {{avg_score}}分 
     <view bindtap="refreshRank" class="text-orange" style="margin-left:13rpx;"><text class="cuIcon-refresh text-orange"></text> 刷新</view>
+  </view>
+</view>
+
+<view class="cu-bar bg-white">
+  <view class="action">
+    <text class="cuIcon-title text-orange "></text>参与排名平均学分绩
+  </view>
+  <view class="action">
+    {{not_in_exclude_course_avg_score}}分
+  </view>
+</view>
+<view class="cu-bar bg-white">
+  <view class="action">
+    <text class="cuIcon-title text-orange "></text>排名(去同分)
+  </view>
+  <view class="action">
+   <text class="cuIcon-rank text-orange"></text>第{{rank}}名 (前{{rank_rate}}%)
   </view>
 </view>
 
@@ -37,18 +54,10 @@
     <text class="cuIcon-title text-orange "></text>排名(含同分)
   </view>
   <view class="action">
-  <text class="cuIcon-rank text-orange"></text>第{{rank}}名 (前{{rank_rate}}%)
+   <text class="cuIcon-rank text-orange"></text>第{{add_same_rank}}名 (前{{add_same_rank_rate}}%)
   </view>
 </view>
 
-<view class="cu-bar bg-white">
-  <view class="action">
-    <text class="cuIcon-title text-orange "></text>排名(不含同分)
-  </view>
-  <view class="action">
-  <text class="cuIcon-rank text-orange"></text>第{{add_same_rank}}名 (前{{add_same_rank_rate}}%)
-  </view>
-</view>
 
 <view class="cu-bar bg-white">
   <view class="action">
@@ -73,15 +82,36 @@
     <text class="cuIcon-title text-orange "></text>参与排名的研究方向
   </view>
   <view class="action">
-    <button class="cu-btn bg-green shadow" bindtap="getAllDepartmentResearch" data-target="RadioModal" style="height:56rpx;font-size:25rpx;">设置</button>
+    <button class="cu-btn bg-green shadow" bindtap="getAllDepartmentResearch" data-target="ResearchModal" style="height:56rpx;font-size:25rpx;">设置</button>
   </view>
 </view>
 <view style="font-size:23rpx;color:grey;background-color: #f6f6f6;margin:10rpx 30rpx 10rpx 30rpx;padding:15rpx 15rpx">
-<view wx:for="{{research_list}}" wx:for-item="item" class="cu-tag line-grey" style="margin:5rpx 5rpx;">
+<view wx:for="{{research_list}}" wx:for-item="item" class="cu-tag line-grey" style="margin:5rpx 5rpx;" wx:if="{{research_list.length>0}}">
       {{item}}
   </view>
+    <view class="cu-tag line-grey" style="margin:5rpx 5rpx;" wx:if="{{research_list.length == 0}}">
+      暂未设置
+  </view>
 </view>
-<view class="cu-modal {{modalName=='RadioModal'?'show':''}}">
+
+<view class="cu-bar bg-white">
+  <view class="action">
+    <text class="cuIcon-title text-orange "></text>不参与排名的考试科目
+  </view>
+  <view class="action">
+    <button class="cu-btn bg-green shadow" bindtap="getCommonCourses" data-target="CoursesModal" style="height:56rpx;font-size:25rpx;">设置</button>
+  </view>
+</view>
+<view style="font-size:23rpx;color:grey;background-color: #f6f6f6;margin:10rpx 30rpx 10rpx 30rpx;padding:15rpx 15rpx">
+<view wx:for="{{exclude_courses}}" wx:for-item="item" class="cu-tag line-grey" style="margin:5rpx 5rpx;" wx:if="{{exclude_courses.length>0}}">
+      {{item}}
+  </view>
+  <view class="cu-tag line-grey" style="margin:5rpx 5rpx;" wx:if="{{exclude_courses.length == 0}}">
+      暂未设置
+  </view>
+</view>
+
+<view class="cu-modal {{modalName=='ResearchModal'?'show':''}}">
   <view class="cu-dialog" style="background-color:white;max-width:85%">
   <view class="cu-bar bg-white justify-end">
 			<view class="content" style="font-size:30rpx">研究方向列表(可滚动)
@@ -102,7 +132,7 @@
 		</scroll-view>
      <view class="text-sm padding-sm">
     <text class="cuIcon-info text-gray"></text>
-      <text class="text-grey" style="margin-left:5rpx;">排名一般按照本系所有专硕/学硕进行排名，具体方向可参照当年研究生考试大纲</text>
+      <text class="text-gray" style="margin-left:5rpx;">排名一般按照本系所有专硕/学硕进行排名，具体方向可参照当年研究生考试大纲</text>
       </view>
      <view class="cu-bar bg-white">
       <view class="action text-blue" style="font-size:30rpx;margin-left:10%" bindtap="hideModal">取消</view>
@@ -110,6 +140,37 @@
     </view>
   </view>
 </view>
+
+<view class="cu-modal {{modalName=='CoursesModal'?'show':''}}">
+  <view class="cu-dialog" style="background-color:white;max-width:85%">
+  <view class="cu-bar bg-white justify-end">
+			<view class="content" style="font-size:30rpx">课程列表(可滚动)
+      </view>
+          
+		</view>
+  <scroll-view scroll-y style="height: 40vh;">
+		<checkbox-group class="block">
+      <view class="cu-list menu text-left">
+        <view class="cu-item" wx:for="{{common_courses}}" wx:for-key="index" wx:for-item="item">
+          <label class="flex justify-between align-center flex-sub">
+            <view class="flex-sub">{{item.value}}</view>
+            <checkbox bindtap="setExcludeCoursesChange" data-index="{{index}}" class="round" data-value="{{item.value}}" checked='{{item.checked}}'></checkbox>
+          </label>
+        </view>
+      </view>
+    </checkbox-group>
+		</scroll-view>
+     <view class="text-sm padding-sm">
+    <text class="cuIcon-info text-gray"></text>
+      <text class="text-gray" style="margin-left:5rpx;">在排名中的所有人将不对选中科目进行平均学分绩计算。</text>
+      </view>
+     <view class="cu-bar bg-white">
+      <view class="action text-blue" style="font-size:30rpx;margin-left:10%" bindtap="hideModal">取消</view>
+      <view class="action text-green" style="font-size:30rpx;margin-right:10%" bindtap="setExcludeCourses">确定</view>
+    </view>
+  </view>
+</view>
+
 <view style="margin-top:10rpx;padding:30rpx">
 <ad unit-id="adunit-0c8e045227a4ffc8"></ad>
 </view>

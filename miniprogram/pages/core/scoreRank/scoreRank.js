@@ -11,6 +11,7 @@ Page({
     sno:app.cache.sno,
     name:app.cache.name,
     avg_score: 0,
+    not_in_exclude_course_avg_score:0,
     rank:0,
     rank_rate:0,
     same_student:0,
@@ -18,9 +19,11 @@ Page({
     add_same_rank_rate:0,
     all_student:0,
     research_list:[],
+    common_courses:[],
     all_research_list:[],
     select_research_list:[],
-    top_forty_percent_students:[]
+    top_forty_percent_students:[],
+    exclude_courses:[]
   },
 
   /**
@@ -77,6 +80,7 @@ Page({
           sno:app.cache.sno,
           name:app.cache.name,
           avg_score: res.data.avg_score,
+          not_in_exclude_course_avg_score: res.data.not_in_exclude_course_avg_score,
           rank:res.data.rank,
           rank_rate: (parseFloat(res.data.rank_rate) * 100).toFixed(2) ,
           same_student: res.data.same_student,
@@ -84,6 +88,7 @@ Page({
           add_same_rank_rate: (parseFloat(res.data.add_same_rank_rate) * 100).toFixed(2) ,
           all_student: res.data.all_student,
           research_list: res.data.research_list,
+          exclude_courses: res.data.exclude_courses,
           top_forty_percent_students: res.data.top_forty_percent_students,
         })
         wx.hideLoading({
@@ -174,7 +179,7 @@ Page({
   getAllDepartmentResearch: function(e){
     let that = this
     wx.showLoading({
-      title: "拉取中",
+      title: "研究方向拉取中",
     })
     wx.request({
       url: app.local_server + "get_department_all_research",
@@ -304,6 +309,139 @@ Page({
     }); 
      
   },
+  getCommonCourses: function(e){
+    let that = this
+    wx.showLoading({
+      title: "科目拉取中",
+    })
+    wx.request({
+      url: app.local_server + "get_common_courses",
+      data: {
+        openid:app.globalData.openId,
+        sno:app.cache.sno,
+      },
+      header: {
+        'content-type': 'application/json'
+      },
+      method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
+      success: function(res){
+       // success
+       if(res.data.message == "success"){
+        that.setData({
+          common_courses: res.data.common_courses
+        })
+        that.setData({
+          modalName: e.currentTarget.dataset.target
+        })
+       }
+       else if (res.data.message == "illegal"){
+        wx.showModal({
+          title: '提示',
+          content: '当前所在年级不能查看排名',
+          showCancel: false,
+          success(res) {
+            if (res.confirm) {
+            }
+          }
+        })
+       }
+       else{
+        wx.showModal({
+          title: '提示',
+          content: '可能是您的网络或者服务器出了问题，请稍后重试',
+          showCancel: false,
+          success(res) {
+            if (res.confirm) {
+            }
+          }
+        })
+       }
+      },
+      fail: function() {
+        wx.showModal({
+          title: '提示',
+          content: '可能是您的网络或者服务器出了问题，请稍后重试',
+          showCancel: false,
+          success(res) {
+            if (res.confirm) {
+            }
+          }
+        })
+      },
+      complete: function() {
+        wx.hideLoading({
+          complete: (res) => {},
+        })
+       // complete
+      }
+     })
+  },
+  setExcludeCoursesChange(e) {
+    //取下标值
+    var index = parseInt(e.currentTarget.dataset.index);
+    //原始的icon状态
+    var checked = this.data.common_courses[index].checked;
+    //console.log(selected)
+    var common_courses= this.data.common_courses;
+    // 对勾选状态取反
+    common_courses[index].checked = !checked;
+    // 写回经点击修改后的数组
+    this.setData({
+      common_courses: common_courses
+    });
+},
+  setExcludeCourses:function(){
+  let that = this
+  let common_courses = that.data.common_courses
+  let select_common_courses = []
+  for(let i = 0; i < common_courses.length; i++){
+    if(common_courses[i].checked){
+      select_common_courses.push(common_courses[i].value)
+    }
+  }
+  wx.showLoading({
+    title: '正在设置',
+  })
+  wx.request({
+    url: app.local_server + 'set_exclude_courses/',
+    method: 'POST',
+    data: {
+      openid: app.globalData.openId,
+      select_common_courses: select_common_courses,
+    },
+    header: { "Content-Type": "application/x-www-form-urlencoded" },
+    success: function (res) {
+      if (res.data.message == "success"){
+        that.setData({
+          exclude_courses:select_common_courses,
+          modalName: null
+        })
+        that.getMyRank(0)
+      }
+      else{
+        wx.showModal({
+          title: '提示',
+          content: '可能是您的网络或者服务器出了问题，请稍后重试',
+          showCancel: false,
+          success(res) {
+          }
+        })
+      }
+    },
+    fail: function (res) {
+      wx.showModal({
+        title: '提示',
+        content: '可能是您的网络或者服务器出了问题，请稍后重试',
+        showCancel: false,
+        success(res) {
+        }
+      })
+    },
+    complete: function (res) {
+    }
+  }); 
+   
+},
   tabSelect(e) {
     this.setData({
       tabCur: e.currentTarget.dataset.id,
