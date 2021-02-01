@@ -99,6 +99,18 @@ Page({
           title: '加载成功',
           duration: 2000
         });
+        // if (that.data.not_in_exclude_course_avg_score == "--"){
+        //   wx.showModal({
+        //     title: "提示",
+        //     content: '系统检测到你存在重修/不及格科目，当前无法参与排名，如有疑问，请反馈。',
+        //     showCancel: false,
+        //     confirmText: "知道了",
+        //     success: (res) => {
+        //       if (res.confirm) {
+        //       }
+        //     }
+        //   });
+        // }
        }
        else if (res.data.message == "incorrect") {
         wx.hideLoading({

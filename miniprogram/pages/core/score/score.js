@@ -217,7 +217,7 @@ Page({
       curScore.css.top = (335 + gapUnit * legal)+ "rpx"
       curScore.css.right = "180rpx"
       curScore.css.fontSize = fontSize
-      if (courses[i].score < 70){
+      if (courses[i].score < 70 || courses[i].score == "重修"){
         curScore.css.color = 'red'
       }
       else{

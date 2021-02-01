@@ -37,7 +37,8 @@
     <text class="cuIcon-title text-orange "></text>参与排名平均学分绩
   </view>
   <view class="action">
-    {{not_in_exclude_course_avg_score}}分
+  <text class="text-orange" wx:if="{{not_in_exclude_course_avg_score == '--'}}" >存在不及格/重修科目</text>
+   <text wx:else> {{not_in_exclude_course_avg_score}}分 </text>
   </view>
 </view>
 <view class="cu-bar bg-white">
@@ -45,7 +46,8 @@
     <text class="cuIcon-title text-orange "></text>排名(去同分)
   </view>
   <view class="action">
-   <text class="cuIcon-rank text-orange"></text>第{{rank}}名 (前{{rank_rate}}%)
+  <text wx:if="{{not_in_exclude_course_avg_score == '--'}}">--</text>
+   <text wx:else> <text class="cuIcon-rank text-orange"></text>第{{rank}}名 (前{{rank_rate}}%)</text>
   </view>
 </view>
 
@@ -54,7 +56,8 @@
     <text class="cuIcon-title text-orange "></text>排名(含同分)
   </view>
   <view class="action">
-   <text class="cuIcon-rank text-orange"></text>第{{add_same_rank}}名 (前{{add_same_rank_rate}}%)
+  <text wx:if="{{not_in_exclude_course_avg_score == '--'}}">--</text>
+   <text wx:else> <text class="cuIcon-rank text-orange"></text>第{{add_same_rank}}名 (前{{add_same_rank_rate}}%)</text>
   </view>
 </view>
 
@@ -64,7 +67,8 @@
     <text class="cuIcon-title text-orange "></text>同分人数
   </view>
   <view class="action">
-  {{same_student}}人
+  <text wx:if="{{not_in_exclude_course_avg_score == '--'}}">--</text>
+  <text wx:else>{{same_student}}人</text>
   </view>
 </view>
 
