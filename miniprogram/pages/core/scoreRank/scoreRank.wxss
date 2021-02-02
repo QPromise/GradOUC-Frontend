@@ -13,3 +13,26 @@ page{
   font-size: 27rpx; 
   padding: 50rpx 30rpx
 }
+.top{
+  width: 100rpx;
+  height: 100rpx;
+  color: #FFF;
+  opacity: 0.8;
+  border-radius: 50%;
+  font-size: 21rpx;
+  text-align: center;
+  z-index: 2;
+  overflow: visible;
+  transition-duration: 0.3s;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+  align-items: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  box-shadow: 0 0 8rpx rgba(0, 0, 0, 0.14), 0 8rpx 16rpx rgba(0, 0, 0, 0.28);
+  right: 5%;
+  bottom: 10%;
+  position: fixed;
+  line-height: 30rpx;
+}

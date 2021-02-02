@@ -181,7 +181,7 @@
 </view>
 <view wx:if="{{tabCur == 1}}">
 <i-notice-bar icon="systemprompt" loop speed='800' class='notice-bar'>
-      当前排行为你设置的研究方向的排名，仅展示大约前百分之四十。
+      当前排行为你设置的研究方向的排名，去掉你所选择的不参与排名科目计算，存在不及格/重修科目的同学不参与排名不作展示。
 </i-notice-bar>
 <view style="margin-top:80rpx;"></view>
 <block wx:for="{{top_forty_percent_students}}" wx:for-index="index" wx:for-item="item" wx:key="item.index">
@@ -205,8 +205,9 @@
 </view>
 </block>
 <view wx:if="{{top_forty_percent_students.length>0}}" class="other_condition" style="font-size:24rpx;color:#6666;padding:30rpx;">
-  <text class="cuIcon-info text-sm" style="margin-right:5rpx;"></text>到底啦，当前排名仅展示大约前百分之四十
+  - 没有更多了 -
 </view>
+<view class="top" style="background-color:orange;" hidden='{{!floorstatus}}' bindtap="goTop">回到顶部</view>
 <view wx:if="{{top_forty_percent_students.length<=0}}" class="other_condition">
   <text class="cuIcon-info text-sm" style="margin-right:5rpx;"></text>暂无排名
 </view>
