@@ -6,7 +6,6 @@ Page({
    * 页面的初始数据
    */
   data: {
-    customBar: app.globalData.CustomBar,
     pages: 0,
     number: 0,
     hiddenmodalput: true,
@@ -265,7 +264,7 @@ Page({
   },
   onShareAppMessage() {
     return {
-      title: '开课查询',
+      title: '全校开课',
       desc: '可查详细的课程表、详细成绩，更多查询功能欢迎体验！',
       path: '/pages/core/schoolCourse/schoolCourse'
     };

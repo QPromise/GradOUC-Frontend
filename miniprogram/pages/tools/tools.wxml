@@ -52,7 +52,7 @@
       <view class="app-icon">
         <image mode="widthFix" src="/images/core/schoolCourse.png"></image>
       </view>
-      <text>全校开课</text>
+      <text>开课查询</text>
     </view>
     
   </view>

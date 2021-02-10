@@ -1,4 +1,4 @@
-<navigationBar id="navigationBar" title="{{'意见反馈'}}" back="{{true}}"></navigationBar>
+<navigationBar id="navigationBar" title="{{'联系我们'}}" back="{{true}}"></navigationBar>
 <view class="page">
   <view class='page__hd'>
   </view>
@@ -22,7 +22,7 @@
           <view class='feed-box-body-con-item' >
             <view class='con-item-logo'><image src='https://i.loli.net/2021/01/18/YzJTLSKm2th8OQy.png' data-src="https://i.loli.net/2021/01/18/YzJTLSKm2th8OQy.png" bindtap="previewImage"></image></view>
             <view class='con-item-text'>
-              <text class='con-item-text-title' bindtap='setwx'>公众号【GradOUC】</text>
+              <text class='con-item-text-title' bindtap='setwx'>公众号【研在OUC助手】</text>
               <text class='con-item-text-detail'>点击图片保存到相册扫码</text>
             </view>
           </view>

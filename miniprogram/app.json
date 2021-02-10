@@ -1,5 +1,6 @@
 {
   "pages": [
+    
     "pages/index/index",
     "pages/my/my",
     "pages/my/login",
@@ -26,7 +27,9 @@
     "pages/tools/tiangou/tiangou",
     "pages/core/exam/exam",
     "pages/test/test",
-    "pages/core/scoreRank/scoreRank"
+    "pages/core/scoreRank/scoreRank",
+    "pages/core/backup/schoolCourse"
+    
   ],
   "window": {
     "backgroundTextStyle": "light",

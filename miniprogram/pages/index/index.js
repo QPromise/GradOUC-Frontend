@@ -177,7 +177,7 @@ Page({
               tmp_course[i].room = tmp_course[i].room.substring(0,3) + ".." + tmp_course[i].room.substring(tmp_course[i].room.length - 6,tmp_course[i].room.length);
             }
           }
-          if(app.cache.nowzc > 22){
+          if(app.cache.nowzc > 22 || app.cache.nowzc <= 0){
             that.setData({
               showTodayInfo:""
             })
