@@ -6,8 +6,8 @@
 <form>
 <view class="cu-form-group">
 <view class="title"> <text class="cuIcon-title text-blue"></text>开课学院</view>
-		<picker bindchange="departmentChange" value="{{departmentIndex}}" range="{{departmentArray}}">
-			<view class="picker">
+		<picker style="color:#555" bindchange="departmentChange" value="{{departmentIndex}}" range="{{departmentArray}}">
+			<view>
 				{{departmentArray[departmentIndex]}}
 			</view>
 		</picker>
@@ -31,10 +31,9 @@
 </view>
 <view style="margin-top:10rpx;position:relative;">
 <view class="cu-list">
-      <view class="cu-item padding-sm bg-white" style="letter-spacing:1rpx;line-height: 1.3;border-radius:12rpx;margin-right: 20rpx;margin-left: 20rpx;margin-bottom: 10rpx;" wx:for="{{schoolCourses}}" wx:for-index="index" wx:for-item="item" wx:key="item.index">
+      <view class="cu-item padding-sm bg-white" style="line-height: 1.3;border-radius:12rpx;margin-right: 20rpx;margin-left: 20rpx;margin-bottom: 10rpx;" wx:for="{{schoolCourses}}" wx:for-index="index" wx:for-item="item" wx:key="item.index">
           <view class="text-blue" bindtap='showdetail' data-xq='{{item.xq}}' data-xn='{{item.xn}}' data-id='{{item.id}}' data-name='{{item.name}}' data-department='{{item.department}}' data-capacity='{{item.capacity}}' data-language='{{item.language}}' data-info='{{item.info}}'data-campus='{{item.campus}}' data-teacher='{{item.teacher}}' data-department='{{item.department}}'>
-           {{item.name}}
-            <text class="text padding-left-sm text-gray">{{item.teacher}}</text>
+           {{item.name}} · {{item.teacher}}
           </view>
           <view class="text-gray text-sm flex" style="margin-top:10rpx" bindtap='showdetail' data-xq='{{item.xq}}' data-xn='{{item.xn}}' data-id='{{item.id}}' data-name='{{item.name}}' data-department='{{item.department}}' data-capacity='{{item.capacity}}' data-language='{{item.language}}' data-info='{{item.info}}'data-campus='{{item.campus}}' data-teacher='{{item.teacher}}' data-department='{{item.department}}'>
             <text class="text">{{item.campus}}</text>

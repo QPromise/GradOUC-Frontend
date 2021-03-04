@@ -37,7 +37,7 @@
     <text class="cuIcon-title text-orange "></text>参与排名平均学分绩
   </view>
   <view class="action">
-  <text class="text-orange" wx:if="{{not_in_exclude_course_avg_score == '--'}}" >存在不及格/重修科目</text>
+  <text class="text-orange" wx:if="{{not_in_exclude_course_avg_score == '--'}}" >存在不及格/重修课程</text>
    <text wx:else> {{not_in_exclude_course_avg_score}}分 </text>
   </view>
 </view>
@@ -100,7 +100,7 @@
 
 <view class="cu-bar bg-white">
   <view class="action">
-    <text class="cuIcon-title text-orange "></text>不参与排名的考试科目
+    <text class="cuIcon-title text-orange "></text>不参与排名的课程类型及名称
   </view>
   <view class="action">
     <button class="cu-btn bg-green shadow" bindtap="getCommonCourses" data-target="CoursesModal" style="height:56rpx;font-size:25rpx;">设置</button>
@@ -139,8 +139,8 @@
       <text class="text-gray" style="margin-left:5rpx;">排名一般按照本系所有专硕/学硕进行排名，具体方向可参照当年研究生考试大纲</text>
       </view>
      <view class="cu-bar bg-white">
-      <view class="action text-blue" style="font-size:30rpx;margin-left:10%" bindtap="hideModal">取消</view>
-      <view class="action text-green" style="font-size:30rpx;margin-right:10%" bindtap="setSelectResearch">确定</view>
+      <view class="action text-grey" style="font-size:32rpx;margin-left:10%" bindtap="hideModal">取消</view>
+      <view class="action text-green" style="font-size:32rpx;margin-right:10%" bindtap="setSelectResearch">确定</view>
     </view>
   </view>
 </view>
@@ -150,14 +150,18 @@
   <view class="cu-bar bg-white justify-end">
 			<view class="content" style="font-size:30rpx">课程列表(可滚动)
       </view>
-          
 		</view>
+  <view class="bg-white flex justify-around" style="padding:0 15% 2% 15%">
+      <view><text class="cuIcon-title text-black"></text>课程类型</view>
+      <view><text class="cuIcon-title text-brown"></text>课程名称</view>
+      </view>
   <scroll-view scroll-y style="height: 40vh;">
 		<checkbox-group class="block">
       <view class="cu-list menu text-left">
         <view class="cu-item" wx:for="{{common_courses}}" wx:for-key="index" wx:for-item="item">
           <label class="flex justify-between align-center flex-sub">
-            <view class="flex-sub">{{item.value}}</view>
+            <view class="flex-sub">
+            <text class="text-{{item.type == 'type'? 'black':'brown'}}">{{item.value}}</text></view>
             <checkbox bindtap="setExcludeCoursesChange" data-index="{{index}}" class="round" data-value="{{item.value}}" checked='{{item.checked}}'></checkbox>
           </label>
         </view>
@@ -166,11 +170,11 @@
 		</scroll-view>
      <view class="text-sm padding-sm">
     <text class="cuIcon-info text-gray"></text>
-      <text class="text-gray" style="margin-left:5rpx;">在排名中的所有人将不对选中科目进行平均学分绩计算。</text>
+      <text class="text-gray" style="margin-left:5rpx;">选中的课程类型和课程名称将不参与平均学分绩计算，对参与当前排名的所有同学适用。</text>
       </view>
      <view class="cu-bar bg-white">
-      <view class="action text-blue" style="font-size:30rpx;margin-left:10%" bindtap="hideModal">取消</view>
-      <view class="action text-green" style="font-size:30rpx;margin-right:10%" bindtap="setExcludeCourses">确定</view>
+      <view class="action text-grey" style="font-size:32rpx;margin-left:10%" bindtap="hideModal">取消</view>
+      <view class="action text-green" style="font-size:32rpx;margin-right:10%" bindtap="setExcludeCourses">确定</view>
     </view>
   </view>
 </view>
@@ -181,7 +185,7 @@
 </view>
 <view wx:if="{{tabCur == 1}}">
 <i-notice-bar icon="systemprompt" loop speed='800' class='notice-bar'>
-      当前排行为你设置的研究方向的排名，去掉你所选择的不参与排名科目计算，存在不及格/重修科目的同学不参与排名不作展示。
+      当前排行为你设置的研究方向的排名，去掉你所选择的不参与排名课程计算，存在不及格/重修课程的同学不参与排名不作展示。
 </i-notice-bar>
 <view style="margin-top:80rpx;"></view>
 <block wx:for="{{top_forty_percent_students}}" wx:for-index="index" wx:for-item="item" wx:key="item.index">

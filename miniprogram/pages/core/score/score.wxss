@@ -107,6 +107,6 @@
   margin-top:2rpx;
   text-align: center;
   color: #92979b;
-  font-size: 24rpx;
+  font-size: 26rpx;
 
 }

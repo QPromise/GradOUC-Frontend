@@ -345,7 +345,7 @@ Page({
   getCommonCourses: function(e){
     let that = this
     wx.showLoading({
-      title: "科目拉取中",
+      title: "课程拉取中",
     })
     wx.request({
       url: app.local_server + "get_common_courses",
@@ -360,8 +360,9 @@ Page({
       success: function(res){
        // success
        if(res.data.message == "success"){
+         console.log(res.data)
         that.setData({
-          common_courses: res.data.common_courses
+          common_courses: res.data.common_courses_type.concat(res.data.common_courses)
         })
         that.setData({
           modalName: e.currentTarget.dataset.target

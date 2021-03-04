@@ -36,7 +36,7 @@
 
 
 <view wx:if="{{exams.length>0 && !loading}}" class="margin padding-sm bg-white" style="border-radius: 8rpx;">
-          <text class="text-yellow" style="line-height:1.5">温馨提示：考试很重要，请同学们务必核实考试信息与学校公布的是否有出入；若数据有误，请联系我，谢谢。</text>
+          <text class="text-yellow" style="line-height:1.5">温馨提示：①考试时信号不好，请提前截图保存考试安排；②请同学们务必核实考试信息与学校公布的是否有出入，若数据有误，请联系我，谢谢。</text>
 </view>
 
 

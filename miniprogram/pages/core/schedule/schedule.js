@@ -48,7 +48,6 @@ Page({
   },
   // 现在是否大于指定的时间
   cmpDate: function () { 
-    console.log(new Date())
     var now = parseInt(Date.parse(new Date()) / 1000)
     var date = parseInt(app.cache.begin_day)
     return now > date
@@ -102,7 +101,6 @@ Page({
           });
     
         }
-        
         that.reFreshKCB();
       }
     }, 500)
@@ -268,15 +266,16 @@ Page({
   },
   //判断课程和教室字数加起来是否超出小方块
   isOverLength: function (name, room) {
-    if (name.length + room.length > 16) {
-      if (room.length > 13){
+      if (name.length > 6 && room.length > 12){
         return 1; //两个都需要缩短
       }
-      else{
+      else if(name.length > 6 && room.length <= 12){
         return 2; //只缩短课程名称
       }
-    }
-    return 3; //两个都不需要缩短
+      else if(name.length <= 6 && room.length > 12){
+        return 3; //只缩短教室名称
+      }
+    return 4; //两个都不需要缩短
   },
   //显示课程的详细信息
   showdetail: function (e) {
@@ -361,7 +360,11 @@ Page({
         }
         else if (over_type == 3){
           changeKCB[row][i].name_short = data[row][i].name;
-          changeKCB[row][i].room_short = data[row][i].room;
+          changeKCB[row][i].room_short = data[row][i].room.substring(0,2) + ".." + data[row][i].room.substring(data[row][i].room.length - 8,data[row][i].room.length);
+          }
+          else if (over_type == 4){
+            changeKCB[row][i].name_short = data[row][i].name;
+            changeKCB[row][i].room_short = data[row][i].room;
           }
         changeKCB[row][i].name_long = data[row][i].name;
         changeKCB[row][i].room_long = data[row][i].room;

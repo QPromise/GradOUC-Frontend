@@ -7,15 +7,16 @@
       {{text}}
     </i-notice-bar>
 
-    <view class="swiper">
-    <swiper class="square-dot" indicator-dots="{{swiimgs.length>1?true:false}}"  indicator-active-color="#fff" autoplay="true" interval="6000" duration="1000" circular="true">
-        <block wx:for="{{swiimgs}}" wx:for-item="item" wx:key="item">
+    <swiper class="screen-swiper square-dot" wx:if="{{swiimgs.length == 0}}" indicator-active-color="#fff" autoplay="true" interval="6000" duration="1000" circular="true">
           <swiper-item>
-            <image src="{{item.image}}" bindtap="navTo" data-id="{{item.url}}" class="pic" />
+            <image src="/images/core/something_wrong.png"  mode="aspectFill" />
           </swiper-item>
-        </block>
       </swiper>
-    </view>
+    <swiper class="screen-swiper square-dot" wx:if="{{swiimgs.length > 0}}" indicator-dots="{{swiimgs.length>1?true:false}}"  indicator-active-color="#fff" autoplay="true" interval="6000" duration="1000" circular="true">
+        <swiper-item wx:for="{{swiimgs}}" bindtap="navTo" data-id="{{item.url}}" wx:for-item="item" wx:key="item">
+            <image src="{{item.image}}" mode="aspectFill"/>
+        </swiper-item>
+    </swiper>
   </view>
    <view class="padding-sm bg-white" style="padding:20rpx 10rpx 10rpx 10rpx">
       <view class="bg-white text">
@@ -133,10 +134,6 @@
 <!-- <view class="bg-img" bindtap="goLife" style="padding:0rpx 0 10rpx 0;text-align: center;background-color: white;margin: 0rpx 0rpx 0rpx 0rpx;">
 <image mode="widthFix" style="height:auto" src="/images/core/go_life.png"></image>
 </view> -->
-
-
-
-
   <view class="cu-bar bg-white arrow"style="min-height:70rpx;margin-top:8rpx;">
   <view class="action">
     <text class="cuIcon-titles text-blue" style="margin-left:-0.9em;margin-right:0.1em;"></text>
@@ -145,7 +142,6 @@
       <view class="action" style="margin-right:3%" bindtap="goSchedule" wx:if="{{showTodayInfo != ''}}">
       <text class="cuIcon-calendar text-blue text-sm" style="margin-right:3rpx;"></text>
     <text>{{showTodayInfo}}</text>
-        
       </view>
 </view>
 
@@ -163,7 +159,8 @@
 <view class='box' wx:if="{{is_bind && !loading}}">
 <view class="cu-list menu" wx:if="{{course.length>0}}" >
 <block wx:for="{{course}}"wx:for-index="index" wx:for-item="item" wx:key="item.index">
-<view class="cu-bar bg-white"style="min-height:50rpx;">
+<!-- 课程名称和上课地点-->
+<view class="cu-bar bg-white"style="min-height:50rpx;margin-right:2%">
   <view class="action">
   <text class="cuIcon-title text-blue" style="margin-right:5rpx"></text>
     <view class="text-df">{{item.name}}</view>
@@ -172,8 +169,9 @@
    <text class="cuIcon-location text-blue" style="margin-right:3rpx"></text>{{item.room}}
    </view>
 </view>
+<!-- 上课时间和上课节次-->
 <view class="padding-left bg-white">
-  <view class="text-left text-sm text-grey padding-left {{course.length == 1 ? '': 'solid-bottom'}}" style="padding-top:5rpx;padding-bottom:15rpx;">
+  <view class="text-left text-sm text-grey padding-left " style="padding-top:5rpx;padding-bottom:15rpx;margin-right:2%">
   <text>上课:{{item.time_begin}}  下课:{{item.time_end}}</text>
   <text style="float:right;marin-right:10rpx;">{{item.span}}节</text>
   </view>

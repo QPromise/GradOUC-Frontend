@@ -35,19 +35,19 @@ Page({
     let that = this
     // console.log(wx.getStorageSync(app.cache.sno + 'exams'))
     // console.log(wx.getStorageSync(app.cache.sno + 'exam') == "")
-    if (wx.getStorageSync(app.cache.sno + 'exams')){
-      let tmp_exams = wx.getStorageSync(app.cache.sno + 'exams')
-          for(let i = 0; i < tmp_exams.length; i++){
-            let cur_date = that.dateTransfer(tmp_exams[i].time)
-            tmp_exams[i]["over"] = that.cmpDate(cur_date)
-          }
-          that.setData({
-            exams:tmp_exams,
-          }) 
-    }
-    else{
+    // if (wx.getStorageSync(app.cache.sno + 'exams')){
+    //   let tmp_exams = wx.getStorageSync(app.cache.sno + 'exams')
+    //       for(let i = 0; i < tmp_exams.length; i++){
+    //         let cur_date = that.dateTransfer(tmp_exams[i].time)
+    //         tmp_exams[i]["over"] = that.cmpDate(cur_date)
+    //       }
+    //       that.setData({
+    //         exams:tmp_exams,
+    //       }) 
+    // }
+    // else{
       that.getExam(app.cache.sno);
-    }
+    //}
 
   },
   snoNameInput: function (e) {
@@ -129,7 +129,7 @@ Page({
             that.setData({
               name:"我的公共课考试安排"
             })
-            app.saveCache(app.cache.sno + "exams", tmp_exams)
+            //app.saveCache(app.cache.sno + "exams", tmp_exams)
           }
           else{
             that.setData({
@@ -139,13 +139,12 @@ Page({
         }
         else if(res.data.message == "empty" && res.statusCode == 200) {
           let tmp_exams = res.data.exams
-    
           that.setData({
             exams:tmp_exams,
           }) 
-          if(sno == app.cache.sno){
-            app.saveCache(app.cache.sno + "exams", tmp_exams)
-          }
+          // if(sno == app.cache.sno){
+          //   app.saveCache(app.cache.sno + "exams", tmp_exams)
+          // }
         }
         else{
           wx.showModal({

@@ -209,8 +209,13 @@ goSchedule:function(){
       })}
       else{
         let tips = '当前仅限学号前四位为' + that.data.get_score_rank_nj_min + '-' + that.data.get_score_rank_nj_max + '的同学访问'
-        if (that.data.get_score_rank_nj_min == that.data.get_score_rank_nj_max){
-          tips = '当前仅限学号前四位为' + that.data.get_score_rank_nj_max + '的同学访问'
+        if(parseInt(that.data.get_score_rank_nj_min) >= 3000){
+          tips = '当前不能查看排名，请等待通知'
+        }
+        else{
+          if (that.data.get_score_rank_nj_min == that.data.get_score_rank_nj_max){
+            tips = '当前仅限学号前四位为' + that.data.get_score_rank_nj_max + '的同学访问'
+          }
         }
         wx.showToast({
           icon: 'none',

@@ -37,7 +37,7 @@ page {
 .box{
   width: 100%;
   background: #fff;
-  padding: 10rpx 3% 35rpx 3%;
+  padding: 10rpx 1% 35rpx 1%;
 }
 .other_condition{
   text-align: center;
@@ -45,9 +45,11 @@ page {
   font-size: 27rpx; 
   padding: 50rpx 30rpx
 }
-swiper {
-  height: 383rpx;
-  
+.screen-swiper {
+  min-height: 320rpx;
+  overflow: hidden;
+  -webkit-backface-visibility: hidden;
+  -webkit-transform: translate3d(0, 0, 0);
 }
 .contain{
   box-sizing: border-box;
@@ -56,12 +58,6 @@ swiper {
 .page_bd {
   background-color: white;
   margin: 15rpx 0rpx;
-}
-
-.pic {
-  width: 100%;
-  height: 100%;
-  
 }
 
 .guide-item{

@@ -6,8 +6,7 @@ Page({
    */
   data: {
     isTiptrue:false,
-    swiimgs: [
-    ],
+    swiimgs: [],
     hiddenmodalput: true,
     getindex: 0,  //最新获取的消息序号，用户用户点击关闭通知
     shownews: false,
@@ -68,11 +67,10 @@ Page({
     that.setData({
       is_bind: app.cache.is_bind,
     })
-    that.getWeek(app.cache.begin_day)
+    that.getConfig()
     that.getTopbarImg()
     that.getDay()
     that.getnews()
-    that.getConfig()
     that.getTodayCourse()
     that.getRecentlyUse()
     //模拟加载
@@ -107,7 +105,7 @@ Page({
     var day = ((nowtimestamp / 1000 - begin_day) / 86400); //与开学时间的时间差（天）
     var nowzc = Math.ceil(day / 7); //向上取整
     //if (nowzc > 21) nowzc = 21;
-    app.saveCache("nowzc",nowzc);
+    app.saveCache("nowzc",nowzc); 
   },
   // 现在是否大于指定的时间
   cmpDate: function () { 
@@ -169,14 +167,17 @@ Page({
         }
         else if(res.data.message == "success" && res.statusCode == 200) {
           let tmp_course = res.data.course
+          // tmp_course = [{"name": "深度学习理论与实践能力认证工程","room": "国际事务与公共管理学院南楼B3107室","span": "10-12","time_begin": "18:30","time_end": "21:20"}]
           for(let i = 0; i < tmp_course.length; i++){
-            if(tmp_course[i].name.length > 13){
-              tmp_course[i].name = tmp_course[i].name.substring(0,11) + "..";
+            if(tmp_course[i].name.length + tmp_course[i].room.length > 24){
+              if(tmp_course[i].name.length > 12){
+                tmp_course[i].name = tmp_course[i].name.substring(0,11) + "..";
+              }
+              if (tmp_course[i].room.length > 12){
+                tmp_course[i].room = tmp_course[i].room.substring(0,2) + ".." + tmp_course[i].room.substring(tmp_course[i].room.length - 9,tmp_course[i].room.length);
+              }
             }
-            if (tmp_course[i].room.length > 10){
-              tmp_course[i].room = tmp_course[i].room.substring(0,3) + ".." + tmp_course[i].room.substring(tmp_course[i].room.length - 6,tmp_course[i].room.length);
-            }
-          }
+        }
           if(app.cache.nowzc > 22 || app.cache.nowzc <= 0){
             that.setData({
               showTodayInfo:""
@@ -194,7 +195,7 @@ Page({
         }
         else{
           that.setData({
-            content: '服务器开小差啦'
+            content: '服务器开小差啦，稍后刷新试试'
           })
         }
       },
@@ -212,41 +213,46 @@ Page({
   },
  //获取当前日期
  getDay:function(){
-   let that = this
-  var today = parseInt(new Date().getDay());
-  if (today == 0) {
-   that.setData({
-     today:6
-   })
-  } else{
-   that.setData({
-     today:today - 1 
-   })
-  }
+    let that = this
+    var today = parseInt(new Date().getDay());
+    if (today == 0) {
+    that.setData({
+      today:6
+    })
+    } else{
+    that.setData({
+      today:today - 1 
+    })
+    }
 },
     /**
    * 检测系统是否开启成绩通知了
    */
-  getConfig: function(){
-    let that = this
-    wx.request({
-      url: app.local_server + 'get_config/',
-      success: function (res) {
-        //console.log(res.data.get_score_rank_nj_min, res.data.get_score_rank_nj_max)
-        app.saveCache("is_open_subscribe", res.data.is_open_subscribe)
-        app.saveCache("get_score_rank_nj_min", res.data.get_score_rank_nj_min)
-        app.saveCache("get_score_rank_nj_max", res.data.get_score_rank_nj_max)
-        that.setData({
-          is_open_subscribe: res.data.is_open_subscribe,
-          get_score_rank_nj_min: res.data.get_score_rank_nj_min,
-          get_score_rank_nj_max: res.data.get_score_rank_nj_max
-        })
-        if (that.data.is_open_subscribe == 1 || that.data.is_open_subscribe == 2){
-          that.failurePopup();
-        }
-      },
-    })
-  },
+getConfig: function(){
+  let that = this
+  wx.request({
+    url: app.local_server + 'get_config/',
+    success: function (res) {
+      //console.log(res.data.get_score_rank_nj_min, res.data.get_score_rank_nj_max)
+      app.saveCache("begin_day", res.data.begin_day)
+      app.saveCache("end_day", res.data.end_day)
+      app.saveCache("xn", res.data.xn)
+      app.saveCache("xq", res.data.xq)
+      app.saveCache("is_open_subscribe", res.data.is_open_subscribe)
+      app.saveCache("get_score_rank_nj_min", res.data.get_score_rank_nj_min)
+      app.saveCache("get_score_rank_nj_max", res.data.get_score_rank_nj_max)
+      that.getWeek(res.data.begin_day)
+      that.setData({
+        is_open_subscribe: res.data.is_open_subscribe,
+        get_score_rank_nj_min: res.data.get_score_rank_nj_min,
+        get_score_rank_nj_max: res.data.get_score_rank_nj_max
+      })
+      if (that.data.is_open_subscribe == 1 || that.data.is_open_subscribe == 2){
+        that.failurePopup();
+      }
+    },
+  })
+},
   /**
    * 检测成绩通知是否失效
    */
@@ -574,8 +580,13 @@ goSchedule:function(){
       })}
       else{
         let tips = '当前仅限学号前四位为' + that.data.get_score_rank_nj_min + '-' + that.data.get_score_rank_nj_max + '的同学访问'
-        if (that.data.get_score_rank_nj_min == that.data.get_score_rank_nj_max){
-          tips = '当前仅限学号前四位为' + that.data.get_score_rank_nj_max + '的同学访问'
+        if(parseInt(that.data.get_score_rank_nj_min) >= 3000){
+          tips = '当前不能查看排名，请等待通知'
+        }
+        else{
+          if (that.data.get_score_rank_nj_min == that.data.get_score_rank_nj_max){
+            tips = '当前仅限学号前四位为' + that.data.get_score_rank_nj_max + '的同学访问'
+          }
         }
         wx.showToast({
           icon: 'none',
@@ -714,6 +725,9 @@ goSchedule:function(){
         }
         that.setData({ swiimgs: swis });
       }
+      ,fail: (res)=>{
+        that.setData({ swiimgs: [] });
+       }
     });
   }
 })

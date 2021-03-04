@@ -104,7 +104,6 @@ Page({
           app.saveCache("passwd", data.passwd);
           app.saveCache("name", data.name);
           app.saveCache("is_bind", true);
-
           wx.showToast({
             title: '绑定成功',
             icon: 'loading',
@@ -113,7 +112,7 @@ Page({
               wx.reLaunch({
                 url: '/pages/my/my',
               })
-             
+        
             }
           })
         } else if (data.message == "fault" && res.statusCode != 200) {

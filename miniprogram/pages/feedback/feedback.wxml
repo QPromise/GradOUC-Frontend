@@ -15,12 +15,12 @@
       </view>
       <view class='feed-box-body'>
         <view class='feed-box-body-text'>
-          <text>感谢大家使用研在OUC小程序！小程序可能某些地方存在没有被发现的问题，大家可以去上面的【意见反馈】模块给我留言，收到会及时给大家回复。有任何通知或者注意事项都会及时通过下方公众号推送，大家可以关注一下。</text>
+          <text>感谢大家使用研在OUC小程序！小程序可能某些地方存在没有被发现的问题，大家可以去上面的【问题反馈】模块给我留言，收到会及时给大家回复。有任何通知或者注意事项都会及时通过下方公众号推送，大家可以关注一下。</text>
           <text></text>
         </view>
         <view class='feed-box-body-con'>
           <view class='feed-box-body-con-item' >
-            <view class='con-item-logo'><image src='https://i.loli.net/2021/01/18/YzJTLSKm2th8OQy.png' data-src="https://i.loli.net/2021/01/18/YzJTLSKm2th8OQy.png" bindtap="previewImage"></image></view>
+            <view class='con-item-logo'><image src='../../images/feedback/gongzhonghao.png' data-src="https://i.loli.net/2021/01/18/YzJTLSKm2th8OQy.png" bindtap="previewImage"></image></view>
             <view class='con-item-text'>
               <text class='con-item-text-title' bindtap='setwx'>公众号【研在OUC助手】</text>
               <text class='con-item-text-detail'>点击图片保存到相册扫码</text>

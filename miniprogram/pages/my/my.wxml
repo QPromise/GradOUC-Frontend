@@ -57,7 +57,7 @@
     <view url="" class="about-link" >
       <button class="more-btn" open-type="feedback">
         <image class="btn-icon" src="/images/my/feedback.png"></image>
-        <text class="btn-text" style="text-align:left">意见反馈</text>
+        <text class="btn-text" style="text-align:left">问题反馈</text>
         <view class="btn-open">
             <image class="btn-enter" src="/images/enter.png"></image>
         </view>
@@ -122,6 +122,15 @@
       <image class="btn-icon" src="/images/my/notice.png"></image>
       <text class="btn-text">成绩通知</text>
       <switch bindtap='scoreSubscribe' checked="{{score_notice}}" />
+    </view>
+    </view>
+    <view url="" wx:if="{{is_bind}}" class="about-link">
+    <view class="more-btn" bindtap="exit">
+      <image class="btn-icon" src="/images/my/exit.png"></image>
+      <text class="btn-text">退出绑定</text>
+      <view class="btn-open">
+          <image class="btn-enter" src="/images/enter.png"></image>
+      </view>
     </view>
     </view>
   </view>

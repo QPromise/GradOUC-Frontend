@@ -206,6 +206,38 @@ Page({
       add_tips: false
     })
   },
+  exit:function(){
+    let that = this
+    wx.showModal({
+      title: '提示',
+      content: '退出绑定后你的个人数据将被清空，是否退出绑定？',
+      showCancel: true,
+      confirmText: '确认',
+      cancelText: '取消',
+      success(res) {
+        if (res.confirm) {
+          // wx.clearStorageSync()
+          // app.cache = {}
+          app.saveCache("is_bind", false)
+          that.setData({
+            is_bind: false
+          })
+          wx.showToast({
+            title: '退出绑定成功',
+            icon: 'loading',
+            duration: 2000,
+            success: function () {
+              wx.reLaunch({
+                url: '/pages/my/my',
+              })
+            }
+          })
+        } else if (res.cancel) {
+        }
+      }
+    })
+    
+  },
   /**
    * 生命周期函数--监听页面隐藏
    */
