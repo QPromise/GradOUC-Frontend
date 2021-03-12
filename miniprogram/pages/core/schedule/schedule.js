@@ -61,16 +61,32 @@ Page({
   onReady: function () {
     var that = this;
     that.getDay();
-    setTimeout(function () {
-      if (!that.cmpDate()) {
+
+    if (!that.cmpDate()) {
+      that.setData({
+        arrayxq: [app.cache.xq],
+        indexzc: 0,
+      });
+      that.reFreshKCB();
+      wx.showModal({
+        title: '提示',
+        content: '本学期课程已结束，当前为新学期课表，如需查看其它课程可以到【我的课程】中进行查看。',
+        showCancel: false,
+        success(res) {
+          if (res.confirm) {
+          } 
+        }
+      })
+    }
+    else{
+      if(app.cache.nowzc > 22){
         that.setData({
           arrayxq: [app.cache.xq],
-          indexzc: 0,
+          indexzc: 21,
         });
-        that.reFreshKCB();
         wx.showModal({
           title: '提示',
-          content: '本学期课程已结束，当前为新学期课表，如需查看其它课程可以到【我的课程】中进行查看。',
+          content: '本学期课程已结束，课表不再更新',
           showCancel: false,
           success(res) {
             if (res.confirm) {
@@ -79,31 +95,15 @@ Page({
         })
       }
       else{
-        if(app.cache.nowzc > 22){
-          that.setData({
-            arrayxq: [app.cache.xq],
-            indexzc: 21,
-          });
-          wx.showModal({
-            title: '提示',
-            content: '本学期课程已结束，课表不再更新',
-            showCancel: false,
-            success(res) {
-              if (res.confirm) {
-              } 
-            }
-          })
-        }
-        else{
-          that.setData({
-            arrayxq: [app.cache.xq],
-            indexzc: app.cache.nowzc - 1,
-          });
-    
-        }
-        that.reFreshKCB();
+        that.setData({
+          arrayxq: [app.cache.xq],
+          indexzc: app.cache.nowzc - 1,
+        });
+  
       }
-    }, 500)
+      that.reFreshKCB();
+    }
+
     //计算当前选择周1至周5日期
     that.caculateDate();
   },

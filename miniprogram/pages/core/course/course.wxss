@@ -5,7 +5,9 @@
 page{
   background-color:white;
 }
-
+.cu-bar{
+  min-height: 30px;
+}
 .edu-top{
   box-shadow: 1px 2px 3px #ddd;
   padding: 0 30rpx;

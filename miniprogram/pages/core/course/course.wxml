@@ -2,7 +2,7 @@
 	<view slot="content" style="color:white;font-weight:bold;">我的课程</view>
 </cu-custom>
 <view wx:if="{{!loading}}">
-<view class="cu-bar bg-white" style="min-height:70rpx;">
+<view class="cu-bar bg-white">
   <view class="action">
    <text class="cuIcon-titles text-blue"></text>
       <text class="text-bold">学分</text>
@@ -35,7 +35,7 @@
 <view style='padding:0 40rpx 0 40rpx;'>
 <ad unit-id="adunit-1be4d4eb22947fdc"></ad>
 </view>
-<view class="cu-bar bg-white"style="min-height:70rpx;">
+<view class="cu-bar bg-white">
   <view class="action">
     <text class="cuIcon-titles text-blue"></text>
       <text class="text-bold">学习计划内课程</text>
@@ -51,24 +51,27 @@
  <view class="flex padding justify-center" style="padding:3rpx;">
       <view class="bg-gray padding-sm margin-xs radius" style="width:40%;text-align:center;padding:4px;">{{key}}</view>
 </view>
-<block wx:for="{{value}}"wx:for-index="index" wx:for-item="item" wx:key="item.index">
-<view class="cu-bar bg-white"style="min-height:50rpx;" bindtap='showdetail' data-id='{{item.id}}' data-name='{{item.name}}' data-full_name='{{item.full_name}}' data-xq='{{item.xq}}' data-xn='{{item.xn}}' data-select='{{item.select}}' data-teacher='{{item.teacher}}' data-credit='{{item.credit}}' data-type='{{item.type}} 'data-process='{{item.process}}'>
+<block wx:for="{{value}}" wx:for-index="index" wx:for-item="item" wx:key="item.index">
+<view class="cu-bar bg-white" style="min-height:50rpx;" bindtap='showdetail' data-id='{{item.id}}' data-name='{{item.name}}' data-full_name='{{item.full_name}}' data-xq='{{item.xq}}' data-xn='{{item.xn}}' data-select='{{item.select}}' data-teacher='{{item.teacher}}' data-credit='{{item.credit}}' data-type='{{item.type}} 'data-process='{{item.process}}'>
   <view class="action">
     <view class="cu-tag sm bg-brown" style="margin-right:5rpx">{{index + 1}}</view>
     <view class="text-df">{{item.name}}</view>
   </view>
-   <view class="margin-xs text-df">{{item.process}}</view>
+   <view class="margin-xs text-df" style="color:#139700">{{item.process}}</view>
 </view>
-<view class="padding-lr bg-white" bindtap='showdetail' data-id='{{item.id}}' data-name='{{item.name}}' data-full_name='{{item.full_name}}' data-xq='{{item.xq}}' data-xn='{{item.xn}}' data-select='{{item.select}}' data-teacher='{{item.teacher}}' data-credit='{{item.credit}}' data-type='{{item.type}} 'data-process='{{item.process}}'>
-  <view class="text-left text-sm text-grey padding solid-bottom" style="padding-top:5rpx;padding-bottom:15rpx;" wx:if = "{{item.teacher}}">{{item.teacher}} · {{item.select}} · {{item.type}} · {{item.credit}}学分</view>
-  <view class="text-left text-sm text-grey padding solid-bottom" style="padding-top:5rpx;padding-bottom:15rpx;" wx:else>{{item.select}} · {{item.type}} · {{item.credit}}学分</view>
+<view class="cu-bar padding-left bg-white" bindtap='showdetail' data-id='{{item.id}}' data-name='{{item.name}}' data-full_name='{{item.full_name}}' data-xq='{{item.xq}}' data-xn='{{item.xn}}' data-select='{{item.select}}' data-teacher='{{item.teacher}}' data-credit='{{item.credit}}' data-type='{{item.type}} 'data-process='{{item.process}}'>
+  <view class="solid-bottom" style="width:100%">
+  <view class="text-left text-sm text-grey"  wx:if = "{{item.teacher}}"><text style="color:{{item.select == '必修'?'#db4d4a':'#139700'}}">{{item.select}}</text> · {{item.teacher}} · {{item.type}} · {{item.credit}}学分</view>
+  <view class="text-left text-sm text-grey"  wx:else><text style="color:{{item.select == '必修'?'#db4d4a':'#139700'}}">{{item.select}}</text> · {{item.type}} · {{item.credit}}学分</view>
+<!-- <view class="text-sm margin-right-xs" style="color:#1F95D0">详细>></view> -->
+</view>
 </view>
 </block>
 </view>
 
 </view>
 
-<view class="cu-bar bg-white"style="min-height:70rpx;">
+<view class="cu-bar bg-white">
   <view class="action">
     <text class="cuIcon-titles text-blue"></text>
       <text class="text-bold">学习计划外课程</text>
@@ -91,17 +94,20 @@
  <view class="flex padding justify-center" style="padding:3rpx;">
       <view class="bg-gray padding-sm margin-xs radius" style="width:40%;text-align:center;padding:4px;">{{key}}</view>
 </view>
-<block wx:for="{{value}}"wx:for-index="index" wx:for-item="item" wx:key="item.index">
-<view class="cu-bar bg-white"style="min-height:50rpx;" bindtap='showdetail' data-id='{{item.id}}' data-name='{{item.name}}' data-full_name='{{item.full_name}}' data-xq='{{item.xq}}' data-xn='{{item.xn}}' data-select='{{item.select}}' data-teacher='{{item.teacher}}' data-credit='{{item.credit}}' data-type='{{item.type}} 'data-process='{{item.process}}'>
+<block wx:for="{{value}}" wx:for-index="index" wx:for-item="item" wx:key="item.index">
+<view class="cu-bar bg-white" style="min-height:50rpx;" bindtap='showdetail' data-id='{{item.id}}' data-name='{{item.name}}' data-full_name='{{item.full_name}}' data-xq='{{item.xq}}' data-xn='{{item.xn}}' data-select='{{item.select}}' data-teacher='{{item.teacher}}' data-credit='{{item.credit}}' data-type='{{item.type}} 'data-process='{{item.process}}'>
   <view class="action">
     <view class="cu-tag sm bg-brown" style="margin-right:5rpx">{{index + 1}}</view>
     <view class="text-df">{{item.name}}</view>
   </view>
-   <view class="margin-xs text-df">{{item.process}}</view>
+   <view class="margin-xs text-df" style="color:#139700">{{item.process}}</view>
 </view>
-<view class="padding-lr bg-white" bindtap='showdetail' data-id='{{item.id}}' data-name='{{item.name}}' data-full_name='{{item.full_name}}' data-xq='{{item.xq}}' data-xn='{{item.xn}}' data-select='{{item.select}}' data-teacher='{{item.teacher}}' data-credit='{{item.credit}}' data-type='{{item.type}} 'data-process='{{item.process}}'>
-  <view class="text-left text-sm text-grey padding solid-bottom" style="padding-top:5rpx;padding-bottom:15rpx;" wx:if = "{{item.teacher}}">{{item.teacher}} · {{item.select}} · {{item.type}} · {{item.credit}}学分</view>
-  <view class="text-left text-sm text-grey padding solid-bottom" style="padding-top:5rpx;padding-bottom:15rpx;" wx:else>{{item.select}} · {{item.type}} · {{item.credit}}学分</view>
+<view class="cu-bar padding-left bg-white" bindtap='showdetail' data-id='{{item.id}}' data-name='{{item.name}}' data-full_name='{{item.full_name}}' data-xq='{{item.xq}}' data-xn='{{item.xn}}' data-select='{{item.select}}' data-teacher='{{item.teacher}}' data-credit='{{item.credit}}' data-type='{{item.type}} 'data-process='{{item.process}}'>
+  <view class="solid-bottom" style="width:100%">
+  <view class="text-left text-sm text-grey"  wx:if = "{{item.teacher}}"><text style="color:{{item.select == '必修'?'#db4d4a':'#139700'}}">{{item.select}}</text> · {{item.teacher}} · {{item.type}} · {{item.credit}}学分</view>
+  <view class="text-left text-sm text-grey"  wx:else><text style="color:{{item.select == '必修'?'#db4d4a':'#139700'}}">{{item.select}}</text> · {{item.type}} · {{item.credit}}学分</view>
+<!-- <view class="text-sm margin-right-xs" style="color:#1F95D0">详细>></view> -->
+</view>
 </view>
 </block>
 </view>

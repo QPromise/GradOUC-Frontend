@@ -11,8 +11,8 @@
   </view>
 </scroll-view>
 <view wx:if="{{tabCur == 0}}">
-   <i-notice-bar icon="systemprompt" loop speed='600' class='notice-bar'>
-      数据源于当前登录小程序的用户，每日整体更新，仅供参考，排名默认是你的平均学分绩在你研究方向的排名，需要你手动设置参与排名的研究方向。
+   <i-notice-bar icon="systemprompt" loop speed='450' class='notice-bar'>
+      数据源于当前登录小程序的用户，每日整体更新，仅供参考，排名默认是你的平均学分绩在你研究方向的排名，需要你手动设置参与排名的研究方向和不参与排名的课程类型及名称，存在重修未出成绩/不及格的同学不参与排名。
     </i-notice-bar>
 <view class="cu-bar bg-white" style="margin-top:60rpx;">
   <view class="action">
@@ -37,7 +37,7 @@
     <text class="cuIcon-title text-orange "></text>参与排名平均学分绩
   </view>
   <view class="action">
-  <text class="text-orange" wx:if="{{not_in_exclude_course_avg_score == '--'}}" >存在不及格/重修课程</text>
+  <text class="text-orange" wx:if="{{not_in_exclude_course_avg_score == '--'}}" >存在不及格/需要重修课程</text>
    <text wx:else> {{not_in_exclude_course_avg_score}}分 </text>
   </view>
 </view>
@@ -46,7 +46,7 @@
     <text class="cuIcon-title text-orange "></text>排名(去同分)
   </view>
   <view class="action">
-  <text wx:if="{{not_in_exclude_course_avg_score == '--'}}">--</text>
+  <text wx:if="{{not_in_exclude_course_avg_score == '--'}}">- -</text>
    <text wx:else> <text class="cuIcon-rank text-orange"></text>第{{rank}}名 (前{{rank_rate}}%)</text>
   </view>
 </view>
@@ -56,7 +56,7 @@
     <text class="cuIcon-title text-orange "></text>排名(含同分)
   </view>
   <view class="action">
-  <text wx:if="{{not_in_exclude_course_avg_score == '--'}}">--</text>
+  <text wx:if="{{not_in_exclude_course_avg_score == '--'}}">- -</text>
    <text wx:else> <text class="cuIcon-rank text-orange"></text>第{{add_same_rank}}名 (前{{add_same_rank_rate}}%)</text>
   </view>
 </view>
@@ -67,7 +67,7 @@
     <text class="cuIcon-title text-orange "></text>同分人数
   </view>
   <view class="action">
-  <text wx:if="{{not_in_exclude_course_avg_score == '--'}}">--</text>
+  <text wx:if="{{not_in_exclude_course_avg_score == '--'}}">- -</text>
   <text wx:else>{{same_student}}人</text>
   </view>
 </view>
@@ -184,8 +184,8 @@
 </view>
 </view>
 <view wx:if="{{tabCur == 1}}">
-<i-notice-bar icon="systemprompt" loop speed='800' class='notice-bar'>
-      当前排行为你设置的研究方向的排名，去掉你所选择的不参与排名课程计算，存在不及格/重修课程的同学不参与排名不作展示。
+<i-notice-bar icon="systemprompt" loop speed='450' class='notice-bar'>
+      当前排行榜为你设置的研究方向的排名，去掉你所选择的不参与排名课程类型及名称计算，存在重修未出成绩/不及格的同学不参与排名。
 </i-notice-bar>
 <view style="margin-top:80rpx;"></view>
 <block wx:for="{{top_forty_percent_students}}" wx:for-index="index" wx:for-item="item" wx:key="item.index">

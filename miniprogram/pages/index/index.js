@@ -201,7 +201,7 @@ Page({
       },
       fail: function (res) {
         that.setData({
-          content: '网络出问题啦'
+          content: '网络或服务器出问题啦'
         })
       },
       complete: function (res) {
