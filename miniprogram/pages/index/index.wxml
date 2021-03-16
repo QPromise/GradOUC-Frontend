@@ -7,9 +7,14 @@
       {{text}}
     </i-notice-bar>
 
-    <swiper class="screen-swiper square-dot" wx:if="{{swiimgs.length == 0}}" indicator-active-color="#fff" autoplay="true" interval="6000" duration="1000" circular="true">
+    <swiper class="screen-swiper square-dot" wx:if="{{swiimgs.length == 0 && !loading}}" indicator-active-color="#fff" autoplay="true" interval="6000" duration="1000" circular="true">
           <swiper-item>
             <image src="/images/core/something_wrong.png"  mode="aspectFill" />
+          </swiper-item>
+      </swiper>
+    <swiper class="screen-swiper square-dot" wx:if="{{swiimgs.length == 0 && loading}}" indicator-active-color="#fff" autoplay="true" interval="6000" duration="1000" circular="true">
+          <swiper-item>
+            <image src="/images/core/loading.png"  mode="aspectFill" />
           </swiper-item>
       </swiper>
     <swiper class="screen-swiper square-dot" wx:if="{{swiimgs.length > 0}}" indicator-dots="{{swiimgs.length>1?true:false}}"  indicator-active-color="#fff" autoplay="true" interval="6000" duration="1000" circular="true">

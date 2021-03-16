@@ -521,9 +521,10 @@ Page({
    */
   onShareAppMessage: function () {
     return {
-      title: '成绩排名',
-      desc: '可查详细的课程表、详细成绩，更多查询功能欢迎体验！',
-      path: '/pages/core/scoreRank/scoreRank'
+      title: '研在OUC-成绩排名',
+      imageUrl:'/images/core/score_rank_share.png',
+      desc: '我正在研在OUC查看成绩排名，这里还缺一个你。',
+      path: '/pages/index/index'
     };
   }
 })

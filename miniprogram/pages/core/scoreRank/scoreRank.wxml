@@ -14,11 +14,16 @@
    <i-notice-bar icon="systemprompt" loop speed='450' class='notice-bar'>
       数据源于当前登录小程序的用户，每日整体更新，仅供参考，排名默认是你的平均学分绩在你研究方向的排名，需要你手动设置参与排名的研究方向和不参与排名的课程类型及名称，存在重修未出成绩/不及格的同学不参与排名。
     </i-notice-bar>
-<view class="cu-bar bg-white" style="margin-top:60rpx;">
+    <view class="options text-center" style="margin-top:70rpx;">
+    <button class="cu-btn line-white margin-left-xl margin-right-xl" bindtap="refreshRank"><text class="cuIcon-refresh text-orange"></text> <text style="margin-left:3px" class="text-black">刷新排名</text></button>
+    <text class="text-gray"> ┊ </text>
+    <button class="cu-btn line-white margin-left-xl margin-right-xl" open-type="share"><text class="cuIcon-weixin text-green"></text> <text style="margin-left:3px" class="text-black">邀请同学</text></button>
+  </view>
+<view class="cu-bar bg-white" >
   <view class="action">
     <text class="cuIcon-title text-orange "></text>姓名 / 学号
   </view>
-  <view class="action">
+  <view class="action text-orange">
     {{name}} / {{sno}}
   </view>
 </view>
@@ -26,9 +31,9 @@
   <view class="action">
     <text class="cuIcon-title text-orange "></text>平均学分绩
   </view>
-  <view class="action">
+  <view class="action text-orange">
     {{avg_score}}分 
-    <view bindtap="refreshRank" class="text-orange" style="margin-left:13rpx;"><text class="cuIcon-refresh text-orange"></text> 刷新</view>
+    <!-- <view bindtap="refreshRank" class="text-orange" style="margin-left:13rpx;"><text class="cuIcon-refresh text-orange"></text> 刷新</view> -->
   </view>
 </view>
 
@@ -36,7 +41,7 @@
   <view class="action">
     <text class="cuIcon-title text-orange "></text>参与排名平均学分绩
   </view>
-  <view class="action">
+  <view class="action text-orange">
   <text class="text-orange" wx:if="{{not_in_exclude_course_avg_score == '--'}}" >存在不及格/需要重修课程</text>
    <text wx:else> {{not_in_exclude_course_avg_score}}分 </text>
   </view>
@@ -45,7 +50,7 @@
   <view class="action">
     <text class="cuIcon-title text-orange "></text>排名(去同分)
   </view>
-  <view class="action">
+  <view class="action text-orange">
   <text wx:if="{{not_in_exclude_course_avg_score == '--'}}">- -</text>
    <text wx:else> <text class="cuIcon-rank text-orange"></text>第{{rank}}名 (前{{rank_rate}}%)</text>
   </view>
@@ -55,7 +60,7 @@
   <view class="action">
     <text class="cuIcon-title text-orange "></text>排名(含同分)
   </view>
-  <view class="action">
+  <view class="action text-orange">
   <text wx:if="{{not_in_exclude_course_avg_score == '--'}}">- -</text>
    <text wx:else> <text class="cuIcon-rank text-orange"></text>第{{add_same_rank}}名 (前{{add_same_rank_rate}}%)</text>
   </view>
@@ -66,7 +71,7 @@
   <view class="action">
     <text class="cuIcon-title text-orange "></text>同分人数
   </view>
-  <view class="action">
+  <view class="action text-orange">
   <text wx:if="{{not_in_exclude_course_avg_score == '--'}}">- -</text>
   <text wx:else>{{same_student}}人</text>
   </view>
@@ -76,7 +81,7 @@
   <view class="action">
     <text class="cuIcon-title text-orange "></text>参与排名的总人数
   </view>
-  <view class="action">
+  <view class="action text-orange">
     {{all_student}}人
   </view>
 </view>
