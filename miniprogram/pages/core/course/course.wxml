@@ -120,8 +120,8 @@
 </view>
 <view wx:if="{{unplannedCourses.length == 0}}">
 <view class="bg-white padding-lr">
- <view class="flex padding justify-center" style="padding:3rpx;">
-      <view class="bg-gray padding-sm margin-xs radius" style="padding:4px;"><text class="cuIcon-info text-sm" style="margin-right:5rpx;"></text>没有计划外的课程</view>
+ <view class="flex padding justify-center" style="color:grey;font-size:25rpx; padding:3rpx;margin-bottom:10rpx">
+      <text class="cuIcon-info text-sm" style="margin-right:5rpx;"></text>没有计划外课程
 </view>
 </view>
 </view>
