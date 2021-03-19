@@ -24,7 +24,8 @@ Page({
     loading: false,
     school_require_credit: 0.0,
     select_credit: 0.0,
-    get_credit: 0.0
+    get_credit: 0.0,
+    showCreditDetail:false,
   },
 
   /**
@@ -61,6 +62,17 @@ Page({
       desc: '可查详细的课程表、详细成绩，更多查询功能欢迎体验！',
       path: '/pages/core/course/course'
     };
+  },
+  preventTouchMove: function () {},
+  openCreditDetail() {
+    this.setData({
+      showCreditDetail: true,
+    });
+  },
+  closeCreditDetail() {
+    this.setData({
+      showCreditDetail: false,
+    });
   },
   //课程刷新
   refreshEDU: function () {

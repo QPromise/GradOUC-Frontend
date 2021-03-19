@@ -21,7 +21,9 @@ page{
   margin-top:5rpx;
   border-radius:9px;
 }
-
+.ouc-cel .tr .th , .ouc-cel .tr .td{
+  width: 25%
+}
 .edu-top text{
   display: flex;
   flex: 1;

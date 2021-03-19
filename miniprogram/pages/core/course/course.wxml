@@ -6,6 +6,10 @@
   <view class="action">
    <text class="cuIcon-titles text-blue"></text>
       <text class="text-bold">学分</text>
+        <!-- <view class="text-sm padding">
+    <text class="cuIcon-infofill text-gray"></text>
+        <text class="text-grey">点击小球查看学分详情</text>
+      </view> -->
   </view>
 </view>
 <view class="bg-white">
@@ -13,10 +17,10 @@
 		<view class="cu-avatar xl round  bg-olive">
     <text class="avatar-text">{{get_credit}}</text>
   </view>
-  <view class="cu-avatar xl round  bg-orange">
+  <view class="cu-avatar xl round  bg-orange"  >
     <text class="avatar-text">{{select_credit}}</text>
   </view>
-   <view class="cu-avatar xl round  bg-red">
+   <view class="cu-avatar xl round  bg-red" >
     <text class="avatar-text">{{school_require_credit}}</text>
   </view>
 	</view>
@@ -32,6 +36,39 @@
   </view>
 	</view>
 </view>
+<view class="cu-modal {{showCreditDetail?'show':''}}" style="font-size: 29rpx;  z-index: 99999999999999;background: rgba(0, 0, 0, 0.3);" catchtouchmove="preventTouchMove">
+	<view class="cu-dialog" >
+		<view class="cu-bar bg-white justify-end">
+			<view class="content" style="font-size:33rpx">学分详细</view>
+		</view>
+		<view class="padding-xl" style="text-align: left;">
+		  <view style="margin-top:0px">
+    <view class="ouc-cel">
+      <view class="tr bg-w">
+        <view class="th">课程类型</view>
+        <view class="th">已修学分</view>
+        <view class="th">计划学分</view>
+        <view class="th">毕业学分</view>
+      </view>
+      <scroll-view scroll-y style="height: 40vh;">
+      <!-- <block wx:for="{{list}}" wx:key="key"> -->
+        <view class="tr" bindtap="viewItem" data-index="{{index}}">
+          <view class="td">公共课</view>
+          <view class="td">6.0</view>
+          <view class="td">6.0</view>
+          <view class="td">6.0</view>
+        </view>
+        </scroll-view>
+      <!-- </block> -->
+    </view>  
+  </view>
+		</view>
+		<view class="cu-bar bg-white">
+			<view class="action margin-0 flex-sub  text-green solid-left" bindtap="closeCreditDetail" style="font-size:33rpx">关闭</view>
+		</view>
+	</view>
+</view>
+
 <view style='padding:0 40rpx 0 40rpx;'>
 <ad unit-id="adunit-1be4d4eb22947fdc"></ad>
 </view>

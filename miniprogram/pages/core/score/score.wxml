@@ -24,7 +24,7 @@
     <view class='grade-item' style='flex:2;text-align:left;font-size:27rpx; '>{{item.name}}</view>
     <view class='grade-item' style='flex:1;color:#9b9b9b;font-size:27rpx;'>{{item.type}}</view>
     <view class='grade-item' style='flex:1;color:#9b9b9b;font-size:27rpx;'>{{item.credit}}</view>
-    <view class='grade-item' style='flex:1;color:{{item.score < 70 || item.score == "重修"? "red":"#139700"}};font-weight:500;font-size:27rpx;'>{{item.score}}</view>
+    <view class='grade-item' style='flex:1;color:{{item.score < 70 && item.disabled || item.score == "重修"? "red":"#139700"}};font-weight:500;font-size:27rpx;'>{{item.score}}</view>
 </view>
    <view style='margin-top:15rpx;'>
 <ad unit-id="adunit-5ce0d10d22696a8c"></ad>

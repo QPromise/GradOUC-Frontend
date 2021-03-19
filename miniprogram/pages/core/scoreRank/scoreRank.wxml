@@ -19,6 +19,7 @@
     <text class="text-gray"> ┊ </text>
     <button class="cu-btn line-white margin-left-xl margin-right-xl" open-type="share"><text class="cuIcon-weixin text-green"></text> <text style="margin-left:3px" class="text-black">邀请同学</text></button>
   </view>
+  <view>
 <view class="cu-bar bg-white" >
   <view class="action">
     <text class="cuIcon-title text-orange "></text>姓名 / 学号
@@ -118,6 +119,7 @@
   <view class="cu-tag line-grey" style="margin:5rpx 5rpx;" wx:if="{{exclude_courses.length == 0}}">
       暂未设置
   </view>
+</view>
 </view>
 
 <view class="cu-modal {{modalName=='ResearchModal'?'show':''}}">
