@@ -31,6 +31,10 @@ Page({
    */
   onLoad: function (options) {
     let that = this
+    that.setData({
+      sno:app.cache.sno,
+      name:app.cache.name
+    })
     that.getMyRank(0)
   },
 
@@ -70,7 +74,10 @@ Page({
   },
   refreshRank:function(){
     let that = this
-    that.getMyRank(1)
+    let canUpdate = app.refreshLimit('rank_update_time')
+    if (canUpdate){
+      that.getMyRank(1)
+    }
   },
   getMyRank:function(type){
     let that = this
@@ -97,6 +104,10 @@ Page({
        // success
        //console.log(res)
        if(res.data.message == "success"){
+        if (type == 1){
+          var time = (new Date()).getTime();
+          wx.setStorageSync('rank_update_time', time);
+        }
         that.setData({
           sno:app.cache.sno,
           name:app.cache.name,

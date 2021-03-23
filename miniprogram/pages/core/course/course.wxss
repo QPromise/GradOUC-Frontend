@@ -2,11 +2,18 @@
 @import "../../../utils/weui.wxss";
 @import "../../../utils/colorui/main.wxss";
 @import "../../../utils/colorui/icon.wxss";
-page{
-  background-color:white;
-}
+
+
 .cu-bar{
   min-height: 30px;
+}
+.operation{
+  position: relative;
+  box-sizing: border-box;
+  margin: 70rpx 0 10rpx 0;
+  padding: 6rpx 30rpx;
+  background: #fff;
+  box-shadow: 0 0 4rpx 0 rgba(255,255,255, .3)
 }
 .edu-top{
   box-shadow: 1px 2px 3px #ddd;

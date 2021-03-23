@@ -112,27 +112,12 @@ Page({
       })
     }
   },
-
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     let that = this
-    let update_time = wx.getStorageSync(app.cache.sno + 'score_update_time')
-    if (update_time != "") {
-      var scores =  wx.getStorageSync(app.cache.sno + 'scores');
-      var mean = wx.getStorageSync(app.cache.sno + 'mean');
-      that.setData({
-        arraycj: scores,
-        update_time: app.formatTime(new Date(update_time)),
-        mean:mean
-      })
-    } else {
-      that.setData({
-        update_time: update_time ? app.formatTime(new Date(update_time)):'无记录'
-      })
-      that.refreshCJ()
-    }
+    that.refreshCJ()
   },
   /**
    * 生命周期函数--监听页面显示
@@ -256,18 +241,17 @@ Page({
     // }
     app.saveCache("cacheCourses", cacheCourses)
   },
-  goScoreRank: function(){
-    wx.navigateTo({
-      url: '../scoreRank/scoreRank',
-    })
+  bindPickerChange: function (e) {
+    var that = this;
+    that.setData({
+      cjnowxq: e.detail.value
+    });
+    that.refreshCJ();
   },
   //成绩刷新
   refreshCJ: function () {
-    let canUpdate = app.refreshLimit(app.cache.sno + 'score_update_time')
-    let that = this
-    if (canUpdate){
+    var that = this
     that.requestCJ()
-    }
   },
   //成绩请求单独作为一个方法
   requestCJ: function () {
@@ -288,7 +272,6 @@ Page({
       },
       header: { "Content-Type": "application/x-www-form-urlencoded" },
       success: function (res) {
-        wx.hideLoading(); 
         if (res.data.message == "timeout"){
           wx.showModal({
             title: '请求超时',
@@ -314,7 +297,10 @@ Page({
                   url: '../../my/login',
                 })
               }
-
+              if(res.cancel){
+                wx.navigateBack({
+                })
+              }
             }
           });
         }
@@ -336,6 +322,10 @@ Page({
           })
         }
         else if (res.data.message == "success" && res.statusCode == 200 && res.data.have_class == 1) {
+          that.setData({
+            have_class: res.data.have_class,
+            mean:res.data.mean
+          })
           let Eduarray = [];
           let legalCourseLen = 0;
           for (var i = 0; i < res.data.courses.length; i++) {
@@ -353,22 +343,11 @@ Page({
             change.disabled = res.data.courses[i].disabled;
             Eduarray[i] = change;
           }
-          var time = (new Date()).getTime();
-          wx.setStorageSync(app.cache.sno + 'score_update_time', time);
-          wx.setStorageSync(app.cache.sno + 'scores', Eduarray);
-          wx.setStorageSync(app.cache.sno + 'mean', res.data.mean);
           that.setData({
-            update_time: app.formatTime(new Date(time)),
             arraycj: Eduarray,
             legalCourseLen: legalCourseLen,
-            mean:res.data.mean,
-          })
+          });
           that.cacheScore(res.data.courses, res.data.mean);
-          wx.showToast({
-            title: '加载成功',
-            icon: 'none',
-            duration: 2000
-          })
         }
         else if (res.data.message == "success" && res.statusCode == 200 && res.data.have_class == 2) {
           that.setData({
@@ -380,7 +359,9 @@ Page({
             showCancel: false,
             success(res) {
               if (res.confirm) {
-               
+                wx.navigateBack({
+
+                })
               }
             }
           })
@@ -395,7 +376,9 @@ Page({
             showCancel: false,
             success(res) {
               if (res.confirm) {
-              
+                wx.navigateBack({
+
+                })
               }
             }
           })
@@ -407,14 +390,15 @@ Page({
             showCancel: false,
             success(res) {
               if (res.confirm) {
-         
+                wx.navigateBack({
+
+                })
               }
             }
           })
         }
       },
       fail: function (res) {
-        wx.hideLoading(); 
         wx.showModal({
           title: "加载失败",
           content: '获取成绩列表失败，可能是您的网络或者服务器出了问题，请稍后重试',
@@ -422,7 +406,9 @@ Page({
           confirmText: "确定",
           success: function (res) {
             if (res.confirm) {
-        
+              wx.navigateBack({
+                
+              })
             }
           }
         });
@@ -430,6 +416,7 @@ Page({
         
       },
       complete: function (res) {
+        wx.hideLoading(); 
         that.setData({
           loading:false
         }) 

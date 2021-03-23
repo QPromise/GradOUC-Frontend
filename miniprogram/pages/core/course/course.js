@@ -32,8 +32,39 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var that = this;
-    that.refreshEDU();
+    let that = this
+    let update_time = wx.getStorageSync(app.cache.sno + 'course_update_time')
+    if (update_time != "") {
+      var arrDict =  wx.getStorageSync(app.cache.sno + 'orderedArrDict');
+      var unplannedCourses = wx.getStorageSync(app.cache.sno + 'unplannedCourses');
+      var unplannedArrDict = wx.getStorageSync(app.cache.sno + 'orderedUnplannedArrDict');
+      var get_credit = wx.getStorageSync(app.cache.sno + 'get_credit');
+      var select_credit = wx.getStorageSync(app.cache.sno + 'select_credit');
+      var school_require_credit = wx.getStorageSync(app.cache.sno + 'school_require_credit');
+      if(unplannedCourses.length > 0){
+        that.setData({
+          unplannedCourses: unplannedCourses,
+          unplannedArrDict: unplannedArrDict,
+        })
+      }
+      else{
+        that.setData({
+          unplannedCourses: unplannedCourses,
+        })
+      }
+      that.setData({
+        arrDict: arrDict,
+        update_time: app.formatTime(new Date(update_time)),
+        get_credit: get_credit,
+        select_credit: select_credit,
+        school_require_credit: school_require_credit
+      })
+    } else {
+      that.setData({
+        update_time: update_time ? that.formatTime(new Date(update_time)):'无记录'
+      })
+      that.refreshEDU()
+    }
   },
 
   onShow: function () {
@@ -76,9 +107,11 @@ Page({
   },
   //课程刷新
   refreshEDU: function () {
-    var that = this;
+    let canUpdate = app.refreshLimit(app.cache.sno + 'course_update_time')
+    var that = this
+    if (canUpdate){
     that.requestEDU();
-
+    }
   },
 
   //请求单独作为一个方法
@@ -103,8 +136,6 @@ Page({
       },
       success: function (res) {
         wx.hideLoading();
-        //console.log("success", res);
-        //console.log(res.data.courses);
         if (res.data.message == "timeout") {
           wx.showModal({
             title: '请求超时',
@@ -112,7 +143,7 @@ Page({
             showCancel: false,
             success(res) {
               if (res.confirm) {
-                wx.navigateBack({})
+               
               }
             }
           })
@@ -129,7 +160,7 @@ Page({
                 })
               }
               if (res.cancel) {
-                wx.navigateBack({})
+                
               }
             }
           });
@@ -152,9 +183,6 @@ Page({
           let unplannedArrDict = {};
           let unplannedCourses = [];
           if (res.data.unplanned_courses.length > 0) {
-            that.setData({
-              unplannedCourses: res.data.unplanned_courses
-            })
             for (var i = 0; i < res.data.unplanned_courses.length; i++) {
               let key = res.data.unplanned_courses[i].xn + res.data.unplanned_courses[i].xq;
               if (key == "") {
@@ -186,13 +214,17 @@ Page({
             orderedUnplannedArrDict[key] = unplannedArrDict[key];
           });
           that.setData({
+            unplannedCourses: res.data.unplanned_courses,
             unplannedArrDict: orderedUnplannedArrDict,
           });
+          wx.setStorageSync(app.cache.sno + 'orderedUnplannedArrDict',  orderedUnplannedArrDict);
+          wx.setStorageSync(app.cache.sno + 'unplannedCourses',  res.data.unplanned_courses);
           }
           else{
             that.setData({
               unplannedCourses: res.data.unplanned_courses
             })
+            wx.setStorageSync(app.cache.sno + 'unplannedCourses',  res.data.unplanned_courses);
           }
           for (var i = 0; i < res.data.courses.length; i++) {
             let key = res.data.courses[i].xn + res.data.courses[i].xq;
@@ -276,7 +308,20 @@ Page({
           that.setData({
             arrDict: orderedArrDict,
           });
-
+          var time = (new Date()).getTime();
+          wx.setStorageSync(app.cache.sno + 'course_update_time', time);
+          wx.setStorageSync(app.cache.sno + 'orderedArrDict', orderedArrDict);
+          wx.setStorageSync(app.cache.sno + 'get_credit', res.data.get_credit);
+          wx.setStorageSync(app.cache.sno + 'select_credit', res.data.select_credit);
+          wx.setStorageSync(app.cache.sno + 'school_require_credit', res.data.school_require_credit);
+          that.setData({
+            update_time: app.formatTime(new Date(time))
+          })
+          wx.showToast({
+            title: '加载成功',
+            icon: 'none',
+            duration: 2000
+          })
         } else if (res.data.message == "success" && res.statusCode == 200 && res.data.have_class == 2) {
           wx.showModal({
             title: '提示',
@@ -284,9 +329,7 @@ Page({
             showCancel: false,
             success(res) {
               if (res.confirm) {
-                wx.navigateBack({
-
-                })
+               
               }
             }
           })
@@ -297,9 +340,7 @@ Page({
             showCancel: false,
             success(res) {
               if (res.confirm) {
-                wx.navigateBack({
-
-                })
+               
               }
             }
           })
@@ -310,9 +351,7 @@ Page({
             showCancel: false,
             success(res) {
               if (res.confirm) {
-                wx.navigateBack({
-
-                })
+               
               }
             }
           })
@@ -327,9 +366,7 @@ Page({
           confirmText: "确定",
           success: function (res) {
             if (res.confirm) {
-              wx.navigateBack({
-
-              })
+             
             }
           }
         });

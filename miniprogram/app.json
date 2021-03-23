@@ -1,6 +1,6 @@
 {
   "pages": [
-    
+   
     "pages/index/index",
     "pages/my/my",
     "pages/my/login",
@@ -28,7 +28,8 @@
     "pages/core/exam/exam",
     "pages/test/test",
     "pages/core/scoreRank/scoreRank",
-    "pages/core/backup/schoolCourse"
+    "pages/core/backup/schoolCourse",
+    "pages/core/scoreBackup/score"
     
   ],
   "window": {

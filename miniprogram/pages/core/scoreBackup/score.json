@@ -1,0 +1,9 @@
+{
+"usingComponents": {
+  "wux-fab-button": "../../../components/fab-button/index",
+  "wux-prompt": "../../../components/prompt2/index",
+  "share-box": "../../../components/shareBox/index"
+},
+"enablePullDownRefresh": true,
+"backgroundTextStyle":"dark"
+}

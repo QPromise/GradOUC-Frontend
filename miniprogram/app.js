@@ -157,6 +157,53 @@ App({
     var date = new Date(date)
     return now > date
   },
+  refreshLimit:function(updateTimeKey){
+    let that = this
+    var time = (new Date()).getTime();
+    if (wx.getStorageSync(updateTimeKey) != "") {
+      var update_time = wx.getStorageSync(updateTimeKey);
+      var gap = time - update_time;
+      var season = that.globalData.refreshTimeLimit * 1 - Math.floor(gap / 1000);
+    } else {
+      var season = 0;
+    }
+    if (season > 0) {
+      let minute = Math.floor(season / 60)
+      if(minute > 0 ){
+        wx.showToast({
+          title: '操作太快啦,'+ minute + '分钟后再来吧',
+          icon: 'none',
+          duration: 1000,
+          success: function () {
+          }
+        })
+        return false
+      }
+      wx.showToast({
+        title: '操作太快啦,' + season + '秒后再来吧',
+        icon: 'none',
+        duration: 1000,
+        success: function () {
+        }
+      })
+      return false
+    }
+    return true
+  },
+  formatNumber:function(n) {
+    n = n.toString()
+    return n[1] ? n : '0' + n
+  },
+  formatTime: function (date) {
+    let that = this
+    var year = date.getFullYear()
+    var month = date.getMonth() + 1
+    var day = date.getDate()
+    var hour = date.getHours()
+    var minute = date.getMinutes()
+    var second = date.getSeconds()
+    return [year, month, day].map(that.formatNumber).join('-') + ' ' + [hour, minute, second].map(that.formatNumber).join(':')
+  },
   saveCache: function (key, value) {
     if (!key || value == undefined || value == null) { return; }
     var that = this;
@@ -214,5 +261,6 @@ App({
     map:[],
     openId: null,
     userInfo: null,
+    refreshTimeLimit:60,
   }
 })

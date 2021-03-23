@@ -1,6 +1,17 @@
 <cu-custom isBack="{{true}}" >
 	<view slot="content" style="color:white;font-weight:bold;">我的课程</view>
 </cu-custom>
+<i-notice-bar icon="systemprompt" loop speed='600' class='notice-bar'>
+      课程默认加载之前数据，需要大家进行手动更新，更新失败时同样默认也会加载之前数据。
+</i-notice-bar>
+ <view class="operation">
+      <view >
+        <text class="text-black">上次更新：</text>
+        <text class="text-grey"><text class="cuIcon-time"></text>{{update_time}}</text>
+        <button class="cu-btn line-white option-btn" style="margin-left: 20rpx;" bindtap="refreshEDU"><text class="text-orange"><text class="cuIcon-refresh"></text>更新课程</text></button>
+      </view>
+
+    </view>
 <view wx:if="{{!loading}}">
 <view class="cu-bar bg-white">
   <view class="action">
