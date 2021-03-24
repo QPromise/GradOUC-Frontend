@@ -140,13 +140,13 @@
 <image mode="widthFix" style="height:auto" src="/images/core/go_life.png"></image>
 </view> -->
   <view class="cu-bar bg-white arrow"style="min-height:70rpx;margin-top:8rpx;">
-  <view class="action">
-    <text class="cuIcon-titles text-blue" style="margin-left:-0.9em;margin-right:0.1em;"></text>
+      <view class="action">
+      <text class="cuIcon-titles text-blue" style="margin-left:-0.9em;margin-right:0.1em;"></text>
       <text class="text-bold">今日课表</text>
       </view>
       <view class="action" style="margin-right:3%" bindtap="goSchedule" wx:if="{{showTodayInfo != ''}}">
       <text class="cuIcon-calendar text-blue text-sm" style="margin-right:3rpx;"></text>
-    <text>{{showTodayInfo}}</text>
+      <text>{{showTodayInfo}}</text>
       </view>
 </view>
 
@@ -189,21 +189,18 @@
 </view>
 </view>
  
-  <!-- <view class="cu-bar bg-white solid-bottom" style="min-height:80rpx;">
-  <view class="action">
-    <text class="cuIcon-titles text-blue"></text> 最新通知
-  </view>
-</view> -->
-  <!-- <view class="cu-bar bg-white arrow"style="min-height:70rpx;margin-top:12rpx;">
-  <view class="action">
-    <text class="cuIcon-titles text-blue" style="margin-left:-0.9em;margin-right:0.1em;"></text>
-      <text class="text-bold">学校新闻</text>
+  <!-- <view class="cu-bar bg-white arrow"style="min-height:70rpx;margin-top:8rpx;">
+      <view class="action">
+      <text class="cuIcon-titles text-blue" style="margin-left:-0.9em;margin-right:0.1em;"></text>
+      <text class="text-bold">校园活动</text>
       </view>
-      <view class="action" bindtap='goCourse'>
-        更多
+      <view class="action" style="margin-right:3%" bindtap="goSchedule" wx:if="{{showTodayInfo != ''}}">
+      <text class="cuIcon-calendar text-blue text-sm" style="margin-right:3rpx;"></text>
+      <text>{{showTodayInfo}}</text>
       </view>
 </view>
-  <block wx:for="{{value}}"wx:for-index="index" wx:for-item="item" wx:key="item.index">
+
+
 
 <view class="cu-bar bg-white" style="min-height:50rpx;" bindtap='showdetail'>
   <view class="action">
@@ -211,9 +208,8 @@
     <view class="text-sm">疫情防控政策知识指南</view>
   </view>
    <view class="margin-xs text-sm">2020-12-13</view>
-</view>
+</view> -->
 
-</block>  -->
 
 
 <jun-mask show="{{isTiptrue}}">

@@ -83,6 +83,13 @@ Page({
     let that = this
     wx.request({
       url: app.local_server + 'get_recently_use/',
+      data: {
+        openid:app.globalData.openId,
+      },
+      header: {
+        'content-type': 'application/json'
+      },
+      method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
       success: function (res) {
         if (res.data.message == "success"){
           that.setData({

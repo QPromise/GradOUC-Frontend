@@ -6,32 +6,27 @@ App({
     this.setNavigation()
     this.checkNetwork()
     this.checkUpdate()
-    this.refreshCache()
-    this.getOpenid()
-    // 5.获取用户信息
-    wx.getSetting({
-      success: res => {
-        if (res.authSetting['scope.userInfo']) {
-          // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
-          wx.getUserInfo({
-            success: res => {
-              // 可以将 res 发送给后台解码出 unionId
-              this.globalData.userInfo = res.userInfo
-              // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-              // 所以此处加入 callback 以防止这种情况
-              if (this.userInfoReadyCallback) {
-                this.userInfoReadyCallback(res)
-              }
-            }
-          })
-          
-          // wx.switchTab({
-          //   url: '/pages/home/home'
-          // });
-        }
+    this.refreshCacheAndGetOpenid()
+    // // 5.获取用户信息
+    // wx.getSetting({
+    //   success: res => {
+    //     if (res.authSetting['scope.userInfo']) {
+    //       // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
+    //       wx.getUserInfo({
+    //         success: res => {
+    //           // 可以将 res 发送给后台解码出 unionId
+    //           this.globalData.userInfo = res.userInfo
+    //           // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
+    //           // 所以此处加入 callback 以防止这种情况
+    //           if (this.userInfoReadyCallback) {
+    //             this.userInfoReadyCallback(res)
+    //           }
+    //         }
+    //       })
+    //     }
 
-      }
-    })
+    //   }
+    // })
   },
   setNavigation:function(){
     wx.getSystemInfo({
@@ -93,31 +88,12 @@ App({
       },
     });
   },
-  getOpenid:function(){
-    let that = this
-    // 4.获取用户openid
-    if (!wx.cloud) {
-      console.error('请使用 2.2.3 或以上的基础库以使用云能力')
-    } else {
-      wx.cloud.init({
-        env: "nostalgic-meakb",
-        traceUser: true,
-      })
-    }
-    wx.cloud.callFunction({
-      name: 'WeOceanLogin',
-      complete: res => {
-        console.log(res.result.openid);
-        that.globalData.openId = res.result.openid;
-        if (this.openIdReadyCallback) {
-          this.openIdReadyCallback(res)
-        }
-      }
+  refreshCacheAndGetOpenid:function(){
+    wx.showLoading({
+      title: '基础数据载入中',
     })
-  },
-  refreshCache:function(){
      //获取数据加载到缓存
-     var that = this;
+     let that = this;
      try {
        //var end_day = wx.getStorageSync("end_day");//从本地获取学期结束日期
        //if (this.cmpDate(end_day) || !end_day) { // 当前缓存学期时间失效，重新获取。
@@ -134,6 +110,10 @@ App({
            that.saveCache("get_score_rank_nj_max", res.data.get_score_rank_nj_max)
            that.getWeek(res.data.begin_day)
          },
+         fail:function(){
+         },
+         complete:function(){       
+         }
        })
        var data = wx.getStorageInfoSync();
        if (data && data.keys.length) {
@@ -147,6 +127,38 @@ App({
      } catch (e) {
        console.warn('获取缓存失败');
      }
+      if (!wx.cloud) {
+        console.error('请使用 2.2.3 或以上的基础库以使用云能力')
+      } else {
+        wx.cloud.init({
+          env: "nostalgic-meakb",
+          traceUser: true,
+        })
+      }
+      wx.cloud.callFunction({
+        name: 'WeOceanLogin',
+        complete: res => {
+          try{
+          console.log(res.result.openid);
+          that.globalData.openId = res.result.openid;
+          wx.hideLoading({
+            complete: (res) => {},
+          })
+          that.msg("载入完成")
+          if (this.openIdReadyCallback) {
+            this.openIdReadyCallback(res)
+          } 
+        }
+        catch (e) {
+          wx.hideLoading({
+            complete: (res) => {},
+          })
+          that.msg("载入失败，请重启应用")
+          console.warn('获取openid失败');
+        }
+        }
+      })
+      
   },
   getWeek:function(begin_day){
     var that = this;
@@ -162,6 +174,19 @@ App({
     var now = new Date()
     var date = new Date(date)
     return now > date
+  },
+  //toast
+  msg:function(text,type){
+    var type = typeof type === "undefined" ? '' : type
+    var icon = 'none'
+    if(type != ''){
+      icon = type
+    }
+    wx.showToast({
+      title: text,
+      icon: icon,
+      duration:2000
+    })
   },
   refreshLimit:function(updateTimeKey){
     let that = this
@@ -257,9 +282,7 @@ App({
     });
   }, 
 
-  server: 'https://leoqin.fun/',
-  // http://127.0.0.1:8000/do_login
-  //'https://leoqin.fun/static/images/'
+  server: 'https://leoqin.fun/', // http://127.0.0.1:8000/do_login
   local_server: 'https://leoqin.fun/',
   cache: {},
   globalData: {
