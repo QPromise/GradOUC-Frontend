@@ -23,10 +23,10 @@
     </view>
 
   <view class="score" wx:key="key" wx:if='{{arraycj.length>0 && !loading}}'>
-      <view class="text-center" style="font-weight:bold;font-size:30rpx;margin-bottom:15rpx;color:lightcoral;">
-        <text>平均学分绩:{{mean}}</text>
+      <view class="text-center" bindtap="goDetail" style="font-weight:bold;font-size:30rpx;margin:0 45rpx 10px 45rpx;color:lightcoral;">
+        <text>平均学分绩:{{mean}}</text> <text style="float:right" class="cuIcon-info"></text>
       </view>
-      <view class='tips' bindtap="goDetail">平均学分绩=∑(所修课程学分×成绩) / ∑所修课程学分. <text style="text-decoration:underline">详细<text class="cuIcon-right"></text></text></view>
+      <!-- <view class='tips' bindtap="goDetail">平均学分绩=∑(所修课程学分×成绩) / ∑所修课程学分. <text style="text-decoration:underline"></text></view> -->
   <view class="cu-list menu sm-border">
     <view class='grade-head'>
     <view wx:for='{{heads}}' class='grade-head-item' style='flex:{{index==1?2:1}};font-size:27rpx;'>{{item}}</view>
