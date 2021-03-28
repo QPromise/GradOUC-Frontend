@@ -23,7 +23,8 @@ Page({
       { week: "周六", date: "" },
       { week: "周日", date: "" }],
     arraykcb: [],
-    trans:0.75
+    trans:0.75,
+    loading:false
   },
  //获取当前日期
   getDay:function(){
@@ -141,6 +142,12 @@ Page({
   //课程表刷新
   reFreshKCB: function () {
     var that = this;
+    if(that.data.loading){
+      return
+    }
+    that.setData({
+      loading:true
+    })
     //先清空课程表 为显示出刷新的效果
     that.setData({
       arraykcb: []
@@ -258,6 +265,9 @@ Page({
       },
       complete: function (res) {
         wx.hideLoading();
+        that.setData({
+          loading:false
+        })
       }
     });
 

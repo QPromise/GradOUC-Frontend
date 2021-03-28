@@ -22,104 +22,19 @@ Page({
     mean :"正在加载...",
     have_class:null,
     arraycj: [],
-    heads: ["选择","课程名", "课程性质", "学分", "成绩"],
+    heads: ["选择","课程名称", "课程性质", "学分", "原始成绩", "计算成绩(可修改)"],
     legalCourseLen: 0,
   },
-  getUserInfo(e) {
-    if(this.data.nickName == ""){
-      wx.showToast({
-        title: '生成成绩单仅需要你的头像和昵称，请放心同意系统使用相应权限。',
-        icon: 'none',
-        duration: 2500,
-        success: function () {
-        }
-      })
-      try{
-      this.setData({
-        nickName: e.detail.userInfo.nickName,
-        avatarUrl: e.detail.userInfo.avatarUrl
-      })
-      wx.setStorageSync('avatarUrl', e.detail.userInfo.avatarUrl)
-      wx.setStorageSync('nickName', e.detail.userInfo.nickName)
-    }
-      catch(error){
-        
-      }
-  }
-    if(this.data.nickName != ""){
-      wx.hideToast({
-        complete: (res) => {},
-      })
-      this.setData({
-        isCanDraw: !this.data.isCanDraw
-      })
-    }
+  cmpDate:function(update_time, set_time){
+    return set_time < update_time
   },
-  createShareImage() {
-    this.setData({
-      isCanDraw: !this.data.isCanDraw
-    })
-  },
-  goDetail:function(){
-    var that = this;
-    wx.navigateTo({
-      url: '/pages/web/web?url=' + "https://mp.weixin.qq.com/s/zCD7AycGgEqp1a3-8imOgQ",
-    })
-  },
-
-  bindCheckbox: function (e) {
-    //取下标值
-    var index = parseInt(e.currentTarget.dataset.index);
-    //原始的icon状态
-    var selected = this.data.arraycj[index].selected;
-    //console.log(selected)
-    var arraycj = this.data.arraycj;
-    // 对勾选状态取反
-    arraycj[index].selected = !selected;
-    // 写回经点击修改后的数组
-    this.setData({
-      arraycj: arraycj
-    });
-    this.calXFJ()
-  },
-  calXFJ: function () {
-    var arraycj = this.data.arraycj;
-    var i;
-    //总的学分
-    var totalCredit = 0;
-    //总的学分绩
-    var totalXFJ = 0;
-    //平均学分绩
-    var averXFJ = 0;
-    for (i = 0; i < arraycj.length; i++) {
-      arraycj[i].credit = parseFloat(arraycj[i].credit)
-      //如果选中了并且学分大于0
-      if (arraycj[i].selected && arraycj[i].credit) {
-        totalCredit += arraycj[i].credit;
-        totalXFJ += arraycj[i].score * arraycj[i].credit;
-      }
-    }
-    //总学分不为0的情况
-    if (totalCredit != 0 ){
-      averXFJ = totalXFJ/totalCredit;
-      this.setData({
-        mean: averXFJ.toFixed(4)
-      }) 
-    }
-    else{
-      this.setData({
-        mean: 0
-      })
-    }
-  },
-
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     let that = this
     let update_time = wx.getStorageSync(app.cache.sno + 'score_update_time')
-    if (update_time != "") {
+    if (update_time != "" && that.cmpDate(parseFloat(update_time), 1616930699000)) {
       var scores =  wx.getStorageSync(app.cache.sno + 'scores');
       var mean = wx.getStorageSync(app.cache.sno + 'mean');
       that.setData({
@@ -164,6 +79,127 @@ Page({
       path: '/pages/core/score/score'
     };
   },
+  getUserInfo(e) {
+    if(this.data.nickName == ""){
+      wx.showToast({
+        title: '生成成绩单仅需要你的头像和昵称，请放心同意系统使用相应权限。',
+        icon: 'none',
+        duration: 2500,
+        success: function () {
+        }
+      })
+      try{
+      this.setData({
+        nickName: e.detail.userInfo.nickName,
+        avatarUrl: e.detail.userInfo.avatarUrl
+      })
+      wx.setStorageSync('avatarUrl', e.detail.userInfo.avatarUrl)
+      wx.setStorageSync('nickName', e.detail.userInfo.nickName)
+    }
+      catch(error){
+        
+      }
+  }
+    if(this.data.nickName != ""){
+      wx.hideToast({
+        complete: (res) => {},
+      })
+      this.setData({
+        isCanDraw: !this.data.isCanDraw
+      })
+    }
+  },
+  createShareImage() {
+    this.setData({
+      isCanDraw: !this.data.isCanDraw
+    })
+  },
+  goDetail:function(){
+    var that = this;
+    wx.navigateTo({
+      url: '/pages/web/web?url=' + "https://mp.weixin.qq.com/s/zCD7AycGgEqp1a3-8imOgQ",
+    })
+  },
+  numRangeLimit: function(num){
+    return parseFloat(num) >=60 && parseFloat(num) <= 100
+  },
+  changeScore: function (e) { 
+    let index = e.currentTarget.dataset.index
+    if(!isNaN(e.detail.value) && parseFloat(e.detail.value).toString() != "NaN" && this.numRangeLimit(e.detail.value)){
+      app.msg("格式正确")
+      console.log(isNaN(e.detail.value), e.detail.value)
+      this.data.arraycj[index].selected = true;
+      this.data.arraycj[index].disabled = false;
+      var arraycj = this.data.arraycj;
+      // 对勾选状态取反
+      arraycj[index].selected = true;
+      arraycj[index].disabled = false;
+      arraycj[index].editScore = e.detail.value;
+      // 写回经点击修改后的数组
+      this.setData({
+        arraycj: arraycj
+      });
+    }
+    else{
+      app.msg("格式错误")
+      var arraycj = this.data.arraycj;
+      // 对勾选状态取反
+      arraycj[index].selected = false;
+      arraycj[index].disabled = true;
+      arraycj[index].editScore = e.detail.value;
+      // 写回经点击修改后的数组
+      this.setData({
+        arraycj: arraycj
+      });
+    }
+    this.calXFJ()
+  },
+  bindCheckbox: function (e) {
+    //取下标值
+    var index = parseInt(e.currentTarget.dataset.index);
+    //原始的icon状态
+    var selected = this.data.arraycj[index].selected;
+    //console.log(selected)
+    var arraycj = this.data.arraycj;
+    // 对勾选状态取反
+    arraycj[index].selected = !selected;
+    // 写回经点击修改后的数组
+    this.setData({
+      arraycj: arraycj
+    });
+    this.calXFJ()
+  },
+  calXFJ: function () {
+    var arraycj = this.data.arraycj;
+    var i;
+    //总的学分
+    var totalCredit = 0;
+    //总的学分绩
+    var totalXFJ = 0;
+    //平均学分绩
+    var averXFJ = 0;
+    for (i = 0; i < arraycj.length; i++) {
+      arraycj[i].credit = parseFloat(arraycj[i].credit)
+      //如果选中了并且学分大于0
+      if (arraycj[i].selected && arraycj[i].credit) {
+        totalCredit += arraycj[i].credit;
+        totalXFJ += parseFloat(arraycj[i].editScore) * arraycj[i].credit;
+      }
+    }
+    //总学分不为0的情况
+    if (totalCredit != 0 ){
+      averXFJ = totalXFJ/totalCredit;
+      this.setData({
+        mean: averXFJ.toFixed(4)
+      }) 
+    }
+    else{
+      this.setData({
+        mean: 0
+      })
+    }
+  },
+
   cacheScore: function(courses, aveScore){
     let that = this
     let cacheCourses = []
@@ -261,6 +297,11 @@ Page({
       url: '../scoreRank/scoreRank',
     })
   },
+  goRewardFile: function(){
+    wx.navigateTo({
+      url: './rewardFile/rewardFile',
+    })
+  },
   //成绩刷新
   refreshCJ: function () {
     let canUpdate = app.refreshLimit(app.cache.sno + 'score_update_time')
@@ -272,6 +313,9 @@ Page({
   //成绩请求单独作为一个方法
   requestCJ: function () {
     var that = this;
+    if(that.data.loading){
+      return
+    }
     that.setData({
       loading:true
     })
@@ -346,6 +390,7 @@ Page({
               legalCourseLen += 1
             }
             change.score = res.data.courses[i].score;
+            change.editScore = res.data.courses[i].score;
             change.type = res.data.courses[i].type;
             change.credit = res.data.courses[i].credit;
             change.teacher = res.data.courses[i].teacher;
@@ -442,5 +487,6 @@ Page({
     }
     else return str;
   },
+
   
 })

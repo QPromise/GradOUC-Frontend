@@ -117,11 +117,14 @@ Page({
   //请求单独作为一个方法
   requestEDU: function () {
     var that = this;
-    wx.showLoading({
-      title: '课程加载中',
-    })
+    if(that.data.loading){
+      return
+    }
     that.setData({
       loading:true
+    })
+    wx.showLoading({
+      title: '课程加载中',
     })
     wx.request({
       url: app.local_server + 'get_course/',

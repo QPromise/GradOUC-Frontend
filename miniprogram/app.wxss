@@ -4,6 +4,7 @@ page{
   font-family: Helvetica Neue, Helvetica, sans-serif;
   line-height: 100%;
   color: #666;
+  /* background-color: #f5f6f7; */
   min-height: 100%;
   position: relative;
   display: flex;

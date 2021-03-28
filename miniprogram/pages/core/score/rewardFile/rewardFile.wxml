@@ -1,0 +1,27 @@
+
+<cu-custom isBack="{{true}}" >
+	<view slot="content" style="color:white;font-weight:bold;">奖助学金文件</view>
+</cu-custom>
+  <view class="padding-sm" style="margin-top:8rpx">
+    <view class="text-blue bg-white padding-sm radius"><text class="cuIcon-notification" style="margin-right:4rpx;"></text>欢迎提交你们学院的学习奖学金评选要求，供学弟学妹们参考~</view>
+  </view>
+  <view class="margin-bottom-sm padding-sm">
+    <button class="cu-btn bg-blue block" bindtap="postFile"><text class="cuIcon-post" style="margin-right:4rpx;"></text>去提交文件</button>
+  </view>
+  <view >
+    <view class="cu-list menu card-menu" style="margin:0 20rpx 0 20rpx">
+      <view class="cu-item arrow" wx:for="{{rewardFiles}}" wx:for-item="item" style="padding-right:60rpx" bindtap="openPdf" data-full_name="{{item.full_name}}">
+        <view class="content padding-tb-sm">
+          <view class="text-blue">{{item.name}}</view>
+          <view class="text-gray text-sm">
+            <text class="padding-right-sm">时间：<text class="text-yellow"></text>{{item.release_time}}</text>
+            <text>来源：<text class="text-green">{{item.origin}}</text></text>
+          </view>
+        </view>
+        <view class="action">
+          <view>查看</view>
+        </view>
+      </view>
+    </view>
+
+  </view>

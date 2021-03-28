@@ -1,6 +1,5 @@
 {
   "pages": [
-   
     "pages/index/index",
     "pages/my/my",
     "pages/my/login",
@@ -29,8 +28,8 @@
     "pages/test/test",
     "pages/core/scoreRank/scoreRank",
     "pages/core/backup/schoolCourse",
-    "pages/core/scoreBackup/score"
-    
+    "pages/core/scoreBackup/score",
+    "pages/core/score/rewardFile/rewardFile"
   ],
   "window": {
     "backgroundTextStyle": "light",

@@ -283,7 +283,7 @@ App({
   }, 
 
   server: 'https://leoqin.fun/', // http://127.0.0.1:8000/do_login
-  local_server: 'https://leoqin.fun/',
+  local_server: 'http://127.0.0.1:8000/',
   cache: {},
   globalData: {
     imgCDN: 'https://leoqin.fun/static/images/',

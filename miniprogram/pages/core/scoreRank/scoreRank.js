@@ -11,6 +11,7 @@ Page({
     sno:app.cache.sno,
     name:app.cache.name,
     avg_score: 0,
+    loading:false,
     not_in_exclude_course_avg_score:0,
     rank:0,
     rank_rate:0,
@@ -81,6 +82,12 @@ Page({
   },
   getMyRank:function(type){
     let that = this
+    if(that.data.loading){
+      return
+    }
+    that.setData({
+      loading:true
+    })
     let title = "排名加载中"
     if (type == 1){
       title = "排名刷新中"
@@ -215,7 +222,9 @@ Page({
         })
       },
       complete: function() {
-        
+        that.setData({
+          loading:false
+        })
        // complete
       }
      })
