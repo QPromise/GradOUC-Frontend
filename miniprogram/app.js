@@ -281,15 +281,15 @@ App({
       duration: duration || 10000
     });
   }, 
-
+  // https://gradouc-backend.leoqin.fun/
   server: 'https://leoqin.fun/', // http://127.0.0.1:8000/do_login
-  local_server: 'http://127.0.0.1:8000/',
+  local_server: 'https://gradouc-backend.leoqin.fun/',
   cache: {},
   globalData: {
     imgCDN: 'https://leoqin.fun/static/images/',
     map:[],
     openId: null,
     userInfo: null,
-    refreshTimeLimit:60,
+    refreshTimeLimit:30,
   }
 })

@@ -185,7 +185,7 @@
 </view>
 
 <view wx:if="{{course.length<=0}}" class="other_condition">
-  <text class="cuIcon-info text-sm" style="margin-right:5rpx;"></text>{{content}}
+  <text wx:if="{{content != ''}}" class="cuIcon-info text-sm" style="margin-right:5rpx;"></text>{{content}}
 </view>
 </view>
  

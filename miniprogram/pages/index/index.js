@@ -21,7 +21,7 @@ Page({
     showTodayInfo:"",
     get_score_rank_nj_min:app.cache.get_score_rank_nj_min,
     get_score_rank_nj_max:app.cache.get_score_rank_nj_max,
-    useNews:[{ url: "url", title: "欢迎使用研在OUC！" }],
+    useNews:[{ url: "url", title: "欢迎使用研在OUC，公众号：研在OUC助手" }],
     todayArr:["周一","周二","周三","周四","周五","周六","周日"]
   },
 
@@ -62,22 +62,31 @@ Page({
   },
    /** 下拉刷新 */
    onPullDownRefresh:function(){
-    var that = this
+    let that = this
     wx.showNavigationBarLoading() 
     that.setData({
       is_bind: app.cache.is_bind,
     })
     that.getConfig()
-    that.getTopbarImg()
     that.getDay()
+    let update_time = wx.getStorageSync(app.cache.sno + 'today_course_update_time')
+    let is_same_day = true
+    if (update_time != "") {
+      is_same_day = that.isSameDay(update_time)
+    }
+    let canUpdate = app.refreshLimit(app.cache.sno + 'today_course_update_time')
+    if (canUpdate || !is_same_day){
+    that.getTopbarImg()
     that.getnews()
     that.getTodayCourse()
     that.getRecentlyUse()
+  }
     //模拟加载
     setTimeout(function () {
       wx.hideNavigationBarLoading(); //完成停止加载
       wx.stopPullDownRefresh(); //停止下拉刷新
     })
+
   },
   getRecentlyUse: function(){
     let that = this
@@ -98,7 +107,7 @@ Page({
         }
         else{
           that.setData({
-            useNews:[{ url: "url", title: "欢迎使用研在OUC！" }]
+            useNews:[{ url: "url", title: "欢迎使用研在OUC，公众号：研在OUC助手" }]
           })
         }
       },
@@ -120,9 +129,16 @@ Page({
     var date = parseInt(app.cache.begin_day)
     return now > date
   },
+  isSameDay: function(cache_time){
+    return new Date(cache_time).toDateString() === new Date().toDateString();
+  },
   //获取今天的课程
   getTodayCourse:function(){
     let that = this
+    if(that.data.loading || !that.data.is_bind){
+      return
+    }
+    console.log(that.data.loading, !that.data.is_bind)
     if(!that.cmpDate()){
       that.setData({
         content:"今天没有课程哦,去做点有意义的事情吧~"
@@ -199,6 +215,8 @@ Page({
             course:tmp_course,
             content:"今天没有课程哦,去做点有意义的事情吧~"
           }) 
+          var time = (new Date()).getTime();
+          wx.setStorageSync(app.cache.sno + 'today_course_update_time', time);
         }
         else{
           that.setData({

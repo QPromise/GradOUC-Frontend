@@ -10,21 +10,31 @@ Page({
     name: "",
     profession: "",
     research: "",
-    supervisor: ""
+    supervisor: "",
+    loading: false
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    wx.showLoading({
-      title: '信息加载中',
-    })
     let that = this
-    that.setData({
-      sno: app.cache.sno,
-    })
-    that.getProfile()
+    let update_time = wx.getStorageSync(app.cache.sno + 'self_info_update_time')
+    if (update_time != "") {
+      var name = wx.getStorageSync(app.cache.sno + 'name');
+      var profession = wx.getStorageSync(app.cache.sno + 'profession');
+      var research = wx.getStorageSync(app.cache.sno + 'research');
+      var supervisor = wx.getStorageSync(app.cache.sno + 'supervisor');
+      that.setData({
+        name: name,
+        profession: profession,
+        research: research,
+        supervisor: supervisor,
+        sno: app.cache.sno,
+      })
+    } else {
+      that.refreshProfile()
+    }
   },
 
   /**
@@ -40,8 +50,24 @@ Page({
   onShow: function () {
 
   },
+  refreshProfile: function(){
+    let that = this
+    let canUpdate = app.refreshLimit(app.cache.sno + 'self_info_update_time')
+    if (canUpdate){
+      that.getProfile()
+    }
+  },
   getProfile: function () {
     var that = this;
+    if(that.data.loading){
+      return
+    }
+    that.setData({
+      loading:true
+    })
+    wx.showLoading({
+      title: '信息加载中',
+    })
     wx.request({
       url: app.local_server + 'get_profile/',
       method: 'POST',
@@ -54,8 +80,7 @@ Page({
         "Content-Type": "application/x-www-form-urlencoded"
       },
       success: function (res) {
-        //console.log("success", res);
-        //console.log(res.data.info);
+        wx.hideLoading();
         if (res.data.message == "timeout") {
           wx.showModal({
             title: '请求超时',
@@ -105,6 +130,14 @@ Page({
             research: info["research"],
             supervisor: info["supervisor"]
           })
+          var time = (new Date()).getTime();
+          wx.setStorageSync(app.cache.sno + 'self_info_update_time', time);
+          wx.setStorageSync(app.cache.sno + 'name', info["name"]);
+          wx.setStorageSync(app.cache.sno + 'profession', info["profession"]);
+          wx.setStorageSync(app.cache.sno + 'research', info["research"]);
+          wx.setStorageSync(app.cache.sno + 'supervisor', info["supervisor"]);
+          app.msg("加载成功")
+
         } else if (res.data.message == "success" && res.statusCode == 200 && res.data.have_info == 2) {
           that.setData({
             have_info: res.data.have_info
@@ -142,10 +175,13 @@ Page({
         }
       },
       fail: function (res) {
+        wx.hideLoading();
         app.showFailBackModel()
       },
       complete: function (res) {
-        wx.hideLoading();
+        that.setData({
+          loading:false
+        }) 
         //console.log("complete", res);
       }
     });
@@ -169,7 +205,14 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    let that = this
+    wx.showNavigationBarLoading() 
+    that.refreshProfile()
+    //模拟加载
+    setTimeout(function () {
+      wx.hideNavigationBarLoading(); //完成停止加载
+      wx.stopPullDownRefresh(); //停止下拉刷新
+    })
   },
 
   /**

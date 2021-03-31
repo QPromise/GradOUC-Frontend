@@ -409,11 +409,7 @@ Page({
             mean:res.data.mean,
           })
           that.cacheScore(res.data.courses, res.data.mean);
-          wx.showToast({
-            title: '加载成功',
-            icon: 'none',
-            duration: 2000
-          })
+          app.msg("加载成功")
         }
         else if (res.data.message == "success" && res.statusCode == 200 && res.data.have_class == 2) {
           that.setData({
