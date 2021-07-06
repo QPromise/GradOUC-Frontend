@@ -109,7 +109,8 @@
         </view>
       </view>
     </navigator>
-    <view url="" class="about-link">
+
+    <view wx:if="{{is_open_subscribe == 1 || is_open_subscribe == 2}}" url="" class="about-link">
     <view wx:if="{{is_open_subscribe == 1}}">
     <view wx:if="{{is_bind}}" class="more-btn">
       <image class="btn-icon" src="/images/my/notice.png"></image>
@@ -124,7 +125,9 @@
       <switch bindtap='scoreSubscribe' checked="{{score_notice}}" />
     </view>
     </view>
-    <view url="" wx:if="{{is_bind}}" class="about-link">
+  </view>
+
+  <view url="" wx:if="{{is_bind}}" class="about-link">
     <view class="more-btn" bindtap="exit">
       <image class="btn-icon" src="/images/my/exit.png"></image>
       <text class="btn-text">退出绑定</text>
@@ -133,7 +136,6 @@
       </view>
     </view>
     </view>
-  </view>
     <navigator url="/pages/my/login" class="login-btn">
     <text wx:if="{{is_bind}}">切换绑定</text>
     <text wx:else>立即绑定</text>

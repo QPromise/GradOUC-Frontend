@@ -115,7 +115,7 @@
       </view>
       <text>校 历</text>
     </view>
-            <view class="cu-item" bindtap="goLife">
+            <!-- <view class="cu-item" bindtap="goLife">
       <view class="app-icon">
         <image mode="widthFix" src="/images/core/life.png"></image>
         <view class="cu-tag badge">
@@ -123,7 +123,7 @@
         </view>
       </view>
       <text>海小圈</text>
-    </view>
+    </view> -->
          <view class="cu-item" bindtap="goWaimai">
       <view class="app-icon">
         <image mode="widthFix" src="/images/core/waimai.png"></image>

@@ -110,7 +110,7 @@ Page({
             duration: 1500,
             success: function () {
               wx.reLaunch({
-                url: '/pages/my/my',
+                url: '/pages/index/index',
               })
         
             }

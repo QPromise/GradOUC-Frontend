@@ -19,6 +19,9 @@ Page({
    */
   onLoad: function (options) {
     let that = this
+    that.setData({
+      sno: app.cache.sno
+    })
     let update_time = wx.getStorageSync(app.cache.sno + 'self_info_update_time')
     if (update_time != "") {
       var name = wx.getStorageSync(app.cache.sno + 'name');
@@ -30,7 +33,6 @@ Page({
         profession: profession,
         research: research,
         supervisor: supervisor,
-        sno: app.cache.sno,
       })
     } else {
       that.refreshProfile()

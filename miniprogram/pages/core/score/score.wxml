@@ -28,9 +28,8 @@
       <view class="text-center" style="font-weight:bold;font-size:30rpx;margin-bottom:10px;color:lightcoral;">
         <text>平均学分绩:{{mean}}</text>  
       </view>
-      
+      <!-- <view class="cu-tag badge bg-blue">查看各科最高分<text class="cuIcon-right"></text></view> -->
       </view>
-      
       <view class='tips' bindtap="goDetail">平均学分绩=∑(所修课程学分×成绩) / ∑所修课程学分 <text style="margin-left:10rpx" class="cuIcon-info"></text></view>
   <view class="cu-list menu sm-border">
     <view class='grade-head'>

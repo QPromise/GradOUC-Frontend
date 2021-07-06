@@ -3,10 +3,13 @@
 @import "../../../utils/colorui/main.wxss";
 @import "../../../utils/colorui/icon.wxss";
 
+.cu-tag.badge{
+  font-size:23rpx;
+}
 .operation{
   position: relative;
   box-sizing: border-box;
-  margin: 75rpx 3% 10rpx 3%;
+  margin: 82rpx 3% 10rpx 3%;
   padding: 20rpx 30rpx;
   background: #fff;
   border-radius: 12rpx;
@@ -16,7 +19,7 @@
 .score{
   position: relative;
   box-sizing: border-box;
-  margin: 5rpx 3% 20rpx 3%;
+  margin: 12rpx 3% 20rpx 3%;
   padding: 20rpx 4rpx;
   background: #fff;
   border-radius: 12rpx;

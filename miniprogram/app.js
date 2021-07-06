@@ -7,6 +7,7 @@ App({
     this.checkNetwork()
     this.checkUpdate()
     this.refreshCacheAndGetOpenid()
+    this.isInBlockUserList(this.cache.sno)
     // // 5.获取用户信息
     // wx.getSetting({
     //   success: res => {
@@ -201,8 +202,10 @@ App({
     if (season > 0) {
       let minute = Math.floor(season / 60)
       if(minute > 0 ){
+        let second = season % 60
+        let title = second == 0 ? '操作太快啦,'+ minute + '分钟后再来吧':'操作太快啦,'+ minute + '分钟' + second + '秒后再来吧'
         wx.showToast({
-          title: '操作太快啦,'+ minute + '分钟后再来吧',
+          title: title,
           icon: 'none',
           duration: 1000,
           success: function () {
@@ -281,15 +284,25 @@ App({
       duration: duration || 10000
     });
   }, 
+  isInBlockUserList: function(sno){
+    let that = this
+    let blockUserList = ['21200231068']
+    if(blockUserList.indexOf(sno) != -1){
+      that.saveCache("is_bind", false);
+      return true
+    }
+    //console.log(sno == 21200231068, blockUserList.indexOf(sno.toString()))
+    return false
+  },
   // https://gradouc-backend.leoqin.fun/
   server: 'https://leoqin.fun/', // http://127.0.0.1:8000/do_login
   local_server: 'https://gradouc-backend.leoqin.fun/',
   cache: {},
   globalData: {
-    imgCDN: 'https://leoqin.fun/static/images/',
+    imgCDN: 'https://gradouc-backend.leoqin.fun/static/images/',
     map:[],
     openId: null,
     userInfo: null,
-    refreshTimeLimit:30,
+    refreshTimeLimit:120,
   }
 })

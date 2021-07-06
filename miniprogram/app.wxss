@@ -63,7 +63,7 @@ button::after{
   background: #f6f6f6;
 }
 .ouc-cel .tr .th {
-  width: 20%;
+  width: 40%;
   justify-content: center;
   background: f9f9f9;
   color: #999;
@@ -74,7 +74,7 @@ button::after{
 }
 .ouc-cel .tr .td {
   display: block;
-  width: 20%;
+  width: 40%;
   color: #333;
   justify-content: center;
   text-align: center;

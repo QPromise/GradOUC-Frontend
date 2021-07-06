@@ -1,92 +1,92 @@
 <!--miniprogram/pages/tools/tools.wxml-->
 <cu-custom>
-	<view slot="content" style="color:white;font-weight:bold;">应用列表</view>
+  <view slot="content" style="color:white;font-weight:bold;">应用列表</view>
 </cu-custom>
 <view class="page">
-<view class="content">
-  <view class='top' style="background: #f6f6f6;">
-    <text class='title'>学业查询</text>
-  </view>
+  <view class="content">
+    <view class='top' style="background: #f6f6f6;">
+      <text class='title'>学业查询</text>
+    </view>
     <view class="cu-list grid col-5 no-border tools">
-    <view class="cu-item" bindtap="goSchedule">
-      <view class="app-icon">
-        <image mode="widthFix" src="/images/core/schedule.png"></image>
-      </view>
-      <text>我的课表</text>
-    </view>
-
-     <view class="cu-item" bindtap="goCourse">
-      <view class="app-icon">
-        <image mode="widthFix" src="/images/core/course.png"></image>
-      </view>
-      <text>我的课程</text>
-    </view>
-       <view class="cu-item" bindtap="goScore">
-      <view class="app-icon">
-        <image mode="widthFix" src="/images/core/score.png"></image>
-      </view>
-      <text>我的成绩</text>
-    </view>
-    <view class="cu-item" bindtap="goExam">
-      <view class="app-icon">
-        <image mode="widthFix" src="/images/core/exam.png"></image>
-      </view>
-      <text>我的考试</text>
-    </view>
-         <view class="cu-item"  bindtap="goScoreRank">
-      <view class="app-icon">
-        <image mode="widthFix" src="/images/core/score_rank.png"></image>
-         <view class="cu-tag badge">
-          <block>新</block>
+      <view class="cu-item" bindtap="goSchedule">
+        <view class="app-icon">
+          <image mode="widthFix" src="/images/core/schedule.png"></image>
         </view>
+        <text>我的课表</text>
       </view>
-      <text>成绩排名</text>
-    </view>
-    <view class="cu-item"  bindtap="goProfile">
-      <view class="app-icon">
-        <image mode="widthFix" src="/images/core/profile.png"></image>
+
+      <view class="cu-item" bindtap="goCourse">
+        <view class="app-icon">
+          <image mode="widthFix" src="/images/core/course.png"></image>
+        </view>
+        <text>我的课程</text>
       </view>
-      <text>我的信息</text>
-    </view>
-    <view class="cu-item"  bindtap="goSchoolCourse">
-      <view class="app-icon">
-        <image mode="widthFix" src="/images/core/schoolCourse.png"></image>
+      <view class="cu-item" bindtap="goScore">
+        <view class="app-icon">
+          <image mode="widthFix" src="/images/core/score.png"></image>
+        </view>
+        <text>我的成绩</text>
       </view>
-      <text>开课查询</text>
+      <view class="cu-item" bindtap="goExam">
+        <view class="app-icon">
+          <image mode="widthFix" src="/images/core/exam.png"></image>
+        </view>
+        <text>我的考试</text>
+      </view>
+      <view class="cu-item" bindtap="goScoreRank">
+        <view class="app-icon">
+          <image mode="widthFix" src="/images/core/score_rank.png"></image>
+          <view class="cu-tag badge">
+            <block>新</block>
+          </view>
+        </view>
+        <text>成绩排名</text>
+      </view>
+      <view class="cu-item" bindtap="goProfile">
+        <view class="app-icon">
+          <image mode="widthFix" src="/images/core/profile.png"></image>
+        </view>
+        <text>我的信息</text>
+      </view>
+      <view class="cu-item" bindtap="goSchoolCourse">
+        <view class="app-icon">
+          <image mode="widthFix" src="/images/core/schoolCourse.png"></image>
+        </view>
+        <text>开课查询</text>
+      </view>
+
     </view>
-    
-  </view>
-   <view class='top' style="background: #f6f6f6;">
-    <text class='title'>校园生活</text>
-  </view>
+    <view class='top' style="background: #f6f6f6;">
+      <text class='title'>校园生活</text>
+    </view>
     <view class="cu-list grid col-5 no-border tools">
-       <view class="cu-item" bindtap="goLibrary">
-      <view class="app-icon">
-        <image mode="widthFix" src="/images/core/library.png"></image>
+      <view class="cu-item" bindtap="goLibrary">
+        <view class="app-icon">
+          <image mode="widthFix" src="/images/core/library.png"></image>
+        </view>
+        <text>图书馆</text>
       </view>
-      <text>图书馆</text>
-    </view>
 
-     <view class="cu-item"  bindtap="goCampusTours">
-      <view class="app-icon">
-        <image mode="widthFix" src="/images/core/campusTours.png"></image>
+      <view class="cu-item" bindtap="goCampusTours">
+        <view class="app-icon">
+          <image mode="widthFix" src="/images/core/campusTours.png"></image>
+        </view>
+        <text>校园导览</text>
       </view>
-      <text>校园导览</text>
-    </view>
 
-    <view class="cu-item" bindtap="goCar">
-      <view class="app-icon">
-        <image mode="widthFix" src="/images/core/car.png"></image>
+      <view class="cu-item" bindtap="goCar">
+        <view class="app-icon">
+          <image mode="widthFix" src="/images/core/car.png"></image>
+        </view>
+        <text>校 车</text>
       </view>
-      <text>校 车</text>
-    </view>
-    <view class="cu-item" bindtap="goCalendar">
-      <view class="app-icon">
-        <image mode="widthFix" src="/images/core/calendar.png"></image>
+      <view class="cu-item" bindtap="goCalendar">
+        <view class="app-icon">
+          <image mode="widthFix" src="/images/core/calendar.png"></image>
+        </view>
+        <text>校 历</text>
       </view>
-      <text>校 历</text>
-    </view>
-       <!-- <view class="cu-item"  bindtap="goLostAndFound">
+      <!-- <view class="cu-item"  bindtap="goLostAndFound">
       <view class="app-icon">
         <image mode="widthFix" src="/images/core/lost_found.png"></image>
       </view>
@@ -99,101 +99,101 @@
       <text>闲置交易</text>
     </view> -->
 
-               <view class="cu-item"  bindtap="goLife">
-      <view class="app-icon">
-        <image mode="widthFix" src="/images/core/life.png"></image>
-        <view class="cu-tag badge">
-          <block>新</block>
-        </view>
+      <!-- <view class="cu-item"  bindtap="goLife">
+    <view class="app-icon">
+      <image mode="widthFix" src="/images/core/life.png"></image>
+      <view class="cu-tag badge">
+        <block>新</block>
       </view>
-      <text>海小圈</text>
     </view>
-  </view>
+    <text>海小圈</text>
+  </view> -->
+    </view>
 
-   <view class='top' style="background: #f6f6f6;">
-    <text class='title'>校园资讯</text>
-  </view>
+    <view class='top' style="background: #f6f6f6;">
+      <text class='title'>校园资讯</text>
+    </view>
     <view class="cu-list grid col-5 no-border tools">
-        <view class="cu-item" bindtap="navArticle" data-url="/pages/core/news/news" data-type="1004">
-      <view class="app-icon">
-        <image mode="widthFix" src="/images/core/school.png"></image>
+      <view class="cu-item" bindtap="navArticle" data-url="/pages/core/news/news" data-type="1004">
+        <view class="app-icon">
+          <image mode="widthFix" src="/images/core/school.png"></image>
+        </view>
+        <text>学校</text>
       </view>
-      <text>学校</text>
-    </view>
-        <view class="cu-item" bindtap="navArticle" data-url="/pages/core/news/news" data-type="1005">
-      <view class="app-icon">
-        <image mode="widthFix" src="/images/core/yanyuan.png"></image>
+      <view class="cu-item" bindtap="navArticle" data-url="/pages/core/news/news" data-type="1005">
+        <view class="app-icon">
+          <image mode="widthFix" src="/images/core/yanyuan.png"></image>
+        </view>
+        <text>研院</text>
       </view>
-      <text>研院</text>
-    </view>
-    <!-- <view class="cu-item" bindtap="navArticle" data-url="/pages/core/news/news" data-type="1001">
+      <!-- <view class="cu-item" bindtap="navArticle" data-url="/pages/core/news/news" data-type="1001">
       <view class="app-icon">
         <image mode="widthFix" src="/images/core/yanzhao.png"></image>
       </view>
       <text>研招网</text>
     </view> -->
-     <view class="cu-item"  bindtap="navArticle" data-url="/pages/core/news/news" data-type="1003">
-      <view class="app-icon">
-        <image mode="widthFix" src="/images/core/backup.png"></image>
+      <view class="cu-item" bindtap="navArticle" data-url="/pages/core/news/news" data-type="1003">
+        <view class="app-icon">
+          <image mode="widthFix" src="/images/core/backup.png"></image>
+        </view>
+        <text>后勤</text>
       </view>
-      <text>后勤</text>
-    </view>
-     <view class="cu-item" bindtap="navArticle" data-url="/pages/core/news/news" data-type="1002">
-      <view class="app-icon" >
-        <image mode="widthFix" src="/images/core/xueshu.png"></image>
+      <view class="cu-item" bindtap="navArticle" data-url="/pages/core/news/news" data-type="1002">
+        <view class="app-icon">
+          <image mode="widthFix" src="/images/core/xueshu.png"></image>
+        </view>
+        <text>讲座</text>
       </view>
-      <text>讲座</text>
-    </view>
-       <view class="cu-item" bindtap="navArticle" data-url="/pages/core/news/news" data-type="1001">
-      <view class="app-icon" >
-        <image mode="widthFix" src="/images/core/yanzhao.png"></image>
+      <view class="cu-item" bindtap="navArticle" data-url="/pages/core/news/news" data-type="1001">
+        <view class="app-icon">
+          <image mode="widthFix" src="/images/core/yanzhao.png"></image>
+        </view>
+        <text>研招</text>
       </view>
-      <text>研招</text>
-    </view>
-    <view class="cu-item">
-      <view class="app-icon">
-        <image mode="widthFix" src="/images/core/countDown.png"></image>
+      <view class="cu-item">
+        <view class="app-icon">
+          <image mode="widthFix" src="/images/core/countDown.png"></image>
+        </view>
+        <text style="color:red">{{countDays}}天</text>
       </view>
-       <text style="color:red">{{countDays}}天</text>
     </view>
-  </view>
 
- <view class='top' style="background: #f6f6f6;">
-    <text class='title'>娱乐互动</text>
-  </view>
+    <view class='top' style="background: #f6f6f6;">
+      <text class='title'>娱乐互动</text>
+    </view>
     <view class="cu-list grid col-5 no-border tools">
-    <view class="cu-item" bindtap="goPaoTui">
-      <view class="app-icon">
-        <image mode="widthFix" src="/images/new_img/tools/paotui.png"></image>
+      <view class="cu-item" bindtap="goPaoTui">
+        <view class="app-icon">
+          <image mode="widthFix" src="/images/new_img/tools/paotui.png"></image>
+        </view>
+        <text>谁去跑腿</text>
       </view>
-      <text>谁去跑腿</text>
-    </view>
-     <view class="cu-item" bindtap="goTianGou">
-      <view class="app-icon">
-        <image mode="widthFix" src="/images/new_img/tools/tiangou.png"></image>
+      <view class="cu-item" bindtap="goTianGou">
+        <view class="app-icon">
+          <image mode="widthFix" src="/images/new_img/tools/tiangou.png"></image>
+        </view>
+        <text>舔狗日记</text>
       </view>
-      <text>舔狗日记</text>
-    </view>
       <view class="cu-item" bindtap="goWaimai">
-      <view class="app-icon">
-        <image mode="widthFix" src="/images/new_img/tools/waimai.png"></image>
-        <view class="cu-tag badge">
-          <block>超全</block>
+        <view class="app-icon">
+          <image mode="widthFix" src="/images/new_img/tools/waimai.png"></image>
+          <view class="cu-tag badge">
+            <block>超全</block>
+          </view>
         </view>
+        <text>外卖红包</text>
       </view>
-      <text>外卖红包</text>
-    </view>
       <view class="cu-item" bindtap="goTravel">
-      <view class="app-icon">
-        <image mode="widthFix" src="/images/new_img/tools/travel.png"></image>
-        <view class="cu-tag badge">
-          <block>新</block>
+        <view class="app-icon">
+          <image mode="widthFix" src="/images/new_img/tools/travel.png"></image>
+          <view class="cu-tag badge">
+            <block>新</block>
+          </view>
         </view>
+        <text>出行优惠</text>
       </view>
-      <text>出行优惠</text>
+
     </view>
 
   </view>
-
-</view>
 </view>

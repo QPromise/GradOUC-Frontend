@@ -30,6 +30,7 @@
     "pages/core/backup/schoolCourse",
     "pages/core/scoreBackup/score",
     "pages/core/score/rewardFile/rewardFile"
+    
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -64,7 +65,8 @@
     ]
   },
   "usingComponents": {
-    "navigationBar": "/components/navigationBar/index"
+    "navigationBar": "/components/navigationBar/index",
+    "empty": "/components/empty/empty"
   },
   "permission": {
     "scope.userLocation": {

@@ -6,7 +6,7 @@
 			<view class="center">
 				<view class="center_top">
 					<view class="center_img" wx:if="{{sno != null}}">
-						<image  src="https://imgshenpi.ouc.edu.cn/avatarNew/{{sno}}.jpg"></image>
+						<image src="https://imgshenpi.ouc.edu.cn/avatarNew/{{sno}}.jpg"></image>
 					</view>
           <view class="center_img" wx:else >
             <open-data type = "userAvatarUrl" class = "user-avatar"></open-data>

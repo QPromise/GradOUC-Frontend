@@ -141,7 +141,7 @@ navArticle: function (e) {
    */
 goSchedule:function(){
     var that = this;
-    if (that.data.is_bind){
+    if (that.data.is_bind && !app.isInBlockUserList(app.cache.sno)){
       wx.navigateTo({
         url: '../core/schedule/schedule',
       })
@@ -155,7 +155,7 @@ goSchedule:function(){
    */
   goCourse:function(){
     var that = this;
-    if (that.data.is_bind) {
+    if (that.data.is_bind && !app.isInBlockUserList(app.cache.sno)) {
       wx.navigateTo({
         url: '../core/course/course',
       })
@@ -169,7 +169,7 @@ goSchedule:function(){
    */
   goScore: function () {
     var that = this;
-    if (that.data.is_bind) {
+    if (that.data.is_bind && !app.isInBlockUserList(app.cache.sno)) {
       wx.navigateTo({
         url: '../core/score/score',
       })
@@ -180,7 +180,7 @@ goSchedule:function(){
   },
   goExam: function () {
     var that = this;
-    if (that.data.is_bind) {
+    if (that.data.is_bind && !app.isInBlockUserList(app.cache.sno)) {
       wx.navigateTo({
         url: '../core/exam/exam',
       })
@@ -202,7 +202,7 @@ goSchedule:function(){
   },
   goScoreRank:function(){
     var that = this;
-    if (that.data.is_bind) {
+    if (that.data.is_bind && !app.isInBlockUserList(app.cache.sno)) {
       if (that.isInScoreRankNj()){
         wx.navigateTo({
         url: '../core/scoreRank/scoreRank',
@@ -230,7 +230,7 @@ goSchedule:function(){
   },
   goProfile: function () {
     var that = this;
-    if (that.data.is_bind) {
+    if (that.data.is_bind && !app.isInBlockUserList(app.cache.sno)) {
       wx.navigateTo({
         url: '/pages/profile/profile',
       })
@@ -244,7 +244,7 @@ goSchedule:function(){
    */
   goSchoolCourse: function () {
     var that = this;
-    if (that.data.is_bind) {
+    if (that.data.is_bind && !app.isInBlockUserList(app.cache.sno)) {
       wx.navigateTo({
         url: '../core/schoolCourse/schoolCourse',
       })
@@ -259,8 +259,9 @@ goSchedule:function(){
     })
   },
   goCar: function () {
+    var that = this;
     wx.navigateTo({
-      url: '../core/car/car',
+      url: '/pages/web/web?url=' + "https://mp.weixin.qq.com/s/n4Bp3ru7_WwruTY07tzNoQ",
     })
   },
   goCalendar:function(){
