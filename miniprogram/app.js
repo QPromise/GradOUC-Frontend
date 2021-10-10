@@ -296,7 +296,7 @@ App({
   },
   // https://gradouc-backend.leoqin.fun/
   server: 'https://leoqin.fun/', // http://127.0.0.1:8000/do_login
-  local_server: 'https://gradouc-backend.leoqin.fun/',
+  local_server: 'http://127.0.0.1:8000/',
   cache: {},
   globalData: {
     imgCDN: 'https://gradouc-backend.leoqin.fun/static/images/',

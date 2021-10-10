@@ -15,7 +15,7 @@
       数据源于当前登录小程序的用户，每日整体更新，仅供参考，排名默认是你的平均学分绩在你研究方向的排名，需要你手动设置参与排名的研究方向和不参与排名的课程类型及名称，存在重修未出成绩/不及格的同学不参与排名。
     </i-notice-bar>
     <view class="options text-center" style="margin-top:70rpx;">
-    <button class="cu-btn line-white margin-left-xl margin-right-xl" bindtap="refreshRank"><text class="cuIcon-refresh text-orange"></text> <text style="margin-left:3px" class="text-black">刷新排名</text></button>
+    <button class="cu-btn line-white margin-left-xl margin-right-xl" bindtap="refreshRank"><text class="cuIcon-refresh text-orange"></text> <text style="margin-left:3px" class="text-black">更新成绩</text></button>
     <text class="text-gray"> ┊ </text>
     <button class="cu-btn line-white margin-left-xl margin-right-xl" open-type="share"><text class="cuIcon-weixin text-green"></text> <text style="margin-left:3px" class="text-black">邀请同学</text></button>
   </view>

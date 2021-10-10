@@ -111,7 +111,7 @@ Page({
        // success
        //console.log(res)
        if(res.data.message == "success"){
-        if (type == 1){
+        if (type == 1 && res.data.extra["is_open_rank_score_update"]){
           var time = (new Date()).getTime();
           wx.setStorageSync('rank_update_time', time);
         }
@@ -138,18 +138,18 @@ Page({
           title: '加载成功',
           duration: 2000
         });
-        // if (that.data.not_in_exclude_course_avg_score == "--"){
-        //   wx.showModal({
-        //     title: "提示",
-        //     content: '系统检测到你存在重修/不及格科目，当前无法参与排名，如有疑问，请反馈。',
-        //     showCancel: false,
-        //     confirmText: "知道了",
-        //     success: (res) => {
-        //       if (res.confirm) {
-        //       }
-        //     }
-        //   });
-        // }
+        if (!res.data.extra["is_open_rank_score_update"]){
+          wx.showModal({
+            title: "提示",
+            content: '因研究生系统问题，当前可正常查看排名，但不允许更新成绩，如有疑问，请反馈。',
+            showCancel: false,
+            confirmText: "知道了",
+            success: (res) => {
+              if (res.confirm) {
+              }
+            }
+          });
+        }
        }
        else if (res.data.message == "incorrect") {
         wx.hideLoading({
