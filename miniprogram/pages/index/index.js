@@ -661,7 +661,7 @@ goSchedule:function(){
   goCalendar:function(){
     var that = this;
     wx.navigateTo({
-      url: '/pages/web/web?url=' + "https://mp.weixin.qq.com/s/mG1X9LpvCmrB3-1UZyOEEw",
+      url: '/pages/web/web?url=' + "https://mp.weixin.qq.com/s/IQpMer5YiiofL74Mjkx28A",
     })
   },
     goWaimai:function(){

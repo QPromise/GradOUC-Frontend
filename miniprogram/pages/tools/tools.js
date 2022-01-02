@@ -109,9 +109,13 @@ Page({
 //考研倒计时
 countDate:function() {
   var that = this
-  var fuTime = new Date("2020/12/26 00:00:00");
-  if (that.cmpDate(fuTime)){
-    fuTime = new Date("2021/12/25 00:00:00");
+  var time_arr = ["2022/12/24 00:00:00", "2023/12/23 00:00:00", "2024/12/21 00:00:00", "2025/12/20 00:00:00"]
+  var fuTime = new Date(time_arr[0]);
+  for (var i = 1; i < time_arr.length; i++) {
+    if (!that.cmpDate(fuTime)){
+      break
+    }
+    fuTime = new Date(time_arr[i]);
   }
   //console.log('compare date',that.cmpDate(fuTime))
   var now = new Date();
@@ -267,7 +271,7 @@ goSchedule:function(){
   goCalendar:function(){
     var that = this;
     wx.navigateTo({
-      url: '/pages/web/web?url=' + "https://mp.weixin.qq.com/s/mG1X9LpvCmrB3-1UZyOEEw",
+      url: '/pages/web/web?url=' + "https://mp.weixin.qq.com/s/IQpMer5YiiofL74Mjkx28A",
     })
   },
   goTravel:function(){
