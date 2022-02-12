@@ -1,5 +1,6 @@
 // miniprogram/pages/core/score/rewardFile/rewardFile.js
 const app = getApp();
+let interstitialAd = null
 Page({
 
   /**
@@ -14,6 +15,14 @@ Page({
    */
   onLoad: function (options) {
     this.getRewardFiles()
+    if (wx.createInterstitialAd) {
+      interstitialAd = wx.createInterstitialAd({
+        adUnitId: 'adunit-2ed68bcc4db0e8f1'
+      })
+      interstitialAd.onLoad(() => {})
+      interstitialAd.onError((err) => {})
+      interstitialAd.onClose(() => {})
+    }
   },
 
   /**
@@ -27,7 +36,11 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    if (interstitialAd) {
+      interstitialAd.show().catch((err) => {
+        console.error(err)
+      })
+    }
   },
 
   /**

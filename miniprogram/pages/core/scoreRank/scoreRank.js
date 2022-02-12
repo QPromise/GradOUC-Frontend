@@ -1,10 +1,6 @@
 // miniprogram/pages/core/scoreRank/scoreRank.js
 const app = getApp();
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
     tabCur: 0,
     scrollLeft:0 ,
@@ -37,6 +33,7 @@ Page({
       name:app.cache.name
     })
     that.getMyRank(0)
+   
   },
 
   /**
@@ -50,7 +47,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    
+
   },
   // 获取滚动条当前位置
   onPageScroll: function(e) {
